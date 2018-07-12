@@ -53,6 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TC_1_02_02.cs" />
+    <Compile Include="TC_1_02_01.cs" />
     <Compile Include="TC_1_01_01.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

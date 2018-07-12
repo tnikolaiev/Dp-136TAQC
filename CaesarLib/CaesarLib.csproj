@@ -56,7 +56,9 @@
   <ItemGroup>
     <Compile Include="Acts.cs" />
     <Compile Include="LoginPage.cs" />
+    <Compile Include="MainPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RightMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

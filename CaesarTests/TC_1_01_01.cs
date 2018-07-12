@@ -1,19 +1,19 @@
-﻿using NUnit.Framework;
+﻿using CaesarLib;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
-using System.Threading;
-using CaesarLib;
 
-namespace Tests
+namespace CaesarTests
 {
     [TestFixture]
     public class TC_1_01_01
     {
         List<string> links;
         IWebDriver driver = new ChromeDriver();
-        LoginPage lp;
+        WebDriverWait wait;
 
         [OneTimeSetUp]
         public void FirstInitialization()
@@ -22,35 +22,28 @@ namespace Tests
             {
                 @"http://localhost:3000", @"http://localhost:3000/Groups/Dnipro", @"http://localhost:3000/admin"
             };
-            Console.WriteLine("Initialization complete");
-
         }
 
         [SetUp]
-        public void Initialize()
+        public void Initialization()
         {
-            lp = new LoginPage(driver);
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
         }
 
         [Test]
-        public void ExecuteTest()
+        public void Test_NavigateToLinks_LoginPageOpened()
         {
-            int count = 0;
             foreach (var link in links)
             {
-                count++;
                 driver.Url = link;
-                Assert.IsTrue(LoginPage.IsLoginPage(driver));
-                Console.WriteLine(String.Format("{0} passed", link));
+                Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPage(driver)));
             }
-            Console.WriteLine("Execution complete");
         }
-        
+
         [OneTimeTearDown]
         public void CleanUp()
         {
-            //driver.Close();
-            Console.WriteLine("Driver closed");
+            driver.Close();
         }
     }
 }
