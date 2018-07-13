@@ -20,9 +20,9 @@ namespace CaesarLib
             element.Clear();
         }
 
-        public static String GetValue(IWebElement element)
+        public static String GetAttribute(IWebElement element, String attribute)
         {
-            return element.GetAttribute("value");
+            return element.GetAttribute(attribute);
         }
     }
 }
