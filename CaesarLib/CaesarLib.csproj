@@ -55,12 +55,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acts.cs" />
+    <Compile Include="ScheduleComponents\EditScheduleWindow.cs" />
     <Compile Include="GroupsInLocation.cs" />
     <Compile Include="LeftContainer.cs" />
     <Compile Include="LoginPage.cs" />
     <Compile Include="MainPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RightMenu.cs" />
+    <Compile Include="ScheduleComponents\ScheduleKeyDates.cs" />
+    <Compile Include="ScheduleComponents\ScheduleMonthView.cs" />
+    <Compile Include="ScheduleComponents\ScheduleWeekView.cs" />
+    <Compile Include="SchedulePage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
