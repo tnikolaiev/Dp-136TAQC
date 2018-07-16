@@ -1,9 +1,6 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaesarLib
 {
@@ -17,6 +14,10 @@ namespace CaesarLib
         public CenterContainer(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
+        }
+        public Func<IWebDriver, IWebElement> IsHintVisible()
+        {
+            return ExpectedConditions.ElementIsVisible(By.XPath("//*[@class='hint']/p[@class='hint']"));
         }
     }
 }
