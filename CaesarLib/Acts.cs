@@ -24,5 +24,10 @@ namespace CaesarLib
         {
             return element.GetAttribute("value");
         }
+
+        public static string GetText(IWebElement element)
+        {
+            return element.Text;
+        }
     }
 }
