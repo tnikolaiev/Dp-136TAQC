@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<LoginField>
+  <Text input ="123456"/>
+  <Text input ="'%#(^$@!"/>
+  <Text input ="InputFirstNameCharacter"/>
+  <Text input ="Фьмвл12%к"/>
+  </LoginField>
