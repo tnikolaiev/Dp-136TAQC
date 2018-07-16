@@ -83,7 +83,7 @@ namespace CaesarTests
             Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.EditButtons));
             wait.Until((d) => EditStudent.IsEditStudent(d));
 
-            Assert.IsFalse(EditStudent.AreFilesUploaded(webDriver));
+            Assert.AreEqual(0, editStudentInstance.CountUploadedFiles());
         }
         [TearDown]
         public void TearDownTest()

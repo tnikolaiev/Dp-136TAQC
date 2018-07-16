@@ -21,8 +21,6 @@ namespace CaesarLib.StudentsPage
         public IWebElement BrowsePhotoButton { get => webDriver.FindElement(By.ClassName("BrowsePhoto")); }
         public IWebElement SaveButton { get => webDriver.FindElement(By.ClassName("save-changes")); }
         public IWebElement CancelButton { get => webDriver.FindElement(By.ClassName("close-modal-window")); }
-        public IWebElement CV { get => webDriver.FindElement(By.ClassName("downloadedCV")).FindElement(By.ClassName("list-item")); }
-        public IWebElement Photo { get => webDriver.FindElement(By.ClassName("downloadedPhoto")).FindElement(By.ClassName("list-item")); }
         public IWebElement RemoveCVButton { get => webDriver.FindElement(By.ClassName("remove-cv")); }
         public IWebElement RemovePhotoButton { get => webDriver.FindElement(By.ClassName("remove-photo")); }
         public EditStudent(IWebDriver webDriver)
@@ -48,12 +46,9 @@ namespace CaesarLib.StudentsPage
             Acts.InputValue(EntryScore, entryScore);
             Acts.SelectElement(ApprovedBy, approvedByIndex);
         }
-        public static bool AreFilesUploaded(IWebDriver webDriver)
+        public int CountUploadedFiles()
         {
-            if (webDriver.FindElements(By.ClassName("list-item")).Count == 2)
-                return true;
-            else
-                return false;
+            return webDriver.FindElements(By.ClassName("list-item")).Count;             
         }
         public static string GetTestFile(string fileName)
         {
