@@ -7,11 +7,13 @@ namespace CaesarLib
 {
     public class MainPage
     {
-        private IWebElement _profileButton;        
+        private IWebElement _profileButton, _logo;
         private IWebDriver _driverInstance;
         private RightMenu _rightMenu;
         private TopMenu _topMenu;
+        private LeftMenu _leftMenu;
         private LeftContainer _leftContainer;
+        private CenterContainer _centerContainer;
 
         public IWebElement ProfileButton
         {
@@ -22,6 +24,19 @@ namespace CaesarLib
                 {
                     _profileButton = _driverInstance.FindElement(By.XPath("//*[@id='icon']//img[@class='img-circle']"));
                     return _profileButton;
+                }
+            }
+        }
+
+        public IWebElement Logo
+        {
+            get
+            {
+                if (_logo != null) return _logo;
+                else
+                {
+                    _logo = _driverInstance.FindElement(By.CssSelector("#logo > a > img"));
+                    return _logo;
                 }
             }
         }
@@ -48,6 +63,15 @@ namespace CaesarLib
                 else
                 {
                     return new TopMenu(_driverInstance);
+        public LeftMenu LeftMenu
+        {
+            get
+            {
+                if (_leftMenu != null) return _leftMenu;
+                else
+                {
+                    _leftMenu = new LeftMenu(_driverInstance);
+                    return _leftMenu;
                 }
             }
         }
@@ -61,6 +85,19 @@ namespace CaesarLib
                 {
                     _leftContainer = new LeftContainer(_driverInstance);
                     return _leftContainer;
+                }
+            }
+        }
+      
+        public CenterContainer CenterContainer
+        {
+            get
+            {
+                if (_centerContainer != null) return _centerContainer;
+                else
+                {
+                    _centerContainer = new CenterContainer(_driverInstance);
+                    return _centerContainer;
                 }
             }
         }
