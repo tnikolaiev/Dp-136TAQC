@@ -1,4 +1,7 @@
-﻿using OpenQA.Selenium;
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using System;
 
 namespace CaesarLib
 {
@@ -7,6 +10,7 @@ namespace CaesarLib
         private IWebElement _profileButton, _logo;
         private IWebDriver _driverInstance;
         private RightMenu _rightMenu;
+        private TopMenu _topMenu;
         private LeftMenu _leftMenu;
         private LeftContainer _leftContainer;
         private CenterContainer _centerContainer;
@@ -50,6 +54,15 @@ namespace CaesarLib
             }
         }
 
+        public TopMenu TopMenu
+        {
+            get
+            {
+                if (_topMenu != null)
+                    return _topMenu;
+                else
+                {
+                    return new TopMenu(_driverInstance);
         public LeftMenu LeftMenu
         {
             get
@@ -100,6 +113,69 @@ namespace CaesarLib
                 driver.FindElements(By.Id("left-side-bar")).Count > 0 &&
                 driver.FindElements(By.Id("right-side-bar")).Count > 0 ?
                 true : false;
+        }
+
+        //Is public in case this method will be needed in tests (access modifier can be discussed)
+        public TopMenu MoveToTopMenu()
+        {
+            Actions builder = new Actions(_driverInstance);
+            builder.MoveToElement(_driverInstance.FindElement(By.Id("top-menu"))).Build().Perform();
+            return new TopMenu(_driverInstance);
+        }
+
+        //This method can return new instance of 'Locations' window so change it in case of need
+        public void OpenLocationsWindow()
+        {
+            TopMenu topMenuInstance = MoveToTopMenu();
+            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
+            Acts.Click(topMenuInstance.LocationsItem);
+        }
+
+        //This method can return new instance of 'Groups' page so change it in case of need
+        public void OpenGroupsPage()
+        {
+            TopMenu topMenuInstance = MoveToTopMenu();
+            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
+            Acts.Click(topMenuInstance.GroupsItem);
+        }
+
+        //This method can return new instance of 'Students' page so change it in case of need
+        public void OpenStudentsPage()
+        {
+            TopMenu topMenuInstance = MoveToTopMenu();
+            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
+            Acts.Click(topMenuInstance.StudentsItem);
+        }
+
+        //This method can return new instance of 'Schedule' page so change it in case of need
+        public void OpenSchedulePage()
+        {
+            TopMenu topMenuInstance = MoveToTopMenu();
+            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
+            Acts.Click(topMenuInstance.ScheduleItem);
+        }
+
+        //This method can return new instance of 'add' page so change it in case of need
+        public void OpenAddPage()
+        {
+            TopMenu topMenuInstance = MoveToTopMenu();
+            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
+            Acts.Click(topMenuInstance.AddItem);
+        }
+
+        //This method can return new instance of 'About' page so change it in case of need
+        public void OpenAboutPage()
+        {
+            TopMenu topMenuInstance = MoveToTopMenu();
+            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
+            Acts.Click(topMenuInstance.AboutItem);
+        }
+
+        public void LogoutUsingTopMenu()
+        {
+            TopMenu topMenuInstance = MoveToTopMenu();
+            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
+            Acts.Click(topMenuInstance.LogoutButton);
         }
     }
 }

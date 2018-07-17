@@ -68,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomText.cs" />
     <Compile Include="RightMenu.cs" />
+    <Compile Include="TopMenu.cs" />
     <Compile Include="StudentsPage\EditStudent.cs" />
     <Compile Include="StudentsPage\EditStudentList.cs" />
     <Compile Include="StudentsPage\GroupView.cs" />
