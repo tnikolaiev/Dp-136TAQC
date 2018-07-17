@@ -63,6 +63,10 @@ namespace CaesarLib
                 else
                 {
                     return new TopMenu(_driverInstance);
+                }
+            }
+        }
+
         public LeftMenu LeftMenu
         {
             get
@@ -88,7 +92,7 @@ namespace CaesarLib
                 }
             }
         }
-      
+
         public CenterContainer CenterContainer
         {
             get

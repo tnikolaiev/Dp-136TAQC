@@ -59,7 +59,6 @@
     <Compile Include="CenterContainer.cs" />
     <Compile Include="LocationPage.cs" />
     <Compile Include="AdminPage.cs" />
-    <Compile Include="CenterContainer.cs" />
     <Compile Include="GroupsInLocation.cs" />
     <Compile Include="LeftContainer.cs" />
     <Compile Include="LeftMenu.cs" />
