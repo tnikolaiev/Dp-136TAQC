@@ -17,7 +17,7 @@ namespace CaesarLib
                 if (_filterSearchButton != null) return _filterSearchButton;
                 else
                 {
-                    _filterSearchButton = _driverInstance.FindElement(By.XPath("div[@id='group-list-view']//div[@class='search']"));
+                    _filterSearchButton = _driverInstance.FindElement(By.XPath("//div[@class='group-list-view']//div[@class='search']/img"));
                     return _filterSearchButton;
                 }
             }
@@ -80,7 +80,7 @@ namespace CaesarLib
             _driverInstance = driver;
         }
 
-        public List<String> GetAvailableGroups()
+        public List<String> GetAvailableGroupsNames()
         {
             IList<IWebElement> elements = _driverInstance.FindElements(By.XPath("//div[@class='small-group-view col-md-6']//p"));
             List<String> groupsNames = new List<String>();
@@ -90,7 +90,6 @@ namespace CaesarLib
             }
             return groupsNames;
         }
-
 
         public IWebElement GetGroupByName(String name)
         {
