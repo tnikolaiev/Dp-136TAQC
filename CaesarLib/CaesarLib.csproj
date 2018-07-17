@@ -59,6 +59,7 @@
     <Compile Include="CenterContainer.cs" />
     <Compile Include="GroupsInLocation.cs" />
     <Compile Include="LeftContainer.cs" />
+    <Compile Include="LeftMenu.cs" />
     <Compile Include="LoginPage.cs" />
     <Compile Include="MainPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

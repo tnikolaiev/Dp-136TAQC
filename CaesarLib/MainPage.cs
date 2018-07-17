@@ -4,9 +4,10 @@ namespace CaesarLib
 {
     public class MainPage
     {
-        private IWebElement _profileButton;        
+        private IWebElement _profileButton, _logo;
         private IWebDriver _driverInstance;
         private RightMenu _rightMenu;
+        private LeftMenu _leftMenu;
         private LeftContainer _leftContainer;
         private CenterContainer _centerContainer;
 
@@ -19,6 +20,19 @@ namespace CaesarLib
                 {
                     _profileButton = _driverInstance.FindElement(By.XPath("//*[@id='icon']//img[@class='img-circle']"));
                     return _profileButton;
+                }
+            }
+        }
+
+        public IWebElement Logo
+        {
+            get
+            {
+                if (_logo != null) return _logo;
+                else
+                {
+                    _logo = _driverInstance.FindElement(By.CssSelector("#logo > a > img"));
+                    return _logo;
                 }
             }
         }
@@ -36,6 +50,19 @@ namespace CaesarLib
             }
         }
 
+        public LeftMenu LeftMenu
+        {
+            get
+            {
+                if (_leftMenu != null) return _leftMenu;
+                else
+                {
+                    _leftMenu = new LeftMenu(_driverInstance);
+                    return _leftMenu;
+                }
+            }
+        }
+
         public LeftContainer LeftContainer
         {
             get
@@ -48,6 +75,7 @@ namespace CaesarLib
                 }
             }
         }
+
         public CenterContainer CenterContainer
         {
             get
