@@ -8,6 +8,7 @@ namespace CaesarLib
         private IWebDriver _driverInstance;
         private RightMenu _rightMenu;
         private LeftContainer _leftContainer;
+        private CenterContainer _centerContainer;
 
         public IWebElement ProfileButton
         {
@@ -44,6 +45,18 @@ namespace CaesarLib
                 {
                     _leftContainer = new LeftContainer(_driverInstance);
                     return _leftContainer;
+                }
+            }
+        }
+        public CenterContainer CenterContainer
+        {
+            get
+            {
+                if (_centerContainer != null) return _centerContainer;
+                else
+                {
+                    _centerContainer = new CenterContainer(_driverInstance);
+                    return _centerContainer;
                 }
             }
         }
