@@ -125,7 +125,7 @@ namespace CaesarLib
             _driverInstance = driver;
         }
 
-        public bool IsOpened()
+        public static bool IsOpened()
         {
             return (TopMenuSection.GetAttribute("class").Equals("top-menu col-md-12 col-sm-12 col-xs-12 open")) ? true : false;
         }

@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using System;
@@ -125,6 +124,10 @@ namespace CaesarLib
         {
             Actions builder = new Actions(_driverInstance);
             builder.MoveToElement(_driverInstance.FindElement(By.Id("top-menu"))).Build().Perform();
+            //if (!TopMenu.IsOpened())
+            //{
+            //    _driverInstance.FindElement(By.ClassName("cancel")).Click();
+            //}
             return new TopMenu(_driverInstance);
         }
 
@@ -132,7 +135,6 @@ namespace CaesarLib
         public void OpenLocationsWindow()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.LocationsItem);
         }
 
@@ -140,7 +142,6 @@ namespace CaesarLib
         public void OpenGroupsPage()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.GroupsItem);
         }
 
@@ -148,7 +149,6 @@ namespace CaesarLib
         public void OpenStudentsPage()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.StudentsItem);
         }
 
@@ -156,7 +156,6 @@ namespace CaesarLib
         public void OpenSchedulePage()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.ScheduleItem);
         }
 
@@ -164,7 +163,6 @@ namespace CaesarLib
         public void OpenAddPage()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.AddItem);
         }
 
@@ -172,14 +170,12 @@ namespace CaesarLib
         public void OpenAboutPage()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.AboutItem);
         }
 
         public void LogoutUsingTopMenu()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.LogoutButton);
         }
     }
