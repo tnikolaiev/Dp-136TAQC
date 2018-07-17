@@ -61,6 +61,10 @@
     <Compile Include="TC_1_02_01.cs" />
     <Compile Include="TC_1_01_01.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestScheduleComponents.cs" />
+    <Compile Include="TC_1_05_01.cs" />
+    <Compile Include="TC_1_05_02.cs" />
+    <Compile Include="TC_4_01.cs" />
     <Compile Include="TC_3_04_01.cs" />
     <Compile Include="TC_3_04_02.cs" />
     <Compile Include="TC_1_04_01.cs" />
