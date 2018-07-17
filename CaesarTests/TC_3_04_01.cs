@@ -18,7 +18,7 @@ namespace CaesarTests
         GroupView groupViewInstance;
         EditStudentList editStudentListInstance;
         EditStudent editStudentInstance;
-        string path;
+        String path;
        [OneTimeSetUp]
         public void OneTimeSetUpTest()
         {
