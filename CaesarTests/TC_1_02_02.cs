@@ -24,15 +24,15 @@ namespace CaesarTests
             loginPageInstance = new LoginPage(driver);
             wait.Until((d) => LoginPage.IsLoginPage(d));
             loginPageInstance.LogIn("artur", "1234");
-            wait.Until((d) => MainPage.IsMainPage(d));
             mainPageInstance = new MainPage(driver);
+            wait.Until((d) => MainPage.IsMainPage(d));
         }
 
         [Test]
         public void ExecuteTest_ExitButtonClicked_LoginPageOpened()
         {
             Acts.Click(mainPageInstance.ProfileButton);
-            wait.Until(mainPageInstance.RightMenu.IsLogOutButtonVisible());
+            wait.Until(mainPageInstance.RightMenu.IsLogOutButtonClickable());
             Acts.Click(mainPageInstance.RightMenu.SignOutButton);
             Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPage(d)));
         }

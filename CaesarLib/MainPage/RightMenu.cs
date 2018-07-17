@@ -6,7 +6,9 @@ namespace CaesarLib
 {
     public class RightMenu
     {
-        private IWebElement _editButton, _signOutButton, _rightMenuSection;
+        private IWebElement _editButton;
+        private IWebElement _signOutButton;
+        private IWebElement _rightMenuSection;
         private IWebDriver _driverInstance;
 
         public IWebElement EditButton
@@ -53,15 +55,14 @@ namespace CaesarLib
             _driverInstance = driver;
         }
 
-        public Func<IWebDriver, IWebElement> IsLogOutButtonVisible()
+        public Func<IWebDriver, IWebElement> IsLogOutButtonClickable()
         {
-            return ExpectedConditions.ElementIsVisible(By.XPath("//*[@id='right-menu']//i[@class='fa fa-sign-out fa-3x']"));
+            return ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id='right-menu']//i[contains(@class, 'sign-out')]"));
         }
 
         public bool IsOpened()
         {
             return (RightMenuSection.GetAttribute("class").Equals("right-menu open")) ? true : false;
         }
-
     }
 }
