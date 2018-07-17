@@ -90,5 +90,18 @@ namespace CaesarLib
             }
             return groupsNames;
         }
+
+
+        public IWebElement GetGroupByName(String name)
+        {
+            IList<IWebElement> elements = _driverInstance.FindElements(By.XPath("//div[@class='small-group-view col-md-6']"));
+            List<String> groupsNames = new List<String>();
+            foreach (var item in elements)
+            {
+                if (item.FindElement(By.TagName("p")).Text.Equals(name)) return item;
+            }
+            throw new Exception("There is no group with such name");
+        }
     }
+
 }

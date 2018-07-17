@@ -8,24 +8,28 @@ using CaesarLib.Schedule;
 
 namespace CaesarLib
 {
-    public class SchedulePage : MainPage
+    public class SchedulePage 
     {
         //Fields
-       
+
+        private IWebDriver _driverInstance;
         private IWebElement _scheduleCogwheell;
         private IWebElement _monthButton;
         private IWebElement _weekButton;
         private IWebElement _keyDatesButton;        
         private EditScheduleWindow _editScheduleWindowInstance;
         private ScheduleMonthView _scheduleMonthViewInstance;
-        private ScheduleWeekView _scheduleWeekViewInstance;
+        private ScheduleWeekViewAndEdit _scheduleWeekViewInstance;
         private ScheduleKeyDates _scheduleKeyDatesInstance;
+        private LeftContainer _leftContainerInstance;
 
         //Constructor  
 
-        public SchedulePage(IWebDriver driver) : base(driver)
+        public SchedulePage(IWebDriver driverInstance)
         {
-        }                
+            _driverInstance = driverInstance;
+        }
+
 
         // Properties
 
@@ -36,7 +40,7 @@ namespace CaesarLib
                 if (_scheduleCogwheell != null) return _scheduleCogwheell;
                 else
                 {
-                    _scheduleCogwheell = DriverInstance.FindElement(By.XPath("//button[@class='btn editBtn']//i[@class='fa fa-cog fa-2x']"));
+                    _scheduleCogwheell = _driverInstance.FindElement(By.XPath("//button[@class='btn editBtn']//i[@class='fa fa-cog fa-2x']"));
                     return _scheduleCogwheell;
                 }
             }
@@ -48,7 +52,7 @@ namespace CaesarLib
                 if (_monthButton != null) return _monthButton;
                 else
                 {
-                    _monthButton = DriverInstance.FindElement(By.XPath("//button[@class='scBtn monthBtne']"));
+                    _monthButton = _driverInstance.FindElement(By.XPath("//button[contains(@class,'monthBtn')]")); 
                     return _monthButton;
                 }
             }
@@ -60,7 +64,7 @@ namespace CaesarLib
                 if (_weekButton != null) return _weekButton;
                 else
                 {
-                    _weekButton = DriverInstance.FindElement(By.XPath("//button[@class='scBtn weekBtn']"));
+                    _weekButton = _driverInstance.FindElement(By.XPath("//button[contains(@class,'weekBtn')]"));
                     return _weekButton;
                 }
             }
@@ -72,7 +76,7 @@ namespace CaesarLib
                 if (_keyDatesButton != null) return _keyDatesButton;
                 else
                 {
-                    _keyDatesButton = DriverInstance.FindElement(By.XPath("///button[@class='scBtn keyDatesBtn']"));
+                    _keyDatesButton = _driverInstance.FindElement(By.XPath("//button[contains(@class,'keyDatesBtn')]"));
                     return _keyDatesButton;
                 }
             }
@@ -84,7 +88,7 @@ namespace CaesarLib
                 if (_editScheduleWindowInstance != null) return _editScheduleWindowInstance;
                 else
                 {
-                    _editScheduleWindowInstance = new EditScheduleWindow(DriverInstance);
+                    _editScheduleWindowInstance = new EditScheduleWindow(_driverInstance);
                     return _editScheduleWindowInstance;
                 }
             }
@@ -96,19 +100,19 @@ namespace CaesarLib
                 if (_scheduleMonthViewInstance != null) return _scheduleMonthViewInstance;
                 else
                 {
-                    _scheduleMonthViewInstance = new ScheduleMonthView(DriverInstance);
+                    _scheduleMonthViewInstance = new ScheduleMonthView(_driverInstance);
                     return _scheduleMonthViewInstance;
                 }
             }
         }
-        public ScheduleWeekView ScheduleWeekViewInstance
+        public ScheduleWeekViewAndEdit ScheduleWeekViewAndEditInstance
         {
             get
             {
                 if (_scheduleWeekViewInstance != null) return _scheduleWeekViewInstance;
                 else
                 {
-                    _scheduleWeekViewInstance = new ScheduleWeekView(DriverInstance);
+                    _scheduleWeekViewInstance = new ScheduleWeekViewAndEdit(_driverInstance);
                     return _scheduleWeekViewInstance;
                 }
             }
@@ -120,8 +124,21 @@ namespace CaesarLib
                 if (_scheduleKeyDatesInstance != null) return _scheduleKeyDatesInstance;
                 else
                 {
-                    _scheduleKeyDatesInstance = new ScheduleKeyDates(DriverInstance);
+                    _scheduleKeyDatesInstance = new ScheduleKeyDates(_driverInstance);
                     return _scheduleKeyDatesInstance;
+                }
+            }
+        }
+
+        public LeftContainer LeftContainerInstance
+        {
+            get
+            {
+                if (_leftContainerInstance != null) return _leftContainerInstance;
+                else
+                {
+                    _leftContainerInstance = new LeftContainer(_driverInstance);
+                    return _leftContainerInstance;
                 }
             }
         }
@@ -131,7 +148,7 @@ namespace CaesarLib
         public EditScheduleWindow ClickCogwheel()
         {
             ScheduleCogwheell.Click();
-            return new EditScheduleWindow(DriverInstance);
+            return new EditScheduleWindow(_driverInstance);
         }
 
     }

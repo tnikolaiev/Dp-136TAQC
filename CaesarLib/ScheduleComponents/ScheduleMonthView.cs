@@ -7,10 +7,13 @@ using OpenQA.Selenium;
 
 namespace CaesarLib.Schedule
 {
-    public class ScheduleMonthView : MainPage
+    public class ScheduleMonthView 
     {
-        public ScheduleMonthView(IWebDriver driver) : base(driver)
+        private IWebDriver _driverInstance;
+
+        public ScheduleMonthView(IWebDriver driverInstance)
         {
+            _driverInstance = driverInstance;
         }
     }
 }

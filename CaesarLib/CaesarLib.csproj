@@ -64,7 +64,7 @@
     <Compile Include="RightMenu.cs" />
     <Compile Include="ScheduleComponents\ScheduleKeyDates.cs" />
     <Compile Include="ScheduleComponents\ScheduleMonthView.cs" />
-    <Compile Include="ScheduleComponents\ScheduleWeekView.cs" />
+    <Compile Include="ScheduleComponents\ScheduleWeekViewAndEdit.cs" />
     <Compile Include="SchedulePage.cs" />
   </ItemGroup>
   <ItemGroup>

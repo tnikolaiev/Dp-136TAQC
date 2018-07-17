@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 
 namespace CaesarLib
@@ -23,6 +24,15 @@ namespace CaesarLib
         public static String GetAttribute(IWebElement element, String attribute)
         {
             return element.GetAttribute(attribute);
+        }
+
+
+        public static void SelectOptionFromDDL(IWebElement element, String value)
+        {
+            SelectElement DropDownList = new SelectElement(element);
+
+            DropDownList.SelectByValue(value);
+
         }
     }
 }

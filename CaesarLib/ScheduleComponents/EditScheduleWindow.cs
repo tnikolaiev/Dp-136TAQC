@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace CaesarLib.Schedule
 {
-    public class EditScheduleWindow : MainPage
+    public class EditScheduleWindow 
     {
         //fields
-       
+
+        private IWebDriver _driverInstance;
         private IWebElement _saveButton;
         private IWebElement _cancelButton;
         private IWebElement _teacherControl;
@@ -21,7 +23,7 @@ namespace CaesarLib.Schedule
         private IWebElement _workWithExpertEvent;
         private IWebElement _consultationEvent;
         private IWebElement _practiceEvent;
-        private ScheduleWeekView _scheduleWeekView;
+        private ScheduleWeekViewAndEdit _scheduleWeekView;
 
 
         // properties
@@ -33,7 +35,7 @@ namespace CaesarLib.Schedule
                 if (_saveButton!= null) return _saveButton;
                 else
                 {
-                    _saveButton = DriverInstance.FindElement(By.XPath("//span[@id='save']"));
+                    _saveButton = _driverInstance.FindElement(By.Id("save"));
                     return _saveButton;
                 }
             }
@@ -45,7 +47,7 @@ namespace CaesarLib.Schedule
                 if (_cancelButton != null) return _cancelButton;
                 else
                 {
-                    _cancelButton = DriverInstance.FindElement(By.XPath("//span[@id='cancel']"));
+                    _cancelButton = _driverInstance.FindElement(By.Id("'cancel'"));
                     return _cancelButton;
                 }
             }
@@ -57,7 +59,7 @@ namespace CaesarLib.Schedule
                 if (_teacherControl != null) return _teacherControl;
                 else
                 {
-                    _teacherControl = DriverInstance.FindElement(By.XPath("//select[@name='resourceteacher']"));
+                    _teacherControl = _driverInstance.FindElement(By.XPath("//select[@name='resourceteacher']"));
                     return _teacherControl;
                 }
             }
@@ -69,7 +71,7 @@ namespace CaesarLib.Schedule
                 if (_roomControl != null) return _roomControl;
                 else
                 {
-                    _roomControl = DriverInstance.FindElement(By.XPath("//select[@name='room']"));
+                    _roomControl = _driverInstance.FindElement(By.XPath("//select[@name='room']"));
                     return _roomControl;
                 }
             }
@@ -81,7 +83,7 @@ namespace CaesarLib.Schedule
                 if (_eventControl != null) return _eventControl;
                 else
                 {
-                    _eventControl = DriverInstance.FindElement(By.XPath("//select[@name='event']"));
+                    _eventControl = _driverInstance.FindElement(By.XPath("//select[@name='event']"));
                     return _eventControl;
                 }
             }
@@ -93,7 +95,7 @@ namespace CaesarLib.Schedule
                 if (_lectureEvent != null) return _lectureEvent;
                 else
                 {
-                    _lectureEvent = DriverInstance.FindElement(By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Lecture')]"));
+                    _lectureEvent = _driverInstance.FindElement(By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Lecture')]"));
                     return _lectureEvent;
                 }
             }
@@ -105,7 +107,7 @@ namespace CaesarLib.Schedule
                 if (_weeklyReportEvent != null) return _weeklyReportEvent;
                 else
                 {
-                    _weeklyReportEvent = DriverInstance.FindElement(By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Weekly report')]"));
+                    _weeklyReportEvent = _driverInstance.FindElement(By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Weekly report')]"));
                     return _weeklyReportEvent;
                 }
             }
@@ -117,7 +119,7 @@ namespace CaesarLib.Schedule
                 if (_workWithExpertEvent != null) return _workWithExpertEvent;
                 else
                 {
-                    _workWithExpertEvent = DriverInstance.FindElement(By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Work with Expert')]"));
+                    _workWithExpertEvent = _driverInstance.FindElement(By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Work with Expert')]"));
                     return _workWithExpertEvent;
                 }
             }
@@ -129,7 +131,7 @@ namespace CaesarLib.Schedule
                 if (_consultationEvent != null) return _consultationEvent;
                 else
                 {
-                    _consultationEvent = DriverInstance.FindElement(By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Consultation')]"));
+                    _consultationEvent = _driverInstance.FindElement(By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Consultation')]"));
                     return _consultationEvent;
                 }
             }
@@ -141,19 +143,19 @@ namespace CaesarLib.Schedule
                 if (_practiceEvent != null) return _practiceEvent;
                 else
                 {
-                    _practiceEvent = DriverInstance.FindElement(By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Practice')]"));
+                    _practiceEvent = _driverInstance.FindElement(By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Practice')]"));
                     return _practiceEvent;
                 }
             }
         }
-        public ScheduleWeekView ScheduleWeekViewInstance
+        public ScheduleWeekViewAndEdit ScheduleWeekViewAndEditInstance
         {
             get
             {
                 if (_scheduleWeekView != null) return _scheduleWeekView;
                 else
                 {
-                    _scheduleWeekView = new ScheduleWeekView(DriverInstance);
+                    _scheduleWeekView = new ScheduleWeekViewAndEdit(_driverInstance);
                     return _scheduleWeekView;
                 }
             }
@@ -162,19 +164,25 @@ namespace CaesarLib.Schedule
 
         //constructor 
 
-        public EditScheduleWindow(IWebDriver driver) : base(driver)
+
+        public EditScheduleWindow(IWebDriver driverInstance)
         {
+            _driverInstance = driverInstance;
         }
 
-       
+
+
         // actions
 
-        public String getEventCounter(IWebElement element)
+        public String GetEventCounter(IWebElement element)
         {
             String counter = element.FindElement(By.CssSelector(".event-score")).Text;
 
             return counter;
         }
+
+
+      
 
         
     }

@@ -7,10 +7,14 @@ using OpenQA.Selenium;
 
 namespace CaesarLib.Schedule
 {
-    public class ScheduleKeyDates : MainPage
+    public class ScheduleKeyDates 
     {
-        public ScheduleKeyDates(IWebDriver driver) : base(driver)
+
+        private IWebDriver _driverInstance;
+
+        public ScheduleKeyDates(IWebDriver driverInstance)
         {
+            _driverInstance = driverInstance;
         }
     }
 }
