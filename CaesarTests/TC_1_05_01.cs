@@ -15,11 +15,12 @@ namespace CaesarTests
         LoginPage loginPageInstance;
         WebDriverWait wait;
         LocationPage locationPageInstance;
+        CenterContainer groupLocationInstance;
 
         [SetUp]
         public void Initialize()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Url = @"http://localhost:3000/logout";
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
@@ -37,7 +38,10 @@ namespace CaesarTests
             locationPageInstance = new LocationPage(driver);
             Acts.Click(locationPageInstance.CityChernivtsy);
             Acts.Click(locationPageInstance.ConfurmButton);
-            Assert.IsTrue(wait.Until((d) => MainPage.IsMainPage(d)));
+            string exeptualResultTitle = "Chernivtsy";
+            groupLocationInstance = new CenterContainer(driver);
+            Console.WriteLine(groupLocationInstance.GroupLocation.Text);
+            Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
         }
 
         [OneTimeTearDown]
