@@ -48,7 +48,7 @@ namespace CaesarTests
             editStudentInstance = new EditStudent(webDriver);
         }
         [Test]
-        public void AddFirstStudentTest()
+        public void ExecuteTest_AddStudent_1_StudentAdded()
         {
             Acts.Click(editStudentListInstance.CreateStudentButton);
             wait.Until((d) => EditStudent.IsEditStudent(d));
@@ -61,7 +61,7 @@ namespace CaesarTests
             Assert.AreEqual("Petrova Anna", EditStudentList.GetStudentName(editStudentListInstance.GetLastElement(editStudentListInstance.Students)));
         }
         [Test]
-        public void AddSecondStudentTest()
+        public void ExecuteTest_AddStudent_2_StudentAddedt()
         {
             Acts.Click(editStudentListInstance.CreateStudentButton);
             wait.Until((d) => EditStudent.IsEditStudent(d));

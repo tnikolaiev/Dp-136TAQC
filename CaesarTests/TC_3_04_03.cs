@@ -61,18 +61,14 @@ namespace CaesarTests
             wait.Until((d) => EditStudent.IsEditStudent(d));
         }
         [Test]
-        public void UploadInvalidCVTest()
+        public void ExecuteTest_UploadInvalidFiles_FilesNotUploaded()
         {
             Acts.Click(editStudentInstance.BrowseCVButton);
             path = EditStudent.GetTestFile("TC_3_04 CV.txt");
             Acts.UploadFile(path);
             wait.Until(ExpectedConditions.AlertIsPresent());
             webDriver.SwitchTo().Alert().Accept();
-            Assert.AreEqual(0, editStudentInstance.CountUploadedFiles());
-        }
-        [Test]
-        public void UploadInvalidPhotoTest()
-        {
+
             Acts.Click(editStudentInstance.BrowsePhotoButton);
             path = EditStudent.GetTestFile("TC_3_04 photo.ico");
             Acts.UploadFile(path);

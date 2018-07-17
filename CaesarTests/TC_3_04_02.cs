@@ -72,7 +72,7 @@ namespace CaesarTests
             wait.Until((d) => EditStudent.IsEditStudent(d));
         }
         [Test]
-        public void DeleteFilesTest()
+        public void ExecuteTest_DeleteFiles_FilesDeleted()
         {
             Acts.Click(editStudentInstance.RemoveCVButton);
             Acts.Click(editStudentInstance.RemovePhotoButton);

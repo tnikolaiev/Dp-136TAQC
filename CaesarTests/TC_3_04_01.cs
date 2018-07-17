@@ -57,7 +57,7 @@ namespace CaesarTests
             wait.Until((d) => EditStudent.IsEditStudent(d));
         }
         [Test]
-        public void UploadFilesTest()
+        public void ExecuteTest_UploadFiles_FilesUploaded()
         {
             path = EditStudent.GetTestFile("TC_3_04 CV.docx");
             Acts.Click(editStudentInstance.BrowseCVButton);
