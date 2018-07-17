@@ -52,5 +52,11 @@ namespace CaesarLib
             SendKeys.SendWait(@"{Enter}");
 
         }
+
+        public static bool IsElementPresent(IWebDriver driverInstance, By by)
+        {    
+            return driverInstance.FindElements(by).Count > 0 ? true : false;
+        }
     }
 }
+
