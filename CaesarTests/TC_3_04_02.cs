@@ -19,7 +19,7 @@ namespace CaesarTests
         GroupView groupViewInstance;
         EditStudentList editStudentListInstance;
         EditStudent editStudentInstance;
-        string path;
+        String path;
         [OneTimeSetUp]
         public void OneTimeSetUpTest()
         {
@@ -72,7 +72,7 @@ namespace CaesarTests
             wait.Until((d) => EditStudent.IsEditStudent(d));
         }
         [Test]
-        public void DeleteFilesTest()
+        public void ExecuteTest_DeleteFiles_FilesDeleted()
         {
             Acts.Click(editStudentInstance.RemoveCVButton);
             Acts.Click(editStudentInstance.RemovePhotoButton);

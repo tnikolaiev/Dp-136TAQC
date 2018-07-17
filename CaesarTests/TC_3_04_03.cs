@@ -5,11 +5,15 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_3_04_01
+    class TC_3_04_03
     {
         IWebDriver webDriver = new ChromeDriver();
         WebDriverWait wait;
@@ -19,7 +23,7 @@ namespace CaesarTests
         EditStudentList editStudentListInstance;
         EditStudent editStudentInstance;
         String path;
-       [OneTimeSetUp]
+        [OneTimeSetUp]
         public void OneTimeSetUpTest()
         {
             wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
@@ -57,30 +61,26 @@ namespace CaesarTests
             wait.Until((d) => EditStudent.IsEditStudent(d));
         }
         [Test]
-        public void ExecuteTest_UploadFiles_FilesUploaded()
+        public void ExecuteTest_UploadInvalidFiles_FilesNotUploaded()
         {
-            path = EditStudent.GetTestFile("TC_3_04 CV.docx");
             Acts.Click(editStudentInstance.BrowseCVButton);
+            path = EditStudent.GetTestFile("TC_3_04 CV.txt");
             Acts.UploadFile(path);
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            webDriver.SwitchTo().Alert().Accept();
 
-            path = EditStudent.GetTestFile("TC_3_04 photo.png");
             Acts.Click(editStudentInstance.BrowsePhotoButton);
+            path = EditStudent.GetTestFile("TC_3_04 photo.ico");
             Acts.UploadFile(path);
-
-            Acts.Click(editStudentInstance.SaveButton);
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
-
-            Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.EditButtons));
-            wait.Until((d) => EditStudent.IsEditStudent(d));
-
-            Assert.AreEqual(2, editStudentInstance.CountUploadedFiles());
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            webDriver.SwitchTo().Alert().Accept();
+            Assert.AreEqual(0, editStudentInstance.CountUploadedFiles());
         }
         [TearDown]
         public void TearDownTest()
         {
-            Acts.Click(editStudentInstance.RemoveCVButton);
-            Acts.Click(editStudentInstance.RemovePhotoButton);
             Acts.Click(editStudentInstance.SaveButton);
+            wait.Until((d) => EditStudentList.IsEditStudentList(d));
         }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()

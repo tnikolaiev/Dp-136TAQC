@@ -44,11 +44,11 @@ namespace CaesarLib
         {
             SendKeys.SendWait(button);
         }
-        public static void UploadFile(string path)
+        public static void UploadFile(String path)
         {
-            Thread.Sleep(200);
+            Thread.Sleep(1000);
             SendKeys.SendWait(path);
-            Thread.Sleep(200);
+            Thread.Sleep(1000);
             SendKeys.SendWait(@"{Enter}");
 
         }

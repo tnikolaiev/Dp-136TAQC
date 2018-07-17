@@ -50,11 +50,11 @@ namespace CaesarLib.StudentsPage
         {
             return webDriver.FindElements(By.ClassName("list-item")).Count;             
         }
-        public static string GetTestFile(string fileName)
+        public static String GetTestFile(String fileName)
         {
-            Dictionary<string, string> fileNamePathPairs = new Dictionary<string, string>();
+            Dictionary<String, String> fileNamePathPairs = new Dictionary<String, String>();
 
-            string[] files = Directory.GetFiles(@"CaesarTests\TC_3_04 files");
+            String[] files = Directory.GetFiles(@"CaesarTests\TC_3_04 files");
 
             for (int i = 0; i < files.Length; i++)
             {
