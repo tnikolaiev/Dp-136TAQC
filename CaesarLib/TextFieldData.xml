@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<TextField>
+  <Text input ="123456"/>
+  <Text input ="'%#(^$@!"/>
+  <Text input ="InputFirstNameCharacter"/>
+</TextField>

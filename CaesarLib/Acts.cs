@@ -15,7 +15,7 @@ namespace CaesarLib
 
         public static void InputValue(IWebElement element, String value)
         {
-            element.SendKeys(value);
+             element.SendKeys(value);
         }
 
         public static void Clear(IWebElement element)
