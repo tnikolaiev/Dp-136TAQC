@@ -56,6 +56,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acts.cs" />
+    <Compile Include="CenterContainer.cs" />
+    <Compile Include="LocationPage.cs" />
     <Compile Include="AdminPage.cs" />
     <Compile Include="CenterContainer.cs" />
     <Compile Include="GroupsInLocation.cs" />
