@@ -102,4 +102,5 @@ namespace CaesarLib
             throw new Exception("There is no group with such name");
         }
     }
+
 }

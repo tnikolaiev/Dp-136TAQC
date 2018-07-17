@@ -27,6 +27,14 @@ namespace CaesarLib
         {
             return element.GetAttribute(attribute);
         }
+
+        public static void SelectOptionFromDDL(IWebElement element, String value)
+        {
+            SelectElement DropDownList = new SelectElement(element);
+
+            DropDownList.SelectByValue(value);
+}
+
         public static void SelectElement(IWebElement webElement, int index)
         {
             SelectElement selectElement = new SelectElement(webElement);
@@ -42,6 +50,7 @@ namespace CaesarLib
             SendKeys.SendWait(path);
             Thread.Sleep(200);
             SendKeys.SendWait(@"{Enter}");
+
         }
     }
 }
