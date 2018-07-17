@@ -13,18 +13,18 @@ using System.Threading.Tasks;
 namespace CaesarTests
 {
     [TestFixture]
-    public class TC_3_08
+    class TC_3_04_03
     {
         IWebDriver webDriver = new ChromeDriver();
         WebDriverWait wait;
         string baseURL = "localhost:3000";
-        LoginPage logingPageInstance;
+        LoginPage loginPageInstance;
         GroupView groupViewInstance;
         EditStudentList editStudentListInstance;
         EditStudent editStudentInstance;
-
+        String path;
         [OneTimeSetUp]
-        public void OneTimeSetUp()
+        public void OneTimeSetUpTest()
         {
             wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
 
@@ -32,8 +32,8 @@ namespace CaesarTests
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             webDriver.Url = baseURL;
 
-            logingPageInstance = new LoginPage(webDriver);
-            logingPageInstance.LogIn("sasha", "1234");
+            loginPageInstance = new LoginPage(webDriver);
+            loginPageInstance.LogIn("sasha", "1234");
             wait.Until((d) => MainPage.IsMainPage(d));
 
             webDriver.Url = baseURL + "/Students/Dnipro/DP-093-JS/list";
@@ -45,44 +45,55 @@ namespace CaesarTests
             editStudentListInstance = new EditStudentList(webDriver);
             wait.Until((d) => EditStudentList.IsEditStudentList(d));
 
+            Acts.Click(editStudentListInstance.CreateStudentButton);
+
             editStudentInstance = new EditStudent(webDriver);
-        }
-        [Test]
-        public void AddFirstStudentTest()
-        {
-            Acts.Click(editStudentListInstance.CreateStudentButton);
             wait.Until((d) => EditStudent.IsEditStudent(d));
 
-            editStudentInstance.FillForm("Anna", "Petrova", 2, "99", "4", 1);
-
+            editStudentInstance.FillForm("Denis", "Petrov", 0, "120", "5", 0);
             Acts.Click(editStudentInstance.SaveButton);
             wait.Until((d) => EditStudentList.IsEditStudentList(d));
-
-            Assert.AreEqual("Petrova Anna", EditStudentList.GetStudentName(editStudentListInstance.GetLastElement(editStudentListInstance.Students)));
+        }
+        [SetUp]
+        public void SetUpTest()
+        {
+            Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.EditButtons));
+            wait.Until((d) => EditStudent.IsEditStudent(d));
         }
         [Test]
-        public void AddSecondStudentTest()
+        public void UploadInvalidCVTest()
         {
-            Acts.Click(editStudentListInstance.CreateStudentButton);
-            wait.Until((d) => EditStudent.IsEditStudent(d));
-
-            editStudentInstance.FillForm("Sergey", "Glinchikov", 8, "130", "5", 1);
-
+            Acts.Click(editStudentInstance.BrowseCVButton);
+            path = EditStudent.GetTestFile("TC_3_04 CV.txt");
+            Acts.UploadFile(path);
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            webDriver.SwitchTo().Alert().Accept();
+            Assert.AreEqual(0, editStudentInstance.CountUploadedFiles());
+        }
+        [Test]
+        public void UploadInvalidPhotoTest()
+        {
+            Acts.Click(editStudentInstance.BrowsePhotoButton);
+            path = EditStudent.GetTestFile("TC_3_04 photo.ico");
+            Acts.UploadFile(path);
+            wait.Until(ExpectedConditions.AlertIsPresent());
+            webDriver.SwitchTo().Alert().Accept();
+            Assert.AreEqual(0, editStudentInstance.CountUploadedFiles());
+        }
+        [TearDown]
+        public void TearDownTest()
+        {
             Acts.Click(editStudentInstance.SaveButton);
             wait.Until((d) => EditStudentList.IsEditStudentList(d));
-
-            Assert.AreEqual("Glinchikov Sergey", EditStudentList.GetStudentName(editStudentListInstance.GetLastElement(editStudentListInstance.Students)));
         }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()
         {
-            for (int i = 0; i < 2; i++)
-            {
-                Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.DeleteButtons));
-                Acts.PressKeyboardButton(@"{Enter}");
-            }
-            webDriver.Quit();
+            Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.DeleteButtons));
+            Acts.PressKeyboardButton(@"{Enter}");
+            wait.Until((d) => EditStudentList.IsEditStudentList(d));
             webDriver.Close();
+            webDriver.Quit();
         }
     }
 }

@@ -65,6 +65,7 @@
     <Compile Include="TC_3_04_02.cs" />
     <Compile Include="TC_1_04_01.cs" />
     <Compile Include="TC_1_03_01.cs" />
+    <Compile Include="TC_3_04_03.cs" />
     <Compile Include="TC_3_08.cs" />
   </ItemGroup>
   <ItemGroup>
