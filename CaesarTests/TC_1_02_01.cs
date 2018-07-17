@@ -2,8 +2,10 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Threading;
 
 namespace CaesarTests
 {
@@ -35,27 +37,19 @@ namespace CaesarTests
             Assert.IsTrue(wait.Until((d) => mainPageInstance.RightMenu.IsOpened()));
         }
 
-        //[Test]
-        //public void Executetest_DropMouseFocus_RightMenuClosed()
-        //{
-        //    ////mouseout(mainPageInstance.RightMenu);
-        //    //Actions act = new Actions(driver);
-        //    IJavaScriptExecutor jse = driver as IJavaScriptExecutor;
-        //    //act.MoveToElement(mainPageInstance.ProfileButton)
-        //    //    .Click()
-        //    //    .Perform();
-        //    Thread.Sleep(1000);
-        //    mainPageInstance.OpenProfileDataSection();
-        //    // jse.ExecuteScript("document.getElementByClassName('right-menu open').mouseout();");
-        //    IWebElement el = driver.FindElement(By.ClassName("right-menu open"));
-        //    //jse.ExecuteScript("argument[0]",el).;
-        //    //Thread.Sleep(3000);
-        //    //Actions acts1 = new Actions(driver);
-        //    //acts1.MoveToElement(mainPageInstance.ProfileButton).Click().Build().Perform();
-        //    //acts1.MoveByOffset(40, 40).Perform();
-        //    Assert.IsTrue(wait.Until<bool>(d => Equals("right-menu", mainPageInstance.GetRightMenuCondition())));
-        //    Assert.Fail();
-        //}
+        [Test]
+        public void Executetest_DropMouseFocus_RightMenuClosed()
+        {
+            Actions act = new Actions(driver);
+            Acts.Click(mainPageInstance.ProfileButton);
+            wait.Until((d) => mainPageInstance.RightMenu.IsOpened());
+            act.MoveToElement(mainPageInstance.ProfileButton)
+                .MoveByOffset(-200, 200)
+                .Build()
+                .Perform();
+            wait.Until((d) => !mainPageInstance.RightMenu.IsOpened());
+            Assert.IsFalse(mainPageInstance.RightMenu.IsOpened());
+        }
 
         [OneTimeTearDown]
         public void CleanUp()
