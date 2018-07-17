@@ -1,6 +1,5 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using System;
 
 namespace CaesarLib
 {
@@ -91,7 +90,7 @@ namespace CaesarLib
                 }
             }
         }
-        
+
 
         public CenterContainer CenterContainer
         {

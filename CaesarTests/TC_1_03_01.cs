@@ -20,7 +20,8 @@ namespace CaesarTests
         [SetUp]
         public void Initialize()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
             driver.Url = @"http://localhost:3000/logout";
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("admin", "1234");
@@ -32,6 +33,7 @@ namespace CaesarTests
         public void ExecuteTest_FirstSignIn_AvailableGroupsList()
         {
             List<String> expectedResult = new List<String> { "Lv-084-QB", "Lv-045-DL", "Lv-023-UX" };
+            wait.Until(mainPageInstance.LeftContainer.GroupsInLocation.AreGroupsVisible());
             List<String> actualResult = mainPageInstance.LeftContainer.GroupsInLocation.GetAvailableGroupsNames();
             CollectionAssert.AreEquivalent(expectedResult, actualResult);
         }
@@ -40,27 +42,26 @@ namespace CaesarTests
         public void ExecuteTest_MyGroupsFilterCheckedUnchecked()
         {
             Acts.Click(mainPageInstance.LeftContainer.GroupsInLocation.MyGroupsFilter);
-            Assert.AreEqual("myGroups pressed", Acts.GetAttribute(mainPageInstance.LeftContainer.GroupsInLocation.MyGroupsFilter, "class"));
+            bool firstCondition = "myGroups pressed".Equals(Acts.GetAttribute(mainPageInstance.LeftContainer.GroupsInLocation.MyGroupsFilter, "class"));
             mainPageInstance.LeftContainer.GroupsInLocation.MyGroupsFilter.Click();
-            Assert.AreEqual("myGroups", Acts.GetAttribute(mainPageInstance.LeftContainer.GroupsInLocation.MyGroupsFilter, "class"));
+            bool secondCondition = "myGroups".Equals(Acts.GetAttribute(mainPageInstance.LeftContainer.GroupsInLocation.MyGroupsFilter, "class"));
+            Assert.IsTrue(firstCondition && secondCondition);
         }
 
         [Test]
         public void ExecuteTest_MyGroupsFilterChecked_NoneAvailableGroups()
         {
             Acts.Click(mainPageInstance.LeftContainer.GroupsInLocation.MyGroupsFilter);
-            List<String> expectedResult = new List<String> { };
             List<String> actualResult = mainPageInstance.LeftContainer.GroupsInLocation.GetAvailableGroupsNames();
-            CollectionAssert.AreEquivalent(expectedResult, actualResult);
+            Assert.IsEmpty(actualResult);
         }
 
         [Test]
         public void ExecuteTest_FutureGroupsFilter()
         {
             Acts.Click(mainPageInstance.LeftContainer.GroupsInLocation.FutureGroupsToggle);
-            List<String> expectedResult = new List<String> { };
             List<String> actualResult = mainPageInstance.LeftContainer.GroupsInLocation.GetAvailableGroupsNames();
-            CollectionAssert.AreEquivalent(expectedResult, actualResult);
+            Assert.IsEmpty(actualResult);
         }
 
         [Test]
@@ -68,6 +69,7 @@ namespace CaesarTests
         {
             Acts.Click(mainPageInstance.LeftContainer.GroupsInLocation.EndedGroupsToggle);
             List<String> expectedResult = new List<String> { "Lv-087-RD", "Lv-077-IOS" };
+            wait.Until(mainPageInstance.LeftContainer.GroupsInLocation.AreGroupsVisible());
             List<String> actualResult = mainPageInstance.LeftContainer.GroupsInLocation.GetAvailableGroupsNames();
             CollectionAssert.AreEquivalent(expectedResult, actualResult);
         }

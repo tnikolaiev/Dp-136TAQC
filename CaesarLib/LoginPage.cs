@@ -5,7 +5,10 @@ namespace CaesarLib
 {
     public class LoginPage
     {
-        private IWebElement _loginField, _passwordField, _loginButton, _messageField;
+        private IWebElement _loginField;
+        private IWebElement _passwordField;
+        private IWebElement _loginButton;
+        private IWebElement _messageField;
         private IWebDriver _driverInstance;
 
         public IWebElement LoginField
@@ -76,7 +79,7 @@ namespace CaesarLib
         {
             return driver.FindElements(By.Name("login")).Count > 0 &&
                 driver.FindElements(By.Name("password")).Count > 0 &&
-                driver.FindElements(By.XPath("//*[@class='login']/button[@class='submit fa fa-check-circle-o fa-3x']")).Count > 0 ?
+                driver.FindElements(By.XPath("//*[@class='login']/button[contains(@class, 'submit')]")).Count > 0 ?
                 true : false;
         }
     }

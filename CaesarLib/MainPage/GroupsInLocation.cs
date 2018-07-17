@@ -1,7 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace CaesarLib
@@ -9,7 +8,12 @@ namespace CaesarLib
     public class GroupsInLocation
     {
         private IWebDriver _driverInstance;
-        private IWebElement _filterSearchButton, _myGroupsButton, _futureGroupsToggle, _currentGroupsToggle, _endedGroupsToggle;
+        private IWebElement _filterSearchButton;
+        private IWebElement _myGroupsButton;
+        private IWebElement _futureGroupsToggle;
+        private IWebElement _currentGroupsToggle;
+        private IWebElement _endedGroupsToggle;
+
         public IWebElement FilterSearchButton
         {
             get
@@ -30,7 +34,7 @@ namespace CaesarLib
                 if (_myGroupsButton != null) return _myGroupsButton;
                 else
                 {
-                    _myGroupsButton = _driverInstance.FindElement(By.XPath("//div[@class='group-list-footer']/button[text() = 'My Groups']"));
+                    _myGroupsButton = _driverInstance.FindElement(By.XPath("//div[@class='group-list-footer']/button[contains(text(), 'My Groups')]"));
                     return _myGroupsButton;
                 }
             }
@@ -43,7 +47,7 @@ namespace CaesarLib
                 if (_futureGroupsToggle != null) return _futureGroupsToggle;
                 else
                 {
-                    _futureGroupsToggle = _driverInstance.FindElement(By.CssSelector("#left-side-bar > div > div.group-list-footer > div > label:nth-child(6) > div"));
+                    _futureGroupsToggle = _driverInstance.FindElement(By.XPath("//div[@class='stage-toggle']/label[3]/div"));
                     return _futureGroupsToggle;
                 }
             }
@@ -56,7 +60,7 @@ namespace CaesarLib
                 if (_currentGroupsToggle != null) return _currentGroupsToggle;
                 else
                 {
-                    _currentGroupsToggle = _driverInstance.FindElement(By.CssSelector("#left-side-bar > div > div.group-list-footer > div > label:nth-child(4) > div"));
+                    _currentGroupsToggle = _driverInstance.FindElement(By.XPath("//div[@class='stage-toggle']/label[2]/div"));
                     return _currentGroupsToggle;
                 }
             }
@@ -69,7 +73,7 @@ namespace CaesarLib
                 if (_endedGroupsToggle != null) return _endedGroupsToggle;
                 else
                 {
-                    _endedGroupsToggle = _driverInstance.FindElement(By.CssSelector("#left-side-bar > div > div.group-list-footer > div > label:nth-child(2) > div"));
+                    _endedGroupsToggle = _driverInstance.FindElement(By.XPath("//div[@class='stage-toggle']/label[1]/div"));
                     return _endedGroupsToggle;
                 }
             }
@@ -80,9 +84,14 @@ namespace CaesarLib
             _driverInstance = driver;
         }
 
+        public Func<IWebDriver, IWebElement> AreGroupsVisible()
+        {
+            return ExpectedConditions.ElementIsVisible(By.XPath("//div[@class='group-collection row']/div//p"));
+        }
+
         public List<String> GetAvailableGroupsNames()
         {
-            IList<IWebElement> elements = _driverInstance.FindElements(By.XPath("//div[@class='small-group-view col-md-6']//p"));
+            IList<IWebElement> elements = _driverInstance.FindElements(By.XPath("//div[@class='group-collection row']/div//p"));
             List<String> groupsNames = new List<String>();
             foreach (var item in elements)
             {
@@ -91,9 +100,14 @@ namespace CaesarLib
             return groupsNames;
         }
 
+        public bool IsGroupChosen(IWebElement group)
+        {
+            return Acts.GetAttribute(group, "class").Contains("chosen");
+        }
+
         public IWebElement GetGroupByName(String name)
         {
-            IList<IWebElement> elements = _driverInstance.FindElements(By.XPath("//div[@class='small-group-view col-md-6']"));
+            IList<IWebElement> elements = _driverInstance.FindElements(By.XPath("//div[@class='group-collection row']/div"));
             List<String> groupsNames = new List<String>();
             foreach (var item in elements)
             {
@@ -102,5 +116,4 @@ namespace CaesarLib
             throw new Exception("There is no group with such name");
         }
     }
-
 }
