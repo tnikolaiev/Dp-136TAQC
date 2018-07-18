@@ -2,13 +2,15 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Threading;
 
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_1_02_02
+    public class TC_1_02_02_additional
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
@@ -23,20 +25,18 @@ namespace CaesarTests
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
             wait.Until((d) => LoginPage.IsLoginPage(d));
-            loginPageInstance.LogIn("artur", "1234");
-            mainPageInstance = new MainPage(driver);
+            loginPageInstance.LogIn("dmytro", "1234");
             wait.Until((d) => MainPage.IsMainPage(d));
-        }
-
-        [Test]
-        public void ExecuteTest_ExitButtonClicked_LoginPageOpened()
-        {
-            Acts.Click(mainPageInstance.ProfileButton);
-            wait.Until(mainPageInstance.RightMenu.IsLogOutButtonClickable());
-            Acts.Click(mainPageInstance.RightMenu.SignOutButton);
-            Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPage(d)));
+            mainPageInstance = new MainPage(driver);
         }
         
+        [Test]
+        public void ExecuteTest_LogoutFromTopMenu()
+        {
+            mainPageInstance.LogoutUsingTopMenu();
+            Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPage(d)));
+        }
+
         [OneTimeTearDown]
         public void CleanUp()
         {

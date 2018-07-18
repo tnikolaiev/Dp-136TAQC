@@ -2,13 +2,15 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Threading;
 
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_1_02_02
+    public class TC_OpenClose_TopMenu
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
@@ -23,18 +25,28 @@ namespace CaesarTests
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
             wait.Until((d) => LoginPage.IsLoginPage(d));
-            loginPageInstance.LogIn("artur", "1234");
-            mainPageInstance = new MainPage(driver);
+            loginPageInstance.LogIn("dmytro", "1234");
             wait.Until((d) => MainPage.IsMainPage(d));
+            mainPageInstance = new MainPage(driver);
         }
 
         [Test]
-        public void ExecuteTest_ExitButtonClicked_LoginPageOpened()
+        public void ExecuteTest_OpenTopMenu()
         {
-            Acts.Click(mainPageInstance.ProfileButton);
-            wait.Until(mainPageInstance.RightMenu.IsLogOutButtonClickable());
-            Acts.Click(mainPageInstance.RightMenu.SignOutButton);
-            Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPage(d)));
+            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            Assert.IsTrue(topMenuInstance.IsOpened());
+        }
+
+        [Test]
+        public void ExecuteTest_CloseTopMenu()
+        {
+            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            wait.Until((d) => topMenuInstance.IsOpened());
+            Thread.Sleep(1000);
+            Actions act = new Actions(driver);
+            act.MoveByOffset(0, 200).Build().Perform();
+            Thread.Sleep(10000);
+            Assert.IsFalse(topMenuInstance.IsOpened());
         }
         
         [OneTimeTearDown]

@@ -15,7 +15,7 @@ namespace CaesarLib
 
         public static void InputValue(IWebElement element, String value)
         {
-             element.SendKeys(value);
+            element.SendKeys(value);
         }
 
         public static void Clear(IWebElement element)
@@ -31,9 +31,8 @@ namespace CaesarLib
         public static void SelectOptionFromDDL(IWebElement element, String value)
         {
             SelectElement DropDownList = new SelectElement(element);
-
             DropDownList.SelectByValue(value);
-}
+        }
 
         public static void SelectElement(IWebElement webElement, int index)
         {
@@ -50,7 +49,11 @@ namespace CaesarLib
             SendKeys.SendWait(path);
             Thread.Sleep(1000);
             SendKeys.SendWait(@"{Enter}");
+        }
 
+        public static void Wait(WebDriverWait wait, bool сondition)
+        {
+            wait.Until((d) => сondition);
         }
 
         public static bool IsElementPresent(IWebDriver driverInstance, By by)
