@@ -29,11 +29,11 @@ namespace CaesarTests
         [Test]
         public void ExecuteTest_SignInAsCoordinator_TwoButtonsAvailable()
         {
-            wait.Until((d) => LoginPage.IsLoginPage(d));
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("dmytro", "1234");
 
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
 
             mainPageInstance.LeftMenu.Open(new Actions(driver));
@@ -47,15 +47,15 @@ namespace CaesarTests
         [Test]
         public void ExecuteTest_SignInAsCoordinator_CheckGroup_FourButtonsAvailable()
         {
-            wait.Until((d) => LoginPage.IsLoginPage(d));
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("dmytro", "1234");
 
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
 
             IWebElement chosenGroup = mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS");
-            Acts.Click(chosenGroup);            
+            chosenGroup.Click();            
 
             mainPageInstance.LeftMenu.Open(new Actions(driver));
             wait.Until(mainPageInstance.LeftMenu.IsSearchButtonVisible());
@@ -68,11 +68,11 @@ namespace CaesarTests
         [Test]
         public void ExecuteTest_SignInAsTeacher_OneButtonsAvailable()
         {
-            wait.Until((d) => LoginPage.IsLoginPage(d));
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("sasha", "1234");
 
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
 
             mainPageInstance.LeftMenu.Open(new Actions(driver));
@@ -86,15 +86,15 @@ namespace CaesarTests
         [Test]
         public void ExecuteTest_SignInAsTeacher_CheckGroup_OneButtonsAvailable()
         {
-            wait.Until((d) => LoginPage.IsLoginPage(d));
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("sasha", "1234");
 
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
 
             IWebElement chosenGroup = mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS");
-            Acts.Click(chosenGroup);
+            chosenGroup.Click();
 
             mainPageInstance.LeftMenu.Open(new Actions(driver));
             wait.Until(mainPageInstance.LeftMenu.IsSearchButtonVisible());
@@ -107,11 +107,11 @@ namespace CaesarTests
         [Test]
         public void ExecuteTest_SignInAsAdministrator_TwoButtonsAvailable()
         {
-            wait.Until((d) => LoginPage.IsLoginPage(d));
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("artur", "1234");
 
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
 
             mainPageInstance.LeftMenu.Open(new Actions(driver));
@@ -125,15 +125,15 @@ namespace CaesarTests
         [Test]
         public void ExecuteTest_SignInAsAdministrator_CheckGroup_FourButtonsAvailable()
         {
-            wait.Until((d) => LoginPage.IsLoginPage(d));
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("artur", "1234");
 
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
 
             IWebElement chosenGroup = mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS");
-            Acts.Click(chosenGroup);
+            chosenGroup.Click();
 
             mainPageInstance.LeftMenu.Open(new Actions(driver));
             wait.Until(mainPageInstance.LeftMenu.IsSearchButtonVisible());

@@ -7,7 +7,7 @@ namespace CaesarLib
 {
     public class GroupsInLocation
     {
-        private IWebDriver _driverInstance;
+        private IWebDriver driver;
         private IWebElement _filterSearchButton;
         private IWebElement _myGroupsButton;
         private IWebElement _futureGroupsToggle;
@@ -21,7 +21,7 @@ namespace CaesarLib
                 if (_filterSearchButton != null) return _filterSearchButton;
                 else
                 {
-                    _filterSearchButton = _driverInstance.FindElement(By.XPath("//div[@class='group-list-view']//div[@class='search']/img"));
+                    _filterSearchButton = driver.FindElement(By.XPath("//div[@class='group-list-view']//div[@class='search']/img"));
                     return _filterSearchButton;
                 }
             }
@@ -34,7 +34,7 @@ namespace CaesarLib
                 if (_myGroupsButton != null) return _myGroupsButton;
                 else
                 {
-                    _myGroupsButton = _driverInstance.FindElement(By.XPath("//div[@class='group-list-footer']/button[contains(text(), 'My Groups')]"));
+                    _myGroupsButton = driver.FindElement(By.XPath("//div[@class='group-list-footer']/button[contains(text(), 'My Groups')]"));
                     return _myGroupsButton;
                 }
             }
@@ -47,7 +47,7 @@ namespace CaesarLib
                 if (_futureGroupsToggle != null) return _futureGroupsToggle;
                 else
                 {
-                    _futureGroupsToggle = _driverInstance.FindElement(By.XPath("//div[@class='stage-toggle']/label[3]/div"));
+                    _futureGroupsToggle = driver.FindElement(By.XPath("//div[@class='stage-toggle']/label[3]/div"));
                     return _futureGroupsToggle;
                 }
             }
@@ -60,7 +60,7 @@ namespace CaesarLib
                 if (_currentGroupsToggle != null) return _currentGroupsToggle;
                 else
                 {
-                    _currentGroupsToggle = _driverInstance.FindElement(By.XPath("//div[@class='stage-toggle']/label[2]/div"));
+                    _currentGroupsToggle = driver.FindElement(By.XPath("//div[@class='stage-toggle']/label[2]/div"));
                     return _currentGroupsToggle;
                 }
             }
@@ -73,7 +73,7 @@ namespace CaesarLib
                 if (_endedGroupsToggle != null) return _endedGroupsToggle;
                 else
                 {
-                    _endedGroupsToggle = _driverInstance.FindElement(By.XPath("//div[@class='stage-toggle']/label[1]/div"));
+                    _endedGroupsToggle = driver.FindElement(By.XPath("//div[@class='stage-toggle']/label[1]/div"));
                     return _endedGroupsToggle;
                 }
             }
@@ -81,7 +81,7 @@ namespace CaesarLib
 
         public GroupsInLocation(IWebDriver driver)
         {
-            _driverInstance = driver;
+            this.driver = driver;
         }
 
         public Func<IWebDriver, IWebElement> AreGroupsVisible()
@@ -91,7 +91,7 @@ namespace CaesarLib
 
         public List<String> GetAvailableGroupsNames()
         {
-            IList<IWebElement> elements = _driverInstance.FindElements(By.XPath("//div[@class='group-collection row']/div//p"));
+            IList<IWebElement> elements = driver.FindElements(By.XPath("//div[@class='group-collection row']/div//p"));
             List<String> groupsNames = new List<String>();
             foreach (var item in elements)
             {
@@ -107,7 +107,7 @@ namespace CaesarLib
 
         public IWebElement GetGroupByName(String name)
         {
-            IList<IWebElement> elements = _driverInstance.FindElements(By.XPath("//div[@class='group-collection row']/div"));
+            IList<IWebElement> elements = driver.FindElements(By.XPath("//div[@class='group-collection row']/div"));
             List<String> groupsNames = new List<String>();
             foreach (var item in elements)
             {

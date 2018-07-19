@@ -20,22 +20,22 @@ namespace CaesarTests
         {
             driver.Url = @"http://localhost:3000/logout";
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
-            wait.Until((d) => LoginPage.IsLoginPage(d));
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance = new LoginPage(driver);
         }
 
         [Test]
         public void ExecuteTest_EmptyFields_LoginButtonClick_NoChanges()
         {
-            Acts.Click(loginPageInstance.LoginButton);
-            Assert.IsTrue(LoginPage.IsLoginPage(driver));
+            loginPageInstance.LoginButton.Click();
+            Assert.IsTrue(LoginPage.IsLoginPageOpened(driver));
         }
 
         [Test]
         public void ExecuteTest_EmptyFields_EnterPressed_NoChanges()
         {
             loginPageInstance.LoginField.SendKeys(Keys.Enter);
-            Assert.IsTrue(LoginPage.IsLoginPage(driver));
+            Assert.IsTrue(LoginPage.IsLoginPageOpened(driver));
         }
 
         [Test]
@@ -62,8 +62,8 @@ namespace CaesarTests
             {
                 loginPageInstance.LogIn(logins[i], passwords[i]);
 
-                Assert.AreEqual(String.Empty, Acts.GetAttribute(loginPageInstance.PasswordField, "value"));
-                Assert.AreEqual(logins[i], Acts.GetAttribute(loginPageInstance.LoginField, "value"));
+                Assert.AreEqual(String.Empty, loginPageInstance.PasswordField.GetAttribute("value"));
+                Assert.AreEqual(logins[i], loginPageInstance.LoginField.GetAttribute("value"));
                 String expectedMessage = "Incorrect login or password. Please, try again";
                 Assert.AreEqual(expectedMessage, loginPageInstance.MessageField.Text);
 
@@ -76,7 +76,7 @@ namespace CaesarTests
         public void ExecuteTest_15lettersLoginField_Contains10()
         {
             Acts.InputValue(loginPageInstance.LoginField, "abcdefghijklmno");
-            Assert.AreEqual("abcdefghij", Acts.GetAttribute(loginPageInstance.LoginField, "value"));
+            Assert.AreEqual("abcdefghij", loginPageInstance.LoginField.GetAttribute("value"));
         }
 
         [OneTimeTearDown]

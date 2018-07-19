@@ -24,16 +24,16 @@ namespace CaesarTests
             driver.Url = @"http://localhost:3000/logout";
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
-            wait.Until((d) => LoginPage.IsLoginPage(d));
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance.LogIn("sasha", "1234");
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
         }
 
         [Test]
         public void ExecuteTest_ProfileButtonClick_RightMenuOpened()
         {
-            Acts.Click(mainPageInstance.ProfileButton);
+            mainPageInstance.ProfileButton.Click();
             Assert.IsTrue(wait.Until((d) => mainPageInstance.RightMenu.IsOpened()));
         }
 
@@ -41,7 +41,7 @@ namespace CaesarTests
         public void Executetest_DropMouseFocus_RightMenuClosed()
         {
             Actions act = new Actions(driver);
-            Acts.Click(mainPageInstance.ProfileButton);
+            mainPageInstance.ProfileButton.Click();
             wait.Until((d) => mainPageInstance.RightMenu.IsOpened());
             act.MoveToElement(mainPageInstance.ProfileButton)
                 .MoveByOffset(-200, 200)

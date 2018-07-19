@@ -9,7 +9,7 @@ namespace CaesarLib
         private IWebElement _editButton;
         private IWebElement _signOutButton;
         private IWebElement _rightMenuSection;
-        private IWebDriver _driverInstance;
+        private IWebDriver driver;
 
         public IWebElement EditButton
         {
@@ -18,7 +18,7 @@ namespace CaesarLib
                 if (_editButton != null) return _editButton;
                 else
                 {
-                    _editButton = _driverInstance.FindElement(By.XPath("//*[@id='right-menu']//i[@class='fa fa-cog fa-2x']"));
+                    _editButton = driver.FindElement(By.XPath("//div[@id='right-menu']//i[@class='fa fa-cog fa-2x']"));
                     return _editButton;
                 }
             }
@@ -31,7 +31,7 @@ namespace CaesarLib
                 if (_signOutButton != null) return _signOutButton;
                 else
                 {
-                    _signOutButton = _driverInstance.FindElement(By.XPath("//*[@id='right-menu']//i[@class='fa fa-sign-out fa-3x']"));
+                    _signOutButton = driver.FindElement(By.XPath("//div[@id='right-menu']//i[contains(@class, 'sign-out')]"));
                     return _signOutButton;
                 }
             }
@@ -44,7 +44,7 @@ namespace CaesarLib
                 if (_rightMenuSection != null) return _rightMenuSection;
                 else
                 {
-                    _rightMenuSection = _driverInstance.FindElement(By.Id("right-menu"));
+                    _rightMenuSection = driver.FindElement(By.Id("right-menu"));
                     return _rightMenuSection;
                 }
             }
@@ -52,12 +52,12 @@ namespace CaesarLib
 
         public RightMenu(IWebDriver driver)
         {
-            _driverInstance = driver;
+            this.driver = driver;
         }
 
         public Func<IWebDriver, IWebElement> IsLogOutButtonClickable()
         {
-            return ExpectedConditions.ElementToBeClickable(By.XPath("//*[@id='right-menu']//i[contains(@class, 'sign-out')]"));
+            return ExpectedConditions.ElementToBeClickable(By.XPath("//div[@id='right-menu']//i[contains(@class, 'sign-out')]"));
         }
 
         public bool IsOpened()
