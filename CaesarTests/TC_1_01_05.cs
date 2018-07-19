@@ -29,7 +29,7 @@ namespace CaesarTests
         {
             driver.Url = @"http://localhost:3000/logout";
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
-            wait.Until((d) => LoginPage.IsLoginPage(d));
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance = new LoginPage(driver);
         }
 
@@ -40,8 +40,8 @@ namespace CaesarTests
             while (i < logins.Count)
             {
                 loginPageInstance.LogIn(logins[i], passwords[i]);
-                bool firstCondition = logins[i].Equals(Acts.GetAttribute(loginPageInstance.LoginField, "value"));
-                bool secondCondition = String.Empty.Equals(Acts.GetAttribute(loginPageInstance.PasswordField, "value"));
+                bool firstCondition = logins[i].Equals(loginPageInstance.LoginField.GetAttribute("value"));
+                bool secondCondition = String.Empty.Equals(loginPageInstance.PasswordField.GetAttribute("value"));
                 String expectedMessage = "Incorrect login or password. Please, try again";
                 bool thirdCondition = expectedMessage.Equals(loginPageInstance.MessageField.Text);
                 Assert.IsTrue(firstCondition && secondCondition && thirdCondition);

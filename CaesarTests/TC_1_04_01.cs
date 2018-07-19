@@ -26,7 +26,7 @@ namespace CaesarTests
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("sasha", "1234");
             mainPageInstance = new MainPage(driver);
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
         }
 
         [Test]

@@ -34,7 +34,7 @@ namespace CaesarTests
 
             logingPageInstance = new LoginPage(webDriver);
             logingPageInstance.LogIn("sasha", "1234");
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
 
             webDriver.Url = baseURL + "/Students/Dnipro/DP-093-JS/list";
             groupViewInstance = new GroupView(webDriver);

@@ -71,9 +71,9 @@
     <Compile Include="TC_2_03_1.cs" />
     <Compile Include="TC_2_01_3.cs" />
     <Compile Include="TC_1_02_02_additional.cs" />
+    <Compile Include="TC_1_04_03.cs" />
     <Compile Include="TC_OpenClose_TopMenu.cs" />
     <Compile Include="TC_1_04_02.cs" />
-    <Compile Include="TestScheduleComponents.cs" />
     <Compile Include="TC_1_05_01.cs" />
     <Compile Include="TC_1_05_02.cs" />
     <Compile Include="TC_4_01.cs" />

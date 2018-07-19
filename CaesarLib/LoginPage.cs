@@ -9,7 +9,7 @@ namespace CaesarLib
         private IWebElement _passwordField;
         private IWebElement _loginButton;
         private IWebElement _messageField;
-        private IWebDriver _driverInstance;
+        private IWebDriver driver;
 
         public IWebElement LoginField
         {
@@ -18,7 +18,7 @@ namespace CaesarLib
                 if (_loginField != null) return _loginField;
                 else
                 {
-                    _loginField = _driverInstance.FindElement(By.Name("login"));
+                    _loginField = driver.FindElement(By.Name("login"));
                     return _loginField;
                 }
             }
@@ -31,7 +31,7 @@ namespace CaesarLib
                 if (_passwordField != null) return _passwordField;
                 else
                 {
-                    _passwordField = _driverInstance.FindElement(By.Name("password"));
+                    _passwordField = driver.FindElement(By.Name("password"));
                     return _passwordField;
                 }
             }
@@ -44,7 +44,7 @@ namespace CaesarLib
                 if (_loginButton != null) return _loginButton;
                 else
                 {
-                    _loginButton = _driverInstance.FindElement(By.XPath("//*[@class='login']/button[@class='submit fa fa-check-circle-o fa-3x']"));
+                    _loginButton = driver.FindElement(By.XPath("//*[@class='login']/button[@class='submit fa fa-check-circle-o fa-3x']"));
                     return _loginButton;
                 }
             }
@@ -57,7 +57,7 @@ namespace CaesarLib
                 if (_messageField != null) return _messageField;
                 else
                 {
-                    _messageField = _driverInstance.FindElement(By.XPath("//*[@class='login']/span[@class='message']"));
+                    _messageField = driver.FindElement(By.XPath("//*[@class='login']/span[@class='message']"));
                     return _messageField;
                 }
             }
@@ -65,7 +65,7 @@ namespace CaesarLib
 
         public LoginPage(IWebDriver driver)
         {
-            _driverInstance = driver;
+            this.driver = driver;
         }
 
         public void LogIn(String login, String password)
@@ -75,10 +75,10 @@ namespace CaesarLib
             LoginButton.Click();
         }
 
-        public static bool IsLoginPage(IWebDriver driver)
+        public static bool IsLoginPageOpened(IWebDriver driver)
         {
-            return driver.FindElements(By.Name("login")).Count > 0 &&
-                driver.FindElements(By.Name("password")).Count > 0 &&
+            return driver.FindElements(By.Name("login")).Count > 0 &
+                driver.FindElements(By.Name("password")).Count > 0 &
                 driver.FindElements(By.XPath("//*[@class='login']/button[contains(@class, 'submit')]")).Count > 0 ?
                 true : false;
         }

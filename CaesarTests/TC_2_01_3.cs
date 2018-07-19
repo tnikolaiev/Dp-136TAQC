@@ -1,6 +1,4 @@
 ﻿using CaesarLib;
-using CaesarLib.Schedule;
-using CaesarLib.StudentsPage;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -30,7 +28,7 @@ namespace CaesarTests
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("sasha", "1234");
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
 
             //Opening Schedule Page
             TopMenu topMenuInstance = new TopMenu(driver);

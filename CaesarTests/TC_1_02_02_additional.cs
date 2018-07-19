@@ -24,9 +24,9 @@ namespace CaesarTests
             driver.Url = @"http://localhost:3000/logout";
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
-            wait.Until((d) => LoginPage.IsLoginPage(d));
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance.LogIn("dmytro", "1234");
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
         }
         
@@ -34,7 +34,7 @@ namespace CaesarTests
         public void ExecuteTest_LogoutFromTopMenu()
         {
             mainPageInstance.LogoutUsingTopMenu();
-            Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPage(d)));
+            Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPageOpened(d)));
         }
 
         [OneTimeTearDown]
