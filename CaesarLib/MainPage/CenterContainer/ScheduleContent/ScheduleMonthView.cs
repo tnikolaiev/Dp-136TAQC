@@ -15,5 +15,12 @@ namespace CaesarLib
         {
             _driverInstance = driverInstance;
         }
+
+        public bool IsScheduleMonthViewDisplayed(IWebDriver driverInstance)
+        {
+            return driverInstance.FindElements(By.ClassName("calendar-table")).Count > 0 ?
+               true : false;
+        }
+
     }
 }

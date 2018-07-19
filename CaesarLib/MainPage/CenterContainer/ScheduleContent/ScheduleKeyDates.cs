@@ -16,5 +16,11 @@ namespace CaesarLib
         {
             _driverInstance = driverInstance;
         }
+
+        public bool IsKeyDatesDisplayed(IWebDriver driverInstance)
+        {
+            return driverInstance.FindElements(By.ClassName("keydates-schedule")).Count > 0 ?
+               true : false;
+        }
     }
 }

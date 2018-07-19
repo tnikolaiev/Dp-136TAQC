@@ -55,5 +55,11 @@ namespace CaesarLib
         {
             wait.Until((d) => сondition);
         }
+
+        public static bool IsElementPresent(IWebDriver driverInstance, By by)
+        {    
+            return driverInstance.FindElements(by).Count > 0 ? true : false;
+        }
     }
 }
+

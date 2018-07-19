@@ -40,24 +40,28 @@ namespace CaesarLib
         
         // Actions
 
+         //In progress
         private List<IWebElement> GetAllCells()
         {
-            List<IWebElement> cells =new List<IWebElement>();
             IWebElement table = DriverInstance.FindElement(By.XPath("//div[contains(@class, 'Table')]"));
-            List<IWebElement> rows = table.FindElements(By.XPath("//div[contains(@class, 'Row')]")).ToList();
+            IList<IWebElement> rows = table.FindElements(By.XPath("//div[contains(@class, 'Row')]"));
+            IList<IWebElement> cells;
+            Console.WriteLine(rows.Count());
 
-            for (int rnum = 2; rnum < rows.Count(); rnum++)
+            for (int rnum = 0; rnum < rows.Count(); rnum++)
             {
-                cells = rows[rnum].FindElements(By.CssSelector("div.Cell")).ToList();
-                
+                cells = rows[rnum].FindElements(By.CssSelector("div.Cell"));
+                Console.WriteLine(cells.Count());
 
-                for (int cnum = 2; cnum < cells.Count(); cnum++)
+                for (int cnum = 0; cnum < cells.Count(); cnum++)
                 {
-                   string strMyXPath = "//div[contains(@class,'Table')]//div["+rnum+"]//div["+cnum+"]";
-                   cells[cnum] = DriverInstance.FindElement(By.XPath(strMyXPath));
+                    string strMyXPath = "???";
+
+                    cells[cnum] = DriverInstance.FindElement(By.XPath(strMyXPath));
                 }
+               
             }
-            return cells;
+            return null;
         }
 
         //In progress
@@ -68,6 +72,12 @@ namespace CaesarLib
             return cell;
         }
 
-        
+        public bool IsScheduleWeekViewDisplayed(IWebDriver driverInstance)
+        {
+            return driverInstance.FindElements(By.ClassName("scheduleWeek-view")).Count > 0 ?
+               true : false;
+        }
+
+
     }
 }

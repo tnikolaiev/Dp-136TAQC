@@ -181,9 +181,15 @@ namespace CaesarLib
             return counter;
         }
 
+        public bool IsScheduleEditorDisplayed(IWebDriver driverInstance)
+        {
+            return driverInstance.FindElements(By.ClassName("scheduleEditorWeek-view")).Count > 0 ?
+               true : false;
+        }
 
-      
 
-        
+
+
+
     }
 }
