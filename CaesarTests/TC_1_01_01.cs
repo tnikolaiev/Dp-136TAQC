@@ -36,7 +36,7 @@ namespace CaesarTests
             foreach (var link in links)
             {
                 driver.Url = link;
-                Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPage(driver)));
+                Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPageOpened(driver)));
             }
         }
 

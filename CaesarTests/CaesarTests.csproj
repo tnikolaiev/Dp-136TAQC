@@ -68,6 +68,7 @@
     <Compile Include="TC_1_01_01.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TC_1_02_02_additional.cs" />
+    <Compile Include="TC_1_04_03.cs" />
     <Compile Include="TC_OpenClose_TopMenu.cs" />
     <Compile Include="TC_1_04_02.cs" />
     <Compile Include="TestScheduleComponents.cs" />

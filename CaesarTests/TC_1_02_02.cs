@@ -22,19 +22,19 @@ namespace CaesarTests
             driver.Url = @"http://localhost:3000/logout";
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
-            wait.Until((d) => LoginPage.IsLoginPage(d));
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance.LogIn("artur", "1234");
             mainPageInstance = new MainPage(driver);
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
         }
 
         [Test]
         public void ExecuteTest_ExitButtonClicked_LoginPageOpened()
         {
-            Acts.Click(mainPageInstance.ProfileButton);
+            mainPageInstance.ProfileButton.Click();
             wait.Until(mainPageInstance.RightMenu.IsLogOutButtonClickable());
-            Acts.Click(mainPageInstance.RightMenu.SignOutButton);
-            Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPage(d)));
+            mainPageInstance.RightMenu.SignOutButton.Click();
+            Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPageOpened(d)));
         }
         
         [OneTimeTearDown]
