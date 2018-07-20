@@ -1,31 +1,32 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CaesarLib.StudentsPage
+namespace CaesarLib
 {
-    public class EditStudentList
+    public class EditStudentListWindow
     {
         IWebDriver webDriver;
         public IWebElement ModalWindow { get => webDriver.FindElement(By.Id("modal-window")); }
         public IWebElement CreateStudentButton { get => webDriver.FindElement(By.ClassName("createStudent")); }
         public IWebElement ImportStudentsButton { get => webDriver.FindElement(By.ClassName("csv-button")); }
         public IWebElement StudentTable { get => ModalWindow.FindElement(By.ClassName("students_list")); }
-        public IList<IWebElement> Students { get => StudentTable.FindElements(By.TagName("tr")); }
+        public IList<IWebElement> Students { get => StudentTable.FindElement(By.ClassName("tableBodyStudents")).FindElements(By.TagName("tr")); }
         public IWebElement SaveFormButton { get => webDriver.FindElement(By.ClassName("save")); }
         public IWebElement ExitFormButton { get => webDriver.FindElement(By.ClassName("exit")); }
         public IWebElement RightshifterButton { get => webDriver.FindElement(By.ClassName("right")); }
         public IList<IWebElement> DownloadButtons { get => webDriver.FindElements(By.ClassName("download-attachments")); }
         public IList<IWebElement> EditButtons { get => webDriver.FindElements(By.ClassName("editStudent")); }
         public IList<IWebElement> DeleteButtons { get => webDriver.FindElements(By.ClassName("deleteStudent")); }
-        public EditStudentList(IWebDriver webDriver)
+        public EditStudentListWindow(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
         }
-        public static bool IsEditStudentList(IWebDriver driver)
+        public static bool IsEditStudentListWindowOpened(IWebDriver driver)
         {
             if (driver.FindElement(By.Id("modal-window")).FindElements(By.ClassName("students_list")).Count > 0 &&
                 driver.FindElements(By.ClassName("createStudent")).Count > 0 &&
@@ -41,6 +42,18 @@ namespace CaesarLib.StudentsPage
         public static string GetStudentName(IWebElement webElement)
         {
             return webElement.FindElement(By.Name("studName")).Text;
+        }
+        public static String GetTestFile(String fileName)
+        {
+            Dictionary<String, String> fileNamePathPairs = new Dictionary<String, String>();
+
+            String[] files = Directory.GetFiles(@"DP-136TAQC\CaesarTests\TC_3_06 files");
+
+            for (int i = 0; i < files.Length; i++)
+            {
+                fileNamePathPairs.Add(Path.GetFileName(files[i]), Path.GetFullPath(files[i]));
+            }
+            return fileNamePathPairs[fileName];
         }
     }
 }

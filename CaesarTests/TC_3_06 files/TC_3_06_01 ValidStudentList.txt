@@ -1,0 +1,5 @@
+name,lastName,englishLevel
+Sergey,Kopylov,Intermediate strong
+Anton,Volik,Upper-intermediate low
+Maxim,Kondzera,Intermediate strong
+Lyudmila,Husar,Elementary

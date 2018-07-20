@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CaesarLib.StudentsPage
+namespace CaesarLib
 {
-    public class EditStudent
+    public class EditStudentWindow
     {
         IWebDriver webDriver;
         public IWebElement FirstName { get => webDriver.FindElement(By.Name("FirstName")); }
@@ -23,11 +23,11 @@ namespace CaesarLib.StudentsPage
         public IWebElement CancelButton { get => webDriver.FindElement(By.ClassName("close-modal-window")); }
         public IWebElement RemoveCVButton { get => webDriver.FindElement(By.ClassName("remove-cv")); }
         public IWebElement RemovePhotoButton { get => webDriver.FindElement(By.ClassName("remove-photo")); }
-        public EditStudent(IWebDriver webDriver)
+        public EditStudentWindow(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
         }
-        public static bool IsEditStudent(IWebDriver driver)
+        public static bool IsEditStudentWindowOpened(IWebDriver driver)
         {
             if (driver.FindElements(By.ClassName("BrowsePhoto")).Count > 0 &&
                 driver.FindElements(By.ClassName("BrowseCV")).Count > 0 &&
@@ -54,7 +54,7 @@ namespace CaesarLib.StudentsPage
         {
             Dictionary<String, String> fileNamePathPairs = new Dictionary<String, String>();
 
-            String[] files = Directory.GetFiles(@"CaesarTests\TC_3_04 files");
+            String[] files = Directory.GetFiles(@"DP-136TAQC\CaesarTests\TC_3_04 files");
 
             for (int i = 0; i < files.Length; i++)
             {
