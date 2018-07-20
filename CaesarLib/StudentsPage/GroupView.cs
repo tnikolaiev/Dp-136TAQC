@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace CaesarLib.StudentsPage
 {
-    public class GroupView : MainPage
+    public class GroupView
     {
         IWebDriver webDriver;
         public IWebElement EditButton { get => webDriver.FindElement(By.ClassName("editBtn")); }
@@ -11,7 +11,7 @@ namespace CaesarLib.StudentsPage
         public IWebElement ScheduleButton { get => webDriver.FindElement(By.Name("shedule")); }
         public IWebElement MessageButton { get => webDriver.FindElement(By.Name("message")); }
         public IWebElement StudentsList { get => webDriver.FindElement(By.ClassName("students_list")); }
-        public GroupView(IWebDriver webDriver) : base(webDriver)
+        public GroupView(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
         }

@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace CaesarLib.StudentsPage
         public IWebElement CreateStudentButton { get => webDriver.FindElement(By.ClassName("createStudent")); }
         public IWebElement ImportStudentsButton { get => webDriver.FindElement(By.ClassName("csv-button")); }
         public IWebElement StudentTable { get => ModalWindow.FindElement(By.ClassName("students_list")); }
-        public IList<IWebElement> Students { get => StudentTable.FindElements(By.TagName("tr")); }
+        public IList<IWebElement> Students { get => StudentTable.FindElement(By.ClassName("tableBodyStudents")).FindElements(By.TagName("tr")); }
         public IWebElement SaveFormButton { get => webDriver.FindElement(By.ClassName("save")); }
         public IWebElement ExitFormButton { get => webDriver.FindElement(By.ClassName("exit")); }
         public IWebElement RightshifterButton { get => webDriver.FindElement(By.ClassName("right")); }
@@ -41,6 +42,18 @@ namespace CaesarLib.StudentsPage
         public static string GetStudentName(IWebElement webElement)
         {
             return webElement.FindElement(By.Name("studName")).Text;
+        }
+        public static String GetTestFile(String fileName)
+        {
+            Dictionary<String, String> fileNamePathPairs = new Dictionary<String, String>();
+
+            String[] files = Directory.GetFiles(@"CaesarTests\TC_3_06 files");
+
+            for (int i = 0; i < files.Length; i++)
+            {
+                fileNamePathPairs.Add(Path.GetFileName(files[i]), Path.GetFullPath(files[i]));
+            }
+            return fileNamePathPairs[fileName];
         }
     }
 }
