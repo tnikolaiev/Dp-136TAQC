@@ -4,7 +4,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
 
 namespace CaesarTests
 {
@@ -14,36 +13,28 @@ namespace CaesarTests
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
         WebDriverWait wait;
-        List<String> logins;
-        List<String> passwords;
-
-        [OneTimeSetUp]
-        public void FirstInitialize()
-        {
-            logins = new List<String> { "admin", "sasha", "dmytro" };
-            passwords = new List<String> { "1234", "1234", "1234" };
-        }
 
         [SetUp]
         public void Initialize()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            driver.Url = @"http://localhost:3000/logout";
+            loginPageInstance = new LoginPage(driver);
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
         }
 
-        [Test]
-        public void ExecuteTest_LoginWithValidLoginCredentials()
+        static Object[] LoginCredentials =
         {
-            int i = 0;
-            while (i < logins.Count)
-            {
-                driver.Url = @"http://localhost:3000/logout";
-                loginPageInstance = new LoginPage(driver);
-                wait.Until((d) => LoginPage.IsLoginPageOpened(d));
+            new String[] { "admin", "1234" },
+            new String[] { "sasha", "1234" },
+            new String[] { "dmytro", "1234" }
+        };
 
-                loginPageInstance.LogIn(logins[i], passwords[i]);
-                Assert.IsTrue(wait.Until((d) => MainPage.IsMainPageOpened(d)));
-                i++;
-            }
+        [Test, TestCaseSource("LoginCredentials")]
+        public void ExecuteTest_LoginWithValidLoginCredentials(String login, String password)
+        {
+            loginPageInstance.LogIn(login, password);
+            Assert.IsTrue(wait.Until((d) => MainPage.IsMainPageOpened(d)));
         }
 
         [OneTimeTearDown]

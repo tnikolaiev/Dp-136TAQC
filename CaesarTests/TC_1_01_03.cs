@@ -2,9 +2,9 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
 
 namespace CaesarTests
 {
@@ -30,8 +30,9 @@ namespace CaesarTests
             Acts.InputValue(loginPageInstance.LoginField, "dmytro");
             Acts.InputValue(loginPageInstance.PasswordField, "1234");
             loginPageInstance.PasswordField.SendKeys(Keys.Escape);
-            Assert.AreEqual(String.Empty, loginPageInstance.LoginField.GetAttribute("value"));
-            Assert.AreEqual(String.Empty, loginPageInstance.PasswordField.GetAttribute("value"));
+            bool loginFieldEmpty = String.Empty.Equals(loginPageInstance.LoginField.GetAttribute("value"));
+            bool passFieldEmpty = String.Empty.Equals(loginPageInstance.PasswordField.GetAttribute("value"));
+            Assert.IsTrue(loginFieldEmpty & passFieldEmpty);
         }
 
         [Test]
@@ -39,7 +40,7 @@ namespace CaesarTests
         {
             Acts.InputValue(loginPageInstance.LoginField, "Dmytro");
             Acts.InputValue(loginPageInstance.PasswordField, "1234");
-            loginPageInstance.PasswordField.SendKeys(Keys.Enter);
+            new Actions(driver).SendKeys(Keys.Enter).Perform();
             Assert.IsTrue(wait.Until(d => MainPage.IsMainPageOpened(d)));
         }
 
