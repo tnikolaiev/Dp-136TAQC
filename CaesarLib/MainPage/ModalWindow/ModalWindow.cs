@@ -10,6 +10,8 @@ namespace CaesarLib
         private CreateGroupWindow _createGroupWindow;
         private EditScheduleWindow _editScheduleWindow;
         private LocationWindow _locationWindow;
+        private EditStudentListWindow _editStudentListWindow;
+        private EditStudentWindow _editStudentWindow;
 
         public CreateGroupWindow CreateGroupWindow
         {
@@ -50,6 +52,31 @@ namespace CaesarLib
             }
         }
 
+        public EditStudentListWindow EditStudentListWindow
+        {
+            get
+            {
+                if (_editStudentListWindow != null) return _editStudentListWindow;
+                else
+                {
+                    _editStudentListWindow = new EditStudentListWindow(driver);
+                    return _editStudentListWindow;
+                }
+            }
+        }
+
+        public EditStudentWindow EditStudentWindow
+        {
+            get
+            {
+                if (_editStudentWindow != null) return _editStudentWindow;
+                else
+                {
+                    _editStudentWindow = new EditStudentWindow(driver);
+                    return _editStudentWindow;
+                }
+            }
+        }
         public ModalWindow(IWebDriver driver)
         {
             this.driver = driver;

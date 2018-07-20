@@ -1,14 +1,9 @@
 ﻿using CaesarLib;
-using CaesarLib.StudentsPage;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaesarTests
 {
@@ -19,8 +14,8 @@ namespace CaesarTests
         WebDriverWait wait;
         string baseURL = "localhost:3000";
         LoginPage loginPageInstance;
-        GroupView groupViewInstance;
-        EditStudentList editStudentListInstance;
+        StudentsContent studentsContentInstance;
+        EditStudentListWindow editStudentListWindowInstance;
         String path;
 
         [OneTimeSetUp]
@@ -34,33 +29,33 @@ namespace CaesarTests
 
             loginPageInstance = new LoginPage(webDriver);
             loginPageInstance.LogIn("sasha", "1234");
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
 
             webDriver.Url = baseURL+"/Students/Lviv/Lv-023-UX/list";
 
-            groupViewInstance = new GroupView(webDriver);
-            wait.Until((d) => GroupView.IsGroupView(d));
+            studentsContentInstance = new StudentsContent(webDriver);
+            wait.Until((d) => StudentsContent.IsStudentsContentOpened(d));
 
-            Acts.Click(groupViewInstance.EditButton);
+            Acts.Click(studentsContentInstance.EditButton);
 
-            editStudentListInstance = new EditStudentList(webDriver);
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            editStudentListWindowInstance = new EditStudentListWindow(webDriver);
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
         }
         [Test]
         public void ExecuteTest_ImportStudentList_ListImpoerted()
         {
-            Acts.Click(editStudentListInstance.ImportStudentsButton);
-            path = EditStudentList.GetTestFile("TC_3_06_01 ValidStudentList.txt");
+            Acts.Click(editStudentListWindowInstance.ImportStudentsButton);
+            path = EditStudentListWindow.GetTestFile("TC_3_06_01 ValidStudentList.txt");
             Acts.UploadFile(path);
-            Acts.Click(editStudentListInstance.SaveFormButton);
-            Assert.AreEqual(4, editStudentListInstance.Students.Count);
+            Acts.Click(editStudentListWindowInstance.SaveFormButton);
+            Assert.AreEqual(4, editStudentListWindowInstance.Students.Count);
         }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()
         {
-            while (editStudentListInstance.DeleteButtons.Count != 0)
+            while (editStudentListWindowInstance.DeleteButtons.Count != 0)
             {
-                Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.DeleteButtons));
+                Acts.Click(editStudentListWindowInstance.GetLastElement(editStudentListWindowInstance.DeleteButtons));
                 Acts.PressKeyboardButton(@"{Enter}");
             }
             webDriver.Close();

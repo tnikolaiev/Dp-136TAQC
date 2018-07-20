@@ -1,11 +1,9 @@
 ﻿using CaesarLib;
-using CaesarLib.StudentsPage;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Threading;
 
 namespace CaesarTests
 {
@@ -16,9 +14,9 @@ namespace CaesarTests
         WebDriverWait wait;
         string baseURL = "localhost:3000";
         LoginPage loginPageInstance;
-        GroupView groupViewInstance;
-        EditStudentList editStudentListInstance;
-        EditStudent editStudentInstance;
+        StudentsContent studentsContentInstance;
+        EditStudentListWindow editStudentListInstance;
+        EditStudentWindow editStudentInstance;
         String path;
         [OneTimeSetUp]
         public void OneTimeSetUpTest()
@@ -34,42 +32,42 @@ namespace CaesarTests
             wait.Until((d) => MainPage.IsMainPageOpened(d));
 
             webDriver.Url = baseURL + "/Students/Dnipro/DP-093-JS/list";
-            groupViewInstance = new GroupView(webDriver);
-            wait.Until((d) => GroupView.IsGroupView(d));
+            studentsContentInstance = new StudentsContent(webDriver);
+            wait.Until((d) => StudentsContent.IsStudentsContentOpened(d));
 
-            Acts.Click(groupViewInstance.EditButton);
+            Acts.Click(studentsContentInstance.EditButton);
 
-            editStudentListInstance = new EditStudentList(webDriver);
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            editStudentListInstance = new EditStudentListWindow(webDriver);
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
 
             Acts.Click(editStudentListInstance.CreateStudentButton);
-            editStudentInstance = new EditStudent(webDriver);
-            wait.Until((d) => EditStudent.IsEditStudent(d));
+            editStudentInstance = new EditStudentWindow(webDriver);
+            wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
 
             editStudentInstance.FillForm("Denis", "Petrov", 0, "120", "5", 0);
             Acts.Click(editStudentInstance.SaveButton);
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
 
         }
         [SetUp]
         public void SetUpTest()
         {
             Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.EditButtons));
-            wait.Until((d) => EditStudent.IsEditStudent(d));
+            wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
 
-            path = EditStudent.GetTestFile("TC_3_04 CV.docx");
+            path = EditStudentWindow.GetTestFile("TC_3_04 CV.docx");
             Acts.Click(editStudentInstance.BrowseCVButton);
             Acts.UploadFile(path);
 
-            path = EditStudent.GetTestFile("TC_3_04 photo.png");
+            path = EditStudentWindow.GetTestFile("TC_3_04 photo.png");
             Acts.Click(editStudentInstance.BrowsePhotoButton);
             Acts.UploadFile(path);
 
             Acts.Click(editStudentInstance.SaveButton);
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
 
             Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.EditButtons));
-            wait.Until((d) => EditStudent.IsEditStudent(d));
+            wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
         }
         [Test]
         public void ExecuteTest_DeleteFiles_FilesDeleted()
@@ -78,10 +76,10 @@ namespace CaesarTests
             Acts.Click(editStudentInstance.RemovePhotoButton);
 
             Acts.Click(editStudentInstance.SaveButton);
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
 
             Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.EditButtons));
-            wait.Until((d) => EditStudent.IsEditStudent(d));
+            wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
 
             Assert.AreEqual(0, editStudentInstance.CountUploadedFiles());
         }
@@ -89,14 +87,14 @@ namespace CaesarTests
         public void TearDownTest()
         {
             Acts.Click(editStudentInstance.SaveButton);
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
         }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()
         {
             Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.DeleteButtons));
             Acts.PressKeyboardButton(@"{Enter}");
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
             webDriver.Close();
             webDriver.Quit();
         }
