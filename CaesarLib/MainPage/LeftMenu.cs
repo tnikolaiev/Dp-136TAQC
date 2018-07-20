@@ -2,13 +2,18 @@
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
 
 namespace CaesarLib
 {
     public class LeftMenu
     {
-        private IWebElement _createButton, _searchButton, _settingsButton, _deleteButton, _leftMenuSection;
-        private IWebDriver _driverInstance;
+        private IWebElement _createButton;
+        private IWebElement _searchButton;
+        private IWebElement _editButton;
+        private IWebElement _deleteButton;
+        private IWebElement _leftMenuSection;
+        private IWebDriver driver;
 
         public IWebElement CreateButton
         {
@@ -17,7 +22,7 @@ namespace CaesarLib
                 if (_createButton != null) return _createButton;
                 else
                 {
-                    _createButton = _driverInstance.FindElement(By.XPath("//div[@class='itemContextMenu']//i[@class='fa fa-plus-square-o fa-4x create']"));
+                    _createButton = driver.FindElement(By.XPath("//div[@id='left-menu']//button[@title='Create']/i"));
                     return _createButton;
                 }
             }
@@ -30,21 +35,21 @@ namespace CaesarLib
                 if (_searchButton != null) return _searchButton;
                 else
                 {
-                    _searchButton = _driverInstance.FindElement(By.XPath("//div[@class = 'itemContextMenu']//i[@class = 'fa fa-search fa-4x search']"));
+                    _searchButton = driver.FindElement(By.XPath("//div[@id='left-menu']//button[@title='Search']/i"));
                     return _searchButton;
                 }
             }
         }
 
-        public IWebElement SettingsButton
+        public IWebElement EditButton
         {
             get
             {
-                if (_settingsButton != null) return _settingsButton;
+                if (_editButton != null) return _editButton;
                 else
                 {
-                    _settingsButton = _driverInstance.FindElement(By.XPath("//div[@class='itemContextMenu']//i[@class='fa fa-cog fa-4x edit']"));
-                    return _settingsButton;
+                    _editButton = driver.FindElement(By.XPath("//div[@id='left-menu']//button[@title='Edit']/i"));
+                    return _editButton;
                 }
             }
         }
@@ -56,7 +61,7 @@ namespace CaesarLib
                 if (_deleteButton != null) return _deleteButton;
                 else
                 {
-                    _deleteButton = _driverInstance.FindElement(By.XPath("//div[@class='itemContextMenu']//i[@class='fa fa-trash-o fa-4x delete']"));
+                    _deleteButton = driver.FindElement(By.XPath("//div[@id='left-menu']//button[@title='Delete']/i"));
                     return _deleteButton;
                 }
             }
@@ -69,15 +74,26 @@ namespace CaesarLib
                 if (_leftMenuSection != null) return _leftMenuSection;
                 else
                 {
-                    _leftMenuSection = _driverInstance.FindElement(By.CssSelector("#left-menu > div"));
+                    _leftMenuSection = driver.FindElement(By.CssSelector("#left-menu > div"));
                     return _leftMenuSection;
                 }
             }
         }
 
+        public List<String> GetAvailableButtonsTitles()
+        {
+            IList<IWebElement> webElems = driver.FindElements(By.XPath("//div[@id='left-menu']//button"));
+            List<String> titles = new List<String>();
+            foreach (var item in webElems)
+            {
+                titles.Add(Acts.GetAttribute(item, "title"));
+            }
+            return titles;
+        }
+
         public LeftMenu(IWebDriver driver)
         {
-            _driverInstance = driver;
+            this.driver = driver;
         }
 
         public void Open(Actions act)
@@ -90,5 +106,9 @@ namespace CaesarLib
             return (LeftMenuSection.GetAttribute("class").Equals("contextMenu open")) ? true : false;
         }
 
+        public Func<IWebDriver, IWebElement> IsSearchButtonVisible()
+        {
+            return ExpectedConditions.ElementIsVisible(By.XPath("//div[@id='left-menu']//button[@title='Search']"));
+        }
     }
 }

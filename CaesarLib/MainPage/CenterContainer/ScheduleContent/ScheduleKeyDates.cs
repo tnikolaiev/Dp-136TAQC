@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 
-namespace CaesarLib.Schedule
+namespace CaesarLib
 {
     public class ScheduleKeyDates 
     {
@@ -15,6 +15,12 @@ namespace CaesarLib.Schedule
         public ScheduleKeyDates(IWebDriver driverInstance)
         {
             _driverInstance = driverInstance;
+        }
+
+        public bool IsKeyDatesDisplayed(IWebDriver driverInstance)
+        {
+            return driverInstance.FindElements(By.ClassName("keydates-schedule")).Count > 0 ?
+               true : false;
         }
     }
 }

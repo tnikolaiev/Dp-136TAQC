@@ -6,7 +6,7 @@ namespace CaesarLib
 {
     public class LeftContainer
     {
-        private IWebDriver _driverInstance;
+        private IWebDriver driver;
         private GroupsInLocation _groupsInLocation;
         public GroupsInLocation GroupsInLocation
         {
@@ -15,7 +15,7 @@ namespace CaesarLib
                 if (_groupsInLocation != null) return _groupsInLocation;
                 else
                 {
-                    _groupsInLocation = new GroupsInLocation(_driverInstance);
+                    _groupsInLocation = new GroupsInLocation(driver);
                     return _groupsInLocation;
                 }
             }
@@ -23,7 +23,7 @@ namespace CaesarLib
 
         public LeftContainer(IWebDriver driver)
         {
-            _driverInstance = driver;
+            this.driver = driver;
         }
     }
 }

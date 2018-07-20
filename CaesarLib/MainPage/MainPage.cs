@@ -1,19 +1,18 @@
-using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using System;
 
 namespace CaesarLib
 {
     public class MainPage
     {
         private IWebElement _profileButton, _logo;
-        private IWebDriver _driverInstance;
         private RightMenu _rightMenu;
         private TopMenu _topMenu;
         private LeftMenu _leftMenu;
         private LeftContainer _leftContainer;
         private CenterContainer _centerContainer;
+        private ModalWindow _modalWindow;
+        private IWebDriver driver;
 
         public IWebElement ProfileButton
         {
@@ -22,7 +21,7 @@ namespace CaesarLib
                 if (_profileButton != null) return _profileButton;
                 else
                 {
-                    _profileButton = _driverInstance.FindElement(By.XPath("//*[@id='icon']//img[@class='img-circle']"));
+                    _profileButton = driver.FindElement(By.XPath("//div[@id='icon']//img[@class='img-circle']"));
                     return _profileButton;
                 }
             }
@@ -35,7 +34,7 @@ namespace CaesarLib
                 if (_logo != null) return _logo;
                 else
                 {
-                    _logo = _driverInstance.FindElement(By.CssSelector("#logo > a > img"));
+                    _logo = driver.FindElement(By.CssSelector("#logo > a > img"));
                     return _logo;
                 }
             }
@@ -48,7 +47,7 @@ namespace CaesarLib
                 if (_rightMenu != null) return _rightMenu;
                 else
                 {
-                    _rightMenu = new RightMenu(_driverInstance);
+                    _rightMenu = new RightMenu(driver);
                     return _rightMenu;
                 }
             }
@@ -62,7 +61,7 @@ namespace CaesarLib
                     return _topMenu;
                 else
                 {
-                    return new TopMenu(_driverInstance);
+                    return new TopMenu(driver);
                 }
             }
         }
@@ -74,7 +73,7 @@ namespace CaesarLib
                 if (_leftMenu != null) return _leftMenu;
                 else
                 {
-                    _leftMenu = new LeftMenu(_driverInstance);
+                    _leftMenu = new LeftMenu(driver);
                     return _leftMenu;
                 }
             }
@@ -87,12 +86,11 @@ namespace CaesarLib
                 if (_leftContainer != null) return _leftContainer;
                 else
                 {
-                    _leftContainer = new LeftContainer(_driverInstance);
+                    _leftContainer = new LeftContainer(driver);
                     return _leftContainer;
                 }
             }
         }
-        
 
         public CenterContainer CenterContainer
         {
@@ -101,21 +99,34 @@ namespace CaesarLib
                 if (_centerContainer != null) return _centerContainer;
                 else
                 {
-                    _centerContainer = new CenterContainer(_driverInstance);
+                    _centerContainer = new CenterContainer(driver);
                     return _centerContainer;
+                }
+            }
+        }
+
+        public ModalWindow ModalWindow
+        {
+            get
+            {
+                if (_modalWindow != null) return _modalWindow;
+                else
+                {
+                    _modalWindow = new ModalWindow(driver);
+                    return _modalWindow;
                 }
             }
         }
 
         public MainPage(IWebDriver driver)
         {
-            _driverInstance = driver;
+            this.driver = driver;
         }
 
-        public static bool IsMainPage(IWebDriver driver)
+        public static bool IsMainPageOpened(IWebDriver driver)
         {
-            return driver.FindElements(By.Id("main-section")).Count > 0 &&
-                driver.FindElements(By.Id("left-side-bar")).Count > 0 &&
+            return driver.FindElements(By.Id("main-section")).Count > 0 &
+                driver.FindElements(By.Id("left-side-bar")).Count > 0 &
                 driver.FindElements(By.Id("right-side-bar")).Count > 0 ?
                 true : false;
         }
@@ -123,16 +134,19 @@ namespace CaesarLib
         //Is public in case this method will be needed in tests (access modifier can be discussed)
         public TopMenu MoveToTopMenu()
         {
-            Actions builder = new Actions(_driverInstance);
-            builder.MoveToElement(_driverInstance.FindElement(By.Id("top-menu"))).Build().Perform();
-            return new TopMenu(_driverInstance);
+            Actions builder = new Actions(driver);
+            builder.MoveToElement(driver.FindElement(By.Id("top-menu"))).Build().Perform();
+            //if (!TopMenu.IsOpened())
+            //{
+            //    _driverInstance.FindElement(By.ClassName("cancel")).Click();
+            //}
+            return new TopMenu(driver);
         }
 
         //This method can return new instance of 'Locations' window so change it in case of need
         public void OpenLocationsWindow()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.LocationsItem);
         }
 
@@ -140,7 +154,6 @@ namespace CaesarLib
         public void OpenGroupsPage()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.GroupsItem);
         }
 
@@ -148,7 +161,6 @@ namespace CaesarLib
         public void OpenStudentsPage()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.StudentsItem);
         }
 
@@ -156,7 +168,6 @@ namespace CaesarLib
         public void OpenSchedulePage()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.ScheduleItem);
         }
 
@@ -164,7 +175,6 @@ namespace CaesarLib
         public void OpenAddPage()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.AddItem);
         }
 
@@ -172,14 +182,12 @@ namespace CaesarLib
         public void OpenAboutPage()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.AboutItem);
         }
 
         public void LogoutUsingTopMenu()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Assert.IsTrue(topMenuInstance.IsOpened(), "Top menu cannot be opened");
             Acts.Click(topMenuInstance.LogoutButton);
         }
     }

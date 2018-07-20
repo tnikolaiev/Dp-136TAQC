@@ -38,10 +38,10 @@ namespace CaesarTests
             {
                 driver.Url = @"http://localhost:3000/logout";
                 loginPageInstance = new LoginPage(driver);
-                wait.Until((d) => LoginPage.IsLoginPage(d));
+                wait.Until((d) => LoginPage.IsLoginPageOpened(d));
 
                 loginPageInstance.LogIn(logins[i], passwords[i]);
-                Assert.IsTrue(wait.Until((d) => MainPage.IsMainPage(d)));
+                Assert.IsTrue(wait.Until((d) => MainPage.IsMainPageOpened(d)));
                 i++;
             }
         }

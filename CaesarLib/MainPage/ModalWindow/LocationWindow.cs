@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace CaesarLib
 {
-   public class LocationPage
+   public class LocationWindow
     {
         private IWebElement groupOfLocations;
         private IWebElement cityChernivtsy;
@@ -124,7 +124,7 @@ namespace CaesarLib
             }
         }
 
-        public LocationPage(IWebDriver driver)
+        public LocationWindow(IWebDriver driver)
         {
             driverInstance = driver;
         }

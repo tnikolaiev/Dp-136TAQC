@@ -10,7 +10,7 @@ using System.Threading;
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_1_02_01
+    public class TC_OpenClose_TopMenu
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
@@ -20,37 +20,35 @@ namespace CaesarTests
         [SetUp]
         public void Initialize()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
             driver.Url = @"http://localhost:3000/logout";
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
             wait.Until((d) => LoginPage.IsLoginPageOpened(d));
-            loginPageInstance.LogIn("sasha", "1234");
+            loginPageInstance.LogIn("dmytro", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
         }
 
         [Test]
-        public void ExecuteTest_ProfileButtonClick_RightMenuOpened()
+        public void ExecuteTest_OpenTopMenu()
         {
-            mainPageInstance.ProfileButton.Click();
-            Assert.IsTrue(wait.Until((d) => mainPageInstance.RightMenu.IsOpened()));
+            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            Assert.IsTrue(topMenuInstance.IsOpened());
         }
 
         [Test]
-        public void Executetest_DropMouseFocus_RightMenuClosed()
+        public void ExecuteTest_CloseTopMenu()
         {
+            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            wait.Until((d) => topMenuInstance.IsOpened());
+            Thread.Sleep(1000);
             Actions act = new Actions(driver);
-            mainPageInstance.ProfileButton.Click();
-            wait.Until((d) => mainPageInstance.RightMenu.IsOpened());
-            act.MoveToElement(mainPageInstance.ProfileButton)
-                .MoveByOffset(-200, 200)
-                .Build()
-                .Perform();
-            wait.Until((d) => !mainPageInstance.RightMenu.IsOpened());
-            Assert.IsFalse(mainPageInstance.RightMenu.IsOpened());
+            act.MoveByOffset(0, 200).Build().Perform();
+            Thread.Sleep(10000);
+            Assert.IsFalse(topMenuInstance.IsOpened());
         }
-
+        
         [OneTimeTearDown]
         public void CleanUp()
         {
