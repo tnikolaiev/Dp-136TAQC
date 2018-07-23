@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using OpenQA.Selenium;
+using System.Linq;
 
 namespace CaesarLib
 {
@@ -10,6 +11,11 @@ namespace CaesarLib
         private IWebElement _goToUsers;
         private IWebElement _goToStudents;
         private IWebElement _goToGroups;
+        private IWebElement _escapeHomeButton;
+        private IList<IWebElement> _tableElements;
+        private IList<IWebElement> _DeleteButtons;
+        private IList<IWebElement> _EditButtons;
+
 
         public IWebElement AddButton
         {
@@ -63,6 +69,47 @@ namespace CaesarLib
             }
         }
 
+        public IWebElement EscapeHome
+        {
+            get
+            {
+                if (_escapeHomeButton != null) return _escapeHomeButton;
+                else
+                {
+                    _escapeHomeButton = _driverInstance.FindElement(By.ClassName("btn-warning"));
+                    return _escapeHomeButton;
+                }
+            }
+        }
+
+        public IList<IWebElement> Delete
+        {
+
+            get
+            {
+                if (_DeleteButtons != null) return _DeleteButtons;
+                else
+                {
+                    var table = _driverInstance.FindElement(By.ClassName("tab-pane"));
+                    _DeleteButtons = table.FindElements(By.ClassName("btn-danger"));
+                    return _DeleteButtons;
+                }
+            }
+        }
+
+        public IList<IWebElement> Edit
+        {
+            get
+            {
+                if (_EditButtons != null) return _EditButtons;
+                else
+                {
+                    var table = _driverInstance.FindElement(By.ClassName("tab-pane"));
+                    _EditButtons = _driverInstance.FindElements(By.ClassName("btn-info"));
+                    return _EditButtons;
+                }
+            }
+        }
         public AdminPage(IWebDriver driver)
         {
             _driverInstance = driver;
@@ -80,10 +127,30 @@ namespace CaesarLib
             return elements;
         }
 
+        public IList<IWebElement> tableElements
+        {
+            get
+            {
+                if (_tableElements != null) return _tableElements;
+                else
+                {
+                    _tableElements = _driverInstance.FindElements(By.TagName("tr"));
+                    return _tableElements;
+                }
+            }
+        }
+
+        public IWebElement getLastElement(IList<IWebElement> webElements)
+        {
+            return webElements.Last();
+        }
+
         public static bool IsCreateForm(IWebDriver driver)
         {
-            return driver.FindElements(By.ClassName("modal-content")).Count > 0 ?
+            return driver.FindElements(By.ClassName("modal-header")).Count > 0 &
+                driver.FindElements(By.Name("firstName")).Count > 0 ?
                 true : false;
         }
+
     }
 }
