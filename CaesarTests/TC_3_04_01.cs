@@ -18,6 +18,13 @@ namespace CaesarTests
         EditStudentListWindow EditStudentWindowListInstance;
         EditStudentWindow EditStudentWindowInstance;
         String path;
+        static object[] testData =
+        {
+            new object[] { 2, "TC_3_04 CV.doc", "TC_3_04 photo.jpeg" },
+            new object[] { 2, "TC_3_04 CV.docx", "TC_3_04 photo.jpg" },
+            new object[] { 2, "TC_3_04 CV.pdf", "TC_3_04 photo.png" },
+            new object[] { 2, "TC_3_04 CV.rtf", "TC_3_04 photo.tiff" } 
+        };
        [OneTimeSetUp]
         public void OneTimeSetUpTest()
         {
@@ -55,14 +62,14 @@ namespace CaesarTests
             Acts.Click(EditStudentWindowListInstance.GetLastElement(EditStudentWindowListInstance.EditButtons));
             wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
         }
-        [Test]
-        public void ExecuteTest_UploadFiles_FilesUploaded()
+        [Test, TestCaseSource("testData")]
+        public void ExecuteTest_UploadFiles_FilesUploaded(int expected, string CV, string photo)
         {
-            path = EditStudentWindow.GetTestFile("TC_3_04 CV.docx");
+            path = EditStudentWindow.GetTestFile(CV);
             Acts.Click(EditStudentWindowInstance.BrowseCVButton);
             Acts.UploadFile(path);
 
-            path = EditStudentWindow.GetTestFile("TC_3_04 photo.png");
+            path = EditStudentWindow.GetTestFile(photo);
             Acts.Click(EditStudentWindowInstance.BrowsePhotoButton);
             Acts.UploadFile(path);
 
@@ -72,7 +79,7 @@ namespace CaesarTests
             Acts.Click(EditStudentWindowListInstance.GetLastElement(EditStudentWindowListInstance.EditButtons));
             wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
 
-            Assert.AreEqual(2, EditStudentWindowInstance.CountUploadedFiles());
+            Assert.AreEqual(expected, EditStudentWindowInstance.CountUploadedFiles());
         }
         [TearDown]
         public void TearDownTest()
