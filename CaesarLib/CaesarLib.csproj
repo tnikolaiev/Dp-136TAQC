@@ -87,6 +87,7 @@
     <Compile Include="MainPage\TopMenu.cs" />
     <Compile Include="MainPage\ModalWindow\EditStudentWindow.cs" />
     <Compile Include="MainPage\ModalWindow\EditStudentListWindow.cs" />
+    <Compile Include="Table.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
