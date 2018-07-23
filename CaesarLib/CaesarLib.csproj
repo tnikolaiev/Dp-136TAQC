@@ -66,6 +66,7 @@
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleContent.cs" />
     <Compile Include="MainPage\CenterContainer\StudentsContent\StudentsContent.cs" />
     <Compile Include="MainPage\LeftContainer\AboutMenu.cs" />
+    <Compile Include="MainPage\MainPage.cs" />
     <Compile Include="MainPage\ModalWindow\CreateGroupWindow.cs" />
     <Compile Include="MainPage\ModalWindow\ModalWindow.cs" />
     <Compile Include="MainPage\ModalWindow\EditScheduleWindow.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="MainPage\LeftContainer\LeftContainer.cs" />
     <Compile Include="MainPage\LeftMenu.cs" />
     <Compile Include="LoginPage.cs" />
-    <Compile Include="MainPage\MainPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomText.cs" />
     <Compile Include="MainPage\RightMenu.cs" />
