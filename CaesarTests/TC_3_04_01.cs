@@ -60,7 +60,7 @@ namespace CaesarTests
         [SetUp]
         public void SetUpTest()
         {
-            editStudentWindowListInstance.GetLastElement(editStudentWindowListInstance.EditButtons).Click();
+            editStudentWindowListInstance.StudentTable.GetElementFromCell(editStudentWindowListInstance.Students.Count - 1, EditStudentListWindow.EditButtonsColumn).Click();
             wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
         }
         [Test, TestCaseSource("testData")]
@@ -77,7 +77,7 @@ namespace CaesarTests
             editStudentWindowInstance.SaveButton.Click();
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
 
-            editStudentWindowListInstance.GetLastElement(editStudentWindowListInstance.EditButtons).Click();
+            editStudentWindowListInstance.StudentTable.GetElementFromCell(editStudentWindowListInstance.Students.Count - 1, EditStudentListWindow.EditButtonsColumn).Click();
             wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
 
             Assert.AreEqual(expected, editStudentWindowInstance.CountUploadedFiles());
@@ -92,7 +92,7 @@ namespace CaesarTests
         [OneTimeTearDown]
         public void OneTimeTearDownTest()
         {
-            editStudentWindowListInstance.GetLastElement(editStudentWindowListInstance.DeleteButtons).Click();
+            editStudentWindowListInstance.StudentTable.GetElementFromCell(editStudentWindowListInstance.Students.Count - 1, EditStudentListWindow.DeleteButtonsColumn).Click();
             Acts.PressKeyboardButton(@"{Enter}");
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
             webDriver.Close();

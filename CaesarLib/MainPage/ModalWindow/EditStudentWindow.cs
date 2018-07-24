@@ -54,7 +54,7 @@ namespace CaesarLib
         {
             Dictionary<String, String> fileNamePathPairs = new Dictionary<String, String>();
 
-            String[] files = Directory.GetFiles(@"CaesarTests\TC_3_04 files");
+            String[] files = Directory.GetFiles(@"DP-136TAQC\CaesarTests\TC_3_04 files");
 
             for (int i = 0; i < files.Length; i++)
             {
