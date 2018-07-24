@@ -19,8 +19,6 @@ namespace CaesarLib
         private IWebElement _close;
         private IWebDriver _driver;
 
-
-
         public IWebElement FirstNameField
         {
             get

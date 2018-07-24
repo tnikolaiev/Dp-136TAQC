@@ -9,15 +9,15 @@ using System.Collections.Generic;
 namespace CaesarTests
 {
     [TestFixture]
-    public class TC_4_01
+    public class TC_4_01_Create
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
         AdminPage adminPage;
         CreateEditUsersForm usersForm;
         WebDriverWait wait;
-        List<string> tableElements;
-        readonly string expectedResult = "someText";
+        Table table;
+        string expectedResult = "someText";
 
         static object[] UsersInfo =
         {
@@ -42,8 +42,8 @@ namespace CaesarTests
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             driver.Url = @"http://localhost:3000/admin";
             adminPage = new AdminPage(driver);
-            Acts.Click(adminPage.AddButton);
-            wait.Until((d) => AdminPage.IsCreateForm(driver));
+            adminPage.AddButton.Click();
+            wait.Until((d) => AdminPage.IsCreateFormOpened(d));
             usersForm = new CreateEditUsersForm(driver);
         }
 
@@ -51,10 +51,10 @@ namespace CaesarTests
         public void Test_CreateUserFormIsDisplayed()
         {
             Assert.IsEmpty(Acts.GetAttribute(usersForm.FirstNameField, "value"),
-            Acts.GetAttribute(usersForm.LastNameField, "value"),
-            Acts.GetAttribute(usersForm.Photo, "value"),
-            Acts.GetAttribute(usersForm.Login, "value"),
-            Acts.GetAttribute(usersForm.Password, "value"));
+            usersForm.LastNameField.GetAttribute("value"),
+            usersForm.Photo.GetAttribute("value"),
+            usersForm.Login.GetAttribute("value"),
+            usersForm.Password.GetAttribute("value"));
 
             Assert.AreEqual(usersForm.Location.GetAttribute("value"), "Chernivtsy");
             Assert.AreEqual(usersForm.Role.GetAttribute("value"), "Teacher");
@@ -64,7 +64,7 @@ namespace CaesarTests
         public void Test_FirstNameFieldDisplayedText()
         {            
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
-            Acts.InputValue(usersForm.FirstNameField, "someText");
+            usersForm.FirstNameField.SendKeys("someText");
             Assert.AreEqual(expectedResult, usersForm.FirstNameField.GetAttribute("value"));
             usersForm.Close.Click();
         }
@@ -73,7 +73,7 @@ namespace CaesarTests
         public void Test_LastNameFieldDisplayedText()
         {
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
-            Acts.InputValue(usersForm.LastNameField, "someText");
+            usersForm.LastNameField.SendKeys("someText");
             Assert.AreEqual(expectedResult, usersForm.LastNameField.GetAttribute("value"));
             usersForm.Close.Click();
         }
@@ -100,7 +100,7 @@ namespace CaesarTests
         public void Test_PhotoFieldDisplayedText()
         {
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
-            Acts.InputValue(usersForm.Photo, "someText");
+            usersForm.Photo.SendKeys("someText");
             Assert.AreEqual(expectedResult, usersForm.Photo.GetAttribute("value"));
             usersForm.Close.Click();
         }
@@ -109,7 +109,7 @@ namespace CaesarTests
         public void Test_LoginFieldDisplayedText()
         {
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
-            Acts.InputValue(usersForm.Login, "someText");
+            usersForm.Login.SendKeys("someText");
             Assert.AreEqual(expectedResult, usersForm.Login.GetAttribute("value"));
             usersForm.Close.Click();
         }
@@ -118,7 +118,7 @@ namespace CaesarTests
         public void Test_PasswordFieldDisplayedText()
         {
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
-            Acts.InputValue(usersForm.Password, "someText");
+            usersForm.Password.SendKeys("someText");
             Assert.AreEqual(expectedResult, usersForm.Password.GetAttribute("value"));
             usersForm.Close.Click();
         }
@@ -134,13 +134,13 @@ namespace CaesarTests
             usersForm.Login.SendKeys(login);
             usersForm.Password.SendKeys(password);
 
-            string expectedResult = usersForm.Login.GetAttribute("value");
+            String expectedResult = usersForm.Login.GetAttribute("value");
             usersForm.SubmitButton.Click();
 
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("nav-tabs")));
-            tableElements = adminPage.GetTableElements("td");
+            table = new Table(adminPage.GetTable, driver);
 
-            CollectionAssert.Contains(tableElements, expectedResult);
+            CollectionAssert.Contains(table.GetTableElements(), expectedResult);
 
             adminPage.getLastElement(adminPage.Delete).Click();
         }

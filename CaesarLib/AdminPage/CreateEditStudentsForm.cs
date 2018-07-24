@@ -4,10 +4,9 @@ using OpenQA.Selenium;
 
 namespace CaesarLib
 {
-    class CreateEditStudentsForm
+    public class CreateEditStudentsForm
     {
         private IWebElement _submitButton;
-        private IWebElement _editButton;
         private IWebElement _closeButton;
         private IWebElement _close;
         private IWebDriver _driver;

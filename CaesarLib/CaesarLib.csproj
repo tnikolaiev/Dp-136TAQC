@@ -62,9 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acts.cs" />
-    <Compile Include="CreateEditGroupsForm.cs" />
-    <Compile Include="CreateEditStudentsForm.cs" />
-    <Compile Include="CreateEditUsersForm.cs" />
+    <Compile Include="AdminPage\CreateEditGroupsForm.cs" />
+    <Compile Include="AdminPage\CreateEditStudentsForm.cs" />
+    <Compile Include="AdminPage\CreateEditUsersForm.cs" />
     <Compile Include="MainPage\CenterContainer\GroupsContent\GroupsContent.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleContent.cs" />
     <Compile Include="MainPage\CenterContainer\StudentsContent\StudentsContent.cs" />
@@ -75,7 +75,7 @@
     <Compile Include="MainPage\ModalWindow\EditScheduleWindow.cs" />
     <Compile Include="MainPage\CenterContainer\CenterContainer.cs" />
     <Compile Include="MainPage\ModalWindow\LocationWindow.cs" />
-    <Compile Include="AdminPage.cs" />
+    <Compile Include="AdminPage\AdminPage.cs" />
     <Compile Include="MainPage\LeftContainer\GroupsInLocation.cs" />
     <Compile Include="MainPage\LeftContainer\LeftContainer.cs" />
     <Compile Include="MainPage\LeftMenu.cs" />

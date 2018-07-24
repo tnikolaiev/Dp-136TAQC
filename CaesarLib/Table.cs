@@ -31,6 +31,19 @@ namespace CaesarLib
             return headingColumns;
         }
 
+        public List<string> GetHeadingsText()
+        {
+            IWebElement HeadingsRow = tableElement.FindElement(By.XPath(".//thead//tr[1]"));
+            IList<IWebElement> headingColumns = HeadingsRow.FindElements(By.XPath(".//th"));
+            List<string> elements = new List<string>();
+
+            foreach (IWebElement el in headingColumns)
+            {
+                elements.Add(el.Text);
+            }
+            return elements;
+        }
+
         public List<IList<IWebElement>> GetRowsWithColumns()
         {
             IList<IWebElement> rows = GetRows();
@@ -43,6 +56,7 @@ namespace CaesarLib
             return rowsWithColumns;
         }
 
+        
         public List<IDictionary<String, IWebElement>> getRowsWithColumnsByHeadings()
         {
             List<IList<IWebElement>> rowsWithColumns = GetRowsWithColumns();
@@ -64,6 +78,20 @@ namespace CaesarLib
             return rowsWithColumnsByHeadings;
 
         }
+                
+        //Return a list of text from each table cell
+        public List<string> GetTableElements()
+        {
+            IList<IWebElement> allElement = driver.FindElements(By.TagName("td"));
+            List<string> elements = new List<string>();
+
+            foreach (IWebElement el in allElement)
+            {
+                elements.Add(el.Text);
+            }
+            return elements;
+        }
+
 
         public int GetRowNumberByValue(String value)
         {

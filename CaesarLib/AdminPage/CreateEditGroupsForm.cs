@@ -17,7 +17,6 @@ namespace CaesarLib
         private IWebElement _stage;
 
         private IWebElement _submitButton;
-        private IWebElement _editButton;
         private IWebElement _closeButton;
         private IWebElement _close;
         private IWebDriver _driver;
@@ -114,6 +113,19 @@ namespace CaesarLib
                 {
                     _teachers = _driver.FindElement(By.Name("teachers"));
                     return _teachers;
+                }
+            }
+        }
+
+        public IWebElement ExpertsField
+        {
+            get
+            {
+                if (_experts != null) return _experts;
+                else
+                {
+                    _experts = _driver.FindElement(By.Name("experts"));
+                    return _experts;
                 }
             }
         }

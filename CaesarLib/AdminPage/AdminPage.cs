@@ -12,11 +12,22 @@ namespace CaesarLib
         private IWebElement _goToStudents;
         private IWebElement _goToGroups;
         private IWebElement _escapeHomeButton;
-        private IList<IWebElement> _tableElements;
+        private IWebElement _table;
         private IList<IWebElement> _DeleteButtons;
         private IList<IWebElement> _EditButtons;
 
-
+        public IWebElement GetTable
+        {
+            get
+            {
+                if (_table != null) return _table;
+                else
+                {
+                    _table = _driverInstance.FindElement(By.ClassName("tab-pane"));
+                    return _table;
+                }
+            }
+        }
         public IWebElement AddButton
         {
             get
@@ -105,7 +116,7 @@ namespace CaesarLib
                 else
                 {
                     var table = _driverInstance.FindElement(By.ClassName("tab-pane"));
-                    _EditButtons = _driverInstance.FindElements(By.ClassName("btn-info"));
+                    _EditButtons = table.FindElements(By.ClassName("btn-info"));
                     return _EditButtons;
                 }
             }
@@ -115,37 +126,20 @@ namespace CaesarLib
             _driverInstance = driver;
         }
 
-        public List<string> GetTableElements(string tagName)
-        {
-            IList<IWebElement> allElement = _driverInstance.FindElements(By.TagName(tagName));
-            List<string> elements = new List<string>();
-
-            foreach (IWebElement el in allElement)
-            {
-                elements.Add(el.Text);
-            }
-            return elements;
-        }
-
-        public IList<IWebElement> tableElements
-        {
-            get
-            {
-                if (_tableElements != null) return _tableElements;
-                else
-                {
-                    _tableElements = _driverInstance.FindElements(By.TagName("tr"));
-                    return _tableElements;
-                }
-            }
-        }
-
         public IWebElement getLastElement(IList<IWebElement> webElements)
         {
             return webElements.Last();
         }
 
-        public static bool IsCreateForm(IWebDriver driver)
+        public static bool IsAdminPageOpened(IWebDriver driver)
+        {
+            return driver.FindElements(By.ClassName("nav-tabs")).Count > 0 &
+                driver.FindElements(By.ClassName("btn-warning")).Count > 0 &
+                driver.FindElements(By.ClassName("btn-info")).Count > 0 ?
+                true : false;
+        }
+        
+        public static bool IsCreateFormOpened(IWebDriver driver)
         {
             return driver.FindElements(By.ClassName("modal-header")).Count > 0 &
                 driver.FindElements(By.Name("firstName")).Count > 0 ?
