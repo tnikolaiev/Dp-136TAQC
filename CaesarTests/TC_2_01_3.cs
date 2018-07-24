@@ -15,7 +15,7 @@ namespace CaesarTests
         WebDriverWait wait;
         string baseURL = "localhost:3000";
         LoginPage loginPageInstance;
-        SchedulePage schedulePageInstance;        
+        ScheduleContent ScheduleContentInstance;        
 
         [SetUp]
         public void BeforeTest()
@@ -42,14 +42,14 @@ namespace CaesarTests
         public void IsMonthTabAvailable()
         {
             //Select group from LeftContainer
-            schedulePageInstance = new SchedulePage(driver);
-            Acts.Click(schedulePageInstance
+            ScheduleContentInstance = new ScheduleContent(driver);
+            Acts.Click(ScheduleContentInstance
                 .LeftContainerInstance
                 .GroupsInLocation
                 .GetGroupByName("DP-094-MQC"));
 
             //Assert MonthView tab is displayed
-            Assert.IsTrue(schedulePageInstance
+            Assert.IsTrue(ScheduleContentInstance
                 .ScheduleMonthViewInstance
                 .IsScheduleMonthViewDisplayed(driver));          
         }
@@ -59,19 +59,19 @@ namespace CaesarTests
         public void IsWeekTabAvailable()
         {
             //Select group from LeftContainer
-            schedulePageInstance = new SchedulePage(driver);
-            Acts.Click(schedulePageInstance
+            ScheduleContentInstance = new ScheduleContent(driver);
+            Acts.Click(ScheduleContentInstance
                 .LeftContainerInstance
                 .GroupsInLocation
                 .GetGroupByName("DP-094-MQC"));
 
             //Click on WeekView button
 
-            Acts.Click(schedulePageInstance.WeekButton);
+            Acts.Click(ScheduleContentInstance.WeekButton);
 
 
             //Assert Week tab is displayed
-            Assert.IsTrue(schedulePageInstance
+            Assert.IsTrue(ScheduleContentInstance
                 .ScheduleWeekViewAndEditInstance
                 .IsScheduleWeekViewDisplayed(driver));
         }
@@ -81,19 +81,19 @@ namespace CaesarTests
         public void IsKeyDatesTabAvailable()
         {
             //Select group from LeftContainer
-            schedulePageInstance = new SchedulePage(driver);
-            Acts.Click(schedulePageInstance
+            ScheduleContentInstance = new ScheduleContent(driver);
+            Acts.Click(ScheduleContentInstance
                 .LeftContainerInstance
                 .GroupsInLocation
                 .GetGroupByName("DP-094-MQC"));
 
             //Click on KeyDates button
 
-            Acts.Click(schedulePageInstance.KeyDatesButton);
+            Acts.Click(ScheduleContentInstance.KeyDatesButton);
 
 
             //Assert KeyDates tab is displayed
-            Assert.IsTrue(schedulePageInstance
+            Assert.IsTrue(ScheduleContentInstance
                 .ScheduleKeyDatesInstance
                 .IsKeyDatesDisplayed(driver));
         }
