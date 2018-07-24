@@ -21,7 +21,6 @@ namespace CaesarLib
         public IList<IWebElement> GetRows()
         {
             IList<IWebElement> rows = tableElement.FindElements(By.XPath("//tbody//tr"));
-            //rows.RemoveAt(0);
             return rows;
         }
 
@@ -66,7 +65,26 @@ namespace CaesarLib
 
         }
 
-        public String getValueFromCell(int rowNumber, int columnNumber)
+        public int GetRowNumberByValue(String value)
+        {
+            List<IList<IWebElement>> rowsWithColumns = GetRowsWithColumns();
+            int rowNumber = 0;
+
+            foreach (IList<IWebElement> el in rowsWithColumns)
+            {
+                IList<IWebElement> oneRowWithColumn = el;
+                rowNumber++;
+
+                foreach (IWebElement element in oneRowWithColumn)
+                {
+                    string textFromCell = element.Text;
+                }
+            }
+
+            return rowNumber;
+        }
+
+        public String GetValueFromCell(int rowNumber, int columnNumber)
         {
             List<IList<IWebElement>> rowsWithColumns = GetRowsWithColumns();
             IList<IWebElement> row = rowsWithColumns[rowNumber - 1];
@@ -74,15 +92,19 @@ namespace CaesarLib
             return cell.Text;
         }
 
-        public String getValueFromCell(int rowNumber, String columnName)
+        public String GetValueFromCell(int rowNumber, String columnName)
         {
             List<IDictionary<String, IWebElement>> rowsWithColumnsByHeadings = getRowsWithColumnsByHeadings();
             IDictionary<String, IWebElement> row = rowsWithColumnsByHeadings[rowNumber - 1];
             IWebElement cell = row[columnName];
             return cell.Text;
-        }        
+        }
+
+        public String GetValueFromCell(string value, String columnName)
+        {
+            int rowNumber = GetRowNumberByValue(value);
+            return GetValueFromCell(rowNumber, columnName);
+        }
 
     }
 }
-
-
