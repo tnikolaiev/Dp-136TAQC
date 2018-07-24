@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 
 namespace CaesarLib
@@ -73,6 +74,15 @@ namespace CaesarLib
             LoginField.SendKeys(login);
             PasswordField.SendKeys(password);
             LoginButton.Click();
+        }
+
+        public void LogIn(String login, String password, WebDriverWait wait)
+        {
+            wait.Until((d) => IsLoginPageOpened(d));
+            LoginField.SendKeys(login);
+            PasswordField.SendKeys(password);
+            LoginButton.Click();
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
         }
 
         public static bool IsLoginPageOpened(IWebDriver driver)
