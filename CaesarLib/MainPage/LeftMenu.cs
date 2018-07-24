@@ -13,7 +13,7 @@ namespace CaesarLib
         private IWebElement _editButton;
         private IWebElement _deleteButton;
         private IWebElement _leftMenuSection;
-        private IWebDriver _driverInstance;
+        private IWebDriver driver;
 
         public IWebElement CreateButton
         {
@@ -22,7 +22,7 @@ namespace CaesarLib
                 if (_createButton != null) return _createButton;
                 else
                 {
-                    _createButton = _driverInstance.FindElement(By.XPath("//*[@id='left-menu']//button[@title='Create']"));
+                    _createButton = driver.FindElement(By.XPath("//div[@id='left-menu']//button[@title='Create']/i"));
                     return _createButton;
                 }
             }
@@ -35,7 +35,7 @@ namespace CaesarLib
                 if (_searchButton != null) return _searchButton;
                 else
                 {
-                    _searchButton = _driverInstance.FindElement(By.XPath("//*[@id='left-menu']//button[@title='Search']"));
+                    _searchButton = driver.FindElement(By.XPath("//div[@id='left-menu']//button[@title='Search']/i"));
                     return _searchButton;
                 }
             }
@@ -48,7 +48,7 @@ namespace CaesarLib
                 if (_editButton != null) return _editButton;
                 else
                 {
-                    _editButton = _driverInstance.FindElement(By.XPath("//*[@id='left-menu']//button[@title='Edit']"));
+                    _editButton = driver.FindElement(By.XPath("//div[@id='left-menu']//button[@title='Edit']/i"));
                     return _editButton;
                 }
             }
@@ -61,7 +61,7 @@ namespace CaesarLib
                 if (_deleteButton != null) return _deleteButton;
                 else
                 {
-                    _deleteButton = _driverInstance.FindElement(By.XPath("//*[@id='left-menu']//button[@title='Delete']"));
+                    _deleteButton = driver.FindElement(By.XPath("//div[@id='left-menu']//button[@title='Delete']/i"));
                     return _deleteButton;
                 }
             }
@@ -74,7 +74,7 @@ namespace CaesarLib
                 if (_leftMenuSection != null) return _leftMenuSection;
                 else
                 {
-                    _leftMenuSection = _driverInstance.FindElement(By.CssSelector("#left-menu > div"));
+                    _leftMenuSection = driver.FindElement(By.CssSelector("#left-menu > div"));
                     return _leftMenuSection;
                 }
             }
@@ -82,7 +82,7 @@ namespace CaesarLib
 
         public List<String> GetAvailableButtonsTitles()
         {
-            IList<IWebElement> webElems = _driverInstance.FindElements(By.XPath("//*[@id='left-menu']//button"));
+            IList<IWebElement> webElems = driver.FindElements(By.XPath("//div[@id='left-menu']//button"));
             List<String> titles = new List<String>();
             foreach (var item in webElems)
             {
@@ -93,7 +93,7 @@ namespace CaesarLib
 
         public LeftMenu(IWebDriver driver)
         {
-            _driverInstance = driver;
+            this.driver = driver;
         }
 
         public void Open(Actions act)
@@ -108,7 +108,7 @@ namespace CaesarLib
 
         public Func<IWebDriver, IWebElement> IsSearchButtonVisible()
         {
-            return ExpectedConditions.ElementIsVisible(By.XPath("//*[@id='left-menu']//button[@title='Search']"));
+            return ExpectedConditions.ElementIsVisible(By.XPath("//div[@id='left-menu']//button[@title='Search']"));
         }
     }
 }

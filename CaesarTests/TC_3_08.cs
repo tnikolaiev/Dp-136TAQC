@@ -1,14 +1,9 @@
 ﻿using CaesarLib;
-using CaesarLib.StudentsPage;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CaesarTests
 {
@@ -19,9 +14,9 @@ namespace CaesarTests
         WebDriverWait wait;
         string baseURL = "localhost:3000";
         LoginPage logingPageInstance;
-        GroupView groupViewInstance;
-        EditStudentList editStudentListInstance;
-        EditStudent editStudentInstance;
+        StudentsContent studentsContentInstance;
+        EditStudentListWindow editStudentListWindowInstance;
+        EditStudentWindow editStudentWindowInstance;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -34,51 +29,51 @@ namespace CaesarTests
 
             logingPageInstance = new LoginPage(webDriver);
             logingPageInstance.LogIn("sasha", "1234");
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
 
             webDriver.Url = baseURL + "/Students/Dnipro/DP-093-JS/list";
-            groupViewInstance = new GroupView(webDriver);
-            wait.Until((d) => GroupView.IsGroupView(d));
+            studentsContentInstance = new StudentsContent(webDriver);
+            wait.Until((d) => StudentsContent.IsStudentsContentOpened(d));
 
-            Acts.Click(groupViewInstance.EditButton);
+            Acts.Click(studentsContentInstance.EditButton);
 
-            editStudentListInstance = new EditStudentList(webDriver);
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            editStudentListWindowInstance = new EditStudentListWindow(webDriver);
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
 
-            editStudentInstance = new EditStudent(webDriver);
+            editStudentWindowInstance = new EditStudentWindow(webDriver);
         }
         [Test]
         public void ExecuteTest_AddStudent_1_StudentAdded()
         {
-            Acts.Click(editStudentListInstance.CreateStudentButton);
-            wait.Until((d) => EditStudent.IsEditStudent(d));
+            Acts.Click(editStudentListWindowInstance.CreateStudentButton);
+            wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
 
-            editStudentInstance.FillForm("Anna", "Petrova", 2, "99", "4", 1);
+            editStudentWindowInstance.FillForm("Anna", "Petrova", 2, "99", "4", 1);
 
-            Acts.Click(editStudentInstance.SaveButton);
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            Acts.Click(editStudentWindowInstance.SaveButton);
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
 
-            Assert.AreEqual("Petrova Anna", EditStudentList.GetStudentName(editStudentListInstance.GetLastElement(editStudentListInstance.Students)));
+            Assert.AreEqual("Petrova Anna", EditStudentListWindow.GetStudentName(editStudentListWindowInstance.GetLastElement(editStudentListWindowInstance.Students)));
         }
         [Test]
         public void ExecuteTest_AddStudent_2_StudentAddedt()
         {
-            Acts.Click(editStudentListInstance.CreateStudentButton);
-            wait.Until((d) => EditStudent.IsEditStudent(d));
+            Acts.Click(editStudentListWindowInstance.CreateStudentButton);
+            wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
 
-            editStudentInstance.FillForm("Sergey", "Glinchikov", 8, "130", "5", 1);
+            editStudentWindowInstance.FillForm("Sergey", "Glinchikov", 8, "130", "5", 1);
 
-            Acts.Click(editStudentInstance.SaveButton);
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            Acts.Click(editStudentWindowInstance.SaveButton);
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
 
-            Assert.AreEqual("Glinchikov Sergey", EditStudentList.GetStudentName(editStudentListInstance.GetLastElement(editStudentListInstance.Students)));
+            Assert.AreEqual("Glinchikov Sergey", EditStudentListWindow.GetStudentName(editStudentListWindowInstance.GetLastElement(editStudentListWindowInstance.Students)));
         }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()
         {
             for (int i = 0; i < 2; i++)
             {
-                Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.DeleteButtons));
+                Acts.Click(editStudentListWindowInstance.GetLastElement(editStudentListWindowInstance.DeleteButtons));
                 Acts.PressKeyboardButton(@"{Enter}");
             }
             webDriver.Quit();

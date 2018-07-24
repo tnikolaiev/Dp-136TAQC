@@ -62,26 +62,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acts.cs" />
-    <Compile Include="ScheduleComponents\EditScheduleWindow.cs" />
-    <Compile Include="CenterContainer.cs" />
-    <Compile Include="LocationPage.cs" />
+    <Compile Include="MainPage\CenterContainer\GroupsContent\GroupsContent.cs" />
+    <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleContent.cs" />
+    <Compile Include="MainPage\CenterContainer\StudentsContent\StudentsContent.cs" />
+    <Compile Include="MainPage\LeftContainer\AboutMenu.cs" />
+    <Compile Include="MainPage\MainPage.cs" />
+    <Compile Include="MainPage\ModalWindow\CreateGroupWindow.cs" />
+    <Compile Include="MainPage\ModalWindow\ModalWindow.cs" />
+    <Compile Include="MainPage\ModalWindow\EditScheduleWindow.cs" />
+    <Compile Include="MainPage\CenterContainer\CenterContainer.cs" />
+    <Compile Include="MainPage\ModalWindow\LocationWindow.cs" />
     <Compile Include="AdminPage.cs" />
-    <Compile Include="MainPage\GroupsInLocation.cs" />
-    <Compile Include="MainPage\LeftContainer.cs" />
+    <Compile Include="MainPage\LeftContainer\GroupsInLocation.cs" />
+    <Compile Include="MainPage\LeftContainer\LeftContainer.cs" />
     <Compile Include="MainPage\LeftMenu.cs" />
     <Compile Include="LoginPage.cs" />
-    <Compile Include="MainPage\MainPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomText.cs" />
     <Compile Include="MainPage\RightMenu.cs" />
-    <Compile Include="ScheduleComponents\ScheduleKeyDates.cs" />
-    <Compile Include="ScheduleComponents\ScheduleMonthView.cs" />
-    <Compile Include="ScheduleComponents\ScheduleWeekViewAndEdit.cs" />
-    <Compile Include="SchedulePage.cs" />
+    <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleKeyDates.cs" />
+    <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleMonthView.cs" />
+    <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleWeekViewAndEdit.cs" />
+    <Compile Include="MainPage\CenterContainer\ScheduleContent\SchedulePage.cs" />
     <Compile Include="MainPage\TopMenu.cs" />
-    <Compile Include="StudentsPage\EditStudent.cs" />
-    <Compile Include="StudentsPage\EditStudentList.cs" />
-    <Compile Include="StudentsPage\GroupView.cs" />
+    <Compile Include="MainPage\ModalWindow\EditStudentWindow.cs" />
+    <Compile Include="MainPage\ModalWindow\EditStudentListWindow.cs" />
+    <Compile Include="Table.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -89,7 +95,10 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MainPage\CenterContainer\AboutContent\" />
+    <Folder Include="MainPage\RightContainer\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

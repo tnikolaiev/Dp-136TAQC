@@ -12,6 +12,10 @@ namespace CaesarLib
         IWebElement groupName;
         IWebElement groupStageTitle;
         IWebElement groupStage;
+        GroupsContent _groupsContent;
+        StudentsContent _studentsContent;
+        ScheduleContent scheduleContent;
+
         public IWebElement GroupLocation
         {
             get
@@ -24,6 +28,7 @@ namespace CaesarLib
                 }
             }
         }
+
         public IWebElement LocationHint
         {
             get
@@ -36,6 +41,7 @@ namespace CaesarLib
                 }
             }
         }
+
         public IWebElement GroupName
         {
             get
@@ -61,6 +67,7 @@ namespace CaesarLib
                 }
             }
         }
+
         public IWebElement GroupStage
         {
             get
@@ -73,13 +80,29 @@ namespace CaesarLib
                 }
             }
         }
+
+        public GroupsContent GroupsContent
+        {
+            get
+            {
+                if (_groupsContent != null) return _groupsContent;
+                else
+                {
+                    _groupsContent = new GroupsContent(webDriver);
+                    return _groupsContent;
+                }
+            }
+        }
+
         public CenterContainer(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
         }
+
         public Func<IWebDriver, IWebElement> IsHintVisible()
         {
             return ExpectedConditions.ElementIsVisible(By.XPath("//p[@class='hint']"));
         }
+
     }
 }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CaesarLib.Schedule
+namespace CaesarLib
 {
     public class EditScheduleWindow 
     {
@@ -181,9 +181,15 @@ namespace CaesarLib.Schedule
             return counter;
         }
 
+        public bool IsScheduleEditorDisplayed(IWebDriver driverInstance)
+        {
+            return driverInstance.FindElements(By.ClassName("scheduleEditorWeek-view")).Count > 0 ?
+               true : false;
+        }
 
-      
 
-        
+
+
+
     }
 }

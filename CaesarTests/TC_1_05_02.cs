@@ -14,7 +14,7 @@ namespace CaesarTests
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
         WebDriverWait wait;
-        LocationPage locationPageInstance;
+        LocationWindow locationPageInstance;
 
         [SetUp]
         public void Initialize()
@@ -23,9 +23,9 @@ namespace CaesarTests
             driver.Url = @"http://localhost:3000/logout";
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
-            wait.Until((d) => LoginPage.IsLoginPage(d));
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance.LogIn("sasha", "1234");
-            wait.Until((d) => MainPage.IsMainPage(d));
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
         }
         [Test]
         public void ExecuteTest_LocationPageCloseWithoutChoosing()
@@ -33,9 +33,9 @@ namespace CaesarTests
             Actions builder = new Actions(driver);
             builder.MoveToElement(driver.FindElement(By.ClassName("containerMainMenu"))).Build().Perform();
             driver.FindElement(By.XPath("//i[@class='fa fa-globe fa-2x']")).Click();
-            locationPageInstance = new LocationPage(driver);
+            locationPageInstance = new LocationWindow(driver);
             Acts.Click(locationPageInstance.CancelButton);
-            Assert.IsTrue(wait.Until((d) => MainPage.IsMainPage(d)));
+            Assert.IsTrue(wait.Until((d) => MainPage.IsMainPageOpened(d)));
         }
 
         [OneTimeTearDown]
