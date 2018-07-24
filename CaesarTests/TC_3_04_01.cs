@@ -16,19 +16,20 @@ namespace CaesarTests
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
         String path;
-        static object[] fileNames =
+        static object[] fileNames = 
         {
             new object[] { 2, "TC_3_04 CV.doc", "TC_3_04 photo.jpeg" },
             new object[] { 2, "TC_3_04 CV.docx", "TC_3_04 photo.jpg" },
             new object[] { 2, "TC_3_04 CV.pdf", "TC_3_04 photo.png" },
-            new object[] { 2, "TC_3_04 CV.rtf", "TC_3_04 photo.tiff" } 
+            new object[] { 2, "TC_3_04 CV.rtf", "TC_3_04 photo.tiff" },
+            new object[] { 0, "TC_3_04 CV.txt", "TC_3_04 photo.ico" }
         };
        [OneTimeSetUp]
         public void OneTimeSetUpTest()
         {
-            wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
+            wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(1));
             webDriver.Manage().Window.Maximize();
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
             //Open Login Page
             webDriver.Url = baseURL;
             wait.Until((driver) => LoginPage.IsLoginPageOpened(driver));
@@ -65,10 +66,16 @@ namespace CaesarTests
             path = EditStudentWindow.GetTestFile(CV);
             mainPageInstance.ModalWindow.EditStudentWindow.BrowseCVButton.Click();
             Acts.UploadFile(path);
+            //Accep Allert if necessary
+            if (Acts.IsAlertPresent(wait))
+                webDriver.SwitchTo().Alert().Accept();
             //Upload photo
             path = EditStudentWindow.GetTestFile(photo);
             mainPageInstance.ModalWindow.EditStudentWindow.BrowsePhotoButton.Click();
             Acts.UploadFile(path);
+            //Accep Allert if necessary
+            if (Acts.IsAlertPresent(wait))
+                webDriver.SwitchTo().Alert().Accept();
             //Save changes
             mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
@@ -82,8 +89,12 @@ namespace CaesarTests
         public void TearDownTest()
         {
             //Delete files
-            mainPageInstance.ModalWindow.EditStudentWindow.RemoveCVButton.Click();
-            mainPageInstance.ModalWindow.EditStudentWindow.RemovePhotoButton.Click();
+            try { mainPageInstance.ModalWindow.EditStudentWindow.RemoveCVButton.Click(); }
+            catch { }
+
+            try { mainPageInstance.ModalWindow.EditStudentWindow.RemovePhotoButton.Click(); }
+            catch { }
+           
             mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
         }
         [OneTimeTearDown]

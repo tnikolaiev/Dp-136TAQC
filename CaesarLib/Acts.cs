@@ -45,9 +45,9 @@ namespace CaesarLib
         }
         public static void UploadFile(String path)
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             SendKeys.SendWait(path);
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             SendKeys.SendWait(@"{Enter}");
         }
 
@@ -59,6 +59,19 @@ namespace CaesarLib
         public static bool IsElementPresent(IWebDriver driverInstance, By by)
         {    
             return driverInstance.FindElements(by).Count > 0 ? true : false;
+        }
+
+        public static bool IsAlertPresent(WebDriverWait wait)
+        {
+            try
+            {
+                wait.Until(ExpectedConditions.AlertIsPresent());
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
