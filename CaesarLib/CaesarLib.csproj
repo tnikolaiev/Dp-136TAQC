@@ -68,6 +68,7 @@
     <Compile Include="MainPage\LeftContainer\AboutMenu.cs" />
     <Compile Include="MainPage\MainPage.cs" />
     <Compile Include="MainPage\ModalWindow\CreateGroupWindow.cs" />
+    <Compile Include="MainPage\ModalWindow\SelectGroupWindow.cs" />
     <Compile Include="MainPage\ModalWindow\ModalWindow.cs" />
     <Compile Include="MainPage\ModalWindow\EditScheduleWindow.cs" />
     <Compile Include="MainPage\CenterContainer\CenterContainer.cs" />
