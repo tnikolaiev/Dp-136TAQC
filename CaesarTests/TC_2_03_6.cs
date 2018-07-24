@@ -15,7 +15,7 @@ namespace CaesarTests
         WebDriverWait wait;
         string baseURL = "localhost:3000";
         LoginPage loginPageInstance;
-        SchedulePage schedulePageInstance;
+        ScheduleContent ScheduleContentInstance;
 
         [SetUp]
         public void BeforeTest()
@@ -43,14 +43,14 @@ namespace CaesarTests
         {
 
             //Select group from LeftContainer
-            schedulePageInstance = new SchedulePage(driver);
-            Acts.Click(schedulePageInstance
+            ScheduleContentInstance = new ScheduleContent(driver);
+            Acts.Click(ScheduleContentInstance
                 .LeftContainerInstance
                 .GroupsInLocation
                 .GetGroupByName("DP-094-MQC"));
 
             //Click on cogweel for ScheduleEditor opening
-            schedulePageInstance.ClickCogwheel();
+            ScheduleContentInstance.ClickCogwheel();
 
             //Check if correct events present
             Assert.IsTrue(Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Lecture')]")));
