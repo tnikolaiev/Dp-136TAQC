@@ -51,6 +51,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="WebDriver, Version=3.13.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.3.13.1\lib\net45\WebDriver.dll</HintPath>
     </Reference>
@@ -73,11 +74,13 @@
     <Compile Include="TC_2_01_3.cs" />
     <Compile Include="TC_1_02_02_additional.cs" />
     <Compile Include="TC_1_04_03.cs" />
+    <Compile Include="TC_4_01_Edit.cs" />
+    <Compile Include="TC_4_Close_CreateEditForms.cs" />
     <Compile Include="TC_OpenClose_TopMenu.cs" />
     <Compile Include="TC_1_04_02.cs" />
     <Compile Include="TC_1_05_01.cs" />
     <Compile Include="TC_1_05_02.cs" />
-    <Compile Include="TC_4_01.cs" />
+    <Compile Include="TC_4_01_Create.cs" />
     <Compile Include="TC_3_04_01.cs" />
     <Compile Include="TC_3_04_02.cs" />
     <Compile Include="TC_1_04_01.cs" />
