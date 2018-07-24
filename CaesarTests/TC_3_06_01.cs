@@ -31,7 +31,7 @@ namespace CaesarTests
             loginPageInstance.LogIn("sasha", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
 
-            webDriver.Url = baseURL+"/Students/Lviv/Lv-023-UX/list";
+            webDriver.Url = baseURL + "/Students/Lviv/Lv-023-UX/list";
 
             studentsContentInstance = new StudentsContent(webDriver);
             wait.Until((d) => StudentsContent.IsStudentsContentOpened(d));
@@ -59,7 +59,7 @@ namespace CaesarTests
                 Acts.PressKeyboardButton(@"{Enter}");
             }
             webDriver.Close();
-            webDriver.Quit();      
+            webDriver.Quit();
         }
     }
 }
