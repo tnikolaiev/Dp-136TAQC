@@ -86,9 +86,7 @@
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleMonthView.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleWeekViewAndEdit.cs" />
     <Compile Include="MainPage\TopMenu.cs" />
-    <Compile Include="MainPage\CenterContainer\StudentsContent\EditStudent.cs" />
-    <Compile Include="MainPage\CenterContainer\StudentsContent\EditStudentList.cs" />
-    <Compile Include="MainPage\CenterContainer\StudentsContent\GroupView.cs" />
+    <Compile Include="Table.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
