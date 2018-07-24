@@ -67,7 +67,11 @@
     <Compile Include="TC_1_02_01.cs" />
     <Compile Include="TC_1_01_01.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <Compile Include="TC_1_05_03.cs" />
+=======
+    <Compile Include="TC_3_06_01.cs" />
+>>>>>>> origin/development
     <Compile Include="TC_2_03_6.cs" />
     <Compile Include="TC_2_03_1.cs" />
     <Compile Include="TC_2_01_3.cs" />
@@ -84,6 +88,7 @@
     <Compile Include="TC_1_03_01.cs" />
     <Compile Include="TC_3_04_03.cs" />
     <Compile Include="TC_3_08.cs" />
+    <Compile Include="TestsForTableClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

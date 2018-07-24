@@ -1,8 +1,8 @@
 ﻿using CaesarLib;
-using CaesarLib.StudentsPage;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 
@@ -15,10 +15,17 @@ namespace CaesarTests
         WebDriverWait wait;
         string baseURL = "localhost:3000";
         LoginPage loginPageInstance;
-        GroupView groupViewInstance;
-        EditStudentList editStudentListInstance;
-        EditStudent editStudentInstance;
+        StudentsContent studentsContentInstance;
+        EditStudentListWindow editStudentWindowListInstance;
+        EditStudentWindow editStudentWindowInstance;
         String path;
+        static object[] testData =
+        {
+            new object[] { 2, "TC_3_04 CV.doc", "TC_3_04 photo.jpeg" },
+            new object[] { 2, "TC_3_04 CV.docx", "TC_3_04 photo.jpg" },
+            new object[] { 2, "TC_3_04 CV.pdf", "TC_3_04 photo.png" },
+            new object[] { 2, "TC_3_04 CV.rtf", "TC_3_04 photo.tiff" } 
+        };
        [OneTimeSetUp]
         public void OneTimeSetUpTest()
         {
@@ -33,61 +40,61 @@ namespace CaesarTests
             wait.Until((d) => MainPage.IsMainPageOpened(d));
 
             webDriver.Url = baseURL + "/Students/Dnipro/DP-093-JS/list";
-            groupViewInstance = new GroupView(webDriver);
-            wait.Until((d) => GroupView.IsGroupView(d));
+            studentsContentInstance = new StudentsContent(webDriver);
+            wait.Until((d) => StudentsContent.IsStudentsContentOpened(d));
 
-            Acts.Click(groupViewInstance.EditButton);
+            studentsContentInstance.EditButton.Click();
 
-            editStudentListInstance = new EditStudentList(webDriver);
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            editStudentWindowListInstance = new EditStudentListWindow(webDriver);
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
 
-            Acts.Click(editStudentListInstance.CreateStudentButton);
+            editStudentWindowListInstance.CreateStudentButton.Click();
 
-            editStudentInstance = new EditStudent(webDriver);
-            wait.Until((d) => EditStudent.IsEditStudent(d));
+            editStudentWindowInstance = new EditStudentWindow(webDriver);
+            wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
 
-            editStudentInstance.FillForm("Denis", "Petrov", 0, "120", "5", 0);
-            Acts.Click(editStudentInstance.SaveButton);
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            editStudentWindowInstance.FillForm("Denis", "Petrov", 0, "120", "5", 0);
+            editStudentWindowInstance.SaveButton.Click();
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
         }
         [SetUp]
         public void SetUpTest()
         {
-            Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.EditButtons));
-            wait.Until((d) => EditStudent.IsEditStudent(d));
+            editStudentWindowListInstance.StudentTable.GetElementFromCell(editStudentWindowListInstance.Students.Count - 1, EditStudentListWindow.EditButtonsColumn).Click();
+            wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
         }
-        [Test]
-        public void ExecuteTest_UploadFiles_FilesUploaded()
+        [Test, TestCaseSource("testData")]
+        public void ExecuteTest_UploadFiles_FilesUploaded(int expected, string CV, string photo)
         {
-            path = EditStudent.GetTestFile("TC_3_04 CV.docx");
-            Acts.Click(editStudentInstance.BrowseCVButton);
+            path = EditStudentWindow.GetTestFile(CV);
+            editStudentWindowInstance.BrowseCVButton.Click();
             Acts.UploadFile(path);
 
-            path = EditStudent.GetTestFile("TC_3_04 photo.png");
-            Acts.Click(editStudentInstance.BrowsePhotoButton);
+            path = EditStudentWindow.GetTestFile(photo);
+            editStudentWindowInstance.BrowsePhotoButton.Click();
             Acts.UploadFile(path);
 
-            Acts.Click(editStudentInstance.SaveButton);
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            editStudentWindowInstance.SaveButton.Click();
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
 
-            Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.EditButtons));
-            wait.Until((d) => EditStudent.IsEditStudent(d));
+            editStudentWindowListInstance.StudentTable.GetElementFromCell(editStudentWindowListInstance.Students.Count - 1, EditStudentListWindow.EditButtonsColumn).Click();
+            wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
 
-            Assert.AreEqual(2, editStudentInstance.CountUploadedFiles());
+            Assert.AreEqual(expected, editStudentWindowInstance.CountUploadedFiles());
         }
         [TearDown]
         public void TearDownTest()
         {
-            Acts.Click(editStudentInstance.RemoveCVButton);
-            Acts.Click(editStudentInstance.RemovePhotoButton);
-            Acts.Click(editStudentInstance.SaveButton);
+            editStudentWindowInstance.RemoveCVButton.Click();
+            editStudentWindowInstance.RemovePhotoButton.Click();
+            editStudentWindowInstance.SaveButton.Click();
         }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()
         {
-            Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.DeleteButtons));
+            editStudentWindowListInstance.StudentTable.GetElementFromCell(editStudentWindowListInstance.Students.Count - 1, EditStudentListWindow.DeleteButtonsColumn).Click();
             Acts.PressKeyboardButton(@"{Enter}");
-            wait.Until((d) => EditStudentList.IsEditStudentList(d));
+            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
             webDriver.Close();
             webDriver.Quit();
         }
