@@ -39,10 +39,12 @@ namespace CaesarLib
             SelectElement selectElement = new SelectElement(webElement);
             selectElement.SelectByIndex(index);
         }
+
         public static void PressKeyboardButton(string button)
         {
             SendKeys.SendWait(button);
         }
+
         public static void UploadFile(String path)
         {
             Thread.Sleep(1000);

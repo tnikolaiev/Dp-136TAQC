@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -113,7 +114,61 @@ namespace CaesarLib
             {
                 if (item.FindElement(By.TagName("p")).Text.Equals(name)) return item;
             }
-            throw new Exception("There is no group with such name");
+            throw new InvalidOperationException("There is no group with such name");
+        }
+
+        public IWebElement GetGroupByName(String name, WebDriverWait wait)
+        {
+            wait.Until(AreGroupsVisible());
+            IList<IWebElement> elements = driver.FindElements(By.XPath("//div[@class='group-collection row']/div"));
+            List<String> groupsNames = new List<String>();
+            foreach (var item in elements)
+            {
+                if (item.FindElement(By.TagName("p")).Text.Equals(name)) return item;
+            }
+            return null;
+        }
+
+        public IList<IWebElement> GetGroupsByNames(params String[] names)
+        {
+            List<String> Names = new List<String>();
+            Names.AddRange(names);
+            IList<IWebElement> elements = driver.FindElements(By.XPath("//div[@class='group-collection row']/div"));
+            List<String> groupsNames = new List<String>();
+            foreach (var item in elements)
+            {
+                if (!Names.Contains(item.FindElement(By.TagName("p")).Text)) elements.Remove(item);
+            }
+            return elements;
+        }
+
+        public void DeleteGroup(String name, Actions action, WebDriverWait wait)
+        {
+            MainPage mainPage = new MainPage(driver);
+            var leftMenu = mainPage.LeftMenu;
+            var grDelConfWind = mainPage.ModalWindow.GroupDeleteConfirmationWindow;
+            var groupsList = mainPage.LeftContainer.GroupsInLocation;
+            IWebElement findElement;
+
+            groupsList.CurrentGroupsToggle.Click();
+            findElement = GetGroupByName(name, wait);
+            if (findElement != null) findElement.Click();
+            else
+            {
+                groupsList.EndedGroupsToggle.Click();
+                findElement = GetGroupByName(name, wait);
+                if (findElement != null) findElement.Click();
+                else
+                {
+                    groupsList.FutureGroupsToggle.Click();
+                    findElement = GetGroupByName(name, wait);
+                    if (findElement != null) findElement.Click();
+                }
+            }            
+
+            leftMenu.Open(action, wait);
+            leftMenu.DeleteButton.Click();
+            grDelConfWind.DeleteButton.Click();
         }
     }
 }

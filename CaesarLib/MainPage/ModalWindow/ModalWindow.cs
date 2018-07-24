@@ -7,19 +7,33 @@ namespace CaesarLib
     public class ModalWindow
     {
         private IWebDriver driver;
-        private CreateGroupWindow _createGroupWindow;
+        private GroupCreateWindow _groupCreateWindow;
         private EditScheduleWindow _editScheduleWindow;
         private LocationWindow _locationWindow;
+        private GroupDeleteConfirmationWindow _groupDeleteConfirmationWindow;
 
-        public CreateGroupWindow CreateGroupWindow
+        public GroupCreateWindow GroupCreateWindow
         {
             get
             {
-                if (_createGroupWindow != null) return _createGroupWindow;
+                if (_groupCreateWindow != null) return _groupCreateWindow;
                 else
                 {
-                    _createGroupWindow = new CreateGroupWindow(driver);
-                    return _createGroupWindow;
+                    _groupCreateWindow = new GroupCreateWindow(driver);
+                    return _groupCreateWindow;
+                }
+            }
+        }
+
+        public GroupDeleteConfirmationWindow GroupDeleteConfirmationWindow
+        {
+            get
+            {
+                if (_groupDeleteConfirmationWindow != null) return _groupDeleteConfirmationWindow;
+                else
+                {
+                    _groupDeleteConfirmationWindow = new GroupDeleteConfirmationWindow(driver);
+                    return _groupDeleteConfirmationWindow;
                 }
             }
         }

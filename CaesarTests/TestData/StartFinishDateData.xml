@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+  <testData direction="MQC" startDate="03/15/2018" finishDate="05/17/2018" />
+  <testData direction="ISTQB" startDate="01/20/2019" finishDate="03/24/2019" />
+  <testData direction=".Net" startDate="12/12/2018" finishDate="03/06/2019" />
+  <testData direction="WebUI" startDate="07/26/2018" finishDate="10/18/2018" />
+</Data>

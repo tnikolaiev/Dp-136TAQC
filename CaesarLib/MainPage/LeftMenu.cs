@@ -101,6 +101,12 @@ namespace CaesarLib
             act.MoveToElement(LeftMenuSection, 100, 200).Perform();
         }
 
+        public void Open(Actions act, WebDriverWait wait)
+        {
+            act.MoveToElement(LeftMenuSection, 100, 200).Perform();
+            wait.Until(IsSearchButtonVisible());
+        }
+
         public bool IsOpened()
         {
             return (LeftMenuSection.GetAttribute("class").Equals("contextMenu open")) ? true : false;

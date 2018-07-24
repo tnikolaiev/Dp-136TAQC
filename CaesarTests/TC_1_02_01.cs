@@ -55,6 +55,7 @@ namespace CaesarTests
         public void CleanUp()
         {
             driver.Close();
+            driver.Quit();
         }
     }
 }

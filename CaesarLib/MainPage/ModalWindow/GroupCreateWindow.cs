@@ -6,10 +6,11 @@ using System.Collections.Generic;
 
 namespace CaesarLib
 {
-    public class CreateGroupWindow
+    public class GroupCreateWindow
     {
-        private IWebElement _createGroupWindowSection;
+        private IWebElement _createGroupWindowInstance;
         private IWebElement _groupNameField;
+        private IWebElement _returnNameButton;
         private IWebElement _directionDDL;
         private IWebElement _locationDDL;
         private IWebElement _addTeacherButton;
@@ -29,18 +30,34 @@ namespace CaesarLib
         private IWebElement _cancelGroupAddingButton;
         private IWebDriver driver;
 
-        public IWebElement CreateGroupWindowSection
+        //TODO: datepicker ?
+
+        public IWebElement CreateGroupWindowInstnace
         {
             get
             {
-                if (_createGroupWindowSection != null) return _createGroupWindowSection;
+                if (_createGroupWindowInstance != null) return _createGroupWindowInstance;
                 else
                 {
-                    _createGroupWindowSection = driver.FindElement(By.XPath("//div[@id='modal-window']//section[@class='modal-window create']"));
-                    return _createGroupWindowSection;
+                    _createGroupWindowInstance = driver.FindElement(By.XPath("//div[@id='modal-window']//section[@class='modal-window create']"));
+                    return _createGroupWindowInstance;
                 }
             }
         }
+        
+        public IWebElement ReturnNameButton
+        {
+            get
+            {
+                if (_returnNameButton != null) return _returnNameButton;
+                else
+                {
+                    _returnNameButton = driver.FindElement(By.XPath("//span[@class='return-name']"));
+                    return _returnNameButton;
+                }
+            }
+        }
+        
 
         public IWebElement GroupNameField
         {
@@ -94,18 +111,18 @@ namespace CaesarLib
             }
         }
 
-        //public IWebElement RemoveTeacherButton
-        //{
-        //    get
-        //    {
-        //        if (_removeTeacherButton != null) return _removeTeacherButton;
-        //        else
-        //        {
-        //            _removeTeacherButton = driver.FindElement(By.XPath("//*[contains(@class,'remove-teacher')]"));
-        //            return _removeTeacherButton;
-        //        }
-        //    }
-        //}
+        public IWebElement RemoveTeacherButton
+        {
+            get
+            {
+                if (_removeTeacherButton != null) return _removeTeacherButton;
+                else
+                {
+                    _removeTeacherButton = driver.FindElement(By.XPath("//span[contains(@class,'remove-teacher')]"));
+                    return _removeTeacherButton;
+                }
+            }
+        }
 
         public IWebElement AcceptSelectTeacherButton
         {
@@ -140,7 +157,7 @@ namespace CaesarLib
                 if (_teacherDDL != null) return _teacherDDL;
                 else
                 {
-                    _teacherDDL = driver.FindElement(By.Id("teachers"));
+                    _teacherDDL = driver.FindElement(By.XPath("//div[@id = 'teachers']//select[@id = 'teachers']"));
                     return _teacherDDL;
                 }
             }
@@ -276,19 +293,77 @@ namespace CaesarLib
             }
         }
 
-        public CreateGroupWindow(IWebDriver driver)
+        public GroupCreateWindow SetGroupName(String value)
         {
-            this.driver = driver;
+            GroupNameField.SendKeys(value);
+            return this;
         }
 
-        public bool IsCreateGroupWindowOpened()
+        public GroupCreateWindow ReturnNameButtonClick()
         {
-            return driver.FindElements(By.XPath("//div[@id='modal-window']//section[@class='modal-window create']")).Count > 0;
+            ReturnNameButton.Click();
+            return this;
+        }
+
+        public GroupCreateWindow SetDirection(String value)
+        {
+            Acts.SelectOptionFromDDL(DirectionDDL, value);
+            return this;
+        }
+
+        public GroupCreateWindow AddTeacher(String value)
+        {
+            AddTeacherButton.Click();
+            Acts.SelectOptionFromDDL(TeacherDDL, value);
+            AcceptSelectTeacherButton.Click();
+            return this;
+        }
+
+        public GroupCreateWindow SetBudgetOwner(String value)
+        {
+            if (value.Equals(value, StringComparison.OrdinalIgnoreCase)) BudgetOwnerSoftServeToggle.Click();
+            else BudgetOwnerOpenGroupToggle.Click();
+            return this;
+        }
+
+        public GroupCreateWindow SetStartDate(String value)
+        {
+            StartDateField.SendKeys(value);
+            return this;
+        }
+
+        public GroupCreateWindow AddExpert(String value)
+        {
+            AddExpertButton.Click();
+            ExpertInputField.SendKeys(value);
+            AcceptInputExpertButton.Click();
+            return this;
+        }
+
+
+        public GroupCreateWindow(IWebDriver driver)
+        {
+            this.driver = driver;
         }
 
         public bool IsOpened()
         {
             return driver.FindElements(By.XPath("//div[@id='modal-window']//section[@class='modal-window create']")).Count > 0;
+        }
+
+        public Func<IWebDriver, IWebElement> IsStartDateFieldClickable()
+        {
+            return ExpectedConditions.ElementToBeClickable(By.Name("name"));
+        }
+
+        public void Open(Actions action, WebDriverWait wait)
+        {
+            MainPage mainPage = new MainPage(driver);
+            var leftMenu = mainPage.LeftMenu;
+
+            leftMenu.Open(action, wait);
+            leftMenu.CreateButton.Click();
+            wait.Until(IsStartDateFieldClickable());
         }
     }
 }
