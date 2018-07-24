@@ -64,6 +64,7 @@
     <Compile Include="Acts.cs" />
     <Compile Include="MainPage\CenterContainer\GroupsContent\GroupsContent.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleContent.cs" />
+    <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleKeyDatesTab.cs" />
     <Compile Include="MainPage\CenterContainer\StudentsContent\StudentsContent.cs" />
     <Compile Include="MainPage\LeftContainer\AboutMenu.cs" />
     <Compile Include="MainPage\ModalWindow\CreateGroupWindow.cs" />
@@ -82,10 +83,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomText.cs" />
     <Compile Include="MainPage\RightMenu.cs" />
-    <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleKeyDates.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleMonthView.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleWeekViewAndEdit.cs" />
-    <Compile Include="MainPage\CenterContainer\ScheduleContent\SchedulePage.cs" />
     <Compile Include="MainPage\TopMenu.cs" />
     <Compile Include="MainPage\CenterContainer\StudentsContent\EditStudent.cs" />
     <Compile Include="MainPage\CenterContainer\StudentsContent\EditStudentList.cs" />
