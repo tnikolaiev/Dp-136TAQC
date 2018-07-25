@@ -22,6 +22,7 @@ namespace CaesarTests
         [SetUp]
         public void Initialize()
         {
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             driver.Manage().Window.Maximize();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
             driver.Url = @"http://localhost:3000/logout";
@@ -38,8 +39,7 @@ namespace CaesarTests
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
 
-            mainPageInstance.LeftMenu.Open(action);
-            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonClickable());
+            mainPageInstance.LeftMenu.Open(action, wait);
 
             mainPageInstance.LeftMenu.CreateButton.Click();
             bool groupCreateWindowOpened = wait.Until((d) => mainPageInstance.ModalWindow.GroupCreateWindow.IsOpened());
@@ -48,20 +48,17 @@ namespace CaesarTests
             Assert.IsTrue(groupCreateWindowOpened & !LocationDdlEnabled);
         }
 
-       
+
 
         static IEnumerable<object[]> StartFinishDateData = Instruments.ReadXML("StartFinishDateData.xml", "testData", "direction", "startDate", "finishDate");
 
         [Test, TestCaseSource("StartFinishDateData")]
         public void ExecuteTest_EnterStartDate_FinishDateFilled(String direction, String startDate, String finishDate)
         {
-            loginPageInstance.LogIn("dmytro", "1234");
-
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
+            loginPageInstance.LogIn("dmytro", "1234", wait);
             mainPageInstance = new MainPage(driver);
 
-            mainPageInstance.LeftMenu.Open(action);
-            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonClickable());
+            mainPageInstance.LeftMenu.Open(action, wait);
 
             mainPageInstance.LeftMenu.CreateButton.Click();
             wait.Until((d) => mainPageInstance.ModalWindow.GroupCreateWindow.IsStartDateFieldClickable());
@@ -81,8 +78,7 @@ namespace CaesarTests
         public void ExecuteTest_NewGroupCreate_GroupAppearedInGroupsList
             (String direction, String groupName, String teacher, String budgetOwner, String startDate, String expert)
         {
-            loginPageInstance.LogIn("dmytro", "1234");
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
+            loginPageInstance.LogIn("dmytro", "1234", wait);
             mainPageInstance = new MainPage(driver);
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             var groupsList = mainPageInstance.LeftContainer.GroupsInLocation;

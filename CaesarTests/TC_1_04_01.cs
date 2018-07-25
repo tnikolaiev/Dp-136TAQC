@@ -21,19 +21,20 @@ namespace CaesarTests
         [SetUp]
         public void Initialize()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            driver.Manage().Window.Maximize();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             driver.Url = @"http://localhost:3000/logout";
             loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn("sasha", "1234");
+            loginPageInstance.LogIn("sasha", "1234", wait);
             mainPageInstance = new MainPage(driver);
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
         }
 
         [Test]
         public void ExecuteTest_CursorToLeftBorder_LeftMenuOpened()
         {
             Actions acts = new Actions(driver);
-            mainPageInstance.LeftMenu.Open(acts);
+            mainPageInstance.LeftMenu.Open(acts, wait);
             Assert.IsTrue(wait.Until((d) => mainPageInstance.LeftMenu.IsOpened()));
         }
 
@@ -41,11 +42,10 @@ namespace CaesarTests
         public void ExecuteTest_CursorFocusOutOfMenu_LeftMenuClosed()
         {
             Actions acts = new Actions(driver);
-            mainPageInstance.LeftMenu.Open(acts);
+            mainPageInstance.LeftMenu.Open(acts, wait);
             acts.MoveByOffset(300, 300).Perform();
-            wait.Until((d) => !mainPageInstance.LeftMenu.IsOpened());
-            Assert.IsFalse(mainPageInstance.LeftMenu.IsOpened());
-
+            bool isLeftMenuClosed = wait.Until((d) => !mainPageInstance.LeftMenu.IsOpened());
+            Assert.IsTrue(isLeftMenuClosed);
         }
         
         [OneTimeTearDown]

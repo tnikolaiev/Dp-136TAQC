@@ -20,6 +20,7 @@ namespace CaesarLib
         [SetUp]
         public void Initialize()
         {
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             driver.Manage().Window.Maximize();
             driver.Url = @"http://localhost:3000/logout";
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
@@ -33,7 +34,7 @@ namespace CaesarLib
         public void ExecuteTest_SelectGroup_ClickDeleteButton_GroupDeleteConfirmantionWindowOpened()
         {
             var groupDeleteConfirmantionWindow = mainPageInstance.ModalWindow.GroupDeleteConfirmationWindow;
-            mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS").Click();
+            mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS", wait).Click();
             mainPageInstance.LeftMenu.Open(action, wait);
             mainPageInstance.LeftMenu.DeleteButton.Click();
             Assert.IsTrue(wait.Until((d) => groupDeleteConfirmantionWindow.IsOpened()));
@@ -43,20 +44,20 @@ namespace CaesarLib
         public void ExecuteTest_ClickCancelButton_GroupDeleteConfirmantionWindowClosed()
         {
             var groupDeleteConfirmantionWindow = mainPageInstance.ModalWindow.GroupDeleteConfirmationWindow;
-            mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS").Click();
+            mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS", wait).Click();
             mainPageInstance.LeftMenu.Open(action, wait);
             mainPageInstance.LeftMenu.DeleteButton.Click();
-            wait.Until((d) => groupDeleteConfirmantionWindow.IsOpened());
+            wait.Until((d) => groupDeleteConfirmantionWindow.IsCancelButtonVisible());
             groupDeleteConfirmantionWindow.CancelButton.Click();
-            wait.Until((d) => !groupDeleteConfirmantionWindow.IsOpened());
-            Assert.IsFalse(groupDeleteConfirmantionWindow.IsOpened());
+            bool isGroupDeleteConfirmationWindowClosed = wait.Until((d) => !groupDeleteConfirmantionWindow.IsOpened());
+            Assert.IsTrue(isGroupDeleteConfirmationWindowClosed);
         }
 
         [Test]
         public void ExecuteTest_PressEscKey_GroupDeleteConfirmantionWindowOpenedClosed()
         {
             var groupDeleteConfirmantionWindow = mainPageInstance.ModalWindow.GroupDeleteConfirmationWindow;
-            mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS").Click();
+            mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS", wait).Click();
             mainPageInstance.LeftMenu.Open(action, wait);
             mainPageInstance.LeftMenu.DeleteButton.Click();
             wait.Until((d) => groupDeleteConfirmantionWindow.IsOpened());

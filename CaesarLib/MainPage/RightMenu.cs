@@ -55,14 +55,22 @@ namespace CaesarLib
             this.driver = driver;
         }
 
-        public Func<IWebDriver, IWebElement> IsLogOutButtonClickable()
+        public bool IsLogOutButtonVisible()
         {
-            return ExpectedConditions.ElementToBeClickable(By.XPath("//div[@id='right-menu']//i[contains(@class, 'sign-out')]"));
+            return Acts.IsElementVisible(driver, By.XPath("//div[@id='right-menu']//i[contains(@class, 'sign-out')]"));
         }
 
         public bool IsOpened()
         {
             return (RightMenuSection.GetAttribute("class").Equals("right-menu open")) ? true : false;
+        }
+
+        public void Open(WebDriverWait wait)
+        {
+            MainPage mainPage = new MainPage(driver);
+            wait.Until((d) => Acts.IsElementExists(driver, By.XPath("//div[@id='right-menu']//i[contains(@class, 'sign-out')]")));
+            mainPage.ProfileButton.Click();
+            wait.Until((d) => IsLogOutButtonVisible());
         }
     }
 }

@@ -42,6 +42,20 @@ namespace CaesarLib
             }
         }
 
+        public IWebElement ReturnNameButton
+        {
+            get
+            {
+                if (_returnNameButton != null) return _returnNameButton;
+                else
+                {
+                    _returnNameButton = driver.FindElement(By.XPath("//span[@class='return-name']"));
+                    return _returnNameButton;
+                }
+            }
+        }
+
+
         public IWebElement GroupNameField
         {
             get
@@ -288,7 +302,29 @@ namespace CaesarLib
 
         public bool IsOpened()
         {
-            return driver.FindElements(By.XPath("//div[@id='modal-window']//section[@class='modal-window create']")).Count > 0;
+            return Acts.IsElementVisible(driver, By.XPath("//div[@id='modal-window']//section[@class='modal-window create']"));
+        }
+
+        //public Func<IWebDriver, IWebElement> IsStartDateFieldClickable()
+        //{
+        //    //return ExpectedConditions.ElementToBeClickable(By.Name("name"));
+        //    return Acts.IsElementExists(driver, By.Name("name"));
+        //}
+
+        public bool IsStartDateFieldClickable()
+        {
+            //return Acts.IsElementExists(driver, By.Name("name"));
+            return Acts.IsElementVisible(driver, By.Id("cancel"));
+        }
+
+        public void Open(Actions action, WebDriverWait wait)
+        {
+            MainPage mainPage = new MainPage(driver);
+            var leftMenu = mainPage.LeftMenu;
+
+            leftMenu.Open(action, wait);
+            leftMenu.CreateButton.Click();
+            wait.Until((d) => IsStartDateFieldClickable());
         }
     }
 }

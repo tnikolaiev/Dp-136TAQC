@@ -125,9 +125,9 @@ namespace CaesarLib
 
         public static bool IsMainPageOpened(IWebDriver driver)
         {
-            return driver.FindElements(By.Id("main-section")).Count > 0 &
-                driver.FindElements(By.Id("left-side-bar")).Count > 0 &
-                driver.FindElements(By.Id("right-side-bar")).Count > 0 ?
+            return Acts.IsElementVisible(driver, By.Id("main-section")) &
+                Acts.IsElementVisible(driver, By.Id("left-side-bar")) &
+                Acts.IsElementVisible(driver, By.Id("right-side-bar")) ?
                 true : false;
         }
 
