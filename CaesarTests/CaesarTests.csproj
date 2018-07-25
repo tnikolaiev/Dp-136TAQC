@@ -85,6 +85,7 @@
     <Compile Include="TC_3_04_03.cs" />
     <Compile Include="TC_3_08.cs" />
     <Compile Include="TestsForTableClass.cs" />
+    <Compile Include="Test_SelectGroupWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
