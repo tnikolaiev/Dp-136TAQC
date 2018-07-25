@@ -20,7 +20,7 @@ namespace CaesarLib
 
         public IList<IWebElement> GetRows()
         {
-            IList<IWebElement> rows = tableElement.FindElements(By.XPath("//tbody//tr"));
+            IList<IWebElement> rows = tableElement.FindElements(By.XPath(".//tbody//tr"));
             return rows;
         }
 
