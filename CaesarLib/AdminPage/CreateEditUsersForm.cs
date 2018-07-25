@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 namespace CaesarLib
 {
-    public class CreateEditUsersForm
+    public class CreateEditUsersForm : AdminPage
     {
         private IWebElement _firstName;
         private IWebElement _lastName;
@@ -14,10 +14,8 @@ namespace CaesarLib
         private IWebElement _photo;
         private IWebElement _login;
         private IWebElement _password;
-        private IWebElement _submitButton;
-        private IWebElement _closeButton;
-        private IWebElement _close;
         private IWebDriver _driver;
+
 
         public IWebElement FirstNameField
         {
@@ -109,46 +107,7 @@ namespace CaesarLib
             }
         }
 
-        public IWebElement SubmitButton
-        {
-            get
-            {
-                if (_submitButton != null) return _submitButton;
-                else
-                {
-                    _submitButton = _driver.FindElement(By.ClassName("btn-primary"));
-                    return _submitButton;
-                }
-            }
-        }
-
-        public IWebElement CloseButton
-        {
-            get
-            {
-                if (_closeButton != null) return _closeButton;
-                else
-                {
-                    _closeButton = _driver.FindElement(By.ClassName("btn-default"));
-                    return _closeButton;
-                }
-            }
-        }
-
-        public IWebElement Close
-        {
-            get
-            {
-                if (_close != null) return _close;
-                else
-                {
-                    _close = _driver.FindElement(By.ClassName("close"));
-                    return _close;
-                }
-            }
-        }
-
-        public CreateEditUsersForm(IWebDriver driver)
+        public CreateEditUsersForm(IWebDriver driver) : base(driver)
         {
             _driver = driver;
         }

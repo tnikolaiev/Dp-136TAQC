@@ -6,7 +6,7 @@ namespace CaesarLib
 {
     public class AdminPage
     {
-        private IWebDriver _driverInstance;
+        private IWebDriver _driver;
         private IWebElement _addButton;
         private IWebElement _goToUsers;
         private IWebElement _goToStudents;
@@ -16,6 +16,10 @@ namespace CaesarLib
         private IList<IWebElement> _DeleteButtons;
         private IList<IWebElement> _EditButtons;
 
+        private IWebElement _submitButton;
+        private IWebElement _closeButton;
+        private IWebElement _close;
+
         public IWebElement GetTable
         {
             get
@@ -23,7 +27,7 @@ namespace CaesarLib
                 if (_table != null) return _table;
                 else
                 {
-                    _table = _driverInstance.FindElement(By.ClassName("tab-pane"));
+                    _table = _driver.FindElement(By.ClassName("tab-pane"));
                     return _table;
                 }
             }
@@ -35,7 +39,7 @@ namespace CaesarLib
                 if (_addButton != null) return _addButton;
                 else
                 {
-                    _addButton = _driverInstance.FindElement(By.Id("add-new-user"));
+                    _addButton = _driver.FindElement(By.Id("add-new-user"));
                     return _addButton;
                 }
             }
@@ -48,7 +52,7 @@ namespace CaesarLib
                 if (_goToUsers != null) return _goToUsers;
                 else
                 {
-                    _goToUsers = _driverInstance.FindElement(By.XPath("/html/body/div[1]/ul/li[1]/a"));
+                    _goToUsers = _driver.FindElement(By.XPath("/html/body/div[1]/ul/li[1]/a"));
                     return _goToUsers;
                 }
             }
@@ -61,7 +65,7 @@ namespace CaesarLib
                 if (_goToGroups != null) return _goToGroups;
                 else
                 {
-                    _goToGroups = _driverInstance.FindElement(By.XPath("/html/body/div[1]/ul/li[2]/a"));
+                    _goToGroups = _driver.FindElement(By.XPath("/html/body/div[1]/ul/li[2]/a"));
                     return _goToGroups;
                 }
             }
@@ -74,7 +78,7 @@ namespace CaesarLib
                 if (_goToStudents != null) return _goToStudents;
                 else
                 {
-                    _goToStudents = _driverInstance.FindElement(By.XPath("/html/body/div[1]/ul/li[3]/a"));
+                    _goToStudents = _driver.FindElement(By.XPath("/html/body/div[1]/ul/li[3]/a"));
                     return _goToStudents;
                 }
             }
@@ -87,7 +91,7 @@ namespace CaesarLib
                 if (_escapeHomeButton != null) return _escapeHomeButton;
                 else
                 {
-                    _escapeHomeButton = _driverInstance.FindElement(By.ClassName("btn-warning"));
+                    _escapeHomeButton = _driver.FindElement(By.ClassName("btn-warning"));
                     return _escapeHomeButton;
                 }
             }
@@ -100,9 +104,8 @@ namespace CaesarLib
             {
                 if (_DeleteButtons != null) return _DeleteButtons;
                 else
-                {
-                    var table = _driverInstance.FindElement(By.ClassName("tab-pane"));
-                    _DeleteButtons = table.FindElements(By.ClassName("btn-danger"));
+                {                    
+                    _DeleteButtons = GetTable.FindElements(By.ClassName("btn-danger"));
                     return _DeleteButtons;
                 }
             }
@@ -115,15 +118,54 @@ namespace CaesarLib
                 if (_EditButtons != null) return _EditButtons;
                 else
                 {
-                    var table = _driverInstance.FindElement(By.ClassName("tab-pane"));
-                    _EditButtons = table.FindElements(By.ClassName("btn-info"));
+                    _EditButtons = GetTable.FindElements(By.ClassName("btn-info"));
                     return _EditButtons;
                 }
             }
         }
+
+        public IWebElement SubmitButton
+        {
+            get
+            {
+                if (_submitButton != null) return _submitButton;
+                else
+                {
+                    _submitButton = _driver.FindElement(By.ClassName("btn-primary"));
+                    return _submitButton;
+                }
+            }
+        }
+
+        public IWebElement CloseButton
+        {
+            get
+            {
+                if (_closeButton != null) return _closeButton;
+                else
+                {
+                    _closeButton = _driver.FindElement(By.ClassName("btn-default"));
+                    return _closeButton;
+                }
+            }
+        }
+
+        public IWebElement Close
+        {
+            get
+            {
+                if (_close != null) return _close;
+                else
+                {
+                    _close = _driver.FindElement(By.ClassName("close"));
+                    return _close;
+                }
+            }
+        }
+
         public AdminPage(IWebDriver driver)
         {
-            _driverInstance = driver;
+            _driver = driver;
         }
 
         public IWebElement getLastElement(IList<IWebElement> webElements)

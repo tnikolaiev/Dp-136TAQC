@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace CaesarLib
 {
-    public class CreateEditGroupsForm
+    public class CreateEditGroupsForm : AdminPage
     {
         private IWebElement _name;
         private IWebElement _location;
@@ -14,14 +14,10 @@ namespace CaesarLib
         private IWebElement _finishDate;
         private IWebElement _teachers;
         private IWebElement _experts;
-        private IWebElement _stage;
-
-        private IWebElement _submitButton;
-        private IWebElement _closeButton;
-        private IWebElement _close;
+        private IWebElement _stage;                
         private IWebDriver _driver;
 
-        public CreateEditGroupsForm(IWebDriver driver)
+        public CreateEditGroupsForm(IWebDriver driver) : base(driver)
         {
             this._driver = driver;
         }
@@ -142,44 +138,6 @@ namespace CaesarLib
                 }
             }
         }
-
-        public IWebElement SubmitButton
-        {
-            get
-            {
-                if (_submitButton != null) return _submitButton;
-                else
-                {
-                    _submitButton = _driver.FindElement(By.ClassName("btn-primary"));
-                    return _submitButton;
-                }
-            }
-        }
-
-        public IWebElement CloseButton
-        {
-            get
-            {
-                if (_closeButton != null) return _closeButton;
-                else
-                {
-                    _closeButton = _driver.FindElement(By.ClassName("btn-default"));
-                    return _closeButton;
-                }
-            }
-        }
-
-        public IWebElement Close
-        {
-            get
-            {
-                if (_close != null) return _close;
-                else
-                {
-                    _close = _driver.FindElement(By.ClassName("close"));
-                    return _close;
-                }
-            }
-        }
+       
     }
 }

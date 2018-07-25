@@ -4,11 +4,8 @@ using OpenQA.Selenium;
 
 namespace CaesarLib
 {
-    public class CreateEditStudentsForm
+    public class CreateEditStudentsForm : AdminPage
     {
-        private IWebElement _submitButton;
-        private IWebElement _closeButton;
-        private IWebElement _close;
         private IWebDriver _driver;
 
         private IWebElement _groupId;
@@ -20,7 +17,7 @@ namespace CaesarLib
         private IWebElement _entryScore;
         private IWebElement _approvedBy;
 
-        public CreateEditStudentsForm(IWebDriver driver)
+        public CreateEditStudentsForm(IWebDriver driver) : base(driver)
         {
             this._driver = driver;
         }
@@ -126,46 +123,7 @@ namespace CaesarLib
                     return _approvedBy;
                 }
             }
-        }
-
-        public IWebElement SubmitButton
-        {
-            get
-            {
-                if (_submitButton != null) return _submitButton;
-                else
-                {
-                    _submitButton = _driver.FindElement(By.ClassName("btn-primary"));
-                    return _submitButton;
-                }
-            }
-        }
-
-        public IWebElement CloseButton
-        {
-            get
-            {
-                if (_closeButton != null) return _closeButton;
-                else
-                {
-                    _closeButton = _driver.FindElement(By.ClassName("btn-default"));
-                    return _closeButton;
-                }
-            }
-        }
-
-        public IWebElement Close
-        {
-            get
-            {
-                if (_close != null) return _close;
-                else
-                {
-                    _close = _driver.FindElement(By.ClassName("close"));
-                    return _close;
-                }
-            }
-        }
+        }       
     }
 }
 

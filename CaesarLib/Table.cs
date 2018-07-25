@@ -20,7 +20,7 @@ namespace CaesarLib
 
         public IList<IWebElement> GetRows()
         {
-            IList<IWebElement> rows = tableElement.FindElements(By.XPath("//tbody//tr"));
+            IList<IWebElement> rows = tableElement.FindElements(By.XPath(".//tbody//tr"));
             return rows;
         }
 
@@ -56,7 +56,26 @@ namespace CaesarLib
             return rowsWithColumns;
         }
 
-        
+        //Return list of the text from row by columns 
+        //if enter 0 return last row
+        public List<string> getRowWithColumns(int rowNumber)
+        {
+            List<string> data = new List<string>();
+            IWebElement row;
+            if (rowNumber == 0) { row = GetRows().Last(); }
+            else
+            {
+                row  = GetRows()[rowNumber];
+            }
+
+            IList<IWebElement> columns = row.FindElements(By.XPath(".//td"));
+            foreach(var el in columns)
+            {
+                data.Add(el.Text);
+            }
+            return data;
+        }
+
         public List<IDictionary<String, IWebElement>> getRowsWithColumnsByHeadings()
         {
             List<IList<IWebElement>> rowsWithColumns = GetRowsWithColumns();
@@ -91,8 +110,7 @@ namespace CaesarLib
             }
             return elements;
         }
-
-
+                
         public int GetRowNumberByValue(String value)
         {
             List<IList<IWebElement>> rowsWithColumns = GetRowsWithColumns();

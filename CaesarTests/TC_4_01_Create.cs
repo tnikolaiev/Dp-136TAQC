@@ -13,9 +13,9 @@ namespace CaesarTests
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
-        AdminPage adminPage;
         CreateEditUsersForm usersForm;
         WebDriverWait wait;
+
         Table table;
         string expectedResult = "someText";
 
@@ -41,10 +41,11 @@ namespace CaesarTests
             loginPageInstance.LogIn("Dmytro", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             driver.Url = @"http://localhost:3000/admin";
-            adminPage = new AdminPage(driver);
-            adminPage.AddButton.Click();
-            wait.Until((d) => AdminPage.IsCreateFormOpened(d));
+            wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
             usersForm = new CreateEditUsersForm(driver);
+            usersForm.AddButton.Click();            
+            wait.Until((d) => CreateEditUsersForm.IsCreateFormOpened(d));
+            
         }
 
         [Test]
@@ -137,17 +138,17 @@ namespace CaesarTests
             String expectedResult = usersForm.Login.GetAttribute("value");
             usersForm.SubmitButton.Click();
 
-            wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("nav-tabs")));
-            table = new Table(adminPage.GetTable, driver);
+            table = new Table(usersForm.GetTable, driver);
+            
+            CollectionAssert.Contains(table.getRowWithColumns(0), expectedResult);
 
-            CollectionAssert.Contains(table.GetTableElements(), expectedResult);
-
-            adminPage.getLastElement(adminPage.Delete).Click();
+            wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
+            usersForm.getLastElement(usersForm.Delete).Click();
         }
 
         [OneTimeTearDown]
         public void CleanUp()
-        {
+        {            
             driver.Close();
             driver.Quit();
         }
