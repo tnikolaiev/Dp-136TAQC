@@ -43,7 +43,7 @@ namespace CaesarTests
             mainPageInstance = new MainPage(driver);
 
             mainPageInstance.LeftMenu.Open(new Actions(driver));
-            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonVisible());
+            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonClickable());
 
             List<String> expectedResult = new List<String> { "Create", "Search" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
@@ -64,7 +64,7 @@ namespace CaesarTests
             chosenGroup.Click();
 
             mainPageInstance.LeftMenu.Open(new Actions(driver));
-            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonVisible());
+            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonClickable());
 
             List<String> expectedResult = new List<String> { "Create", "Search", "Edit", "Delete" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
@@ -87,7 +87,7 @@ namespace CaesarTests
             mainPageInstance = new MainPage(driver);
 
             mainPageInstance.LeftMenu.Open(new Actions(driver));
-            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonVisible());
+            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonClickable());
 
             List<String> expectedResult = new List<String> { "Search" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
@@ -108,7 +108,7 @@ namespace CaesarTests
             chosenGroup.Click();
 
             mainPageInstance.LeftMenu.Open(new Actions(driver));
-            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonVisible());
+            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonClickable());
 
             List<String> expectedResult = new List<String> { "Search" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
