@@ -17,12 +17,12 @@ namespace CaesarTests
         [SetUp]
         public void Initialization()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
         }
 
-        static List<String> Links = new List<String> { @"http://localhost:3000", @"http://localhost:3000/Groups/Dnipro", @"http://localhost:3000/admin" };
+        static List<String> LinksList = new List<String> { @"http://localhost:3000", @"http://localhost:3000/Groups/Dnipro", @"http://localhost:3000/admin" };
 
-        [Test, TestCaseSource("Links")]
+        [Test, TestCaseSource("LinksList")]
         public void Test_NavigateToLinks_LoginPageOpened(String link)
         {
             driver.Url = link;
@@ -34,7 +34,6 @@ namespace CaesarTests
         {
             driver.Close();
             driver.Quit();
-            //driver.Dispose();
         }
     }
 }

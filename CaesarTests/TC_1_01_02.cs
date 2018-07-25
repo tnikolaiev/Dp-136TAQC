@@ -17,10 +17,10 @@ namespace CaesarTests
         [SetUp]
         public void Initialize()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            driver.Manage().Window.Maximize();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             driver.Url = @"http://localhost:3000/logout";
             loginPageInstance = new LoginPage(driver);
-            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
         }
 
         static Object[] LoginCredentials =
@@ -33,7 +33,7 @@ namespace CaesarTests
         [Test, TestCaseSource("LoginCredentials")]
         public void ExecuteTest_LoginWithValidLoginCredentials(String login, String password)
         {
-            loginPageInstance.LogIn(login, password);
+            loginPageInstance.LogIn(login, password, wait);
             Assert.IsTrue(wait.Until((d) => MainPage.IsMainPageOpened(d)));
         }
 

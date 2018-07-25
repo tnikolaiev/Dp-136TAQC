@@ -14,15 +14,6 @@ namespace CaesarTests
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
         WebDriverWait wait;
-        List<String> logins;
-        List<String> passwords;
-
-        [OneTimeSetUp]
-        public void FirstInitialize()
-        {
-            logins = new List<String> { "odmin", "sashq", "jtytro" };
-            passwords = new List<String> { "9234", "5234", "1734" };
-        }
 
         [SetUp]
         public void Initialize()
@@ -33,21 +24,19 @@ namespace CaesarTests
             loginPageInstance = new LoginPage(driver);
         }
 
-        [Test]
-        public void ExecuteTest_LoginWithInvalidLoginCredentials()
+        static IEnumerable<object[]> InvalidLoginCredentials = Instruments.ReadXML("InvalidLoginCredentials.xml", "testData", "login", "password");
+
+        [Test, TestCaseSource("InvalidLoginCredentials")]
+        public void ExecuteTest_LoginWithInvalidLoginCredentials(String login, String password)
         {
-            int i = 0;
-            while (i < logins.Count)
-            {
-                loginPageInstance.LogIn(logins[i], passwords[i]);
-                bool firstCondition = logins[i].Equals(loginPageInstance.LoginField.GetAttribute("value"));
-                bool secondCondition = String.Empty.Equals(loginPageInstance.PasswordField.GetAttribute("value"));
-                String expectedMessage = "Incorrect login or password. Please, try again";
-                bool thirdCondition = expectedMessage.Equals(loginPageInstance.MessageField.Text);
-                Assert.IsTrue(firstCondition && secondCondition && thirdCondition);
-                loginPageInstance.LoginField.SendKeys(Keys.Escape);
-                i++;
-            }
+            loginPageInstance.LogIn(login, password);
+            bool firstCondition = login.Equals(loginPageInstance.LoginField.GetAttribute("value"));
+            bool secondCondition = String.Empty.Equals(loginPageInstance.PasswordField.GetAttribute("value"));
+            String expectedMessage = "Incorrect login or password. Please, try again";
+            bool thirdCondition = expectedMessage.Equals(loginPageInstance.MessageField.Text);
+
+            Assert.IsTrue(firstCondition && secondCondition && thirdCondition);
+            loginPageInstance.LoginField.SendKeys(Keys.Escape);
         }
 
         [OneTimeTearDown]

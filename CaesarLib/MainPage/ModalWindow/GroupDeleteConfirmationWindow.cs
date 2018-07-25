@@ -66,9 +66,9 @@ namespace CaesarLib
             }
         }
 
-        public Func<IWebDriver, IWebElement> IsCancelButtonClickable()
+        public bool IsCancelButtonVisible()
         {
-            return ExpectedConditions.ElementToBeClickable(By.XPath("//button[contains(@class, 'btn-cancel')]/i"));
+            return Acts.IsElementVisible(driver, (By.XPath("//button[contains(@class, 'btn-cancel')]/i")));
         }
 
         public GroupDeleteConfirmationWindow(IWebDriver driver)
@@ -78,7 +78,7 @@ namespace CaesarLib
 
         public bool IsOpened()
         {
-            return driver.FindElements(By.XPath("//div[@id='modal-window']//div[@class='modal-body']")).Count > 0;
+            return Acts.IsElementVisible(driver, By.XPath("//div[@id='modal-window']//div[@class='modal-body']"));
         }
     }
 }

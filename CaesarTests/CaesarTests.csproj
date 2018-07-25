@@ -98,6 +98,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestData\InvalidLoginCredentials.xml" />
     <Content Include="TestData\LoginPageInvalidData.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

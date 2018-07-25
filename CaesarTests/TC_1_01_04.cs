@@ -14,20 +14,15 @@ namespace CaesarTests
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
         WebDriverWait wait;
-        static IEnumerable<object[]> TestData()
-        {
-            return Instruments.ReadXML("LoginPageInvalidData.xml", "testData", "login", "password");
-        }
-        
+
         [SetUp]
         public void Initialize()
         {
             driver.Url = @"http://localhost:3000/logout";
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance = new LoginPage(driver);
-            
-        }               
+        }
 
         [Test]
         public void ExecuteTest_EmptyFields_LoginButtonClick_NoChanges()
@@ -57,16 +52,21 @@ namespace CaesarTests
             Assert.IsFalse(loginPageInstance.LoginButton.Enabled);
         }
 
-        [Test, TestCaseSource("TestData")]
+        static IEnumerable<object[]> LoginInvalidData()
+        {
+            return Instruments.ReadXML("LoginPageInvalidData.xml", "testData", "login", "password");
+        }
+
+        [Test, TestCaseSource("LoginInvalidData")]
         public void ExecuteTest_InvalidValues_ErrorMessage(String login, String password)
         {
             loginPageInstance.LogIn(login, password);
-
-            Assert.AreEqual(String.Empty, loginPageInstance.PasswordField.GetAttribute("value"));
-            Assert.AreEqual(login, loginPageInstance.LoginField.GetAttribute("value"));
+            bool passFieldEmpty = String.Empty.Equals(loginPageInstance.PasswordField.GetAttribute("value"));
+            bool loginFieldKeepsValue = login.Equals(loginPageInstance.LoginField.GetAttribute("value"));
             String expectedMessage = "Incorrect login or password. Please, try again";
-            Assert.AreEqual(expectedMessage, loginPageInstance.MessageField.Text);
+            bool textMatches = expectedMessage.Equals(loginPageInstance.MessageField.Text);
 
+            Assert.IsTrue(passFieldEmpty & loginFieldKeepsValue & textMatches);
             loginPageInstance.LoginField.SendKeys(Keys.Escape);
         }
 
