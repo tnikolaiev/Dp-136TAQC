@@ -20,9 +20,9 @@ namespace CaesarTests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(1));
+            wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(2));
             webDriver.Manage().Window.Maximize();
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
             //Open Login Page
             webDriver.Url = baseURL;
             wait.Until((driver) => LoginPage.IsLoginPageOpened(driver));
