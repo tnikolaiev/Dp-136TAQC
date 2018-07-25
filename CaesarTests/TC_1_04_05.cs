@@ -39,7 +39,7 @@ namespace CaesarTests
             mainPageInstance = new MainPage(driver);
 
             mainPageInstance.LeftMenu.Open(action);
-            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonVisible());
+            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonClickable());
 
             mainPageInstance.LeftMenu.CreateButton.Click();
             bool groupCreateWindowOpened = wait.Until((d) => mainPageInstance.ModalWindow.GroupCreateWindow.IsOpened());
@@ -61,7 +61,7 @@ namespace CaesarTests
             mainPageInstance = new MainPage(driver);
 
             mainPageInstance.LeftMenu.Open(action);
-            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonVisible());
+            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonClickable());
 
             mainPageInstance.LeftMenu.CreateButton.Click();
             wait.Until((d) => mainPageInstance.ModalWindow.GroupCreateWindow.IsStartDateFieldClickable());
@@ -131,23 +131,23 @@ namespace CaesarTests
                 .SetStartDate(startDate);
             groupCreateWindow.SaveGroupButton.Click();
             Assert.DoesNotThrow(() => groupsList.GetGroupByName(groupName, wait));
-            //groupsList.DeleteGroup(groupName, action, wait);
-        }
-
-        static List<String> GroupsToDelete = new List<String> { "Dp-115 .NetgroupNet1", "Dp-113 .NetgroupNet1", "groupC/C++", "groupISTQB", "groupIOS", "groupUX" };
-
-        [Test, TestCaseSource("GroupsToDelete")]
-        public void ExecuteTest_DeleteGroup_GroupDisappearedFromGroupsList(String groupName)
-        {
-            loginPageInstance.LogIn("dmytro", "1234");
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
-            mainPageInstance = new MainPage(driver);
-            var groupsList = mainPageInstance.LeftContainer.GroupsInLocation;
-            Thread.Sleep(3000);
-
             groupsList.DeleteGroup(groupName, action, wait);
-            Assert.IsNull(groupsList.GetGroupByName(groupName, wait));
         }
+
+        //static List<String> GroupsToDelete = new List<String> { "Dp-115 .NetgroupNet1", "Dp-113 .NetgroupNet1", "groupC/C++", "groupISTQB", "groupIOS", "groupUX" };
+
+        //[Test, TestCaseSource("GroupsToDelete")]
+        //public void ExecuteTest_DeleteGroup_GroupDisappearedFromGroupsList(String groupName)
+        //{
+        //    loginPageInstance.LogIn("dmytro", "1234");
+        //    wait.Until((d) => MainPage.IsMainPageOpened(d));
+        //    mainPageInstance = new MainPage(driver);
+        //    var groupsList = mainPageInstance.LeftContainer.GroupsInLocation;
+        //    Thread.Sleep(3000);
+
+        //    groupsList.DeleteGroup(groupName, action, wait);
+        //    Assert.IsNull(groupsList.GetGroupByName(groupName, wait));
+        //}
 
         [OneTimeTearDown]
         public void CleanUp()
