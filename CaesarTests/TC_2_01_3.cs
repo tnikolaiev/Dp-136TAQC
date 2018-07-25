@@ -50,7 +50,7 @@ namespace CaesarTests
 
             //Assert MonthView tab is displayed
             Assert.IsTrue(ScheduleContentInstance
-                .ScheduleMonthViewInstance
+                .MonthViewInstance
                 .IsScheduleMonthViewDisplayed(driver));          
         }
 
@@ -72,7 +72,7 @@ namespace CaesarTests
 
             //Assert Week tab is displayed
             Assert.IsTrue(ScheduleContentInstance
-                .ScheduleWeekViewAndEditInstance
+                .WeekViewTabInstance
                 .IsScheduleWeekViewDisplayed(driver));
         }
 
@@ -94,7 +94,7 @@ namespace CaesarTests
 
             //Assert KeyDates tab is displayed
             Assert.IsTrue(ScheduleContentInstance
-                .ScheduleKeyDatesInstance
+                .KeyDatesTabInstance
                 .IsKeyDatesDisplayed(driver));
         }
 

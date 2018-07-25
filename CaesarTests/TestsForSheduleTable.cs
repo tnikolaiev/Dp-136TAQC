@@ -9,7 +9,7 @@ using System;
 namespace CaesarTests
 {
     [TestFixture]
-    class TestsForTableClass
+    class TestsForScheduleTableClass
     {
         IWebDriver driver;
         WebDriverWait wait;
@@ -36,7 +36,7 @@ namespace CaesarTests
 
         [Test]
 
-        public void TestCellSelectorOnKeyDatesTable()
+        public void SelectCellInScheduleEditor()
         {
             //Opening Schedule Page
             TopMenu topMenuInstance = new TopMenu(driver);
@@ -51,23 +51,16 @@ namespace CaesarTests
                 .GroupsInLocation
                 .GetGroupByName("DP-094-MQC"));
 
-            Acts.Click(scheduleContentInstance
-                .LeftContainerInstance
-                .GroupsInLocation
-                .GetGroupByName("DP-093-JS"));
+            //Go to ScheduleEditor
+            scheduleContentInstance.ScheduleCogwheell.Click();
+            EditScheduleWindow editScheduleWindowInstance = new EditScheduleWindow(driver);
+
+            //Find table and using methods from ScheduleTable class
+            IWebElement tableElement = editScheduleWindowInstance.ScheduleWeekTable;
+            ScheduleWeekTable scheduleTable = new ScheduleWeekTable(tableElement, driver);
+            scheduleTable.GetValueFromCell(4, 5);
 
 
-            //Go to Key-Dates tab
-
-            scheduleContentInstance.KeyDatesButton.Click();
-
-            // Select some cell in key-dates table
-
-            KeyDatesTab scheduleKeyDatesTabInstance = new KeyDatesTab(driver);
-            IWebElement tableElement = scheduleKeyDatesTabInstance.KeyDatesTable;  //.("Demo2", "DP-094-MQC").Text;
-            Table table = new Table(tableElement, driver);
-            string textFromCell = table.GetValueFromCell("DP-094-MQC", "Demo2");
-            Console.WriteLine(textFromCell);
 
         }
     }

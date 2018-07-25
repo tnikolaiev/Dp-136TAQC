@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using CaesarLib;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 
 namespace CaesarLib
@@ -14,9 +15,9 @@ namespace CaesarLib
         private IWebElement _weekButton;
         private IWebElement _keyDatesButton;
         private EditScheduleWindow _editScheduleWindowInstance;
-        private ScheduleMonthView _scheduleMonthViewInstance;
-        private ScheduleWeekViewAndEdit _scheduleWeekViewInstance;
-        private ScheduleKeyDatesTab _scheduleKeyDatesInstance;
+        private MonthViewTab _scheduleMonthViewInstance;        
+        private KeyDatesTab _scheduleKeyDatesInstance;
+        private WeekViewTab _weekViewTabInstance;
         private LeftContainer _leftContainerInstance;
 
         //Constructor  
@@ -89,38 +90,41 @@ namespace CaesarLib
                 }
             }
         }
-        public ScheduleMonthView ScheduleMonthViewInstance
+        public MonthViewTab MonthViewInstance
         {
             get
             {
                 if (_scheduleMonthViewInstance != null) return _scheduleMonthViewInstance;
                 else
                 {
-                    _scheduleMonthViewInstance = new ScheduleMonthView(_driverInstance);
+                    _scheduleMonthViewInstance = new MonthViewTab(_driverInstance);
                     return _scheduleMonthViewInstance;
                 }
             }
         }
-        public ScheduleWeekViewAndEdit ScheduleWeekViewAndEditInstance
+
+        public WeekViewTab WeekViewTabInstance
         {
             get
             {
-                if (_scheduleWeekViewInstance != null) return _scheduleWeekViewInstance;
+                if (_weekViewTabInstance != null) return _weekViewTabInstance;
                 else
                 {
-                    _scheduleWeekViewInstance = new ScheduleWeekViewAndEdit(_driverInstance);
-                    return _scheduleWeekViewInstance;
+                    _weekViewTabInstance = new WeekViewTab(_driverInstance);
+                    return _weekViewTabInstance;
                 }
             }
         }
-        public ScheduleKeyDatesTab ScheduleKeyDatesInstance
+
+
+        public KeyDatesTab KeyDatesTabInstance
         {
             get
             {
                 if (_scheduleKeyDatesInstance != null) return _scheduleKeyDatesInstance;
                 else
                 {
-                    _scheduleKeyDatesInstance = new ScheduleKeyDatesTab(_driverInstance);
+                    _scheduleKeyDatesInstance = new KeyDatesTab(_driverInstance);
                     return _scheduleKeyDatesInstance;
                 }
             }

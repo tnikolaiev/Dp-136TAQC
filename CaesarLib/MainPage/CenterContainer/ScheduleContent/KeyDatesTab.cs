@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace CaesarLib
 {
-    public class ScheduleKeyDatesTab
+    public class KeyDatesTab
     {
 
         private IWebDriver _driverInstance;
@@ -26,7 +26,7 @@ namespace CaesarLib
             }
         }
 
-        public ScheduleKeyDatesTab(IWebDriver driverInstance)
+        public KeyDatesTab(IWebDriver driverInstance)
         {
             _driverInstance = driverInstance;
         }

@@ -12,26 +12,29 @@ namespace CaesarLib
         private IWebElement tableElement;
         private IWebDriver driver;
 
+        public IWebElement TableElement { get => tableElement; set => tableElement = value; }
+        public IWebDriver Driver { get => driver; set => driver = value; }
+
         public Table(IWebElement tableElement, IWebDriver driver)
         {
-            this.tableElement = tableElement;
-            this.driver = driver;
+            this.TableElement = tableElement;
+            this.Driver = driver;
         }
 
-        public IList<IWebElement> GetRows()
+        public virtual IList<IWebElement> GetRows()
         {
-            IList<IWebElement> rows = tableElement.FindElements(By.XPath("//tbody//tr"));
+            IList<IWebElement> rows = TableElement.FindElements(By.XPath("//tbody//tr"));
             return rows;
         }
 
-        public IList<IWebElement> GetHeadings()
+        public virtual IList<IWebElement> GetHeadings()
         {
-            IWebElement HeadingsRow = tableElement.FindElement(By.XPath(".//thead//tr[1]"));
+            IWebElement HeadingsRow = TableElement.FindElement(By.XPath(".//thead//tr[1]"));
             IList<IWebElement> headingColumns = HeadingsRow.FindElements(By.XPath(".//th"));
             return headingColumns;
         }
 
-        public List<IList<IWebElement>> GetRowsWithColumns()
+        public virtual List<IList<IWebElement>> GetRowsWithColumns()
         {
             IList<IWebElement> rows = GetRows();
             List<IList<IWebElement>> rowsWithColumns = new List<IList<IWebElement>>();

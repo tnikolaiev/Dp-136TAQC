@@ -7,11 +7,11 @@ using OpenQA.Selenium;
 
 namespace CaesarLib
 {
-    public class ScheduleMonthView 
+    public class MonthViewTab 
     {
         private IWebDriver _driverInstance;
 
-        public ScheduleMonthView(IWebDriver driverInstance)
+        public MonthViewTab(IWebDriver driverInstance)
         {
             _driverInstance = driverInstance;
         }
