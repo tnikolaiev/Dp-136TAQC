@@ -190,5 +190,12 @@ namespace CaesarLib
             TopMenu topMenuInstance = MoveToTopMenu();
             Acts.Click(topMenuInstance.LogoutButton);
         }
+
+        public CenterContainer MoveToCenterContainer()
+        {
+            Actions builder = new Actions(driver);
+            builder.MoveToElement(driver.FindElement(By.ClassName("groupLocation"))).Build().Perform();
+            return new CenterContainer(driver);
+        }
     }
 }

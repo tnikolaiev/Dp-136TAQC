@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
 using OpenQA.Selenium.Interactions;
+using System.Threading;
 
 namespace CaesarTests
 {
@@ -14,40 +15,44 @@ namespace CaesarTests
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
         WebDriverWait wait;
-        LocationWindow locationPageInstance;
+        LocationWindow locationWindowInstance;
         CenterContainer groupLocationInstance;
+        TopMenu topMenuInstance;
+        MainPage mainPageInstance;
 
-        [SetUp]
+        [OneTimeSetUp]
+       // [SetUp]
         public void Initialize()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
             driver.Url = @"http://localhost:3000/logout";
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
             wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance.LogIn("sasha", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
-           // driver.FindElement(By.XPath("//*[@id='top-menu']/div[1]/div[1]/p")).Click();
+            mainPageInstance = new MainPage(driver);
+
         }
         [Test]
-        public void ExecuteTest_ChooseLocation_LocationPageOpened()
+        public void ExecuteTest_ChooseLocationChernivtsy_LocationPageOpened()
         {
-            Actions builder = new Actions(driver);
-            builder.MoveToElement(driver.FindElement(By.ClassName("containerMainMenu"))).Build().Perform();
-            driver.FindElement(By.XPath("//i[@class='fa fa-globe fa-2x']")).Click();
-            locationPageInstance = new LocationWindow(driver);
-            Acts.Click(locationPageInstance.CityChernivtsy);
-            Acts.Click(locationPageInstance.ConfurmButton);
+            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            Acts.Click(topMenuInstance.LocationsItem);
+            locationWindowInstance = new LocationWindow(driver);
+            Acts.Click(locationWindowInstance.CityChernivtsy);
+            Acts.Click(locationWindowInstance.ConfurmButton);
             string exeptualResultTitle = "Chernivtsy";
             groupLocationInstance = new CenterContainer(driver);
             Console.WriteLine(groupLocationInstance.GroupLocation.Text);
             Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
         }
 
+
         [OneTimeTearDown]
         public void CleanUp()
         {
-            driver.Close();
+            driver.Quit();
         }
     }
 }
