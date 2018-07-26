@@ -5,7 +5,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Threading;
 
 namespace CaesarTests
 {
@@ -20,41 +19,39 @@ namespace CaesarTests
         [SetUp]
         public void Initialize()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             driver.Url = @"http://localhost:3000/logout";
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
-            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
-            loginPageInstance.LogIn("sasha", "1234");
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
+            loginPageInstance.LogIn("sasha", "1234", wait);
             mainPageInstance = new MainPage(driver);
         }
 
         [Test]
         public void ExecuteTest_ProfileButtonClick_RightMenuOpened()
         {
-            mainPageInstance.ProfileButton.Click();
-            Assert.IsTrue(wait.Until((d) => mainPageInstance.RightMenu.IsOpened()));
+            mainPageInstance.RightMenu.Open(wait);
+            Assert.IsTrue(mainPageInstance.RightMenu.IsOpened());
         }
 
         [Test]
         public void Executetest_DropMouseFocus_RightMenuClosed()
         {
             Actions act = new Actions(driver);
-            mainPageInstance.ProfileButton.Click();
-            wait.Until((d) => mainPageInstance.RightMenu.IsOpened());
+            mainPageInstance.RightMenu.Open(wait);
             act.MoveToElement(mainPageInstance.ProfileButton)
                 .MoveByOffset(-200, 200)
                 .Build()
                 .Perform();
-            wait.Until((d) => !mainPageInstance.RightMenu.IsOpened());
-            Assert.IsFalse(mainPageInstance.RightMenu.IsOpened());
+            bool isRightMenuClosed = wait.Until((d) => !mainPageInstance.RightMenu.IsOpened());
+            Assert.IsTrue(isRightMenuClosed);
         }
 
         [OneTimeTearDown]
         public void CleanUp()
         {
             driver.Close();
+            driver.Quit();
         }
     }
 }

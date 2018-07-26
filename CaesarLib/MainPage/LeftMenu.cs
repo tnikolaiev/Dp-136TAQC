@@ -101,14 +101,26 @@ namespace CaesarLib
             act.MoveToElement(LeftMenuSection, 100, 200).Perform();
         }
 
+        public void Open(Actions act, WebDriverWait wait)
+        {
+            wait.Until((d) => IsLeftMenuSectionExists());
+            act.MoveToElement(LeftMenuSection, 100, 200).Perform();
+            wait.Until((d) => IsSearchButtonVisible());
+        }
+
         public bool IsOpened()
         {
             return (LeftMenuSection.GetAttribute("class").Equals("contextMenu open")) ? true : false;
         }
 
-        public Func<IWebDriver, IWebElement> IsSearchButtonVisible()
+        public bool IsLeftMenuSectionExists()
         {
-            return ExpectedConditions.ElementIsVisible(By.XPath("//div[@id='left-menu']//button[@title='Search']"));
+            return Acts.IsElementExists(driver, By.CssSelector("#left-menu > div"));
+        }
+
+        public bool IsSearchButtonVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@id='left-menu']//button[@title='Search']"));
         }
     }
 }

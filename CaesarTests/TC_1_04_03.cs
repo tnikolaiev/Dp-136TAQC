@@ -1,76 +1,68 @@
-﻿using CaesarLib;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
+﻿using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
-using System;
+using OpenQA.Selenium.Interactions;
+using NUnit.Framework;
 using System.Collections.Generic;
-using System.Threading;
+using System;
+using OpenQA.Selenium;
 
-namespace CaesarTests
+namespace CaesarLib
 {
     [TestFixture]
     class TC_1_04_03
     {
-        LoginPage loginPageInstance;
-        MainPage mainPageInstance;
         IWebDriver driver = new ChromeDriver();
         WebDriverWait wait;
+        Actions action;
+        LoginPage loginPageInstance;
+        MainPage mainPageInstance;
 
         [SetUp]
         public void Initialize()
         {
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
             driver.Url = @"http://localhost:3000/logout";
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            action = new Actions(driver);                    
+            loginPageInstance = new LoginPage(driver);
+            loginPageInstance.LogIn("dmytro", "1234", wait);
+            mainPageInstance = new MainPage(driver);           
         }
 
         [Test]
-        public void ExecuteTest_SignInAsCoordinator_OpenCreateGroupWindow_DirectionDDlnotEnabled()
+        public void ExecuteTest_ClickCreateButton_GroupCreateWindowOpened()
         {
-            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
-            loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn("dmytro", "1234");
-
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
-            mainPageInstance = new MainPage(driver);
-
-            mainPageInstance.LeftMenu.Open(new Actions(driver));
-            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonVisible());
-
-            mainPageInstance.LeftMenu.CreateButton.Click();
-            bool createGroupWindowOpened = wait.Until((d) => mainPageInstance.ModalWindow.CreateGroupWindow.IsCreateGroupWindowOpened());
-
-            bool LocationDdlEnabled = mainPageInstance.ModalWindow.CreateGroupWindow.LocationDDL.Enabled;
-            Assert.IsTrue(createGroupWindowOpened & !LocationDdlEnabled);
+            var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
+            groupCreateWindow.Open(action, wait);
+            Assert.IsTrue(groupCreateWindow.IsOpened());
         }
 
         [Test]
-        public void ExecuteTest_OpenCreateGroupWindow_PressCancelButton_CreateGroupWindowClosed()
+        public void ExecuteTest_ClickCancelButton_GroupCreateWindowClosed()
         {
-            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
-            loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn("dmytro", "1234");
+            var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
+            groupCreateWindow.Open(action, wait);
+            groupCreateWindow.CancelGroupAddingButton.Click();
+            bool isWindowClosed = wait.Until((d) => !groupCreateWindow.IsOpened());
+            Assert.IsTrue(isWindowClosed);
+        }
 
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
-            mainPageInstance = new MainPage(driver);
-
-            mainPageInstance.LeftMenu.Open(new Actions(driver));
-            wait.Until(mainPageInstance.LeftMenu.IsSearchButtonVisible());
-
-            mainPageInstance.LeftMenu.CreateButton.Click();
-            wait.Until((d) => mainPageInstance.ModalWindow.CreateGroupWindow.IsCreateGroupWindowOpened());
-
-            mainPageInstance.ModalWindow.CreateGroupWindow.CancelGroupAddingButton.Click();
-            wait.Until((d) => !mainPageInstance.ModalWindow.CreateGroupWindow.IsCreateGroupWindowOpened());
-            Assert.IsFalse(mainPageInstance.ModalWindow.CreateGroupWindow.IsCreateGroupWindowOpened());
+        [Test]
+        public void ExecuteTest_PressEscKey_GroupCreateWindowClosed()
+        {
+            var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
+            groupCreateWindow.Open(action, wait);
+            action.SendKeys(Keys.Escape).Perform();
+            wait.Until((d) => !groupCreateWindow.IsOpened());
+            Assert.IsFalse(groupCreateWindow.IsOpened());
         }
 
         [OneTimeTearDown]
         public void CleanUp()
         {
             driver.Close();
+            driver.Quit();
         }
     }
 }
