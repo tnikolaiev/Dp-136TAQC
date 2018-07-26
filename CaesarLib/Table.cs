@@ -130,6 +130,5 @@ namespace CaesarLib
             IWebElement cell = row[columnNumber - 1];
             return cell.FindElement(By.TagName("i"));
         }
-
     }
 }
