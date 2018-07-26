@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace CaesarTests
 {
@@ -43,9 +44,9 @@ namespace CaesarTests
             driver.Url = @"http://localhost:3000/admin";
             wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
             usersForm = new CreateEditUsersForm(driver);
-            usersForm.AddButton.Click();            
+            usersForm.AddButton.Click();
             wait.Until((d) => CreateEditUsersForm.IsCreateFormOpened(d));
-            
+
         }
 
         [Test]
@@ -143,9 +144,10 @@ namespace CaesarTests
             CollectionAssert.Contains(table.getRowWithColumns(0), expectedResult);
 
             wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
-            usersForm.getLastElement(usersForm.Delete).Click();
+            Thread.Sleep(1000);
+            usersForm.getLastElement(usersForm.Delete, 0).Click();
         }
-
+        
         [OneTimeTearDown]
         public void CleanUp()
         {            

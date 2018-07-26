@@ -168,9 +168,13 @@ namespace CaesarLib
             _driver = driver;
         }
 
-        public IWebElement getLastElement(IList<IWebElement> webElements)
+        public IWebElement getLastElement(IList<IWebElement> webElements, int number)
         {
-            return webElements.Last();
+            if (number == 0)
+            {
+                return webElements.Last();
+            }
+            else return webElements[number];
         }
 
         public static bool IsAdminPageOpened(IWebDriver driver)
