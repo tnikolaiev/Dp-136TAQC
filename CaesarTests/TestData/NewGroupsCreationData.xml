@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+  <testData direction=".Net" groupName="groupNet" teacher="K. Kozak" budgetOwner="SoftServe" startDate="02/13/2018" expert="Expert" />
+  <testData direction="ISTQB" groupName="groupISTQB" teacher="O. Reuta" budgetOwner="OpenGroup" startDate="11/19/2018" expert="Expertik" />
+  <testData direction="iOS" groupName="groupIOS" teacher="D. Petin" budgetOwner="SoftServe" startDate="06/11/2012" expert="Expertok" />
+  <testData direction="UX" groupName="groupUX" teacher="P. Kucher" budgetOwner="OpenGroup" startDate="01/05/2011" expert="Testwoman" />
+  <testData direction="C/C++" groupName="groupC/C++" teacher="A. Koval" budgetOwner="SoftServe" startDate="09/27/2017" expert="Testman" />
+</Data>
