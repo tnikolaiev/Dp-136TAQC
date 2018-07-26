@@ -123,5 +123,13 @@ namespace CaesarLib
             return GetValueFromCell(rowNumber, columnNumber);                      
         }
 
+        public IWebElement GetElementFromCell(int rowNumber, int columnNumber)
+        {
+            List<IList<IWebElement>> rowsWithColumns = GetRowsWithColumns();
+            IList<IWebElement> row = rowsWithColumns[rowNumber - 1];
+            IWebElement cell = row[columnNumber - 1];
+            return cell.FindElement(By.TagName("i"));
+        }
+
     }
 }
