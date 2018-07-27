@@ -21,7 +21,7 @@ namespace CaesarTests
         public void Initialize()
         {
             driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(2));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             driver.Url = @"http://localhost:3000/logout";
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("admin", "1234", wait);
@@ -35,7 +35,7 @@ namespace CaesarTests
         {
             List<String> expectedResult = new List<String> { "Lv-084-QB", "Lv-045-DL", "Lv-023-UX" };
             wait.Until((d) => groupsList.AreGroupsVisible());
-            List<String> actualResult = groupsList.GetAvailableGroupsNames();
+            List<String> actualResult = groupsList.GetAvailableGroupsNames(wait);
             CollectionAssert.AreEquivalent(expectedResult, actualResult);
         }
 
@@ -43,17 +43,17 @@ namespace CaesarTests
         public void ExecuteTest_MyGroupsFilterCheckedUnchecked()
         {
             mainPageInstance.LeftContainer.GroupsInLocation.MyGroupsFilter.Click();
-            bool firstCondition = "myGroups pressed".Equals(groupsList.MyGroupsFilter.GetAttribute("class"));
+            bool isMyGroupsFilterChecked = "myGroups pressed".Equals(groupsList.MyGroupsFilter.GetAttribute("class"));
             groupsList.MyGroupsFilter.Click();
-            bool secondCondition = "myGroups".Equals(groupsList.MyGroupsFilter.GetAttribute("class"));
-            Assert.IsTrue(firstCondition && secondCondition);
+            bool isMyGroupFilterUnckecked = "myGroups".Equals(groupsList.MyGroupsFilter.GetAttribute("class"));
+            Assert.IsTrue(isMyGroupsFilterChecked && isMyGroupFilterUnckecked);
         }
 
         [Test]
         public void ExecuteTest_MyGroupsFilterChecked_NoneAvailableGroups()
         {
             groupsList.MyGroupsFilter.Click();
-            List<String> actualResult = groupsList.GetAvailableGroupsNames();
+            List<String> actualResult = groupsList.GetAvailableGroupsNames(wait);
             Assert.IsEmpty(actualResult);
         }
 
@@ -61,7 +61,7 @@ namespace CaesarTests
         public void ExecuteTest_FutureGroupsFilter()
         {
             groupsList.FutureGroupsToggle.Click();
-            List<String> actualResult = groupsList.GetAvailableGroupsNames();
+            List<String> actualResult = groupsList.GetAvailableGroupsNames(wait);
             Assert.IsEmpty(actualResult);
         }
 
@@ -71,7 +71,7 @@ namespace CaesarTests
             groupsList.EndedGroupsToggle.Click();
             List<String> expectedResult = new List<String> { "Lv-087-RD", "Lv-077-IOS" };
             wait.Until((d) => groupsList.AreGroupsVisible());
-            List<String> actualResult = groupsList.GetAvailableGroupsNames();
+            List<String> actualResult = groupsList.GetAvailableGroupsNames(wait);
             CollectionAssert.AreEquivalent(expectedResult, actualResult);
         }
 

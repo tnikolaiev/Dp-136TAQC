@@ -3,6 +3,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace CaesarLib
 {
@@ -357,9 +358,8 @@ namespace CaesarLib
         //    return Acts.IsElementExists(driver, By.Name("name"));
         //}
 
-        public bool IsStartDateFieldClickable()
+        public bool IsCancelButtonVisible()
         {
-            //return Acts.IsElementExists(driver, By.Name("name"));
             return Acts.IsElementVisible(driver, By.Id("cancel"));
         }
 
@@ -369,8 +369,9 @@ namespace CaesarLib
             var leftMenu = mainPage.LeftMenu;
 
             leftMenu.Open(action, wait);
+            leftMenu.IsCreateButtonVisible();
             leftMenu.CreateButton.Click();
-            wait.Until((d) => IsStartDateFieldClickable());
+            wait.Until((d) => IsCancelButtonVisible());
         }
     }
 }
