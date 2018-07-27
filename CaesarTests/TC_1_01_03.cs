@@ -21,6 +21,7 @@ namespace CaesarTests
         {
             driver.Url = @"http://localhost:3000/logout";
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance = new LoginPage(driver);
         }
 

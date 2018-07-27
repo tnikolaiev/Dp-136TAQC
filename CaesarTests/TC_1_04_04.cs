@@ -49,7 +49,7 @@ namespace CaesarLib
             mainPageInstance.LeftMenu.DeleteButton.Click();
             wait.Until((d) => groupDeleteConfirmantionWindow.IsCancelButtonVisible());
             groupDeleteConfirmantionWindow.CancelButton.Click();
-            bool isGroupDeleteConfirmationWindowClosed = wait.Until((d) => !groupDeleteConfirmantionWindow.IsOpened());
+            bool isGroupDeleteConfirmationWindowClosed = wait.Until((d) => !groupDeleteConfirmantionWindow.IsOpened());            
             Assert.IsTrue(isGroupDeleteConfirmationWindowClosed);
         }
 
@@ -62,8 +62,8 @@ namespace CaesarLib
             mainPageInstance.LeftMenu.DeleteButton.Click();
             wait.Until((d) => groupDeleteConfirmantionWindow.IsOpened());
             action.SendKeys(Keys.Escape).Perform();
-            wait.Until((d) => !groupDeleteConfirmantionWindow.IsOpened());
-            Assert.IsFalse(groupDeleteConfirmantionWindow.IsOpened());
+            bool isGroupDeleteConfirmationWindowClosed = wait.Until((d) => !groupDeleteConfirmantionWindow.IsOpened());
+            Assert.IsTrue(isGroupDeleteConfirmationWindowClosed);
         }
 
         [OneTimeTearDown]

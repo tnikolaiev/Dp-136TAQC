@@ -6,7 +6,6 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 
 namespace CaesarTests
 {
@@ -24,9 +23,8 @@ namespace CaesarTests
         {
             //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             driver.Url = @"http://localhost:3000/logout";
-            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance = new LoginPage(driver);
             action = new Actions(driver);
         }
@@ -34,21 +32,13 @@ namespace CaesarTests
         [Test]
         public void ExecuteTest_SignInAsCoordinator_OpenGroupCreateWindow_DirectionDDlnotEnabled()
         {
-            loginPageInstance.LogIn("dmytro", "1234");
-
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
+            loginPageInstance.LogIn("dmytro", "1234", wait);
             mainPageInstance = new MainPage(driver);
-
-            mainPageInstance.LeftMenu.Open(action, wait);
-
-            mainPageInstance.LeftMenu.CreateButton.Click();
-            bool groupCreateWindowOpened = wait.Until((d) => mainPageInstance.ModalWindow.GroupCreateWindow.IsOpened());
-
-            bool LocationDdlEnabled = mainPageInstance.ModalWindow.GroupCreateWindow.LocationDDL.Enabled;
-            Assert.IsTrue(groupCreateWindowOpened & !LocationDdlEnabled);
+            var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
+            groupCreateWindow.Open(action, wait);
+            bool LocationDdlEnabled = groupCreateWindow.LocationDDL.Enabled;
+            Assert.IsTrue(groupCreateWindow.IsOpened() & !LocationDdlEnabled);
         }
-
-
 
         static IEnumerable<object[]> StartFinishDateData = Instruments.ReadXML("StartFinishDateData.xml", "testData", "direction", "startDate", "finishDate");
 
@@ -57,17 +47,12 @@ namespace CaesarTests
         {
             loginPageInstance.LogIn("dmytro", "1234", wait);
             mainPageInstance = new MainPage(driver);
-
-            mainPageInstance.LeftMenu.Open(action, wait);
-
-            mainPageInstance.LeftMenu.CreateButton.Click();
-            wait.Until((d) => mainPageInstance.ModalWindow.GroupCreateWindow.IsStartDateFieldClickable());
-
-            Acts.SelectOptionFromDDL(mainPageInstance.ModalWindow.GroupCreateWindow.DirectionDDL, direction);
-            Acts.InputValue(mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField, startDate);
-            mainPageInstance.ModalWindow.GroupCreateWindow.GroupNameField.Click();
-
-            String actualResult = mainPageInstance.ModalWindow.GroupCreateWindow.FinishDateField.GetAttribute("value");
+            var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
+            groupCreateWindow.Open(action, wait);
+            groupCreateWindow.SetDirection(direction)
+                .SetStartDate(startDate);
+            groupCreateWindow.GroupNameField.Click();
+            String actualResult = groupCreateWindow.FinishDateField.GetAttribute("value");
             Assert.AreEqual(finishDate, actualResult);
         }
 
@@ -82,6 +67,20 @@ namespace CaesarTests
             mainPageInstance = new MainPage(driver);
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             var groupsList = mainPageInstance.LeftContainer.GroupsInLocation;
+
+            groupCreateWindow.Open(action, wait);
+            groupCreateWindow.SetGroupName(groupName)
+                .SetDirection(direction)
+                .ReturnNameButtonClick()
+                .AddTeacher(teacher)
+                .SetBudgetOwner(budgetOwner)
+                .AddExpert(expert)
+                .SetStartDate(startDate);
+            groupCreateWindow.SaveGroupButton.Click();
+            bool isGroupCreated = !groupsList.GetGroupByName(groupName, wait).Equals(null);
+            groupsList.DeleteGroup(groupName, action, wait);
+            bool isGroupDeleted = groupsList.GetGroupByName(groupName, wait).Equals(null);
+            Assert.IsTrue(isGroupCreated & isGroupDeleted);
 
             /*--------Create and Delete group-------*/
             //mainPageInstance.LeftMenu.Open(action);
@@ -116,18 +115,6 @@ namespace CaesarTests
             //wait.Until(groupDeleteConfirmationWindow.IsCancelButtonClickable());
             //groupDeleteConfirmationWindow.DeleteButton.Click();
             /*-----wtf-----*/
-
-            groupCreateWindow.Open(action, wait);
-            groupCreateWindow.SetGroupName(groupName)
-                .SetDirection(direction)
-                .ReturnNameButtonClick()
-                .AddTeacher(teacher)
-                .SetBudgetOwner(budgetOwner)
-                .AddExpert(expert)
-                .SetStartDate(startDate);
-            groupCreateWindow.SaveGroupButton.Click();
-            Assert.DoesNotThrow(() => groupsList.GetGroupByName(groupName, wait));
-            groupsList.DeleteGroup(groupName, action, wait);
         }
 
         //static List<String> GroupsToDelete = new List<String> { "Dp-115 .NetgroupNet1", "Dp-113 .NetgroupNet1", "groupC/C++", "groupISTQB", "groupIOS", "groupUX" };

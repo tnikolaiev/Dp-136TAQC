@@ -125,10 +125,16 @@ namespace CaesarLib
 
         public static bool IsMainPageOpened(IWebDriver driver)
         {
-            return Acts.IsElementVisible(driver, By.Id("main-section")) &
-                Acts.IsElementVisible(driver, By.Id("left-side-bar")) &
-                Acts.IsElementVisible(driver, By.Id("right-side-bar")) ?
+            return Acts.IsElementExists(driver, By.Id("main-section")) &
+                Acts.IsElementExists(driver, By.Id("left-side-bar")) &
+                Acts.IsElementExists(driver, By.Id("right-side-bar")) ?
                 true : false;
+        }
+
+        public bool IsMainPageOpened()
+        {
+            return Acts.IsElementExists(driver, By.Id("main-section")) &
+                Acts.IsElementExists(driver, By.CssSelector("#logo > a > img"));
         }
 
         //Is public in case this method will be needed in tests (access modifier can be discussed)

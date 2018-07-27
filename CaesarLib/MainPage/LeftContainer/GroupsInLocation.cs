@@ -85,14 +85,9 @@ namespace CaesarLib
             this.driver = driver;
         }
 
-        //public Func<IWebDriver, IWebElement> AreGroupsVisible()
-        //{
-        //    return ExpectedConditions.ElementIsVisible(By.XPath("//div[@class='group-collection row']/div//p"));
-        //}
-
         public bool AreGroupsVisible()
         {
-            return Acts.IsElementVisible(driver, By.XPath("//div[@class='group-collection row']/div//p"));
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='group-collection row']"));
         }
 
         public bool AreTogglesVisible()
@@ -100,8 +95,9 @@ namespace CaesarLib
             return Acts.IsElementVisible(driver, By.XPath("//div[@class='stage-toggle']/label"));
         }
 
-        public List<String> GetAvailableGroupsNames()
+        public List<String> GetAvailableGroupsNames(WebDriverWait wait)
         {
+            wait.Until((d) => AreGroupsVisible());
             IList<IWebElement> elements = driver.FindElements(By.XPath("//div[@class='group-collection row']/div//p"));
             List<String> groupsNames = new List<String>();
             foreach (var item in elements)
@@ -177,6 +173,7 @@ namespace CaesarLib
             }
 
             leftMenu.Open(action, wait);
+            wait.Until((d) => leftMenu.IsDeleteButtonVisible());
             leftMenu.DeleteButton.Click();
             grDelConfWind.DeleteButton.Click();
         }

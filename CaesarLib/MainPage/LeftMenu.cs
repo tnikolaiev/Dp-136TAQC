@@ -3,6 +3,7 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace CaesarLib
 {
@@ -103,24 +104,34 @@ namespace CaesarLib
 
         public void Open(Actions act, WebDriverWait wait)
         {
-            wait.Until((d) => IsLeftMenuSectionExists());
+            wait.Until((d) => Acts.IsElementExists(driver, By.CssSelector("#left-menu > div")));
             act.MoveToElement(LeftMenuSection, 100, 200).Perform();
             wait.Until((d) => IsSearchButtonVisible());
         }
 
         public bool IsOpened()
         {
-            return (LeftMenuSection.GetAttribute("class").Equals("contextMenu open")) ? true : false;
+            return (LeftMenuSection.GetAttribute("class").Equals("contextMenu open"));
         }
 
-        public bool IsLeftMenuSectionExists()
-        {
-            return Acts.IsElementExists(driver, By.CssSelector("#left-menu > div"));
-        }
+        //public Func<IWebDriver, IWebElement> IsCreateButtonClickable()
+        //{
+        //    return ExpectedConditions.ElementToBeClickable(By.XPath("//div[@id='left-menu']//button[@title='Create']/i"));
+        //}
 
         public bool IsSearchButtonVisible()
         {
             return Acts.IsElementVisible(driver, By.XPath("//div[@id='left-menu']//button[@title='Search']"));
+        }
+
+        public bool IsCreateButtonVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@id='left-menu']//button[@title='Create']/i"));
+        }
+
+        public bool IsDeleteButtonVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@id='left-menu']//button[@title='Delete']/i"));
         }
     }
 }
