@@ -5,30 +5,31 @@ using System.Collections.Generic;
 
 namespace CaesarLib
 {
-   public class LocationWindow
+    public class LocationWindow
     {
-        private IWebElement groupOfLocations;
-        private IWebElement cityChernivtsy;
-        private IWebElement cityDnipro;
-        private IWebElement cityIvanoFrankivsk;
-        private IWebElement cityKyiv;
-        private IWebElement cityLviv;
-        private IWebElement cityRivne;
-        private IWebElement citySofia;
-        private IWebElement confurmButton;
-        private IWebElement cancelButton;
-        private IWebDriver driverInstance;
+        private IWebElement _groupOfLocations;
+        private IWebElement _cityChernivtsy;
+        private IWebElement _cityDnipro;
+        private IWebElement _cityIvanoFrankivsk;
+        private IWebElement _cityKyiv;
+        private IWebElement _cityLviv;
+        private IWebElement _cityRivne;
+        private IWebElement _citySofia;
+        private IWebElement _confurmButton;
+        private IWebElement _cancelButton;
+        private IWebDriver _driverInstance;
+        private IWebElement _clickActiveButtonNames;
 
 
-            public IWebElement GroupOfLocations
+        public IWebElement GroupOfLocations
         {
             get
             {
-                if (groupOfLocations != null) return groupOfLocations;
+                if (_groupOfLocations != null) return _groupOfLocations;
                 else
                 {
-                    groupOfLocations = driverInstance.FindElement(By.Name("location-wrapper"));
-                    return groupOfLocations;
+                    _groupOfLocations = _driverInstance.FindElement(By.Name("location-wrapper"));
+                    return _groupOfLocations;
                 }
             }
         }
@@ -37,11 +38,11 @@ namespace CaesarLib
         {
             get
             {
-                if (cityChernivtsy != null) return cityChernivtsy;
+                if (_cityChernivtsy != null) return _cityChernivtsy;
                 else
                 {
-                    cityChernivtsy = driverInstance.FindElement(By.XPath("//p[contains(text(),'Chernivtsy')]"));
-                    return cityChernivtsy;
+                    _cityChernivtsy = _driverInstance.FindElement(By.XPath("//p[contains(text(),'Chernivtsy')]"));
+                    return _cityChernivtsy;
                 }
             }
         }
@@ -50,11 +51,11 @@ namespace CaesarLib
         {
             get
             {
-                if (cityDnipro != null) return cityDnipro;
+                if (_cityDnipro != null) return _cityDnipro;
                 else
                 {
-                    cityDnipro = driverInstance.FindElement(By.XPath("//p[contains(text(),'Dnipro')]"));
-                    return cityDnipro;
+                    _cityDnipro = _driverInstance.FindElement(By.XPath("//p[contains(text(),'Dnipro')]"));
+                    return _cityDnipro;
                 }
             }
         }
@@ -63,11 +64,11 @@ namespace CaesarLib
         {
             get
             {
-                if (cityIvanoFrankivsk != null) return cityIvanoFrankivsk;
+                if (_cityIvanoFrankivsk != null) return _cityIvanoFrankivsk;
                 else
                 {
-                    cityIvanoFrankivsk = driverInstance.FindElement(By.XPath("/p[contains(text(),'Ivano-Frankivsk')]"));
-                    return cityIvanoFrankivsk;
+                    _cityIvanoFrankivsk = _driverInstance.FindElement(By.XPath("//p[contains(text(),'Ivano-Frankivsk')]"));
+                    return _cityIvanoFrankivsk;
                 }
             }
         }
@@ -76,11 +77,11 @@ namespace CaesarLib
         {
             get
             {
-                if (cityKyiv != null) return cityKyiv;
+                if (_cityKyiv != null) return _cityKyiv;
                 else
                 {
-                    cityKyiv = driverInstance.FindElement(By.XPath("//p[contains(text(),'Kyiv')]"));
-                    return cityKyiv;
+                    _cityKyiv = _driverInstance.FindElement(By.XPath("//p[contains(text(),'Kyiv')]"));
+                    return _cityKyiv;
                 }
             }
         }
@@ -89,11 +90,12 @@ namespace CaesarLib
         {
             get
             {
-                if (cityLviv != null) return cityLviv;
+                if (_cityLviv != null) return _cityLviv;
                 else
                 {
-                    cityLviv = driverInstance.FindElement(By.XPath("//p[contains(text(),'Lviv')]"));
-                    return cityLviv;
+                    _cityLviv = _driverInstance.FindElement(By.XPath("//p[contains(text(),'Lviv')]"));
+                    //"//body//div[@id='modal-window']//div[@class='locationsWindow']//div[@class='location-wrapper']//div//ul//li[5]"));
+                    return _cityLviv;
                 }
             }
         }
@@ -102,11 +104,11 @@ namespace CaesarLib
         {
             get
             {
-                if (cityRivne != null) return cityRivne;
+                if (_cityRivne != null) return _cityRivne;
                 else
                 {
-                    cityRivne = driverInstance.FindElement(By.XPath("//p[contains(text(),'Rivne')]"));
-                    return cityRivne;
+                    _cityRivne = _driverInstance.FindElement(By.XPath("//p[contains(text(),'Rivne')]"));
+                    return _cityRivne;
                 }
             }
         }
@@ -115,29 +117,29 @@ namespace CaesarLib
         {
             get
             {
-                if (citySofia != null) return citySofia;
+                if (_citySofia != null) return _citySofia;
                 else
                 {
-                    citySofia = driverInstance.FindElement(By.XPath("//p[contains(text(),'Sofia')]"));
-                    return citySofia;
+                    _citySofia = _driverInstance.FindElement(By.XPath("//p[contains(text(),'Sofia')]"));
+                    return _citySofia;
                 }
             }
         }
 
         public LocationWindow(IWebDriver driver)
         {
-            driverInstance = driver;
+            _driverInstance = driver;
         }
 
         public IWebElement ConfurmButton
         {
             get
             {
-                if (confurmButton != null) return confurmButton;
+                if (_confurmButton != null) return _confurmButton;
                 else
                 {
-                    confurmButton = driverInstance.FindElement(By.XPath("//i[@class='fa fa-check-circle-o fa-3x']"));
-                    return confurmButton;
+                    _confurmButton = _driverInstance.FindElement(By.XPath("//i[@class='fa fa-check-circle-o fa-3x']"));
+                    return _confurmButton;
                 }
             }
         }
@@ -146,18 +148,18 @@ namespace CaesarLib
         {
             get
             {
-                if (cancelButton != null) return cancelButton;
+                if (_cancelButton != null) return _cancelButton;
                 else
                 {
-                    cancelButton = driverInstance.FindElement(By.XPath("//i[@class='fa fa-times-circle-o fa-3x']"));
-                    return cancelButton;
+                    _cancelButton = _driverInstance.FindElement(By.XPath("//i[@class='fa fa-times-circle-o fa-3x']"));
+                    return _cancelButton;
                 }
             }
         }
 
         public List<String> GetLocationActive()
         {
-            IList<IWebElement> elements = driverInstance.FindElements(By.ClassName("location active-location"));
+            IList<IWebElement> elements = _driverInstance.FindElements(By.ClassName("location active-location"));
             List<String> activeButtonNames = new List<String>();
             foreach (var item in elements)
             {
@@ -165,6 +167,32 @@ namespace CaesarLib
             }
             return activeButtonNames;
         }
-            
+
+        public IList<IWebElement> GetLocationActiveWebElements()
+        {
+            IList<IWebElement> locationActiveButtonNames = _driverInstance.FindElements(By.ClassName("location active-location"));
+            return locationActiveButtonNames;
+        }
+
+        public IList<IWebElement> GetLocationNonActiveWebElements()
+        {
+            IList<IWebElement> nonActiveButtonNames = _driverInstance.FindElements(By.ClassName("location"));
+            return nonActiveButtonNames;
+        }
+
+        public void ClickNonActiveButtonNames(IList<IWebElement> GetLocationNonActiveWebElements, List<string> listOfCity)
+        {
+            foreach (var listItem in listOfCity)
+            {
+                foreach (var item in GetLocationNonActiveWebElements)
+                {
+                    if (item.Text == listItem)
+                    {
+                        item.Click();
+                    }
+                }
+            }
+        }
     }
 }
+

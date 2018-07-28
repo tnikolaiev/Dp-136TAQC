@@ -15,8 +15,8 @@ namespace CaesarTests
         WebDriverWait wait;
         string baseURL = "localhost:3000";
         LoginPage loginPageInstance;
-        ScheduleContent scheduleContentInstance;
-        MainPage mainPageInstance;
+        ScheduleContent scheduleContentInstance;       
+        Table table;
 
         [SetUp]
         public void BeforeTest()
@@ -30,14 +30,7 @@ namespace CaesarTests
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("sasha", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
-
-
-        }
-
-        [Test]
-
-        public void TestCellSelectorOnKeyDatesTable()
-        {
+          
             //Opening Schedule Page
             TopMenu topMenuInstance = new TopMenu(driver);
             Actions builder = new Actions(driver);
@@ -56,7 +49,6 @@ namespace CaesarTests
                 .GroupsInLocation
                 .GetGroupByName("DP-093-JS"));
 
-
             //Go to Key-Dates tab
 
             scheduleContentInstance.KeyDatesButton.Click();
@@ -65,9 +57,40 @@ namespace CaesarTests
 
             ScheduleKeyDatesTab scheduleKeyDatesTabInstance = new ScheduleKeyDatesTab(driver);
             IWebElement tableElement = scheduleKeyDatesTabInstance.KeyDatesTable;  //.("Demo2", "DP-094-MQC").Text;
-            Table table = new Table(tableElement, driver);
+            table = new Table(tableElement, driver);
+
+        }
+
+        [Test]
+
+        public void GetCellTextByValueInRowAndColumnNameKeyDatesTable()
+        {            
             string textFromCell = table.GetValueFromCell("DP-094-MQC", "Demo2");
-            Console.WriteLine(textFromCell);
+            Assert.AreEqual(textFromCell, "03/14/2016");
+        }
+
+        [Test]
+
+        public void GetCellTextByRowNumberAndColumnNumberKeyDatesTable()
+        {
+            string textFromCell = table.GetValueFromCell(2,5);
+            Assert.AreEqual(textFromCell, "04/04/2016");
+        }
+
+        [Test]
+
+        public void GetCellTextByValueInRowAndColumnNumberKeyDatesTable()
+        {         
+            string textFromCell = table.GetValueFromCell("DP-094-MQC", 3);
+            Assert.AreEqual(textFromCell, "02/22/2016");
+        }
+
+        [Test]
+
+        public void GetCellTextByRowNumberAndColumnNameKeyDatesTable()
+        {
+            string textFromCell = table.GetValueFromCell(1,"Finish");
+            Assert.AreEqual(textFromCell, "11/28/2016");
 
         }
     }
