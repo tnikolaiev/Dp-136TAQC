@@ -93,6 +93,7 @@ namespace CaesarLib
                 }
             }
         }
+        
         public StudentsContent StudentsContent
         {
             get
