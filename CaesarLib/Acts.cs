@@ -39,10 +39,12 @@ namespace CaesarLib
             SelectElement selectElement = new SelectElement(webElement);
             selectElement.SelectByIndex(index);
         }
+
         public static void PressKeyboardButton(string button)
         {
             SendKeys.SendWait(button);
         }
+
         public static void UploadFile(String path)
         {
             Thread.Sleep(1000);
@@ -57,8 +59,30 @@ namespace CaesarLib
         }
 
         public static bool IsElementPresent(IWebDriver driverInstance, By by)
-        {    
+        {
             return driverInstance.FindElements(by).Count > 0 ? true : false;
+        }
+
+        public static bool IsElementVisible(IWebDriver driver, By byExpression)
+        {
+            try
+            {
+                if (driver.FindElement(byExpression).Displayed) return true;
+                else return false;
+            }
+            catch (NoSuchElementException) { return false; }
+            catch (StaleElementReferenceException) { return false; }
+        }
+
+        public static bool IsElementExists(IWebDriver driver, By byExpression)
+        {
+            try
+            {
+                driver.FindElement(byExpression);
+                return true;
+            }
+            catch (NoSuchElementException) { return false; }
+            catch (StaleElementReferenceException) { return false; }
         }
     }
 }
