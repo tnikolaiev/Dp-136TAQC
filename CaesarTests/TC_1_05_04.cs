@@ -1,17 +1,18 @@
-﻿using CaesarLib;
-using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
-using System;
-using OpenQA.Selenium.Interactions;
-using System.Threading;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using NUnit.Framework;
+using System.Collections;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium.Chrome;
+using CaesarLib;
 
 namespace CaesarTests
 {
+ 
     [TestFixture]
-    class TC_1_05_03
+    public class TC_1_05_04
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
@@ -22,8 +23,7 @@ namespace CaesarTests
         MainPage mainPageInstance;
         List<String> listOfCity;
 
-        [OneTimeSetUp]
-       // [SetUp]
+        [SetUp]
         public void Initialize()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
@@ -36,37 +36,12 @@ namespace CaesarTests
             mainPageInstance = new MainPage(driver);
             TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.LocationsItem);
-
         }
-        //[Test]
-        //public void ExecuteTest_ChooseLocation()
-        //{
-        //    locationWindowInstance = new LocationWindow(driver);
-        //    string city =  "Lviv";
-        //    IList<IWebElement> nonActiveCity = locationWindowInstance.GetLocationNonActiveWebElements();
-            
-          
-        //     locationWindowInstance.ClickNonActiveButtonNames(nonActiveCity, city);
-           
-        //    Acts.Click(locationWindowInstance.ConfurmButton);
-        //    groupLocationInstance = new CenterContainer(driver);
-        //    Console.WriteLine(groupLocationInstance.GroupLocation.Text);
-        //    string exeptualResultTitle = "Lviv";
-        //    Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
-        //}
-
-        [Test]
-
-        static IEnumerable<object[]> LocationsList()
+        [TestCaseSource("LocationsList")]
+        public void TestLocationList(string city)
         {
-            return Instruments.ReadXML("LocationsList.xml", "city");
-        }
- [Test]
-        public void ExecuteTest_ChooseListLocations()
-        {
-
             locationWindowInstance = new LocationWindow(driver);
-            List<string> listOfCity = new List <string> {"Lviv", "Dnipro"};
+            List<string> listOfCity = new List<string> { "Lviv", "Dnipro" };
             IList<IWebElement> nonActiveCity = locationWindowInstance.GetLocationNonActiveWebElements();
             locationWindowInstance.ClickNonActiveButtonNames(nonActiveCity, listOfCity);
             Acts.Click(locationWindowInstance.ConfurmButton);
@@ -77,11 +52,21 @@ namespace CaesarTests
             string exeptualResultTitle = " Dnipro,Lviv";
             Assert.AreEqual(exeptualResultTitle, groupLocationInstance.LocationHint.Text);
         }
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
             driver.Quit();
         }
+       
+        private  IEnumerable<object[]> LocationsList()
+        {
+          //  logger.Info("LocationsList");
+            var doc = XDocument.Load(@"LocationsList");
+         //   logger.Info("\n" + doc.ToString());
+            return
+            from vars in doc.Descendants("vars")
+            let city = vars.Attribute("city").Value
+            select new object[] { city };
+        }
     }
 }
-

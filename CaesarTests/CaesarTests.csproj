@@ -68,6 +68,7 @@
     <Compile Include="TC_1_01_01.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TC_1_05_03.cs" />
+    <Compile Include="TC_1_05_04.cs" />
     <Compile Include="TC_3_06_01.cs" />
     <Compile Include="TC_2_03_6.cs" />
     <Compile Include="TC_2_03_1.cs" />
@@ -95,6 +96,9 @@
       <Project>{8004eb36-6518-439f-9685-93a57a6b9506}</Project>
       <Name>CaesarLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="LocationsList.xml" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
