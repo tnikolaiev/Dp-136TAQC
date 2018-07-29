@@ -4,8 +4,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using OpenQA.Selenium.Interactions;
-using System.Threading;
 using System.Collections.Generic;
 
 namespace CaesarTests
@@ -57,11 +55,6 @@ namespace CaesarTests
 
         [Test]
 
-        static IEnumerable<object[]> LocationsList()
-        {
-            return Instruments.ReadXML("LocationsList.xml", "city");
-        }
- [Test]
         public void ExecuteTest_ChooseListLocations()
         {
 

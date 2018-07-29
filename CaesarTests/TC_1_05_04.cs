@@ -7,6 +7,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Chrome;
 using CaesarLib;
+using Motion;
+using NLog;
+using System.Xml.Linq;
+using NUnit.Framework.Internal;
 
 namespace CaesarTests
 {
@@ -37,11 +41,18 @@ namespace CaesarTests
             TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.LocationsItem);
         }
-        [TestCaseSource("LocationsList")]
+
+        static IEnumerable<object[]> GetLocationLists()
+        {
+           // return Instruments.ReadXML("LocationLists.xml", "testData", "city");
+            var doc = AppDomain.CurrentDomain.BaseDirectory + @"..\..\TestData\LocationLists.xml);
+        }
+
+        [Test, TestCaseSource("LocationLists")]
         public void TestLocationList(string city)
         {
             locationWindowInstance = new LocationWindow(driver);
-            List<string> listOfCity = new List<string> { "Lviv", "Dnipro" };
+            List<string> listOfCity = new List<string>(city);
             IList<IWebElement> nonActiveCity = locationWindowInstance.GetLocationNonActiveWebElements();
             locationWindowInstance.ClickNonActiveButtonNames(nonActiveCity, listOfCity);
             Acts.Click(locationWindowInstance.ConfurmButton);
@@ -52,21 +63,25 @@ namespace CaesarTests
             string exeptualResultTitle = " Dnipro,Lviv";
             Assert.AreEqual(exeptualResultTitle, groupLocationInstance.LocationHint.Text);
         }
+
         [TearDown]
         public void CleanUp()
         {
             driver.Quit();
         }
-       
-        private  IEnumerable<object[]> LocationsList()
+
+        private static IEnumerable<object[]> LocationLists()
         {
-          //  logger.Info("LocationsList");
-            var doc = XDocument.Load(@"LocationsList");
-         //   logger.Info("\n" + doc.ToString());
-            return
-            from vars in doc.Descendants("vars")
-            let city = vars.Attribute("city").Value
-            select new object[] { city };
+            //logger.Info("LocationLists");
+            //var doc = AppDomain.CurrentDomain.BaseDirectory + @"..\..\TestData\LocationLists.xml);
+            
+            //return
+            //    from vars in doc.Descendants("testData")
+            //    let city = vars.Attribute("city").Value
+            //    select new object[] { double.Parse(city) };
+
+
+
         }
     }
 }
