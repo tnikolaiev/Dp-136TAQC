@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using NUnit.Framework;
-using System.Collections;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Chrome;
 using CaesarLib;
-using Motion;
-using NLog;
-using System.Xml.Linq;
 using NUnit.Framework.Internal;
 
 namespace CaesarTests
@@ -42,17 +37,13 @@ namespace CaesarTests
             Acts.Click(topMenuInstance.LocationsItem);
         }
 
-        static IEnumerable<object[]> GetLocationLists()
-        {
-           // return Instruments.ReadXML("LocationLists.xml", "testData", "city");
-            var doc = AppDomain.CurrentDomain.BaseDirectory + @"..\..\TestData\LocationLists.xml);
-        }
+        static IEnumerable<object[]> GetLocationLists = Instruments.ReadXML("LocationLists.xml", "testData", "city");
 
-        [Test, TestCaseSource("LocationLists")]
+        [Test, TestCaseSource("GetLocationLists")]
         public void TestLocationList(string city)
         {
             locationWindowInstance = new LocationWindow(driver);
-            List<string> listOfCity = new List<string>(city);
+            List<string> listOfCity = new List<string> {city};
             IList<IWebElement> nonActiveCity = locationWindowInstance.GetLocationNonActiveWebElements();
             locationWindowInstance.ClickNonActiveButtonNames(nonActiveCity, listOfCity);
             Acts.Click(locationWindowInstance.ConfurmButton);
@@ -69,19 +60,6 @@ namespace CaesarTests
         {
             driver.Quit();
         }
-
-        private static IEnumerable<object[]> LocationLists()
-        {
-            //logger.Info("LocationLists");
-            //var doc = AppDomain.CurrentDomain.BaseDirectory + @"..\..\TestData\LocationLists.xml);
-            
-            //return
-            //    from vars in doc.Descendants("testData")
-            //    let city = vars.Attribute("city").Value
-            //    select new object[] { double.Parse(city) };
-
-
-
-        }
+        
     }
 }
