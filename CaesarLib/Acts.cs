@@ -34,10 +34,10 @@ namespace CaesarLib
             DropDownList.SelectByValue(value);
         }
 
-        public static void SelectElement(IWebElement webElement, int index)
+        public static void SelectOptionFromDDL(IWebElement element, int index)
         {
-            SelectElement selectElement = new SelectElement(webElement);
-            selectElement.SelectByIndex(index);
+            SelectElement DropDownList = new SelectElement(element);
+            DropDownList.SelectByIndex(index);
         }
 
         public static void PressKeyboardButton(string button)
@@ -74,6 +74,7 @@ namespace CaesarLib
             {
                 return false;
             }
+        }
         public static bool IsElementVisible(IWebDriver driver, By byExpression)
         {
             try

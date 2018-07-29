@@ -41,10 +41,10 @@ namespace CaesarLib
         {
             Acts.InputValue(FirstName, firstName);
             Acts.InputValue(LastName, lastName);
-            Acts.SelectElement(EnglishLevel, englishLevelIndex);
+            Acts.SelectOptionFromDDL(EnglishLevel, englishLevelIndex);
             Acts.InputValue(IncomingTest, incomingTest);
             Acts.InputValue(EntryScore, entryScore);
-            Acts.SelectElement(ApprovedBy, approvedByIndex);
+            Acts.SelectOptionFromDDL(ApprovedBy, approvedByIndex);
         }
         public int CountUploadedFiles()
         {

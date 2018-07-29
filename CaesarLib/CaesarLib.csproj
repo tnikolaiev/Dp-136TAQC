@@ -68,7 +68,6 @@
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleKeyDatesTab.cs" />
     <Compile Include="MainPage\CenterContainer\StudentsContent\StudentsContent.cs" />
     <Compile Include="MainPage\LeftContainer\AboutMenu.cs" />
-    <Compile Include="MainPage\ModalWindow\CreateGroupWindow.cs" />
     <Compile Include="MainPage\ModalWindow\SelectGroupWindow.cs" />
     <Compile Include="MainPage\ModalWindow\GroupCreateWindow.cs" />
     <Compile Include="MainPage\ModalWindow\GroupDeleteConfirmationWindow.cs" />

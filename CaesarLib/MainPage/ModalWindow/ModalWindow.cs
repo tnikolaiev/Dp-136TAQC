@@ -27,7 +27,6 @@ namespace CaesarLib
         private EditStudentListWindow _editStudentListWindow;
         private EditStudentWindow _editStudentWindow;
         private SelectGroupWindow _selectGroupWindow;
-        public CreateGroupWindow CreateGroupWindow
 
         public GroupDeleteConfirmationWindow GroupDeleteConfirmationWindow
         {
