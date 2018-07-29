@@ -129,6 +129,10 @@ namespace CaesarLib
                 Acts.IsElementExists(driver, By.Id("left-side-bar")) &
                 Acts.IsElementExists(driver, By.Id("right-side-bar")) ?
                 true : false;
+            //return driver.FindElements(By.Id("main-section")).Count > 0 &
+            //    driver.FindElements(By.Id("left-side-bar")).Count > 0 &
+            //    driver.FindElements(By.Id("left-side-bar")).Count > 0 ?
+            //    true : false;
         }
 
         public bool IsMainPageOpened()

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Interactions;
+﻿using CaesarLib;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
-using CaesarLib;
+using System;
+using System.Collections.Generic;
 
 namespace CaesarTests
 {
@@ -24,7 +24,7 @@ namespace CaesarTests
             driver.Manage().Window.Maximize();
             driver.Url = "http://localhost:3000/logout";
             action = new Actions(driver);
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("dmytro", "1234", wait);
             mainPageInstance = new MainPage(driver);

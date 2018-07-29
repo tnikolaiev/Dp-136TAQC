@@ -5,8 +5,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Threading;
 
 namespace CaesarTests
 {
@@ -47,7 +45,7 @@ namespace CaesarTests
             bool isLeftMenuClosed = wait.Until((d) => !mainPageInstance.LeftMenu.IsOpened());
             Assert.IsTrue(isLeftMenuClosed);
         }
-        
+
         [OneTimeTearDown]
         public void CleanUp()
         {
