@@ -14,85 +14,88 @@ namespace CaesarTests
         WebDriverWait wait;
         string baseURL = "localhost:3000";
         LoginPage loginPageInstance;
-        StudentsContent studentsContentInstance;
-        EditStudentListWindow editStudentListInstance;
-        EditStudentWindow editStudentInstance;
+        MainPage mainPageInstance;
         String path;
         [OneTimeSetUp]
         public void OneTimeSetUpTest()
         {
-            wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
-
+            wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(2));
             webDriver.Manage().Window.Maximize();
-            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
+            //Open Login Page
             webDriver.Url = baseURL;
-
+            wait.Until((driver) => LoginPage.IsLoginPageOpened(driver));
             loginPageInstance = new LoginPage(webDriver);
+            //Login as Teacher
             loginPageInstance.LogIn("sasha", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
-
+            mainPageInstance = new MainPage(webDriver);
+            //Go to group's DP-093-JS students page
             webDriver.Url = baseURL + "/Students/Dnipro/DP-093-JS/list";
-            studentsContentInstance = new StudentsContent(webDriver);
             wait.Until((d) => StudentsContent.IsStudentsContentOpened(d));
-
-            Acts.Click(studentsContentInstance.EditButton);
-
-            editStudentListInstance = new EditStudentListWindow(webDriver);
+            //Open modal window 'EditStudentListWindow'
+            mainPageInstance.CenterContainer.StudentsContent.EditButton.Click();
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
-
-            Acts.Click(editStudentListInstance.CreateStudentButton);
-            editStudentInstance = new EditStudentWindow(webDriver);
+            //Create new student for test
+            mainPageInstance.ModalWindow.EditStudentListWindow.CreateStudentButton.Click();
             wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
-
-            editStudentInstance.FillForm("Denis", "Petrov", 0, "120", "5", 0);
-            Acts.Click(editStudentInstance.SaveButton);
+            mainPageInstance.ModalWindow.EditStudentWindow.FillForm("Andrey", "Magera", 3, "137", "4.2", 1);
+            mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
 
         }
         [SetUp]
         public void SetUpTest()
         {
-            Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.EditButtons));
+            //Open last student in table for editing
+            mainPageInstance.ModalWindow.EditStudentListWindow.StudentTable.GetElementFromCell
+                (mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count, EditStudentListWindow.EditButtonsColumn).Click();
             wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
-
+            //Upload CV and photo
             path = EditStudentWindow.GetTestFile("TC_3_04 CV.docx");
-            Acts.Click(editStudentInstance.BrowseCVButton);
+            mainPageInstance.ModalWindow.EditStudentWindow.BrowseCVButton.Click();
             Acts.UploadFile(path);
-
             path = EditStudentWindow.GetTestFile("TC_3_04 photo.png");
-            Acts.Click(editStudentInstance.BrowsePhotoButton);
+            mainPageInstance.ModalWindow.EditStudentWindow.BrowsePhotoButton.Click();
             Acts.UploadFile(path);
-
-            Acts.Click(editStudentInstance.SaveButton);
+            //Save changes
+            mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
-
-            Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.EditButtons));
+            //Open last student in table for editing
+            mainPageInstance.ModalWindow.EditStudentListWindow.StudentTable.GetElementFromCell
+                (mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count, EditStudentListWindow.EditButtonsColumn).Click();
             wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
         }
         [Test]
         public void ExecuteTest_DeleteFiles_FilesDeleted()
         {
-            Acts.Click(editStudentInstance.RemoveCVButton);
-            Acts.Click(editStudentInstance.RemovePhotoButton);
-
-            Acts.Click(editStudentInstance.SaveButton);
+            //Remove files
+            mainPageInstance.ModalWindow.EditStudentWindow.RemoveCVButton.Click();
+            mainPageInstance.ModalWindow.EditStudentWindow.RemovePhotoButton.Click();
+            //Save changes
+            mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
 
-            Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.EditButtons));
+            //Open last student in table for editing
+            mainPageInstance.ModalWindow.EditStudentListWindow.StudentTable.GetElementFromCell
+                (mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count, EditStudentListWindow.EditButtonsColumn).Click();
             wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
 
-            Assert.AreEqual(0, editStudentInstance.CountUploadedFiles());
+            Assert.AreEqual(0, mainPageInstance.ModalWindow.EditStudentWindow.CountUploadedFiles());
         }
         [TearDown]
         public void TearDownTest()
         {
-            Acts.Click(editStudentInstance.SaveButton);
+            //Save changes
+            mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
         }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()
         {
-            Acts.Click(editStudentListInstance.GetLastElement(editStudentListInstance.DeleteButtons));
+            //Delete test students
+            mainPageInstance.ModalWindow.EditStudentListWindow.StudentTable.GetElementFromCell
+                (mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count, EditStudentListWindow.DeleteButtonsColumn).Click();
             Acts.PressKeyboardButton(@"{Enter}");
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
             webDriver.Close();

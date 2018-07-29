@@ -26,6 +26,7 @@ namespace CaesarLib
         }
         private EditStudentListWindow _editStudentListWindow;
         private EditStudentWindow _editStudentWindow;
+        private SelectGroupWindow _selectGroupWindow;
 
         public GroupDeleteConfirmationWindow GroupDeleteConfirmationWindow
         {
@@ -88,6 +89,18 @@ namespace CaesarLib
                 {
                     _editStudentWindow = new EditStudentWindow(driver);
                     return _editStudentWindow;
+                }
+            }
+        }
+        public SelectGroupWindow SelectGroupWindow
+        {
+            get
+            {
+                if (_selectGroupWindow != null) return _selectGroupWindow;
+                else
+                {
+                    _selectGroupWindow = new SelectGroupWindow(driver);
+                    return _selectGroupWindow;
                 }
             }
         }
