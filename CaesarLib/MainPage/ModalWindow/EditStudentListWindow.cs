@@ -11,10 +11,9 @@ namespace CaesarLib
     public class EditStudentListWindow
     {
         IWebDriver webDriver;
-        public IWebElement ModalWindow { get => webDriver.FindElement(By.Id("modal-window")); }
         public IWebElement CreateStudentButton { get => webDriver.FindElement(By.ClassName("createStudent")); }
         public IWebElement ImportStudentsButton { get => webDriver.FindElement(By.ClassName("csv-button")); }
-        public Table StudentTable { get => new Table(ModalWindow.FindElement(By.ClassName("students_list")),webDriver); }
+        public Table StudentTable { get => new Table(webDriver.FindElement(By.XPath("//*[@id='modal-window']//table")), webDriver); }
         public IList<IWebElement> Students { get => StudentTable.GetRows(); }
         public IWebElement SaveFormButton { get => webDriver.FindElement(By.ClassName("save")); }
         public IWebElement ExitFormButton { get => webDriver.FindElement(By.ClassName("exit")); }
@@ -50,7 +49,7 @@ namespace CaesarLib
         {
             Dictionary<String, String> fileNamePathPairs = new Dictionary<String, String>();
 
-            String[] files = Directory.GetFiles(@"DP-136TAQC\CaesarTests\TC_3_06 files");
+            String[] files = Directory.GetFiles(@"CaesarTests\TC_3_06 files");
 
             for (int i = 0; i < files.Length; i++)
             {

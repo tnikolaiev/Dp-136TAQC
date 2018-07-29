@@ -19,7 +19,7 @@ namespace CaesarTests
         public void Initialize()
         {
             driver.Url = @"http://localhost:3000/logout";
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance = new LoginPage(driver);
         }
@@ -52,24 +52,22 @@ namespace CaesarTests
             Assert.IsFalse(loginPageInstance.LoginButton.Enabled);
         }
 
-        [Test]
-        public void ExecuteTest_InvalidValues_ErrorMessage()
+        static IEnumerable<object[]> LoginInvalidData()
         {
-            List<String> logins = new List<String>() { "login1", "#$%^#${}", "4f4&4]3", "login", "1234", "12" };
-            List<String> passwords = new List<String>() { "$%^&#*", "pass2", "#@#@#@", "pa$$word", "12", "1234" };
-            int i = 0;
-            while (i < logins.Count)
-            {
-                loginPageInstance.LogIn(logins[i], passwords[i]);
+            return Instruments.ReadXML("LoginPageInvalidData.xml", "testData", "login", "password");
+        }
 
-                Assert.AreEqual(String.Empty, loginPageInstance.PasswordField.GetAttribute("value"));
-                Assert.AreEqual(logins[i], loginPageInstance.LoginField.GetAttribute("value"));
-                String expectedMessage = "Incorrect login or password. Please, try again";
-                Assert.AreEqual(expectedMessage, loginPageInstance.MessageField.Text);
+        [Test, TestCaseSource("LoginInvalidData")]
+        public void ExecuteTest_InvalidValues_ErrorMessage(String login, String password)
+        {
+            loginPageInstance.LogIn(login, password);
+            bool passFieldEmpty = String.Empty.Equals(loginPageInstance.PasswordField.GetAttribute("value"));
+            bool loginFieldKeepsValue = login.Equals(loginPageInstance.LoginField.GetAttribute("value"));
+            String expectedMessage = "Incorrect login or password. Please, try again";
+            bool textMatches = expectedMessage.Equals(loginPageInstance.MessageField.Text);
 
-                loginPageInstance.LoginField.SendKeys(Keys.Escape);
-                i++;
-            }
+            Assert.IsTrue(passFieldEmpty & loginFieldKeepsValue & textMatches);
+            loginPageInstance.LoginField.SendKeys(Keys.Escape);
         }
 
         [Test]
@@ -83,6 +81,7 @@ namespace CaesarTests
         public void CleanUp()
         {
             driver.Close();
+            driver.Quit();
         }
     }
 }

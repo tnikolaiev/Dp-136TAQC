@@ -34,20 +34,22 @@ namespace CaesarLib
             DropDownList.SelectByValue(value);
         }
 
-        public static void SelectElement(IWebElement webElement, int index)
+        public static void SelectOptionFromDDL(IWebElement element, int index)
         {
-            SelectElement selectElement = new SelectElement(webElement);
-            selectElement.SelectByIndex(index);
+            SelectElement DropDownList = new SelectElement(element);
+            DropDownList.SelectByIndex(index);
         }
+
         public static void PressKeyboardButton(string button)
         {
             SendKeys.SendWait(button);
         }
+
         public static void UploadFile(String path)
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             SendKeys.SendWait(path);
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             SendKeys.SendWait(@"{Enter}");
         }
 
@@ -57,8 +59,42 @@ namespace CaesarLib
         }
 
         public static bool IsElementPresent(IWebDriver driverInstance, By by)
-        {    
+        {
             return driverInstance.FindElements(by).Count > 0 ? true : false;
+        }
+
+        public static bool IsAlertPresent(WebDriverWait wait)
+        {
+            try
+            {
+                wait.Until(ExpectedConditions.AlertIsPresent());
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static bool IsElementVisible(IWebDriver driver, By byExpression)
+        {
+            try
+            {
+                if (driver.FindElement(byExpression).Displayed) return true;
+                else return false;
+            }
+            catch (NoSuchElementException) { return false; }
+            catch (StaleElementReferenceException) { return false; }
+        }
+
+        public static bool IsElementExists(IWebDriver driver, By byExpression)
+        {
+            try
+            {
+                driver.FindElement(byExpression);
+                return true;
+            }
+            catch (NoSuchElementException) { return false; }
+            catch (StaleElementReferenceException) { return false; }
         }
     }
 }

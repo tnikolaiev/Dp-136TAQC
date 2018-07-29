@@ -51,6 +51,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebDriver, Version=3.13.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.3.13.1\lib\net45\WebDriver.dll</HintPath>
     </Reference>
@@ -67,6 +69,9 @@
     <Compile Include="TC_1_02_01.cs" />
     <Compile Include="TC_1_01_01.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TC_1_04_04.cs" />
+    <Compile Include="TC_1_04_05.cs" />
+    <Compile Include="TC_1_04_06.cs" />
     <Compile Include="TC_1_05_03.cs" />
     <Compile Include="TC_1_05_04.cs" />
     <Compile Include="TC_3_06_01.cs" />
@@ -84,9 +89,9 @@
     <Compile Include="TC_3_04_02.cs" />
     <Compile Include="TC_1_04_01.cs" />
     <Compile Include="TC_1_03_01.cs" />
-    <Compile Include="TC_3_04_03.cs" />
     <Compile Include="TC_3_08.cs" />
     <Compile Include="TestsForTableClass.cs" />
+    <Compile Include="Test_SelectGroupWindow.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -98,7 +103,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Content Include="LocationsList.xml" />
+=======
+    <Content Include="TestData\InvalidLoginCredentials.xml" />
+    <Content Include="TestData\LoginPageInvalidData.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\NewGroupsCreationData.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="TestData\StartFinishDateData.xml">
+      <SubType>Designer</SubType>
+    </Content>
+>>>>>>> development
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

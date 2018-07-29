@@ -9,21 +9,21 @@ namespace CaesarLib
 {
     public class Table
     {
-        private IWebElement tableElement;
-        private IWebDriver driver;
+        private IWebElement tableElement;       
 
         public Table(IWebElement tableElement, IWebDriver driver)
         {
-            this.tableElement = tableElement;
-            this.driver = driver;
+            this.tableElement = tableElement;           
         }
 
+        //Use this method to get all Rows in table without column names
         public IList<IWebElement> GetRows()
         {
-            IList<IWebElement> rows = tableElement.FindElements(By.XPath("//tbody//tr"));
+            IList<IWebElement> rows = tableElement.FindElements(By.XPath(".//tbody//tr"));
             return rows;
         }
 
+        //Use this method to get all column names
         public IList<IWebElement> GetHeadings()
         {
             IWebElement HeadingsRow = tableElement.FindElement(By.XPath(".//thead//tr[1]"));
@@ -31,6 +31,7 @@ namespace CaesarLib
             return headingColumns;
         }
 
+        //Method for getting all rows with all their cells 
         public List<IList<IWebElement>> GetRowsWithColumns()
         {
             IList<IWebElement> rows = GetRows();
@@ -43,6 +44,7 @@ namespace CaesarLib
             return rowsWithColumns;
         }
 
+        //Method for getting list of cells with column names in each row
         public List<IDictionary<String, IWebElement>> getRowsWithColumnsByHeadings()
         {
             List<IList<IWebElement>> rowsWithColumns = GetRowsWithColumns();
@@ -65,7 +67,8 @@ namespace CaesarLib
 
         }
 
-        public int GetRowNumberByValue(String value)
+        //Method to find out number of row where specific value is situated
+        public int GetRowNumberByValue(String valueInRow)
         {
             List<IList<IWebElement>> rowsWithColumns = GetRowsWithColumns();
             int rowNumber = 0;
@@ -78,12 +81,17 @@ namespace CaesarLib
                 foreach (IWebElement element in oneRowWithColumn)
                 {
                     string textFromCell = element.Text;
+                    if (textFromCell==valueInRow)
+                    {
+                        return rowNumber;
+                    }                    
                 }
             }
 
             return rowNumber;
         }
 
+        //Getting any cell by column number and row number
         public String GetValueFromCell(int rowNumber, int columnNumber)
         {
             List<IList<IWebElement>> rowsWithColumns = GetRowsWithColumns();
@@ -92,6 +100,7 @@ namespace CaesarLib
             return cell.Text;
         }
 
+        //Getting any cell by row number and column name
         public String GetValueFromCell(int rowNumber, String columnName)
         {
             List<IDictionary<String, IWebElement>> rowsWithColumnsByHeadings = getRowsWithColumnsByHeadings();
@@ -100,10 +109,18 @@ namespace CaesarLib
             return cell.Text;
         }
 
-        public String GetValueFromCell(string value, String columnName)
+        //Getting any cell by value from row and column name
+        public String GetValueFromCell(string valueInRow, String columnName)
         {
-            int rowNumber = GetRowNumberByValue(value);
+            int rowNumber = GetRowNumberByValue(valueInRow);
             return GetValueFromCell(rowNumber, columnName);
+        }
+
+        //Getting any cell by value from row and column number
+        public String GetValueFromCell(string valueInRow, int columnNumber)
+        {
+            int rowNumber = GetRowNumberByValue(valueInRow);
+            return GetValueFromCell(rowNumber, columnNumber);                      
         }
 
         public IWebElement GetElementFromCell(int rowNumber, int columnNumber)
