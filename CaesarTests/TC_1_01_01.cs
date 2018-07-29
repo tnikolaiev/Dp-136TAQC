@@ -11,39 +11,29 @@ namespace CaesarTests
     [TestFixture]
     public class TC_1_01_01
     {
-        List<string> links;
         IWebDriver driver = new ChromeDriver();
         WebDriverWait wait;
-
-        [OneTimeSetUp]
-        public void FirstInitialization()
-        {
-            links = new List<string>
-            {
-                @"http://localhost:3000", @"http://localhost:3000/Groups/Dnipro", @"http://localhost:3000/admin"
-            };
-        }
 
         [SetUp]
         public void Initialization()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
         }
 
-        [Test]
-        public void Test_NavigateToLinks_LoginPageOpened()
+        static List<String> LinksList = new List<String> { @"http://localhost:3000", @"http://localhost:3000/Groups/Dnipro", @"http://localhost:3000/admin" };
+
+        [Test, TestCaseSource("LinksList")]
+        public void Test_NavigateToLinks_LoginPageOpened(String link)
         {
-            foreach (var link in links)
-            {
-                driver.Url = link;
-                Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPageOpened(driver)));
-            }
+            driver.Url = link;
+            Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPageOpened(driver)));
         }
 
         [OneTimeTearDown]
         public void CleanUp()
         {
             driver.Close();
+            driver.Quit();
         }
     }
 }
