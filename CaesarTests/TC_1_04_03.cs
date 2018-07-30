@@ -1,11 +1,12 @@
-﻿using NUnit.Framework;
+﻿using CaesarLib;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 
-namespace CaesarLib
+namespace CaesarTests
 {
     [TestFixture]
     class TC_1_04_03
