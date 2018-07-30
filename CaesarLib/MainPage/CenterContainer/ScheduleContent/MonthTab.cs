@@ -7,16 +7,16 @@ using OpenQA.Selenium;
 
 namespace CaesarLib
 {
-    public class ScheduleMonthView 
+    public class MonthTab 
     {
         private IWebDriver _driverInstance;
 
-        public ScheduleMonthView(IWebDriver driverInstance)
+        public MonthTab(IWebDriver driverInstance)
         {
             _driverInstance = driverInstance;
         }
 
-        public bool IsScheduleMonthViewDisplayed(IWebDriver driverInstance)
+        public bool IsMonthTabDisplayed(IWebDriver driverInstance)
         {
             return driverInstance.FindElements(By.ClassName("calendar-table")).Count > 0 ?
                true : false;
