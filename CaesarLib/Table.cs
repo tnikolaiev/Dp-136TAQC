@@ -53,7 +53,7 @@ namespace CaesarLib
             if (rowNumber == 0) { row = GetRows().Last(); }
             else
             {
-                row = GetRows()[rowNumber];
+                row = GetRows()[rowNumber-1];
             }
 
             IList<IWebElement> columns = row.FindElements(By.XPath(".//td"));
@@ -62,6 +62,23 @@ namespace CaesarLib
                 data.Add(el.Text);
             }
             return data;
+        }
+
+        public bool FindRowInTable(List<string> expectedRow)
+        {
+            int number = GetRows().Count;
+            List<string> actualRow = new List<string>();
+            for (int i = 0; i < number; i++)
+            {
+                actualRow = getRowWithColumns(i);
+
+                if (actualRow.SequenceEqual(expectedRow))
+                {
+                    return true;
+                }
+                else { return false; }              
+            }
+            return false;
         }
 
         //Method for getting list of cells with column names in each row

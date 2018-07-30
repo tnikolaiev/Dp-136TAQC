@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenQA.Selenium;
-
+using OpenQA.Selenium.Support.UI;
 
 namespace CaesarLib
 {
@@ -30,6 +30,12 @@ namespace CaesarLib
             }
         }
 
+        public CreateEditUsersForm setFirstName(string value)
+        {
+            FirstNameField.SendKeys(value);
+            return this;
+        }
+
         public IWebElement LastNameField
         {
             get
@@ -43,7 +49,13 @@ namespace CaesarLib
             }
         }
 
-        public IWebElement Role
+        public CreateEditUsersForm setLastName(string value)
+        {
+            LastNameField.SendKeys(value);
+            return this;
+        }
+
+        public IWebElement RoleDDL
         {
             get
             {
@@ -56,7 +68,13 @@ namespace CaesarLib
             }
         }
 
-        public IWebElement Location
+        public CreateEditUsersForm selectRole(int value)
+        {
+            Acts.SelectOptionFromDDL(RoleDDL, value);
+            return this;
+        }
+
+        public IWebElement LocationDDL
         {
             get
             {
@@ -69,6 +87,11 @@ namespace CaesarLib
             }
         }
 
+        public CreateEditUsersForm selectLocation(int value)
+        {
+            Acts.SelectOptionFromDDL(LocationDDL, value);
+            return this;
+        }
         public IWebElement Photo
         {
             get
@@ -81,6 +104,13 @@ namespace CaesarLib
                 }
             }
         }
+
+        public CreateEditUsersForm setPhoto(string value)
+        {
+            Photo.SendKeys(value);
+            return this;
+        }
+
         public IWebElement Login
         {
             get
@@ -92,6 +122,12 @@ namespace CaesarLib
                     return _login;
                 }
             }
+        }
+
+        public CreateEditUsersForm setLogin(string value)
+        {
+            Login.SendKeys(value);
+            return this;
         }
 
         public IWebElement Password
@@ -107,9 +143,42 @@ namespace CaesarLib
             }
         }
 
+        public CreateEditUsersForm setPassword(string value)
+        {
+            Password.SendKeys(value);
+            return this;
+        }
+
+        public List<string> RememberUser()
+        {
+            List<string> user = new List<string>();
+            user.Add(FirstNameField.GetAttribute("value"));
+            user.Add(LastNameField.GetAttribute("value"));
+            user.Add(RoleDDL.GetAttribute("value"));
+            user.Add(LocationDDL.GetAttribute("value"));
+            user.Add(Photo.GetAttribute("value"));
+            user.Add(Login.GetAttribute("value"));
+            user.Add(Password.GetAttribute("value"));
+
+            return user;
+        }
+
         public CreateEditUsersForm(IWebDriver driver) : base(driver)
         {
             _driver = driver;
+        }
+
+        public bool IsOpened(WebDriverWait wait)
+        {
+            try
+            {
+                wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }

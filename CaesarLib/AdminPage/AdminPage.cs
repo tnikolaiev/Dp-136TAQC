@@ -185,10 +185,11 @@ namespace CaesarLib
                 true : false;
         }
 
-        public static bool IsCreateFormOpened(IWebDriver driver)
+        public static bool IsCreateEditFormOpened(IWebDriver driver)
         {
-            return driver.FindElements(By.ClassName("modal-header")).Count > 0 &
-                driver.FindElements(By.Name("firstName")).Count > 0 ?
+            return driver.FindElements(By.ClassName("modal-content")).Count > 0 &
+                driver.FindElements(By.ClassName("modal-header")).Count > 0 &
+                driver.FindElements(By.ClassName("modal-body")).Count > 0 ?
                 true : false;
         }
 

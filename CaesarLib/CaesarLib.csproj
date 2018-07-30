@@ -62,6 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acts.cs" />
+    <Compile Include="AdminPage\CreateEditStudentsForm.cs" />
+    <Compile Include="AdminPage\CreateEditUsersForm.cs" />
+    <Compile Include="AdminPage\CreateEditGroupsForm.cs" />
     <Compile Include="Instruments.cs" />
     <Compile Include="MainPage\CenterContainer\GroupsContent\GroupsContent.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleContent.cs" />
