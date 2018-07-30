@@ -44,6 +44,26 @@ namespace CaesarLib
             return rowsWithColumns;
         }
 
+        //This method return list of the text from row 
+        //if enter 0 return last row
+        public List<string> getRowWithColumns(int rowNumber)
+        {
+            List<string> data = new List<string>();
+            IWebElement row;
+            if (rowNumber == 0) { row = GetRows().Last(); }
+            else
+            {
+                row = GetRows()[rowNumber];
+            }
+
+            IList<IWebElement> columns = row.FindElements(By.XPath(".//td"));
+            foreach (var el in columns)
+            {
+                data.Add(el.Text);
+            }
+            return data;
+        }
+
         //Method for getting list of cells with column names in each row
         public List<IDictionary<String, IWebElement>> getRowsWithColumnsByHeadings()
         {
