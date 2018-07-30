@@ -77,7 +77,7 @@
     <Compile Include="MainPage\ModalWindow\EditScheduleWindow.cs" />
     <Compile Include="MainPage\CenterContainer\CenterContainer.cs" />
     <Compile Include="MainPage\ModalWindow\LocationWindow.cs" />
-    <Compile Include="AdminPage.cs" />
+    <Compile Include="AdminPage\AdminPage.cs" />
     <Compile Include="MainPage\LeftContainer\GroupsInLocation.cs" />
     <Compile Include="MainPage\LeftContainer\LeftContainer.cs" />
     <Compile Include="MainPage\LeftMenu.cs" />
