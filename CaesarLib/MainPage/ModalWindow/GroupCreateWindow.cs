@@ -31,8 +31,6 @@ namespace CaesarLib
         private IWebElement _cancelGroupAddingButton;
         private IWebDriver driver;
 
-        //TODO: datepicker ?
-
         public IWebElement CreateGroupWindowInstnace
         {
             get
@@ -58,7 +56,6 @@ namespace CaesarLib
                 }
             }
         }
-
 
         public IWebElement GroupNameField
         {
@@ -400,6 +397,26 @@ namespace CaesarLib
         public bool IsGroupNameHintVisible()
         {
             return Acts.IsElementVisible(driver, By.XPath("//div[@class='form-group name-wrapper col-xs-12']//p[@class='hint']"));
+        }
+
+        public bool IsDirectionHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='row'][2]//p[@class='hint']"));
+        }
+
+        public bool IsStartDateHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='row'][2]/div[contains (@class, 'calendar-wrapper')]//p[@class='hint']"));
+        }
+
+        public bool IsFinishDateHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='row'][3]/div[contains(@class, 'calendar-wrapper')]//p[@class='hint']"));
+        }
+
+        public bool IsExpertHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='add-expert clearfix']//p[@class='hint']"));
         }
 
         public bool IsCancelButtonVisible()
