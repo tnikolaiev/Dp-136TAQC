@@ -16,6 +16,7 @@ namespace CaesarTests
         string baseURL = "localhost:3000";
         LoginPage loginPageInstance;
         ScheduleContent ScheduleContentInstance;
+        MainPage mainPageInstance;
 
         [SetUp]
         public void BeforeTest()
@@ -31,23 +32,19 @@ namespace CaesarTests
             wait.Until((d) => MainPage.IsMainPageOpened(d));
 
             //Opening Schedule Page
-            TopMenu topMenuInstance = new TopMenu(driver);
-            Actions builder = new Actions(driver);
-            builder.MoveToElement(topMenuInstance.TopMenuSection).Build().Perform();
-            Acts.Click(topMenuInstance.ScheduleItem);
+
+            mainPageInstance = new MainPage(driver);
+            ScheduleContentInstance = mainPageInstance.OpenScheduleContent();
+
+            //Select group from LeftContainer
+
+            mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
         }
 
         [Test]
 
         public void CheckQAEventsScheduleEditor()
-        {
-
-            //Select group from LeftContainer
-            ScheduleContentInstance = new ScheduleContent(driver);
-            Acts.Click(ScheduleContentInstance
-                .LeftContainerInstance
-                .GroupsInLocation
-                .GetGroupByName("DP-094-MQC"));
+        {           
 
             //Click on cogweel for ScheduleEditor opening
             ScheduleContentInstance.ClickCogwheel();
