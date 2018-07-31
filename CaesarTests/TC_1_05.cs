@@ -11,7 +11,7 @@ namespace CaesarTests
 {
  
     [TestFixture]
-    public class TC_1_05_04
+    public class TC_1_05
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
@@ -41,7 +41,7 @@ namespace CaesarTests
         [Test, TestCaseSource("GetLocationLists")]
         public void TestLocationList(string exeptedResult, string city)
         {
-            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.LocationsItem);
             locationWindowInstance = new LocationWindow(driver);
             string[] parts = city.Split(',');

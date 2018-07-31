@@ -8,7 +8,7 @@ using System;
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_1_05_03
+    class TC_1_05_03_04
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
@@ -35,7 +35,7 @@ namespace CaesarTests
         [Test]
         public void ExecuteTest_ChooseLocationRivne_UsingKeyBoard()
         {
-            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.LocationsItem);
             Acts.Click(mainPageInstance.ModalWindow.LocationWindow.CityRivne);
             Acts.PressKeyboardButton("{Enter}");
@@ -48,7 +48,7 @@ namespace CaesarTests
         [Test]
         public void ExecuteTest_CancelLocationIvanoFrankivsk_UsingKeyBoard()
         {
-            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.LocationsItem);
             Acts.Click(mainPageInstance.ModalWindow.LocationWindow.CityIvanoFrankivsk);
             Acts.PressKeyboardButton("{Esc}");
