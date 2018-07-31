@@ -35,7 +35,13 @@ namespace CaesarLib
             }
         }
 
-        public IWebElement LocationDropDown
+        public CreateEditGroupsForm setName(string value)
+        {
+            NameField.SendKeys(value);
+            return this;
+        }
+
+        public IWebElement LocationDDL
         {
             get
             {
@@ -46,6 +52,12 @@ namespace CaesarLib
                     return _location;
                 }
             }
+        }
+
+        public CreateEditGroupsForm setLocationDDL(string value)
+        {
+            Acts.SelectOptionFromDDL(LocationDDL, value);
+            return this;
         }
 
         public IWebElement BudgetOwnerCheckbox
@@ -61,7 +73,7 @@ namespace CaesarLib
             }
         }
 
-        public IWebElement DirectionDropDown
+        public IWebElement DirectionDDL
         {
             get
             {
@@ -72,6 +84,12 @@ namespace CaesarLib
                     return _direction;
                 }
             }
+        }
+
+        public CreateEditGroupsForm setDirectionDDL(string value)
+        {
+            Acts.SelectOptionFromDDL(DirectionDDL, value);
+            return this;
         }
 
         public IWebElement StartDate
@@ -113,6 +131,12 @@ namespace CaesarLib
             }
         }
 
+        public CreateEditGroupsForm setTeachers(string value)
+        {
+            TeachersField.SendKeys(value);
+            return this;
+        }
+
         public IWebElement ExpertsField
         {
             get
@@ -126,7 +150,13 @@ namespace CaesarLib
             }
         }
 
-        public IWebElement StageDropDown
+        public CreateEditGroupsForm setExperts(string value)
+        {
+            ExpertsField.SendKeys(value);
+            return this;
+        }
+
+        public IWebElement StageDDL
         {
             get
             {
@@ -139,5 +169,10 @@ namespace CaesarLib
             }
         }
 
+        public CreateEditGroupsForm setStageDDL(string value)
+        {
+            Acts.SelectOptionFromDDL(StageDDL, value);
+            return this;
+        }
     }
 }

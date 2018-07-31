@@ -34,7 +34,7 @@ namespace CaesarLib
             }
         }
 
-        public CreateEditStudentsForm setGroupIdField(string value)
+        public CreateEditStudentsForm setGroupId(string value)
         {
             GroupIdField.SendKeys(value);
             return this;
@@ -53,7 +53,7 @@ namespace CaesarLib
             }
         }
 
-        public CreateEditStudentsForm setNameField(string value)
+        public CreateEditStudentsForm setName(string value)
         {
             NameField.SendKeys(value);
             return this;
@@ -72,7 +72,7 @@ namespace CaesarLib
             }
         }
 
-        public CreateEditStudentsForm setLastNameField(string value)
+        public CreateEditStudentsForm setLastName(string value)
         {
             LastNameField.SendKeys(value);
             return this;
@@ -110,7 +110,7 @@ namespace CaesarLib
             }
         }
 
-        public CreateEditStudentsForm setCvUrlField(string value)
+        public CreateEditStudentsForm setCvUrl(string value)
         {
             CvUrlField.SendKeys(value);
             return this;
@@ -129,7 +129,7 @@ namespace CaesarLib
             }
         }
 
-        public CreateEditStudentsForm setImageUrlField(string value)
+        public CreateEditStudentsForm setImageUrl(string value)
         {
             ImageUrlField.SendKeys(value);
             return this;
@@ -148,7 +148,7 @@ namespace CaesarLib
             }
         }
 
-        public CreateEditStudentsForm setEntryScoreField(string value)
+        public CreateEditStudentsForm setEntryScore(string value)
         {
             EntryScoreField.SendKeys(value);
             return this;
@@ -167,7 +167,7 @@ namespace CaesarLib
             }
         }
 
-        public CreateEditStudentsForm setApprovedByField(string value)
+        public CreateEditStudentsForm setApprovedBy(string value)
         {
             ApprovedByField.SendKeys(value);
             return this;

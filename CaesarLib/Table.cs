@@ -63,7 +63,7 @@ namespace CaesarLib
             }
             return data;
         }
-
+        //Method search expected row in table
         public bool FindRowInTable(List<string> expectedRow)
         {
             int number = GetRows().Count;
