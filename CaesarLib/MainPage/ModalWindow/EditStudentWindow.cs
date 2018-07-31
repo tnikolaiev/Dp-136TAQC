@@ -27,7 +27,7 @@ namespace CaesarLib
         {
             this.webDriver = webDriver;
         }
-        public static bool IsEditStudentWindowOpened(IWebDriver driver)
+        public static bool IsOpened(IWebDriver driver)
         {
             if (driver.FindElements(By.ClassName("BrowsePhoto")).Count > 0 &&
                 driver.FindElements(By.ClassName("BrowseCV")).Count > 0 &&
@@ -52,15 +52,7 @@ namespace CaesarLib
         }
         public static String GetTestFile(String fileName)
         {
-            Dictionary<String, String> fileNamePathPairs = new Dictionary<String, String>();
-
-            String[] files = Directory.GetFiles(@"DP-136TAQC\CaesarTests\TC_3_04 files");
-
-            for (int i = 0; i < files.Length; i++)
-            {
-                fileNamePathPairs.Add(Path.GetFileName(files[i]), Path.GetFullPath(files[i]));
-            }
-            return fileNamePathPairs[fileName];
+            return AppDomain.CurrentDomain.BaseDirectory + @"..\..\TC_3_04 files\" + fileName;
         }
     }
 }
