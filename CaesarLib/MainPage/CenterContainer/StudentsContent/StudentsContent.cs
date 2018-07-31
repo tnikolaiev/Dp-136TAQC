@@ -10,21 +10,20 @@ namespace CaesarLib
         public IWebElement StudentsButton { get => webDriver.FindElement(By.Name("students")); }
         public IWebElement ScheduleButton { get => webDriver.FindElement(By.Name("shedule")); }
         public IWebElement MessageButton { get => webDriver.FindElement(By.Name("message")); }
-        public IWebElement StudentsList { get => webDriver.FindElement(By.ClassName("students_list")); }
+        public Table StudentTable { get => new Table(webDriver.FindElement(By.ClassName("students_list"))); }
         public StudentsContent(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
         }
-        public static bool IsStudentsContentOpened(IWebDriver driver)
+        public static bool IsOpened(IWebDriver driver)
         {
-            if (driver.FindElements(By.ClassName("editBtn")).Count > 0 &&
-                driver.FindElements(By.Name("students")).Count > 0 &&
-                driver.FindElements(By.Name("shedule")).Count > 0 &&
-                driver.FindElements(By.Name("message")).Count > 0 &&
-                driver.FindElements(By.ClassName("students_list")).Count > 0)
-                return true;
-            else
-                return false;
+            if (Acts.IsElementExists(driver, By.ClassName("editBtn")) &&
+                Acts.IsElementExists(driver, By.Name("students")) &&
+                Acts.IsElementExists(driver, By.Name("shedule")) &&
+                Acts.IsElementExists(driver, By.Name("message")) &&
+                Acts.IsElementExists(driver, By.ClassName("students_list")))
+                    return true;
+            else return false;
         }
     }
 }

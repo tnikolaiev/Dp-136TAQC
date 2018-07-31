@@ -7,26 +7,26 @@ using OpenQA.Selenium;
 
 namespace CaesarLib
 {
-    public class ScheduleKeyDatesTab
+    public class KeyDatesTab
     {
 
         private IWebDriver _driverInstance;
-        private IWebElement _keyDatesTable;
+        private Table _keyDatesTable;
 
-        public IWebElement KeyDatesTable
+        public Table KeyDatesTable
         {
             get
             {
                 if (_keyDatesTable != null) return _keyDatesTable;
                 else
                 {
-                    _keyDatesTable = _driverInstance.FindElement(By.XPath("//table[@class='keydates-schedule']"));
+                    _keyDatesTable = new Table(_driverInstance.FindElement(By.XPath("//table[@class='keydates-schedule']")));
                     return _keyDatesTable;
                 }
             }
         }
 
-        public ScheduleKeyDatesTab(IWebDriver driverInstance)
+        public KeyDatesTab(IWebDriver driverInstance)
         {
             _driverInstance = driverInstance;
         }

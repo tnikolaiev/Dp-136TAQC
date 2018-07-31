@@ -23,7 +23,7 @@ namespace CaesarLib
         private IWebElement _workWithExpertEvent;
         private IWebElement _consultationEvent;
         private IWebElement _practiceEvent;
-        private ScheduleWeekViewAndEdit _scheduleWeekView;
+        private ScheduleWeekTable _scheduleEditWeekTable;
 
 
         // properties
@@ -148,19 +148,18 @@ namespace CaesarLib
                 }
             }
         }
-        public ScheduleWeekViewAndEdit ScheduleWeekViewAndEditInstance
+        public ScheduleWeekTable ScheduleEditWeekTable
         {
             get
             {
-                if (_scheduleWeekView != null) return _scheduleWeekView;
+                if (_scheduleEditWeekTable != null) return _scheduleEditWeekTable;
                 else
                 {
-                    _scheduleWeekView = new ScheduleWeekViewAndEdit(_driverInstance);
-                    return _scheduleWeekView;
+                    _scheduleEditWeekTable = new ScheduleWeekTable(_driverInstance.FindElement(By.XPath("//div[contains(@class,'Table')]")));
+                    return _scheduleEditWeekTable;
                 }
             }
         }
-
 
         //constructor 
 

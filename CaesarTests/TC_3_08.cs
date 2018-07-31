@@ -36,7 +36,7 @@ namespace CaesarTests
             mainPageInstance = new MainPage(webDriver);
             //Go to group's DP-093-JS students page
             webDriver.Url = baseURL + "/Students/Dnipro/DP-093-JS/list";
-            wait.Until((d) => StudentsContent.IsStudentsContentOpened(d));
+            wait.Until((d) => StudentsContent.IsOpened(d));
             //Open modal window 'EditStudentListWindow'
             mainPageInstance.CenterContainer.StudentsContent.EditButton.Click();
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
@@ -46,7 +46,7 @@ namespace CaesarTests
             int englishLevelIndex, string incomingTest, string entryScore, int approvedByIndex)
         {
             mainPageInstance.ModalWindow.EditStudentListWindow.CreateStudentButton.Click();
-            wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
+            wait.Until((d) => EditStudentWindow.IsOpened(d));
             mainPageInstance.ModalWindow.EditStudentWindow.FillForm(firstName, lastName, englishLevelIndex, incomingTest, entryScore, approvedByIndex);
             mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));

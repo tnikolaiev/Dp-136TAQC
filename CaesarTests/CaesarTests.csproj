@@ -79,6 +79,7 @@
     <Compile Include="TC_2_01_3.cs" />
     <Compile Include="TC_1_02_02_additional.cs" />
     <Compile Include="TC_1_04_03.cs" />
+    <Compile Include="TC_3_06_03.cs" />
     <Compile Include="TC_OpenClose_TopMenu.cs" />
     <Compile Include="TC_1_04_02.cs" />
     <Compile Include="TC_1_05_01.cs" />
@@ -89,7 +90,14 @@
     <Compile Include="TC_1_04_01.cs" />
     <Compile Include="TC_1_03_01.cs" />
     <Compile Include="TC_3_08.cs" />
+<<<<<<< HEAD
     <Compile Include="TestsForTableClass.cs" />
+=======
+    <Compile Include="TestsForScheduleTableClass_ScheduleEditWeekTable.cs" />
+    <Compile Include="TestsForScheduleTableClass_ScheduleViewWeekTable.cs" />
+    <Compile Include="TestsForTableClass_KeyDatesTable.cs" />
+    <Compile Include="Test_SelectGroupWindow.cs" />
+>>>>>>> development
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

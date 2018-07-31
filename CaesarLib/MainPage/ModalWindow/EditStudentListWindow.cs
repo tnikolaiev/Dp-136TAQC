@@ -13,10 +13,10 @@ namespace CaesarLib
         IWebDriver webDriver;
         public IWebElement CreateStudentButton { get => webDriver.FindElement(By.ClassName("createStudent")); }
         public IWebElement ImportStudentsButton { get => webDriver.FindElement(By.ClassName("csv-button")); }
-        public Table StudentTable { get => new Table(webDriver.FindElement(By.XPath("//*[@id='modal-window']//table")), webDriver); }
+        public Table StudentTable { get => new Table(webDriver.FindElement(By.XPath("//*[@id='modal-window']//table"))); }
         public IList<IWebElement> Students { get => StudentTable.GetRows(); }
         public IWebElement SaveFormButton { get => webDriver.FindElement(By.ClassName("save")); }
-        public IWebElement ExitFormButton { get => webDriver.FindElement(By.ClassName("exit")); }
+        public IWebElement ExitFormButton { get => webDriver.FindElement(By.XPath("//*[@id='modal-window']/section/section/section/button[2]")); }
         public IWebElement RightshifterButton { get => webDriver.FindElement(By.ClassName("right")); }
         public static int DownloadButtonsColumn { get => 4; }
         public static int EditButtonsColumn { get => 5; }
@@ -47,15 +47,7 @@ namespace CaesarLib
         }
         public static String GetTestFile(String fileName)
         {
-            Dictionary<String, String> fileNamePathPairs = new Dictionary<String, String>();
-
-            String[] files = Directory.GetFiles(@"DP-136TAQC\CaesarTests\TC_3_06 files");
-
-            for (int i = 0; i < files.Length; i++)
-            {
-                fileNamePathPairs.Add(Path.GetFileName(files[i]), Path.GetFullPath(files[i]));
-            }
-            return fileNamePathPairs[fileName];
+            return AppDomain.CurrentDomain.BaseDirectory + @"..\..\TC_3_06 files\" + fileName;
         }
     }
 }

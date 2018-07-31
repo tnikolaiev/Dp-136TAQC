@@ -15,7 +15,8 @@ namespace CaesarTests
         WebDriverWait wait;
         string baseURL = "localhost:3000";
         LoginPage loginPageInstance;
-        ScheduleContent ScheduleContentInstance;        
+        ScheduleContent ScheduleContentInstance;
+        MainPage mainPageInstance;
 
         [SetUp]
         public void BeforeTest()
@@ -31,39 +32,32 @@ namespace CaesarTests
             wait.Until((d) => MainPage.IsMainPageOpened(d));
 
             //Opening Schedule Page
-            TopMenu topMenuInstance = new TopMenu(driver);
-            Actions builder = new Actions(driver);
-            builder.MoveToElement(topMenuInstance.TopMenuSection).Build().Perform();
-            Acts.Click(topMenuInstance.ScheduleItem);
+
+            mainPageInstance = new MainPage(driver);
+            ScheduleContentInstance = mainPageInstance.OpenScheduleContent();
+
+            //Select group from LeftContainer
+
+            mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
         }
 
         [Test]
 
         public void IsMonthTabAvailable()
         {
-            //Select group from LeftContainer
-            ScheduleContentInstance = new ScheduleContent(driver);
-            Acts.Click(ScheduleContentInstance
-                .LeftContainerInstance
-                .GroupsInLocation
-                .GetGroupByName("DP-094-MQC"));
+           
 
             //Assert MonthView tab is displayed
             Assert.IsTrue(ScheduleContentInstance
-                .ScheduleMonthViewInstance
-                .IsScheduleMonthViewDisplayed(driver));          
+                .MonthTabInstance
+                .IsMonthTabDisplayed(driver));          
         }
 
         [Test]
 
         public void IsWeekTabAvailable()
         {
-            //Select group from LeftContainer
-            ScheduleContentInstance = new ScheduleContent(driver);
-            Acts.Click(ScheduleContentInstance
-                .LeftContainerInstance
-                .GroupsInLocation
-                .GetGroupByName("DP-094-MQC"));
+           
 
             //Click on WeekView button
 
@@ -72,20 +66,14 @@ namespace CaesarTests
 
             //Assert Week tab is displayed
             Assert.IsTrue(ScheduleContentInstance
-                .ScheduleWeekViewAndEditInstance
-                .IsScheduleWeekViewDisplayed(driver));
+                .WeekTabInstance
+                .IsWeekTabDisplayed(driver));
         }
 
         [Test]
 
         public void IsKeyDatesTabAvailable()
-        {
-            //Select group from LeftContainer
-            ScheduleContentInstance = new ScheduleContent(driver);
-            Acts.Click(ScheduleContentInstance
-                .LeftContainerInstance
-                .GroupsInLocation
-                .GetGroupByName("DP-094-MQC"));
+        {            
 
             //Click on KeyDates button
 
@@ -94,7 +82,7 @@ namespace CaesarTests
 
             //Assert KeyDates tab is displayed
             Assert.IsTrue(ScheduleContentInstance
-                .ScheduleKeyDatesInstance
+                .KeyDatesTabInstance
                 .IsKeyDatesDisplayed(driver));
         }
 
