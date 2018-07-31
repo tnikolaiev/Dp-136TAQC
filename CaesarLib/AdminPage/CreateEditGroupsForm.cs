@@ -174,5 +174,22 @@ namespace CaesarLib
             Acts.SelectOptionFromDDL(StageDDL, value);
             return this;
         }
+        public List<string> RememberGroup()
+        {
+            List<string> group = new List<string>();
+            group.Add(NameField.GetAttribute("value"));
+            group.Add(LocationDDL.GetAttribute("value"));
+
+            group.Add(DirectionDDL.GetAttribute("value"));
+            group.Add(LocationDDL.GetAttribute("value"));
+            group.Add(StartDate.GetAttribute("value"));
+            group.Add(FinishDate.GetAttribute("value"));
+            group.Add(TeachersField.GetAttribute("value"));
+            group.Add(ExpertsField.GetAttribute("value"));
+            group.Add(StageDDL.GetAttribute("value"));
+
+            return group;
+        }
+
     }
 }

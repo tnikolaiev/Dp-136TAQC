@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using OpenQA.Selenium;
 using System.Linq;
+using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace CaesarLib
 {
@@ -57,7 +59,7 @@ namespace CaesarLib
                 }
             }
         }
-
+      
         public IWebElement GoToGroups
         {
             get
@@ -191,6 +193,19 @@ namespace CaesarLib
                 driver.FindElements(By.ClassName("modal-header")).Count > 0 &
                 driver.FindElements(By.ClassName("modal-body")).Count > 0 ?
                 true : false;
+        }
+        
+        public bool IsOpened(WebDriverWait wait)
+        {
+            try
+            {
+                wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
     }

@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Test_AdminPage\StudentsForm\TC_4_03_CreateStudent_Success.cs" />
     <Compile Include="Test_AdminPage\TC_FormsAreClosed.cs" />
     <Compile Include="TC_1_01_02.cs" />
     <Compile Include="TC_1_01_03.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="TC_1_04_02.cs" />
     <Compile Include="TC_1_05_01.cs" />
     <Compile Include="TC_1_05_02.cs" />
+    <Compile Include="Test_AdminPage\Test_EscapeToHomeButton.cs" />
     <Compile Include="Test_AdminPage\UsersForm\TC_4_01_CreateUser_Success.cs" />
     <Compile Include="TC_3_04_01.cs" />
     <Compile Include="TC_3_04_02.cs" />
@@ -93,7 +95,6 @@
     <Compile Include="TC_3_08.cs" />
     <Compile Include="TestsForTableClass.cs" />
     <Compile Include="Test_AdminPage\UsersForm\TC_4-01_CreateUser_Fail.cs" />
-    <Compile Include="Test_EscapeToHomeButton.cs" />
     <Compile Include="Test_SelectGroupWindow.cs" />
   </ItemGroup>
   <ItemGroup>

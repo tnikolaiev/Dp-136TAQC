@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 namespace CaesarLib
 {
@@ -166,20 +165,7 @@ namespace CaesarLib
         public CreateEditUsersForm(IWebDriver driver) : base(driver)
         {
             _driver = driver;
-        }
-
-        public bool IsOpened(WebDriverWait wait)
-        {
-            try
-            {
-                wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+        }       
 
     }
 }

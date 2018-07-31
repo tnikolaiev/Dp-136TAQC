@@ -21,6 +21,7 @@ namespace CaesarLib
         {
             this._driver = driver;
         }
+        
         public IWebElement GroupIdField
         {
             get
@@ -172,5 +173,32 @@ namespace CaesarLib
             ApprovedByField.SendKeys(value);
             return this;
         }
+
+        public List<string> RememberStudent()
+        {
+            List<string> student = new List<string>();
+            student.Add(GroupIdField.GetAttribute("value"));
+            student.Add(NameField.GetAttribute("value"));
+            student.Add(LastNameField.GetAttribute("value"));
+            student.Add(EnglishLevelDDL.GetAttribute("value"));
+            student.Add(CvUrlField.GetAttribute("value"));
+            student.Add(ImageUrlField.GetAttribute("value"));
+            student.Add(EntryScoreField.GetAttribute("value"));
+            student.Add(ApprovedByField.GetAttribute("value"));
+
+            return student;
+        }
+        public static bool IsStudentOpened(IWebDriver driver)
+        {
+            return driver.FindElements(By.XPath("/html/body/div[1]/ul/li[3]/a")).Count > 0 &
+               driver.FindElements(By.ClassName("add-new-user")).Count > 0 ?
+               true : false;
+            //List<string> headre = new List<string>();
+            //List<string> expect = new List<string>();
+            //expect.Add("groupId"); expect.Add("name"); expect.Add("lastName");
+            //expect.Add("englishLevel"); expect.Add("CvUrl"); expect.Add("imageUrl");
+            //expect.Add("entryScore"); 
+        }
+       
     }
 }
