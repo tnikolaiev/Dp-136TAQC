@@ -34,6 +34,12 @@ namespace CaesarLib
             }
         }
 
+        public CreateEditStudentsForm setGroupIdField(string value)
+        {
+            GroupIdField.SendKeys(value);
+            return this;
+        }
+
         public IWebElement NameField
         {
             get
@@ -45,6 +51,12 @@ namespace CaesarLib
                     return _name;
                 }
             }
+        }
+
+        public CreateEditStudentsForm setNameField(string value)
+        {
+            NameField.SendKeys(value);
+            return this;
         }
 
         public IWebElement LastNameField
@@ -60,7 +72,13 @@ namespace CaesarLib
             }
         }
 
-        public IWebElement EnglishLevelDropDown
+        public CreateEditStudentsForm setLastNameField(string value)
+        {
+            LastNameField.SendKeys(value);
+            return this;
+        }
+
+        public IWebElement EnglishLevelDDL
         {
             get
             {
@@ -71,6 +89,12 @@ namespace CaesarLib
                     return _englishLevel;
                 }
             }
+        }
+
+        public CreateEditStudentsForm setEnglishLevelDDL(string value)
+        {
+            Acts.SelectOptionFromDDL(EnglishLevelDDL, value);
+            return this;
         }
 
         public IWebElement CvUrlField
@@ -86,6 +110,12 @@ namespace CaesarLib
             }
         }
 
+        public CreateEditStudentsForm setCvUrlField(string value)
+        {
+            CvUrlField.SendKeys(value);
+            return this;
+        }
+
         public IWebElement ImageUrlField
         {
             get
@@ -97,6 +127,12 @@ namespace CaesarLib
                     return _imageUrl;
                 }
             }
+        }
+
+        public CreateEditStudentsForm setImageUrlField(string value)
+        {
+            ImageUrlField.SendKeys(value);
+            return this;
         }
 
         public IWebElement EntryScoreField
@@ -112,6 +148,12 @@ namespace CaesarLib
             }
         }
 
+        public CreateEditStudentsForm setEntryScoreField(string value)
+        {
+            EntryScoreField.SendKeys(value);
+            return this;
+        }
+
         public IWebElement ApprovedByField
         {
             get
@@ -123,6 +165,12 @@ namespace CaesarLib
                     return _approvedBy;
                 }
             }
+        }
+
+        public CreateEditStudentsForm setApprovedByField(string value)
+        {
+            ApprovedByField.SendKeys(value);
+            return this;
         }
     }
 }
