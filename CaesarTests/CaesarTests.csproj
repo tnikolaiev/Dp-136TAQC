@@ -90,7 +90,6 @@
     <Compile Include="TC_1_04_01.cs" />
     <Compile Include="TC_1_03_01.cs" />
     <Compile Include="TC_3_08.cs" />
-    <Compile Include="TestsForTableClass.cs" />
     <Compile Include="TestsForScheduleTableClass_ScheduleEditWeekTable.cs" />
     <Compile Include="TestsForScheduleTableClass_ScheduleViewWeekTable.cs" />
     <Compile Include="TestsForTableClass_KeyDatesTable.cs" />
