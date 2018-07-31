@@ -67,13 +67,10 @@
     <Compile Include="TC_1_02_01.cs" />
     <Compile Include="TC_1_01_01.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
-=======
     <Compile Include="TC_1_04_04.cs" />
     <Compile Include="TC_1_04_05.cs" />
     <Compile Include="TC_1_04_07.cs" />
     <Compile Include="TC_1_04_06.cs" />
->>>>>>> development
     <Compile Include="TC_1_05_03.cs" />
     <Compile Include="TC_1_05_04.cs" />
     <Compile Include="TC_3_06_01.cs" />
