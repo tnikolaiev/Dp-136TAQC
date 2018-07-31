@@ -69,9 +69,10 @@ namespace CaesarTests
                 .SetStartDate(startDateInvalid)
                 .SetGroupName(groupNameInvalid);
             groupCreateWindow.SaveGroupButton.Click();
-
             bool isGroupCreateWindowOpened = groupCreateWindow.IsOpened();
+            wait.Until((d) => groupCreateWindow.IsGroupNameHintVisible());
             bool invalidGroupNameWarn = warnings["groupNameInvalid"].Equals(groupCreateWindow.GroupNameHint.GetAttribute("textContent").Trim());
+            wait.Until((d) => groupCreateWindow.IsStartDateHintVisible());
             bool invalidStartDateWarn = warnings["wrongDateFormat"].Equals(groupCreateWindow.StartDateHint.GetAttribute("textContent").Trim());
             bool invalidDateFinishDataValue = "Invalid date".Equals(groupCreateWindow.FinishDateField.GetAttribute("value"));
             Assert.IsTrue(isGroupCreateWindowOpened & invalidGroupNameWarn & invalidStartDateWarn & invalidDateFinishDataValue);
@@ -86,6 +87,7 @@ namespace CaesarTests
             groupCreateWindow.SetGroupName(groupNameMinLength);
             groupCreateWindow.SaveGroupButton.Click();
             bool isGroupCreateWindowOpened = groupCreateWindow.IsOpened();
+            wait.Until((d) => groupCreateWindow.IsGroupNameHintVisible());
             bool symbolsDeficiencyWarn = warnings["groupNameMinLength"].Equals(groupCreateWindow.GroupNameHint.GetAttribute("textContent").Trim());
             Assert.IsTrue(isGroupCreateWindowOpened & symbolsDeficiencyWarn);
         }
@@ -99,6 +101,7 @@ namespace CaesarTests
             groupCreateWindow.SetGroupName(groupNameMaxLength);
             groupCreateWindow.SaveGroupButton.Click();
             bool isGroupCreateWindowOpened = groupCreateWindow.IsOpened();
+            wait.Until((d) => groupCreateWindow.IsGroupNameHintVisible());
             bool symbolsExcessWarn = warnings["groupNameMaxLength"].Equals(groupCreateWindow.GroupNameHint.GetAttribute("textContent").Trim());
             Assert.IsTrue(isGroupCreateWindowOpened & symbolsExcessWarn);
         }
@@ -113,6 +116,7 @@ namespace CaesarTests
             groupCreateWindow
                 .SetExpertName(expertNameSpecSymb)
                 .AcceptInputExpertButton.Click();
+            wait.Until((d) => groupCreateWindow.IsExpertHintVisible());
             Assert.AreEqual(warnings["expNameSpecSymbolsNA"], groupCreateWindow.ExpertHint.GetAttribute("textContent").Trim());
         }
 
@@ -125,6 +129,7 @@ namespace CaesarTests
             groupCreateWindow.AddExpertButton.Click();
             groupCreateWindow.SetExpertName(expertNameMinMaxLength)
                 .AcceptInputExpertButton.Click();
+            wait.Until((d) => groupCreateWindow.IsExpertHintVisible());
             Assert.AreEqual(warnings["expNameLength"], groupCreateWindow.ExpertHint.GetAttribute("textContent").Trim());
         }
 

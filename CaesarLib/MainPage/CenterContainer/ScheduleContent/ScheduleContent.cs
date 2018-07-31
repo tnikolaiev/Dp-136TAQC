@@ -13,11 +13,10 @@ namespace CaesarLib
         private IWebElement _monthButton;
         private IWebElement _weekButton;
         private IWebElement _keyDatesButton;
+        private WeekTab _weekTabInstance;
+        private MonthTab _monthTabInstance;        
+        private KeyDatesTab _keyDatesTabInstance;       
         private EditScheduleWindow _editScheduleWindowInstance;
-        private ScheduleMonthView _scheduleMonthViewInstance;
-        private ScheduleWeekViewAndEdit _scheduleWeekViewInstance;
-        private ScheduleKeyDatesTab _scheduleKeyDatesInstance;
-        private LeftContainer _leftContainerInstance;
 
         //Constructor  
 
@@ -77,6 +76,46 @@ namespace CaesarLib
                 }
             }
         }
+        
+        public MonthTab MonthTabInstance
+        {
+            get
+            {
+                if (_monthTabInstance != null) return _monthTabInstance;
+                else
+                {
+                    _monthTabInstance = new MonthTab(_driverInstance);
+                    return _monthTabInstance;
+                }
+            }
+        }
+
+        public WeekTab WeekTabInstance
+        {
+            get
+            {
+                if (_weekTabInstance != null) return _weekTabInstance;
+                else
+                {
+                    _weekTabInstance = new WeekTab(_driverInstance);
+                    return _weekTabInstance;
+                }
+            }
+        }
+
+        public KeyDatesTab KeyDatesTabInstance
+        {
+            get
+            {
+                if (_keyDatesTabInstance != null) return _keyDatesTabInstance;
+                else
+                {
+                    _keyDatesTabInstance = new KeyDatesTab(_driverInstance);
+                    return _keyDatesTabInstance;
+                }
+            }
+        }
+
         public EditScheduleWindow EditScheduleWindowInstance
         {
             get
@@ -86,55 +125,6 @@ namespace CaesarLib
                 {
                     _editScheduleWindowInstance = new EditScheduleWindow(_driverInstance);
                     return _editScheduleWindowInstance;
-                }
-            }
-        }
-        public ScheduleMonthView ScheduleMonthViewInstance
-        {
-            get
-            {
-                if (_scheduleMonthViewInstance != null) return _scheduleMonthViewInstance;
-                else
-                {
-                    _scheduleMonthViewInstance = new ScheduleMonthView(_driverInstance);
-                    return _scheduleMonthViewInstance;
-                }
-            }
-        }
-        public ScheduleWeekViewAndEdit ScheduleWeekViewAndEditInstance
-        {
-            get
-            {
-                if (_scheduleWeekViewInstance != null) return _scheduleWeekViewInstance;
-                else
-                {
-                    _scheduleWeekViewInstance = new ScheduleWeekViewAndEdit(_driverInstance);
-                    return _scheduleWeekViewInstance;
-                }
-            }
-        }
-        public ScheduleKeyDatesTab ScheduleKeyDatesInstance
-        {
-            get
-            {
-                if (_scheduleKeyDatesInstance != null) return _scheduleKeyDatesInstance;
-                else
-                {
-                    _scheduleKeyDatesInstance = new ScheduleKeyDatesTab(_driverInstance);
-                    return _scheduleKeyDatesInstance;
-                }
-            }
-        }
-
-        public LeftContainer LeftContainerInstance
-        {
-            get
-            {
-                if (_leftContainerInstance != null) return _leftContainerInstance;
-                else
-                {
-                    _leftContainerInstance = new LeftContainer(_driverInstance);
-                    return _leftContainerInstance;
                 }
             }
         }

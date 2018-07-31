@@ -13,7 +13,7 @@ namespace CaesarLib
         IWebDriver webDriver;
         public IWebElement CreateStudentButton { get => webDriver.FindElement(By.ClassName("createStudent")); }
         public IWebElement ImportStudentsButton { get => webDriver.FindElement(By.ClassName("csv-button")); }
-        public Table StudentTable { get => new Table(webDriver.FindElement(By.XPath("//*[@id='modal-window']//table")), webDriver); }
+        public Table StudentTable { get => new Table(webDriver.FindElement(By.XPath("//*[@id='modal-window']//table"))); }
         public IList<IWebElement> Students { get => StudentTable.GetRows(); }
         public IWebElement SaveFormButton { get => webDriver.FindElement(By.ClassName("save")); }
         public IWebElement ExitFormButton { get => webDriver.FindElement(By.XPath("//*[@id='modal-window']/section/section/section/button[2]")); }
