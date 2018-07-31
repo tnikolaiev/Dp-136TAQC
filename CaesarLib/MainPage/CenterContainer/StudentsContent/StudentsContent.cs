@@ -10,7 +10,7 @@ namespace CaesarLib
         public IWebElement StudentsButton { get => webDriver.FindElement(By.Name("students")); }
         public IWebElement ScheduleButton { get => webDriver.FindElement(By.Name("shedule")); }
         public IWebElement MessageButton { get => webDriver.FindElement(By.Name("message")); }
-        public Table StudentTable { get => new Table(webDriver.FindElement(By.ClassName("students_list")), webDriver); }
+        public Table StudentTable { get => new Table(webDriver.FindElement(By.ClassName("students_list"))); }
         public StudentsContent(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
