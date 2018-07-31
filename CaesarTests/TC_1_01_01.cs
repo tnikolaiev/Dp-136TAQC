@@ -17,7 +17,7 @@ namespace CaesarTests
         [SetUp]
         public void Initialization()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         static List<String> LinksList = new List<String> { @"http://localhost:3000", @"http://localhost:3000/Groups/Dnipro", @"http://localhost:3000/admin" };

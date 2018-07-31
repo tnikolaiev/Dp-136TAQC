@@ -32,8 +32,6 @@ namespace CaesarLib
         private IWebElement _cancelGroupAddingButton;
         private IWebDriver driver;
 
-        //TODO: datepicker ?
-
         public IWebElement CreateGroupWindowInstnace
         {
             get
@@ -59,7 +57,6 @@ namespace CaesarLib
                 }
             }
         }
-
 
         public IWebElement GroupNameField
         {
@@ -295,6 +292,46 @@ namespace CaesarLib
             }
         }
 
+        public IWebElement GroupNameHint
+        {
+            get
+            {
+                return driver.FindElement(By.XPath("//div[@class='row'][1]//div[contains(@class, 'name-wrapper')]//p[@class='hint']"));
+            }
+        }
+
+        public IWebElement DirectionHint
+        {
+            get
+            {
+                return driver.FindElement(By.XPath("//div[@class='row'][2]//p[@class='hint']"));
+            }
+        }
+
+        public IWebElement StartDateHint
+        {
+            get
+            {
+                return driver.FindElement(By.XPath("//div[@class='row'][2]/div[contains (@class, 'calendar-wrapper')]//p[@class='hint']"));
+            }
+        }
+
+        public IWebElement FinishDateHint
+        {
+            get
+            {
+                return driver.FindElement(By.XPath("//div[@class='row'][3]/div[contains(@class, 'calendar-wrapper')]//p[@class='hint']"));
+            }
+        }
+
+        public IWebElement ExpertHint
+        {
+            get
+            {
+                return driver.FindElement(By.XPath("//div[@class='add-expert clearfix']//p[@class='hint']"));
+            }
+        }
+
         public GroupCreateWindow SetGroupName(String value)
         {
             GroupNameField.SendKeys(value);
@@ -334,6 +371,12 @@ namespace CaesarLib
             return this;
         }
 
+        public GroupCreateWindow SetExpertName(String value)
+        {
+            ExpertInputField.SendKeys(value);
+            return this;
+        }
+
         public GroupCreateWindow AddExpert(String value)
         {
             AddExpertButton.Click();
@@ -341,7 +384,6 @@ namespace CaesarLib
             AcceptInputExpertButton.Click();
             return this;
         }
-
 
         public GroupCreateWindow(IWebDriver driver)
         {
@@ -353,11 +395,30 @@ namespace CaesarLib
             return Acts.IsElementVisible(driver, By.XPath("//div[@id='modal-window']//section[@class='modal-window create']"));
         }
 
-        //public Func<IWebDriver, IWebElement> IsStartDateFieldClickable()
-        //{
-        //    //return ExpectedConditions.ElementToBeClickable(By.Name("name"));
-        //    return Acts.IsElementExists(driver, By.Name("name"));
-        //}
+        public bool IsGroupNameHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='form-group name-wrapper col-xs-12']//p[@class='hint']"));
+        }
+
+        public bool IsDirectionHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='row'][2]//p[@class='hint']"));
+        }
+
+        public bool IsStartDateHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='row'][2]/div[contains (@class, 'calendar-wrapper')]//p[@class='hint']"));
+        }
+
+        public bool IsFinishDateHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='row'][3]/div[contains(@class, 'calendar-wrapper')]//p[@class='hint']"));
+        }
+
+        public bool IsExpertHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='add-expert clearfix']//p[@class='hint']"));
+        }
 
         public bool IsCancelButtonVisible()
         {

@@ -5,8 +5,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Threading;
 
 namespace CaesarTests
 {
@@ -23,7 +21,7 @@ namespace CaesarTests
         {
             //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Url = @"http://localhost:3000/logout";
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("sasha", "1234", wait);
@@ -47,7 +45,7 @@ namespace CaesarTests
             bool isLeftMenuClosed = wait.Until((d) => !mainPageInstance.LeftMenu.IsOpened());
             Assert.IsTrue(isLeftMenuClosed);
         }
-        
+
         [OneTimeTearDown]
         public void CleanUp()
         {

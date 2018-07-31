@@ -23,7 +23,7 @@ namespace CaesarTests
         {
             //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Url = @"http://localhost:3000/logout";
             loginPageInstance = new LoginPage(driver);
             action = new Actions(driver);
@@ -65,40 +65,6 @@ namespace CaesarTests
             groupsList.DeleteGroup(groupName, action, wait);
             bool isGroupDeleted = groupsList.GetGroupByName(groupName, wait) == null;
             Assert.IsTrue(isGroupCreated & isGroupDeleted);
-
-            /*--------Create and Delete group-------*/
-            //mainPageInstance.LeftMenu.Open(action);
-            //wait.Until(mainPageInstance.LeftMenu.IsSearchButtonVisible());
-            //var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
-            //var groupsList = mainPageInstance.LeftContainer.GroupsInLocation;
-            //var groupDeleteConfirmationWindow = mainPageInstance.ModalWindow.GroupDeleteConfirmationWindow;
-            //mainPageInstance.LeftMenu.CreateButton.Click();
-            //wait.Until(groupCreateWindow.IsStartDateFieldClickable());
-            //Acts.SelectOptionFromDDL(groupCreateWindow.DirectionDDL, direction);
-            //groupCreateWindow.GroupNameField.Clear();
-            //groupCreateWindow.GroupNameField.SendKeys(groupName);
-            //groupCreateWindow.AddTeacherButton.Click();
-            //Acts.SelectOptionFromDDL(groupCreateWindow.TeacherDDL, teacher);
-            //groupCreateWindow.AcceptSelectTeacherButton.Click();
-            //if (budgetOwner.Equals("SoftServe")) groupCreateWindow.BudgetOwnerSoftServeToggle.Click();
-            //else if (budgetOwner.Equals("OpenGroup")) groupCreateWindow.BudgetOwnerOpenGroupToggle.Click();
-            //groupCreateWindow.AddExpertButton.Click();
-            //groupCreateWindow.ExpertInputField.SendKeys(expert);
-            //groupCreateWindow.AcceptInputExpertButton.Click();
-            //groupCreateWindow.StartDateField.SendKeys(startDate);
-            //groupCreateWindow.SaveGroupButton.Click();
-            //wait.Until((d) => !groupCreateWindow.IsOpened());
-            //wait.Until(groupsList.AreGroupsVisible());
-            //Assert.NotNull(groupsList.GetGroupByName(groupName));
-            //wait.Until(groupsList.AreGroupsVisible());
-            //groupsList.EndedGroupsToggle.Click();
-            //groupsList.GetGroupByName("groupNet1").Click();
-            //mainPageInstance.LeftMenu.Open(action);
-            //wait.Until(mainPageInstance.LeftMenu.IsSearchButtonVisible());
-            //mainPageInstance.LeftMenu.DeleteButton.Click();
-            //wait.Until(groupDeleteConfirmationWindow.IsCancelButtonClickable());
-            //groupDeleteConfirmationWindow.DeleteButton.Click();
-            /*-----wtf-----*/
         }
 
         [Test]
@@ -111,21 +77,6 @@ namespace CaesarTests
             bool LocationDdlEnabled = groupCreateWindow.LocationDDL.Enabled;
             Assert.IsTrue(groupCreateWindow.IsOpened() & LocationDdlEnabled);
         }
-
-        //static List<String> GroupsToDelete = new List<String> { "Dp-115 .NetgroupNet1", "Dp-113 .NetgroupNet1", "groupC/C++", "groupISTQB", "groupIOS", "groupUX" };
-
-        //[Test, TestCaseSource("GroupsToDelete")]
-        //public void ExecuteTest_DeleteGroup_GroupDisappearedFromGroupsList(String groupName)
-        //{
-        //    loginPageInstance.LogIn("dmytro", "1234");
-        //    wait.Until((d) => MainPage.IsMainPageOpened(d));
-        //    mainPageInstance = new MainPage(driver);
-        //    var groupsList = mainPageInstance.LeftContainer.GroupsInLocation;
-        //    Thread.Sleep(3000);
-
-        //    groupsList.DeleteGroup(groupName, action, wait);
-        //    Assert.IsNull(groupsList.GetGroupByName(groupName, wait));
-        //}
 
         [OneTimeTearDown]
         public void CleanUp()
