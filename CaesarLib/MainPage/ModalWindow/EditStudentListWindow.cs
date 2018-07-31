@@ -11,14 +11,16 @@ namespace CaesarLib
     public class EditStudentListWindow
     {
         IWebDriver webDriver;
-        public IWebElement ModalWindow { get => webDriver.FindElement(By.Id("modal-window")); }
         public IWebElement CreateStudentButton { get => webDriver.FindElement(By.ClassName("createStudent")); }
         public IWebElement ImportStudentsButton { get => webDriver.FindElement(By.ClassName("csv-button")); }
-        public IWebElement StudentTable { get => ModalWindow.FindElement(By.ClassName("students_list")); }
-        public IList<IWebElement> Students { get => StudentTable.FindElement(By.ClassName("tableBodyStudents")).FindElements(By.TagName("tr")); }
+        public Table StudentTable { get => new Table(webDriver.FindElement(By.XPath("//*[@id='modal-window']//table")), webDriver); }
+        public IList<IWebElement> Students { get => StudentTable.GetRows(); }
         public IWebElement SaveFormButton { get => webDriver.FindElement(By.ClassName("save")); }
         public IWebElement ExitFormButton { get => webDriver.FindElement(By.ClassName("exit")); }
         public IWebElement RightshifterButton { get => webDriver.FindElement(By.ClassName("right")); }
+        public static int DownloadButtonsColumn { get => 4; }
+        public static int EditButtonsColumn { get => 5; }
+        public static int DeleteButtonsColumn { get => 6; }
         public IList<IWebElement> DownloadButtons { get => webDriver.FindElements(By.ClassName("download-attachments")); }
         public IList<IWebElement> EditButtons { get => webDriver.FindElements(By.ClassName("editStudent")); }
         public IList<IWebElement> DeleteButtons { get => webDriver.FindElements(By.ClassName("deleteStudent")); }

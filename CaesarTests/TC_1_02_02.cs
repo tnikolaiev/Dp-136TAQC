@@ -18,21 +18,18 @@ namespace CaesarTests
         [SetUp]
         public void Initialize()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Url = @"http://localhost:3000/logout";
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
-            wait.Until((d) => LoginPage.IsLoginPageOpened(d));
-            loginPageInstance.LogIn("artur", "1234");
+            loginPageInstance.LogIn("artur", "1234", wait);
             mainPageInstance = new MainPage(driver);
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
         }
 
         [Test]
         public void ExecuteTest_ExitButtonClicked_LoginPageOpened()
         {
-            mainPageInstance.ProfileButton.Click();
-            wait.Until(mainPageInstance.RightMenu.IsLogOutButtonClickable());
+            mainPageInstance.RightMenu.Open(wait);
             mainPageInstance.RightMenu.SignOutButton.Click();
             Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPageOpened(d)));
         }
@@ -41,6 +38,7 @@ namespace CaesarTests
         public void CleanUp()
         {
             driver.Close();
+            driver.Quit();
         }
     }
 }

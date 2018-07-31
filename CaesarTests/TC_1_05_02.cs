@@ -15,6 +15,9 @@ namespace CaesarTests
         LoginPage loginPageInstance;
         WebDriverWait wait;
         LocationWindow locationPageInstance;
+        CenterContainer groupLocationInstance;
+        TopMenu topMenuInstance;
+        MainPage mainPageInstance;
 
         [SetUp]
         public void Initialize()
@@ -26,22 +29,26 @@ namespace CaesarTests
             wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance.LogIn("sasha", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
+            mainPageInstance = new MainPage(driver);
         }
         [Test]
         public void ExecuteTest_LocationPageCloseWithoutChoosing()
         {
-            Actions builder = new Actions(driver);
-            builder.MoveToElement(driver.FindElement(By.ClassName("containerMainMenu"))).Build().Perform();
-            driver.FindElement(By.XPath("//i[@class='fa fa-globe fa-2x']")).Click();
+            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            Acts.Click(topMenuInstance.LocationsItem);
             locationPageInstance = new LocationWindow(driver);
+            Acts.Click(locationPageInstance.CityLviv);
             Acts.Click(locationPageInstance.CancelButton);
-            Assert.IsTrue(wait.Until((d) => MainPage.IsMainPageOpened(d)));
+            string exeptualResultTitle = "Dnipro";
+            groupLocationInstance = new CenterContainer(driver);
+            Console.WriteLine(groupLocationInstance.GroupLocation.Text);
+            Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
         }
 
         [OneTimeTearDown]
         public void CleanUp()
         {
-           driver.Close();
+           driver.Quit();
         }
     }
 }

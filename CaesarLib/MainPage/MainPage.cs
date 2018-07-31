@@ -125,10 +125,20 @@ namespace CaesarLib
 
         public static bool IsMainPageOpened(IWebDriver driver)
         {
-            return driver.FindElements(By.Id("main-section")).Count > 0 &
-                driver.FindElements(By.Id("left-side-bar")).Count > 0 &
-                driver.FindElements(By.Id("right-side-bar")).Count > 0 ?
+            return Acts.IsElementExists(driver, By.Id("main-section")) &
+                Acts.IsElementExists(driver, By.Id("left-side-bar")) &
+                Acts.IsElementExists(driver, By.Id("right-side-bar")) ?
                 true : false;
+            //return driver.FindElements(By.Id("main-section")).Count > 0 &
+            //    driver.FindElements(By.Id("left-side-bar")).Count > 0 &
+            //    driver.FindElements(By.Id("left-side-bar")).Count > 0 ?
+            //    true : false;
+        }
+
+        public bool IsMainPageOpened()
+        {
+            return Acts.IsElementExists(driver, By.Id("main-section")) &
+                Acts.IsElementExists(driver, By.CssSelector("#logo > a > img"));
         }
 
         //Is public in case this method will be needed in tests (access modifier can be discussed)
@@ -190,6 +200,13 @@ namespace CaesarLib
         {
             TopMenu topMenuInstance = MoveToTopMenu();
             Acts.Click(topMenuInstance.LogoutButton);
+        }
+
+        public CenterContainer MoveToCenterContainer()
+        {
+            Actions builder = new Actions(driver);
+            builder.MoveToElement(driver.FindElement(By.ClassName("groupLocation"))).Build().Perform();
+            return new CenterContainer(driver);
         }
     }
 }

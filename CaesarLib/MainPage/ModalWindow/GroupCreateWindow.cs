@@ -3,13 +3,15 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace CaesarLib
 {
-    public class CreateGroupWindow
+    public class GroupCreateWindow
     {
-        private IWebElement _createGroupWindowSection;
+        private IWebElement _createGroupWindowInstance;
         private IWebElement _groupNameField;
+        private IWebElement _returnNameButton;
         private IWebElement _directionDDL;
         private IWebElement _locationDDL;
         private IWebElement _addTeacherButton;
@@ -29,15 +31,28 @@ namespace CaesarLib
         private IWebElement _cancelGroupAddingButton;
         private IWebDriver driver;
 
-        public IWebElement CreateGroupWindowSection
+        public IWebElement CreateGroupWindowInstnace
         {
             get
             {
-                if (_createGroupWindowSection != null) return _createGroupWindowSection;
+                if (_createGroupWindowInstance != null) return _createGroupWindowInstance;
                 else
                 {
-                    _createGroupWindowSection = driver.FindElement(By.XPath("//div[@id='modal-window']//section[@class='modal-window create']"));
-                    return _createGroupWindowSection;
+                    _createGroupWindowInstance = driver.FindElement(By.XPath("//div[@id='modal-window']//section[@class='modal-window create']"));
+                    return _createGroupWindowInstance;
+                }
+            }
+        }
+
+        public IWebElement ReturnNameButton
+        {
+            get
+            {
+                if (_returnNameButton != null) return _returnNameButton;
+                else
+                {
+                    _returnNameButton = driver.FindElement(By.XPath("//span[@class='return-name']"));
+                    return _returnNameButton;
                 }
             }
         }
@@ -94,18 +109,18 @@ namespace CaesarLib
             }
         }
 
-        //public IWebElement RemoveTeacherButton
-        //{
-        //    get
-        //    {
-        //        if (_removeTeacherButton != null) return _removeTeacherButton;
-        //        else
-        //        {
-        //            _removeTeacherButton = driver.FindElement(By.XPath("//*[contains(@class,'remove-teacher')]"));
-        //            return _removeTeacherButton;
-        //        }
-        //    }
-        //}
+        public IWebElement RemoveTeacherButton
+        {
+            get
+            {
+                if (_removeTeacherButton != null) return _removeTeacherButton;
+                else
+                {
+                    _removeTeacherButton = driver.FindElement(By.XPath("//span[contains(@class,'remove-teacher')]"));
+                    return _removeTeacherButton;
+                }
+            }
+        }
 
         public IWebElement AcceptSelectTeacherButton
         {
@@ -140,7 +155,7 @@ namespace CaesarLib
                 if (_teacherDDL != null) return _teacherDDL;
                 else
                 {
-                    _teacherDDL = driver.FindElement(By.Id("teachers"));
+                    _teacherDDL = driver.FindElement(By.XPath("//div[@id = 'teachers']//select[@id = 'teachers']"));
                     return _teacherDDL;
                 }
             }
@@ -276,19 +291,148 @@ namespace CaesarLib
             }
         }
 
-        public CreateGroupWindow(IWebDriver driver)
+        public IWebElement GroupNameHint
+        {
+            get
+            {
+                return driver.FindElement(By.XPath("//div[@class='row'][1]//div[contains(@class, 'name-wrapper')]//p[@class='hint']"));
+            }
+        }
+
+        public IWebElement DirectionHint
+        {
+            get
+            {
+                return driver.FindElement(By.XPath("//div[@class='row'][2]//p[@class='hint']"));
+            }
+        }
+
+        public IWebElement StartDateHint
+        {
+            get
+            {
+                return driver.FindElement(By.XPath("//div[@class='row'][2]/div[contains (@class, 'calendar-wrapper')]//p[@class='hint']"));
+            }
+        }
+
+        public IWebElement FinishDateHint
+        {
+            get
+            {
+                return driver.FindElement(By.XPath("//div[@class='row'][3]/div[contains(@class, 'calendar-wrapper')]//p[@class='hint']"));
+            }
+        }
+
+        public IWebElement ExpertHint
+        {
+            get
+            {
+                return driver.FindElement(By.XPath("//div[@class='add-expert clearfix']//p[@class='hint']"));
+            }
+        }
+
+        public GroupCreateWindow SetGroupName(String value)
+        {
+            GroupNameField.SendKeys(value);
+            return this;
+        }
+
+        public GroupCreateWindow ReturnNameButtonClick()
+        {
+            ReturnNameButton.Click();
+            return this;
+        }
+
+        public GroupCreateWindow SetDirection(String value)
+        {
+            Acts.SelectOptionFromDDL(DirectionDDL, value);
+            return this;
+        }
+
+        public GroupCreateWindow AddTeacher(String value)
+        {
+            AddTeacherButton.Click();
+            Acts.SelectOptionFromDDL(TeacherDDL, value);
+            AcceptSelectTeacherButton.Click();
+            return this;
+        }
+
+        public GroupCreateWindow SetBudgetOwner(String value)
+        {
+            if (value.Equals(value, StringComparison.OrdinalIgnoreCase)) BudgetOwnerSoftServeToggle.Click();
+            else BudgetOwnerOpenGroupToggle.Click();
+            return this;
+        }
+
+        public GroupCreateWindow SetStartDate(String value)
+        {
+            StartDateField.SendKeys(value);
+            return this;
+        }
+
+        public GroupCreateWindow SetExpertName(String value)
+        {
+            ExpertInputField.SendKeys(value);
+            return this;
+        }
+
+        public GroupCreateWindow AddExpert(String value)
+        {
+            AddExpertButton.Click();
+            ExpertInputField.SendKeys(value);
+            AcceptInputExpertButton.Click();
+            return this;
+        }
+
+        public GroupCreateWindow(IWebDriver driver)
         {
             this.driver = driver;
         }
 
-        public bool IsCreateGroupWindowOpened()
-        {
-            return driver.FindElements(By.XPath("//div[@id='modal-window']//section[@class='modal-window create']")).Count > 0;
-        }
-
         public bool IsOpened()
         {
-            return driver.FindElements(By.XPath("//div[@id='modal-window']//section[@class='modal-window create']")).Count > 0;
+            return Acts.IsElementVisible(driver, By.XPath("//div[@id='modal-window']//section[@class='modal-window create']"));
+        }
+
+        public bool IsGroupNameHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='form-group name-wrapper col-xs-12']//p[@class='hint']"));
+        }
+
+        public bool IsDirectionHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='row'][2]//p[@class='hint']"));
+        }
+
+        public bool IsStartDateHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='row'][2]/div[contains (@class, 'calendar-wrapper')]//p[@class='hint']"));
+        }
+
+        public bool IsFinishDateHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='row'][3]/div[contains(@class, 'calendar-wrapper')]//p[@class='hint']"));
+        }
+
+        public bool IsExpertHintVisible()
+        {
+            return Acts.IsElementVisible(driver, By.XPath("//div[@class='add-expert clearfix']//p[@class='hint']"));
+        }
+
+        public bool IsCancelButtonVisible()
+        {
+            return Acts.IsElementVisible(driver, By.Id("cancel"));
+        }
+
+        public void Open(Actions action, WebDriverWait wait)
+        {
+            MainPage mainPage = new MainPage(driver);
+            var leftMenu = mainPage.LeftMenu;
+
+            leftMenu.Open(action, wait);
+            leftMenu.IsCreateButtonVisible();
+            leftMenu.CreateButton.Click();
+            wait.Until((d) => IsCancelButtonVisible());
         }
     }
 }
