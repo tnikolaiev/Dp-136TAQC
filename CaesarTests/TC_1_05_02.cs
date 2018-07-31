@@ -36,9 +36,8 @@ namespace CaesarTests
         {
             TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.LocationsItem);
-            locationPageInstance = new LocationWindow(driver);
-            Acts.Click(locationPageInstance.CityLviv);
-            Acts.Click(locationPageInstance.CancelButton);
+            Acts.Click(mainPageInstance.ModalWindow.LocationWindow.CityLviv);
+            Acts.Click(mainPageInstance.ModalWindow.LocationWindow.CancelButton);
             string exeptualResultTitle = "Dnipro";
             groupLocationInstance = new CenterContainer(driver);
             Console.WriteLine(groupLocationInstance.GroupLocation.Text);

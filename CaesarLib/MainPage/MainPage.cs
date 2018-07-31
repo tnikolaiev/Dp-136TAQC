@@ -208,5 +208,11 @@ namespace CaesarLib
             builder.MoveToElement(driver.FindElement(By.ClassName("groupLocation"))).Build().Perform();
             return new CenterContainer(driver);
         }
+
+        public void DoubleClick(IWebElement element)
+        {
+            Actions builder = new Actions(driver);
+            builder.DoubleClick(element).Build().Perform();
+        }
     }
 }

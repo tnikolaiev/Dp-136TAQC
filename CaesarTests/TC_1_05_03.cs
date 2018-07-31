@@ -37,8 +37,7 @@ namespace CaesarTests
         {
             TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.LocationsItem);
-            locationWindowInstance = new LocationWindow(driver);
-            Acts.Click(locationWindowInstance.CityRivne);
+            Acts.Click(mainPageInstance.ModalWindow.LocationWindow.CityRivne);
             Acts.PressKeyboardButton("{Enter}");
             string exeptualResultTitle = "Rivne";
             groupLocationInstance = new CenterContainer(driver);
@@ -56,7 +55,6 @@ namespace CaesarTests
             string exeptualResultTitle = "Lviv";
             groupLocationInstance = new CenterContainer(driver);
             Console.WriteLine(groupLocationInstance.GroupLocation.Text);
-           // Console.WriteLine(groupLocationInstance.LocationHint.Text);
             Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
         }
 
