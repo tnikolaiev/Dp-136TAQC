@@ -4,7 +4,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
 
 namespace CaesarTests
 {
@@ -18,10 +17,9 @@ namespace CaesarTests
         CenterContainer groupLocationInstance;
         TopMenu topMenuInstance;
         MainPage mainPageInstance;
-        List<String> listOfCity;
 
-        [OneTimeSetUp]
-       // [SetUp]
+        //[OneTimeSetUp]
+        [SetUp]
         public void Initialize()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
@@ -29,51 +27,45 @@ namespace CaesarTests
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
             wait.Until((d) => LoginPage.IsLoginPageOpened(d));
-            loginPageInstance.LogIn("sasha", "1234");
+            loginPageInstance.LogIn("admin", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
+
+        }
+        [Test]
+        public void ExecuteTest_ChooseLocationRivne_UsingKeyBoard()
+        {
             TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.LocationsItem);
-
+            locationWindowInstance = new LocationWindow(driver);
+            Acts.Click(locationWindowInstance.CityRivne);
+            Acts.PressKeyboardButton("{Enter}");
+            string exeptualResultTitle = "Rivne";
+            groupLocationInstance = new CenterContainer(driver);
+            Console.WriteLine(groupLocationInstance.GroupLocation.Text);
+            Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
         }
-        //[Test]
-        //public void ExecuteTest_ChooseLocation()
-        //{
-        //    locationWindowInstance = new LocationWindow(driver);
-        //    string city =  "Lviv";
-        //    IList<IWebElement> nonActiveCity = locationWindowInstance.GetLocationNonActiveWebElements();
-            
-          
-        //     locationWindowInstance.ClickNonActiveButtonNames(nonActiveCity, city);
-           
-        //    Acts.Click(locationWindowInstance.ConfurmButton);
-        //    groupLocationInstance = new CenterContainer(driver);
-        //    Console.WriteLine(groupLocationInstance.GroupLocation.Text);
-        //    string exeptualResultTitle = "Lviv";
-        //    Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
-        //}
 
         [Test]
-
-        public void ExecuteTest_ChooseListLocations()
+        public void ExecuteTest_CancelLocationIvanoFrankivsk_UsingKeyBoard()
         {
-
-            locationWindowInstance = new LocationWindow(driver);
-            List<string> listOfCity = new List <string> {"Lviv", "Dnipro"};
-            IList<IWebElement> nonActiveCity = locationWindowInstance.GetLocationNonActiveWebElements();
-            locationWindowInstance.ClickNonActiveButtonNames(nonActiveCity, listOfCity);
-            Acts.Click(locationWindowInstance.ConfurmButton);
-            CenterContainer groupLocationInstance = mainPageInstance.MoveToCenterContainer();
+            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            Acts.Click(topMenuInstance.LocationsItem);
+            Acts.Click(mainPageInstance.ModalWindow.LocationWindow.CityIvanoFrankivsk);
+            Acts.PressKeyboardButton("{Esc}");
+            string exeptualResultTitle = "Lviv";
             groupLocationInstance = new CenterContainer(driver);
-            wait.Until(groupLocationInstance.IsHintVisible());
-            Console.WriteLine(groupLocationInstance.LocationHint.Text);
-            string exeptualResultTitle = " Dnipro,Lviv";
-            Assert.AreEqual(exeptualResultTitle, groupLocationInstance.LocationHint.Text);
+            Console.WriteLine(groupLocationInstance.GroupLocation.Text);
+           // Console.WriteLine(groupLocationInstance.LocationHint.Text);
+            Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
         }
+
+
         [OneTimeTearDown]
         public void CleanUp()
         {
             driver.Quit();
+            driver.Close();
         }
     }
 }

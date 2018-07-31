@@ -4,8 +4,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using OpenQA.Selenium.Interactions;
-using System.Threading;
 
 namespace CaesarTests
 {

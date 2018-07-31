@@ -22,7 +22,7 @@ namespace CaesarTests
         MainPage mainPageInstance;
         List<String> listOfCity;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Initialize()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
@@ -33,17 +33,19 @@ namespace CaesarTests
             loginPageInstance.LogIn("sasha", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
-            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
-            Acts.Click(topMenuInstance.LocationsItem);
+           
         }
 
-        static IEnumerable<object[]> GetLocationLists = Instruments.ReadXML("LocationLists.xml", "testData", "city");
+        static IEnumerable<object[]> GetLocationLists = Instruments.ReadXML("LocationLists.xml", "testData", "exeptedResult", "city");
 
         [Test, TestCaseSource("GetLocationLists")]
-        public void TestLocationList(string city)
+        public void TestLocationList(string exeptedResult, string city)
         {
+            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            Acts.Click(topMenuInstance.LocationsItem);
             locationWindowInstance = new LocationWindow(driver);
-            List<string> listOfCity = new List<string> {city};
+            string[] parts = city.Split(',');
+            List<string> listOfCity = new List<string> (parts);
             IList<IWebElement> nonActiveCity = locationWindowInstance.GetLocationNonActiveWebElements();
             locationWindowInstance.ClickNonActiveButtonNames(nonActiveCity, listOfCity);
             Acts.Click(locationWindowInstance.ConfurmButton);
@@ -51,13 +53,15 @@ namespace CaesarTests
             groupLocationInstance = new CenterContainer(driver);
             wait.Until(groupLocationInstance.IsHintVisible());
             Console.WriteLine(groupLocationInstance.LocationHint.Text);
-            string exeptualResultTitle = " Dnipro,Lviv";
-            Assert.AreEqual(exeptualResultTitle, groupLocationInstance.LocationHint.Text);
+            string exeptedResultTitle = exeptedResult;
+            Assert.AreEqual(exeptedResultTitle, groupLocationInstance.LocationHint.Text);
+
         }
 
-        [TearDown]
+        [OneTimeTearDown]
         public void CleanUp()
         {
+            driver.Close();
             driver.Quit();
         }
         
