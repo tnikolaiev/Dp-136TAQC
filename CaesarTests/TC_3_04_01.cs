@@ -40,13 +40,13 @@ namespace CaesarTests
             mainPageInstance = new MainPage(webDriver);
             //Go to group's DP-093-JS students page
             webDriver.Url = baseURL + "/Students/Dnipro/DP-093-JS/list";
-            wait.Until((d) => StudentsContent.IsStudentsContentOpened(d));
+            wait.Until((d) => StudentsContent.IsOpened(d));
             //Open modal window 'EditStudentListWindow'
             mainPageInstance.CenterContainer.StudentsContent.EditButton.Click();
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
             //Create new student for test
             mainPageInstance.ModalWindow.EditStudentListWindow.CreateStudentButton.Click();
-            wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
+            wait.Until((d) => EditStudentWindow.IsOpened(d));
             mainPageInstance.ModalWindow.EditStudentWindow.FillForm("Andrey", "Magera", 3, "137", "4.2", 1);
             mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
@@ -57,7 +57,7 @@ namespace CaesarTests
             //Open last student in table for editing
             mainPageInstance.ModalWindow.EditStudentListWindow.StudentTable.GetElementFromCell
                 (mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count, EditStudentListWindow.EditButtonsColumn).Click();
-            wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
+            wait.Until((d) => EditStudentWindow.IsOpened(d));
         }
         [Test, TestCaseSource("fileNames")]
         public void ExecuteTest_UploadFiles_FilesUploaded(int expected, string CV, string photo)
@@ -82,7 +82,7 @@ namespace CaesarTests
             //Check if files saved
             mainPageInstance.ModalWindow.EditStudentListWindow.StudentTable.GetElementFromCell
                 (mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count, EditStudentListWindow.EditButtonsColumn).Click();
-            wait.Until((d) => EditStudentWindow.IsEditStudentWindowOpened(d));
+            wait.Until((d) => EditStudentWindow.IsOpened(d));
             Assert.AreEqual(expected, mainPageInstance.ModalWindow.EditStudentWindow.CountUploadedFiles());
         }
         [TearDown]
