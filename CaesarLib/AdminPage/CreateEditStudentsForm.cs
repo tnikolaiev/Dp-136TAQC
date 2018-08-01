@@ -16,6 +16,64 @@ namespace CaesarLib
         private IWebElement _imageUrl;
         private IWebElement _entryScore;
         private IWebElement _approvedBy;
+        private IWebElement _table;
+
+        private IList<IWebElement> _EditButtons;
+        private IList<IWebElement> _DeleteButtons;
+
+        public CreateEditStudentsForm addStudents()
+        {
+            AddButtonClick(2);
+            return this;
+        }
+
+        public IList<IWebElement> Delete
+        {
+            get
+            {
+                if (_DeleteButtons != null) return _DeleteButtons;
+                else
+                {
+                    _DeleteButtons = GetTable.FindElements(By.ClassName("btn-danger"));
+                    return _DeleteButtons;
+                }
+            }
+        }
+        public IList<IWebElement> Edit
+        {
+            get
+            {
+                if (_EditButtons != null) return _EditButtons;
+                else
+                {
+                    _EditButtons = GetTable.FindElements(By.ClassName("btn-info"));
+                    return _EditButtons;
+                }
+            }
+        }
+        public CreateEditStudentsForm DeleteStudent(int index)
+        {
+            Delete[index - 1].Click();
+            return this;
+        }
+        public CreateEditStudentsForm EditStudent(int index)
+        {
+            Edit[index - 1].Click();
+            return this;
+        }
+
+        public IWebElement GetTable
+        {
+            get
+            {
+                if (_table != null) return _table;
+                else
+                {
+                    _table = _driver.FindElement(By.Id("students"));
+                    return _table;
+                }
+            }
+        }
 
         public CreateEditStudentsForm(IWebDriver driver) : base(driver)
         {
@@ -29,7 +87,7 @@ namespace CaesarLib
                 if (_groupId != null) return _groupId;
                 else
                 {
-                    _groupId = _driver.FindElement(By.ClassName("groupId"));
+                    _groupId = _driver.FindElement(By.Name("groupId"));
                     return _groupId;
                 }
             }
@@ -48,7 +106,7 @@ namespace CaesarLib
                 if (_name != null) return _name;
                 else
                 {
-                    _name = _driver.FindElement(By.ClassName("name"));
+                    _name = _driver.FindElement(By.Name("name"));
                     return _name;
                 }
             }
@@ -67,7 +125,7 @@ namespace CaesarLib
                 if (_lastName != null) return _lastName;
                 else
                 {
-                    _lastName = _driver.FindElement(By.ClassName("lastName"));
+                    _lastName = _driver.FindElement(By.Name("lastName"));
                     return _lastName;
                 }
             }
@@ -86,13 +144,13 @@ namespace CaesarLib
                 if (_englishLevel != null) return _englishLevel;
                 else
                 {
-                    _englishLevel = _driver.FindElement(By.ClassName("englishLevel"));
+                    _englishLevel = _driver.FindElement(By.Name("englishLevel"));
                     return _englishLevel;
                 }
             }
         }
 
-        public CreateEditStudentsForm setEnglishLevelDDL(string value)
+        public CreateEditStudentsForm setEnglishLevelDDL(int value)
         {
             Acts.SelectOptionFromDDL(EnglishLevelDDL, value);
             return this;
@@ -105,7 +163,7 @@ namespace CaesarLib
                 if (_CvUrl != null) return _CvUrl;
                 else
                 {
-                    _CvUrl = _driver.FindElement(By.ClassName("CvUrl"));
+                    _CvUrl = _driver.FindElement(By.Name("CvUrl"));
                     return _CvUrl;
                 }
             }
@@ -124,7 +182,7 @@ namespace CaesarLib
                 if (_imageUrl != null) return _imageUrl;
                 else
                 {
-                    _imageUrl = _driver.FindElement(By.ClassName("imageUrl"));
+                    _imageUrl = _driver.FindElement(By.Name("imageUrl"));
                     return _imageUrl;
                 }
             }
@@ -143,7 +201,7 @@ namespace CaesarLib
                 if (_entryScore != null) return _entryScore;
                 else
                 {
-                    _entryScore = _driver.FindElement(By.ClassName("entryScore"));
+                    _entryScore = _driver.FindElement(By.Name("entryScore"));
                     return _entryScore;
                 }
             }
@@ -162,7 +220,7 @@ namespace CaesarLib
                 if (_approvedBy != null) return _approvedBy;
                 else
                 {
-                    _approvedBy = _driver.FindElement(By.ClassName("approvedBy"));
+                    _approvedBy = _driver.FindElement(By.Name("approvedBy"));
                     return _approvedBy;
                 }
             }

@@ -48,12 +48,13 @@ namespace CaesarLib
         //if enter 0 return last row
         public List<string> getRowWithColumns(int rowNumber)
         {
+            IList<IWebElement> rows = GetRows();
             List<string> data = new List<string>();
             IWebElement row;
-            if (rowNumber == 0) { row = GetRows().Last(); }
+            if (rowNumber == 0) { row = rows[rows.Count-1]; }
             else
             {
-                row = GetRows()[rowNumber-1];
+                row = rows[rowNumber-1];
             }
 
             IList<IWebElement> columns = row.FindElements(By.XPath(".//td"));
@@ -63,22 +64,27 @@ namespace CaesarLib
             }
             return data;
         }
+
+        
         //Method search expected row in table
         public bool FindRowInTable(List<string> expectedRow)
         {
+            bool result = false;
             int number = GetRows().Count;
             List<string> actualRow = new List<string>();
-            for (int i = 0; i < number; i++)
+            for (int i = 0; i <= number; i++)
             {
                 actualRow = getRowWithColumns(i);
 
-                if (actualRow.SequenceEqual(expectedRow))
+                for(int j = 0; j< expectedRow.Count; j++)
                 {
-                    return true;
-                }
-                else { return false; }              
+                    if (actualRow[j]==expectedRow[j])
+                    {
+                        result = true;
+                    }
+                }                           
             }
-            return false;
+            return result;
         }
 
         //Method for getting list of cells with column names in each row

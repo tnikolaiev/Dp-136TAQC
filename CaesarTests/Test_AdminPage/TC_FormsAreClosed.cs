@@ -33,9 +33,7 @@ namespace CaesarTests
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             driver.Url = @"http://localhost:3000/admin";
             adminPage = new AdminPage(driver);
-            Acts.Click(adminPage.AddButton);
-
-
+            wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
         }
         //===================================
         //User Form
@@ -43,6 +41,7 @@ namespace CaesarTests
         [Test]
         public void Test_CloseButtonUserForm()
         {
+            usersForm.addUsers();
             usersForm = new CreateEditUsersForm(driver);
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             usersForm.CloseButton.Click();
@@ -52,6 +51,7 @@ namespace CaesarTests
         [Test]
         public void Test_CloseIconUserForm()
         {
+            usersForm.addUsers();
             usersForm = new CreateEditUsersForm(driver);
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             usersForm.Close.Click();
@@ -61,6 +61,7 @@ namespace CaesarTests
         [Test]
         public void Test_EscUserForm()
         {
+            usersForm.addUsers();
             usersForm = new CreateEditUsersForm(driver);
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             Acts.PressKeyboardButton(@"{Escape}");
@@ -72,6 +73,8 @@ namespace CaesarTests
         [Test]
         public void Test_CloseButtonGroupForm()
         {
+            adminPage.GoToGroups.Click();
+            adminPage.AddButtonClick(1);
             groupForm = new CreateEditGroupsForm(driver);
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             groupForm.CloseButton.Click();
@@ -81,6 +84,8 @@ namespace CaesarTests
         [Test]
         public void Test_CloseIconGroupForm()
         {
+            adminPage.GoToGroups.Click();
+            groupForm.addGroups();
             groupForm = new CreateEditGroupsForm(driver);
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             groupForm.Close.Click();
@@ -90,6 +95,8 @@ namespace CaesarTests
         [Test]
         public void Test_EscGroupForm()
         {
+            adminPage.GoToGroups.Click();
+            groupForm.addGroups();
             groupForm = new CreateEditGroupsForm(driver);
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             Acts.PressKeyboardButton(@"{Escape}");
@@ -101,6 +108,8 @@ namespace CaesarTests
         [Test]
         public void Test_CloseButtonStudentForm()
         {
+            adminPage.GoToStudents.Click();
+            studentForm.addStudents();
             studentForm = new CreateEditStudentsForm(driver);
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             studentForm.CloseButton.Click();
@@ -110,6 +119,8 @@ namespace CaesarTests
         [Test]
         public void Test_CloseIconStudentForm()
         {
+            adminPage.GoToStudents.Click();
+            studentForm.addStudents();
             studentForm = new CreateEditStudentsForm(driver);
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             studentForm.Close.Click();
@@ -119,6 +130,8 @@ namespace CaesarTests
         [Test]
         public void Test_EscStudentForm()
         {
+            adminPage.GoToStudents.Click();
+            studentForm.addStudents();
             studentForm = new CreateEditStudentsForm(driver);
             wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             Acts.PressKeyboardButton(@"{Escape}");

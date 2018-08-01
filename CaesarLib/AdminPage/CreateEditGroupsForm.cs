@@ -16,12 +16,67 @@ namespace CaesarLib
         private IWebElement _experts;
         private IWebElement _stage;
         private IWebDriver _driver;
+        private IWebElement _table;
+        private IList<IWebElement> _EditButtons;
+        private IList<IWebElement> _DeleteButtons;
+
+        public IWebElement GetTable
+        {
+            get
+            {
+                if (_table != null) return _table;
+                else
+                {
+                    _table = _driver.FindElement(By.Id("groups"));
+                    return _table;
+                }
+            }
+        }
+        public IList<IWebElement> Delete
+        {
+            get
+            {
+                if (_DeleteButtons != null) return _DeleteButtons;
+                else
+                {
+                    _DeleteButtons = GetTable.FindElements(By.ClassName("btn-danger"));
+                    return _DeleteButtons;
+                }
+            }
+        }
+        public IList<IWebElement> Edit
+        {
+            get
+            {
+                if (_EditButtons != null) return _EditButtons;
+                else
+                {
+                    _EditButtons = GetTable.FindElements(By.ClassName("btn-info"));
+                    return _EditButtons;
+                }
+            }
+        }
+        public CreateEditGroupsForm DeleteGroup(int index)
+        {
+            Delete[index - 1].Click();
+            return this;
+        }
+        public CreateEditGroupsForm EditStudent(int index)
+        {
+            Edit[index - 1].Click();
+            return this;
+        }
 
         public CreateEditGroupsForm(IWebDriver driver) : base(driver)
         {
             this._driver = driver;
         }
 
+        public CreateEditGroupsForm addGroups()
+        {
+            AddButtonClick(1);
+            return this;
+        }
         public IWebElement NameField
         {
             get

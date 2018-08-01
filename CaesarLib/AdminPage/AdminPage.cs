@@ -8,43 +8,40 @@ namespace CaesarLib
 {
     public class AdminPage
     {
-        private IWebDriver _driver;
-        private IWebElement _addButton;
+        private IWebDriver _driver;       
         private IWebElement _goToUsers;
         private IWebElement _goToStudents;
         private IWebElement _goToGroups;
-        private IWebElement _escapeHomeButton;
-        private IWebElement _table;
+        
+        private IList<IWebElement> _AddButton;
         private IList<IWebElement> _DeleteButtons;
         private IList<IWebElement> _EditButtons;
-
         private IWebElement _submitButton;
         private IWebElement _closeButton;
         private IWebElement _close;
+        private IWebElement _escapeHomeButton;
 
-        public IWebElement GetTable
+        public IList<IWebElement> AddButton
         {
             get
             {
-                if (_table != null) return _table;
+                if (_AddButton != null) return _AddButton;
                 else
                 {
-                    _table = _driver.FindElement(By.ClassName("tab-pane"));
-                    return _table;
+                    _AddButton = _driver.FindElements(By.Id("add-new-user"));
+                    return _AddButton;
                 }
             }
         }
-        public IWebElement AddButton
+        
+        public AdminPage AddButtonClick(int index)
         {
-            get
-            {
-                if (_addButton != null) return _addButton;
-                else
-                {
-                    _addButton = _driver.FindElement(By.Id("add-new-user"));
-                    return _addButton;
-                }
-            }
+            IList<IWebElement> add;
+            add = _driver.FindElements(By.Id("add-new-user"));
+            IWebElement addClick = add[index];
+            addClick.Click();
+
+            return this;
         }
 
         public IWebElement GoToUsers
@@ -59,7 +56,7 @@ namespace CaesarLib
                 }
             }
         }
-      
+              
         public IWebElement GoToGroups
         {
             get
@@ -72,7 +69,7 @@ namespace CaesarLib
                 }
             }
         }
-
+        
         public IWebElement GoToStudents
         {
             get
@@ -85,7 +82,7 @@ namespace CaesarLib
                 }
             }
         }
-
+               
         public IWebElement EscapeHome
         {
             get
@@ -98,32 +95,15 @@ namespace CaesarLib
                 }
             }
         }
-
-        public IList<IWebElement> Delete
+              
+        public AdminPage EditClick(IList<IList<IWebElement>> rows, int rowIndex)
         {
+            IList<IWebElement> row = rows[rowIndex-1];
+            IWebElement action = row[row.Count - 1];
+            IWebElement edit = action.FindElement(By.ClassName("btn-info"));
+            edit.Click();
 
-            get
-            {
-                if (_DeleteButtons != null) return _DeleteButtons;
-                else
-                {
-                    _DeleteButtons = GetTable.FindElements(By.ClassName("btn-danger"));
-                    return _DeleteButtons;
-                }
-            }
-        }
-
-        public IList<IWebElement> Edit
-        {
-            get
-            {
-                if (_EditButtons != null) return _EditButtons;
-                else
-                {
-                    _EditButtons = GetTable.FindElements(By.ClassName("btn-info"));
-                    return _EditButtons;
-                }
-            }
+            return this;
         }
 
         public IWebElement SubmitButton
@@ -170,15 +150,7 @@ namespace CaesarLib
             _driver = driver;
         }
 
-        public IWebElement getLastElement(IList<IWebElement> webElements, int number)
-        {
-            if (number == 0)
-            {
-                return webElements.Last();
-            }
-            else return webElements[number];
-        }
-
+       
         public static bool IsAdminPageOpened(IWebDriver driver)
         {
             return driver.FindElements(By.ClassName("nav-tabs")).Count > 0 &
