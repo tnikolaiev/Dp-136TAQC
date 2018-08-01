@@ -114,10 +114,10 @@ namespace CaesarLib
             return (LeftMenuSection.GetAttribute("class").Equals("contextMenu open"));
         }
 
-        //public Func<IWebDriver, IWebElement> IsCreateButtonClickable()
-        //{
-        //    return ExpectedConditions.ElementToBeClickable(By.XPath("//div[@id='left-menu']//button[@title='Create']/i"));
-        //}
+        public Func<IWebDriver, IWebElement> IsCreateButtonClickable()
+        {
+            return ExpectedConditions.ElementToBeClickable(By.XPath("//div[@id='left-menu']//button[@title='Create']/i"));
+        }
 
         public bool IsSearchButtonVisible()
         {

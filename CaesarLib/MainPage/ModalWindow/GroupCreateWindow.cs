@@ -428,11 +428,14 @@ namespace CaesarLib
         {
             MainPage mainPage = new MainPage(driver);
             var leftMenu = mainPage.LeftMenu;
-
             leftMenu.Open(action, wait);
-            leftMenu.IsCreateButtonVisible();
-            leftMenu.CreateButton.Click();
-            wait.Until((d) => IsCancelButtonVisible());
+            //
+            //action = new Actions(driver);
+            //action.ClickAndHold(.Release().Build().Perform();
+
+            wait.Until((d) => leftMenu.IsCreateButtonVisible());
+            do leftMenu.CreateButton.Click();
+            while (!wait.Until((d) => IsCancelButtonVisible()));
         }
     }
 }
