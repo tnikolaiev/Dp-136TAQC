@@ -11,6 +11,7 @@ namespace CaesarLib
         private IWebDriver driver;
         private IWebElement _filterSearchButton;
         private IWebElement _myGroupsButton;
+        private IWebElement _allGroupsButton;
         private IWebElement _futureGroupsToggle;
         private IWebElement _currentGroupsToggle;
         private IWebElement _endedGroupsToggle;
@@ -37,6 +38,19 @@ namespace CaesarLib
                 {
                     _myGroupsButton = driver.FindElement(By.XPath("//div[@class='group-list-footer']/button[contains(text(), 'My Groups')]"));
                     return _myGroupsButton;
+                }
+            }
+        }
+
+        public IWebElement AllGroupsButton
+        {
+            get
+            {
+                if (_allGroupsButton != null) return _allGroupsButton;
+                else
+                {
+                    _allGroupsButton = driver.FindElement(By.XPath("//div[@class='group-list-footer']/button[contains(text(), 'All Groups')]"));
+                    return _allGroupsButton;
                 }
             }
         }
@@ -110,6 +124,11 @@ namespace CaesarLib
         public bool IsGroupChosen(IWebElement group)
         {
             return Acts.GetAttribute(group, "class").Contains("chosen");
+        }
+
+        public bool IsButtonChosen(IWebElement button)
+        {
+            return Acts.GetAttribute(button, "class").Contains("pressed");
         }
 
         public IWebElement GetGroupByName(String name)
