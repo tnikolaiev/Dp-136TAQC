@@ -433,9 +433,19 @@ namespace CaesarLib
             //action = new Actions(driver);
             //action.ClickAndHold(.Release().Build().Perform();
 
+
+            //do
+            //{
+            //    leftMenu.CreateButton.Click();
+            //    Thread.Sleep(100);
+            //}
+            //while (!wait.Until((d) => IsCancelButtonVisible()));
+
+            //leftMenu.CreateButton.SendKeys(Keys.Enter);
+
             wait.Until((d) => leftMenu.IsCreateButtonVisible());
-            do leftMenu.CreateButton.Click();
-            while (!wait.Until((d) => IsCancelButtonVisible()));
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", leftMenu.CreateButton);
+            wait.Until((d) => IsCancelButtonVisible());
         }
     }
 }

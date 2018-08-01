@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Threading;
 
 namespace CaesarTests
 {
@@ -42,8 +43,16 @@ namespace CaesarTests
             //action.ClickAndHold(leftMenu.DeleteButton).Release().Build().Perform();
 
             wait.Until((d) => leftMenu.IsDeleteButtonVisible());
-            do leftMenu.DeleteButton.Click();
-            while (!wait.Until((d) => groupDeleteConfirmantionWindow.IsOpened()));
+            //do
+            //{
+            //    leftMenu.DeleteButton.Click();
+            //    Thread.Sleep(100);
+            //}
+            //while (!wait.Until((d) => groupDeleteConfirmantionWindow.IsOpened()));
+
+            //leftMenu.DeleteButton.SendKeys(Keys.Enter);
+
+            (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].click();", leftMenu.DeleteButton);
             Assert.IsTrue(wait.Until((d) => groupDeleteConfirmantionWindow.IsOpened()));
         }
 
