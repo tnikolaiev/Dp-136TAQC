@@ -41,7 +41,7 @@ namespace CaesarTests
             //Opening Schedule Page
 
             mainPageInstance = new MainPage(driver);
-            ScheduleContentInstance = mainPageInstance.OpenScheduleContent();
+           mainPageInstance.OpenScheduleContent();
 
             //Select group from LeftContainer
 
@@ -69,7 +69,7 @@ namespace CaesarTests
             //Opening Schedule Page
 
             mainPageInstance = new MainPage(driver);
-            ScheduleContentInstance = mainPageInstance.OpenScheduleContent();
+            mainPageInstance.OpenScheduleContent();
 
             //Select group from LeftContainer
 
@@ -97,7 +97,7 @@ namespace CaesarTests
             //Opening Schedule Page
 
             mainPageInstance = new MainPage(driver);
-            ScheduleContentInstance = mainPageInstance.OpenScheduleContent();
+           mainPageInstance.OpenScheduleContent();
 
             //Select group from LeftContainer
 
