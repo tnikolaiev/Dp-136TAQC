@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace CaesarLib
 {
@@ -135,6 +136,20 @@ namespace CaesarLib
         {
             ScheduleCogwheell.Click();
             return new EditScheduleWindow(_driverInstance);
+        }
+
+        public WeekTab OpenWeekTab(WebDriverWait wait)
+        {            
+            WeekButton.Click();
+            wait.Until((d) => WeekTabInstance.IsWeekTabDisplayed(_driverInstance));
+            return new WeekTab(_driverInstance);
+        }
+
+        public KeyDatesTab OpenKeyDatesTab(WebDriverWait wait)
+        {
+            KeyDatesButton.Click();
+            wait.Until((d) =>KeyDatesTabInstance.IsKeyDatesDisplayed(_driverInstance));
+            return new KeyDatesTab(_driverInstance);
         }
 
     }
