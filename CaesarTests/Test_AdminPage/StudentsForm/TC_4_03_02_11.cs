@@ -9,14 +9,14 @@ using System.Threading;
 namespace CaesarTests
 {
     [TestFixture]
-    public class TC_4_03_CreateStudent_Success
+    public class TC_4_03_02_11
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
         CreateEditStudentsForm studentForm;
         WebDriverWait wait;
         Table table;
-        List<string> index = new List<string>();
+        string index;
 
         static object[] StudentInfo =
         {
@@ -51,16 +51,6 @@ namespace CaesarTests
             wait.Until((d) => CreateEditStudentsForm.IsCreateEditFormOpened(d));
         }
 
-        [Test]
-        public void Test_CreateStudentFormIsDisplayed()
-        {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
-            List<string> expectedResult = new List<string> { "", "", "", "Elementary", "", "", "", "" };
-            List<string> actualResult = studentForm.RememberStudent();
-
-            CollectionAssert.AreEqual(actualResult, expectedResult);
-        }
-
         [Test, TestCaseSource("StudentInfo")]
         public void Test_CreateStudent_Success(string groupId, string name, string lastName, int englishLevel, string entryScore, string approvedBy)
         {
@@ -73,24 +63,22 @@ namespace CaesarTests
                 .setApprovedBy(approvedBy);
             
             List<String> expectedResult = studentForm.RememberStudent();
-            index.Add(studentForm.LastNameField.GetAttribute("value"));
+            index = studentForm.LastNameField.GetAttribute("value");
             studentForm.SubmitButton.Click();
             table = new Table(studentForm.GetTable, driver);
 
-            Assert.IsTrue(table.FindRowInTable(expectedResult));
-
-            
+            Assert.IsTrue(table.FindRowInTable(expectedResult));            
         }
-       
-        [OneTimeTearDown]
-        public void CleanUp()
+
+        [TearDown]
+        public void Delete()
         {
             wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
-            Thread.Sleep(1000);
-            foreach (var i in index)
-            {
-                studentForm.DeleteStudent(table.GetRowNumberByValue(i));
-            }
+            studentForm.DeleteStudent(table.GetRowNumberByValueInCell(index, 5));
+        }
+        [OneTimeTearDown]
+        public void CleanUp()
+        {           
             driver.Close();
             driver.Quit();
         }

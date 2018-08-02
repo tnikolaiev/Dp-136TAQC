@@ -10,7 +10,7 @@ using System.Threading;
 namespace CaesarTests
 {
     [TestFixture]
-    public class TC_4_Close_CreateEditForms
+    public class TС_4_00_1
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;

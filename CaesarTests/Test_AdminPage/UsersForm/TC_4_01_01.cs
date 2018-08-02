@@ -10,27 +10,13 @@ using System.Threading;
 namespace CaesarTests
 {
     [TestFixture]
-    public class TC_4_01_CreateUser_Success
+    public class TC_4_01_01
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
         CreateEditUsersForm usersForm;
         WebDriverWait wait;
-        List<string> index = new List<string>();
-        Table table;
-
-        static object[] UsersInfo =
-        {
-            new object[] {"Olga", "Ivanova", 0, 0, "IvanovaO@", "qwerty12#" },
-            new object[] {"Hanna", "Lavrova", 1, 1, "IvanovaH@", "qwerty12#" },
-            new object[] {"Thor", "Thorov", 2, 2, "Thor@", "qwerty12#" },
-            new object[] {"Halk", "Halkov", 0, 3, "Halk@", "qwerty12#" },
-            new object[] {"Iron", "Ironon", 1, 4, "Iron@", "qwerty12#" },
-            new object[] {"Lady", "Ivanova", 1, 5, "Lady@", "qwerty12#" },
-            new object[] {"Sima", "Kotova", 1, 5, "Sima@", "qwerty12#" },
-
-        };
-
+       
         [SetUp]
         public void Initialize()
         {
@@ -44,7 +30,6 @@ namespace CaesarTests
             wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
             usersForm = new CreateEditUsersForm(driver);
             usersForm.addUsers();
-
         }
 
         [Test]
@@ -118,34 +103,10 @@ namespace CaesarTests
             Assert.AreEqual("someText", usersForm.Password.GetAttribute("value"));
             usersForm.Close.Click();
         }
-
-        [Test, TestCaseSource("UsersInfo")]
-        public void Test_CreateUser_Valid(string name, string sername, int role, int location, string login, string password)
-        {
-            usersForm.IsOpened(wait);
-            usersForm.setFirstName(name)
-                .setLastName(sername)
-                .selectRole(role)
-                .selectLocation(location)
-                .setLogin(login)
-                .setPassword(password)
-                .SubmitButton.Click();
-
-            List<string> expectedResult = usersForm.RememberUser();
-            index.Add(usersForm.Login.GetAttribute("value"));
-            table = new Table(usersForm.GetTable, driver);
-            Assert.IsTrue(table.FindRowInTable(expectedResult));
-        }
-
+       
         [OneTimeTearDown]
         public void CleanUp()
         {
-            wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
-            Thread.Sleep(1000);
-            foreach (var i in index)
-            {
-                usersForm.DeleteUser(table.GetRowNumberByValue(i));
-            }
             driver.Close();
             driver.Quit();
         }

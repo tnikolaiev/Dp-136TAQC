@@ -109,6 +109,25 @@ namespace CaesarLib
             return rowsWithColumnsByHeadings;
 
         }
+        //Method to find out number of row where specific value is situated
+        public int GetRowNumberByValueInCell(String valueInRow, int cellIndex)
+        {
+            List<IList<IWebElement>> rowsWithColumns = GetRowsWithColumns();
+            int rowNumber = 0;
+
+            foreach (IList<IWebElement> el in rowsWithColumns)
+            {
+                IList<IWebElement> oneRowWithColumn = el;
+                rowNumber++;
+
+                if(el[cellIndex].Text == valueInRow)
+                {
+                    return rowNumber;
+                }                
+            }
+
+            return rowNumber;
+        }
 
         //Method to find out number of row where specific value is situated
         public int GetRowNumberByValue(String valueInRow)

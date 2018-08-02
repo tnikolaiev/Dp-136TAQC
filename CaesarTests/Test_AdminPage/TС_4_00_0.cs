@@ -10,7 +10,7 @@ using System.Threading;
 namespace CaesarTests
 {
     [TestFixture]
-    public class Test_EscapeToHomeButton
+    public class TС_4_00_0
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
