@@ -47,7 +47,7 @@ namespace CaesarTests
         {           
 
             //Click on cogweel for ScheduleEditor opening
-            ScheduleContentInstance.ClickCogwheel();
+            ScheduleContentInstance.ClickCogwheel(wait);
 
             //Check if correct events present
             Assert.IsTrue(Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Lecture')]")));

@@ -59,7 +59,6 @@ namespace CaesarTests
 
         public void IsKeyDatesTabAvailable()
         {
-
             //Click on KeyDates button
 
             MainPageInstance.CenterContainer.ScheduleContent.KeyDatesButton.Click();

@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
 
 namespace CaesarTests
 {
@@ -15,7 +16,7 @@ namespace CaesarTests
         protected WebDriverWait wait;
         protected LoginPage loginPageInstance;
         protected MainPage MainPageInstance;
-
+     
         [SetUp]
 
         public void SetUp()
@@ -26,12 +27,7 @@ namespace CaesarTests
 
             //Navigating to Caesar app
             string baseURL = "localhost:3000";
-            driver.Url = baseURL;
-
-            //Logging in
-            loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn("sasha", "1234");
-            wait.Until((driver) => MainPage.IsMainPageOpened(driver));
+            driver.Url = baseURL;           
 
             BeforeTest();
         }       
