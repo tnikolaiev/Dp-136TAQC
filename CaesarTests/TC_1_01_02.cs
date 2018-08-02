@@ -10,13 +10,20 @@ namespace CaesarTests
     [TestFixture]
     class TC_1_01_02
     {
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         LoginPage loginPageInstance;
         WebDriverWait wait;
+
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+        }
 
         [SetUp]
         public void Initialize()
         {
+            //driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Url = @"http://localhost:3000/logout";
@@ -38,9 +45,8 @@ namespace CaesarTests
         }
 
         [OneTimeTearDown]
-        public void CleanUp()
+        public void LastCleanUp()
         {
-            driver.Close();
             driver.Quit();
         }
     }

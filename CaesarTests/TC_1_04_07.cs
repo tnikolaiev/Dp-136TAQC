@@ -12,7 +12,7 @@ namespace CaesarTests
     [TestFixture]
     class TC_1_04_07
     {
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         Actions action;
         WebDriverWait wait;
         LoginPage loginPageInstance;
@@ -32,6 +32,12 @@ namespace CaesarTests
             ["expNameSpecSymbolsNA"] = "Special symbols are not allowed.",
             ["expNameLength"] = "Name should be from 5 to 25 chars."
         };
+
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+        }
 
         [SetUp]
         public void Initialize()
@@ -135,8 +141,7 @@ namespace CaesarTests
 
         [OneTimeTearDown]
         public void CleanUp()
-        {
-            driver.Close();
+        {            
             driver.Quit();
         }
     }
