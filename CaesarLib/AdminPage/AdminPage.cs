@@ -106,6 +106,16 @@ namespace CaesarLib
             return this;
         }
 
+        public AdminPage DeleteClick(IList<IList<IWebElement>> rows, int rowIndex)
+        {
+            IList<IWebElement> row = rows[rowIndex - 1];
+            IWebElement action = row[row.Count - 1];
+            IWebElement delete = action.FindElement(By.ClassName("btn-info"));
+            delete.Click();
+
+            return this;
+        }
+
         public IWebElement SubmitButton
         {
             get

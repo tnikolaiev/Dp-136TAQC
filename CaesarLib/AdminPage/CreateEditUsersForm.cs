@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace CaesarLib
 {
@@ -18,7 +19,7 @@ namespace CaesarLib
 
         private IList<IWebElement> _EditButtons;
         private IList<IWebElement> _DeleteButtons;
-
+               
         public IWebElement GetTable
         {
             get
@@ -61,7 +62,7 @@ namespace CaesarLib
                 if (_EditButtons != null) return _EditButtons;
                 else
                 {
-                    _EditButtons = GetTable.FindElements(By.ClassName("btn-info"));
+                    _EditButtons = GetTable.FindElements(By.ClassName("edit"));
                     return _EditButtons;
                 }
             }

@@ -54,11 +54,10 @@ namespace CaesarTests
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             driver.Url = @"http://localhost:3000/admin";
             wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
-            usersForm = new CreateEditUsersForm(driver);
+            usersForm = new CreateEditUsersForm(driver);            
             usersForm.addUsers();
         }
-
-
+        
         [Test]
         public void Test_CreateUserWithEmptyFields()
         {
@@ -69,7 +68,7 @@ namespace CaesarTests
             usersForm.SubmitButton.Click();
             index = usersForm.Login.GetAttribute("value");
             Thread.Sleep(1000);
-
+            table = new Table(usersForm.GetTable, driver);
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
@@ -87,6 +86,7 @@ namespace CaesarTests
             index = usersForm.Login.GetAttribute("value");
             expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
+            table = new Table(usersForm.GetTable, driver);
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
@@ -104,6 +104,7 @@ namespace CaesarTests
             index = usersForm.Login.GetAttribute("value");
             expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
+            table = new Table(usersForm.GetTable, driver);
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
         [Test, TestCaseSource("UsersLogin")]
@@ -120,6 +121,7 @@ namespace CaesarTests
             index = usersForm.Login.GetAttribute("value");
             expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
+            table = new Table(usersForm.GetTable, driver);
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
@@ -137,6 +139,7 @@ namespace CaesarTests
             index = usersForm.Login.GetAttribute("value");
             expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
+            table = new Table(usersForm.GetTable, driver);
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
@@ -151,7 +154,7 @@ namespace CaesarTests
 
         [OneTimeTearDown]
         public void CleanUp()
-        {            
+        {           
             driver.Close();
             driver.Quit();
         }
