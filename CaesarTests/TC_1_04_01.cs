@@ -13,8 +13,14 @@ namespace CaesarTests
     {
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         WebDriverWait wait;
+
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+        }
 
         [SetUp]
         public void Initialize()
@@ -48,8 +54,7 @@ namespace CaesarTests
 
         [OneTimeTearDown]
         public void CleanUp()
-        {
-            driver.Close();
+        {            
             driver.Quit();
         }
     }
