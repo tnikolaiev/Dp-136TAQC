@@ -16,6 +16,7 @@ namespace CaesarTests
         CenterContainer groupLocationInstance;
         TopMenu topMenuInstance;
         MainPage mainPageInstance;
+        GroupsInLocation groupsInLocationInstance;
 
         [OneTimeSetUp]
         public void Initialize()
@@ -40,6 +41,17 @@ namespace CaesarTests
             groupLocationInstance = new CenterContainer(driver);
             Console.WriteLine(groupLocationInstance.GroupLocation.Text);
             Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
+        }
+
+        [Test]
+        public void ExecuteTest_ChooseLocationSofia_UsingDoubleClick_CheckGroupsName()
+        {
+            topMenuInstance = mainPageInstance.MoveToTopMenu();
+            Acts.Click(topMenuInstance.LocationsItem);
+            mainPageInstance.DoubleClick(mainPageInstance.ModalWindow.LocationWindow.CitySofia);
+            string exeptualResultTitle = "Sf-089-MQC";
+            Console.WriteLine(mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("Sf-089-MQC").Text);
+            Assert.AreEqual(exeptualResultTitle, mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("Sf-089-MQC").Text);
         }
 
 

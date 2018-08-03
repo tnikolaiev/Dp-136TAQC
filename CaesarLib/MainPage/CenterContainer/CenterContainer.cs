@@ -15,6 +15,7 @@ namespace CaesarLib
         GroupsContent _groupsContent;
         StudentsContent _studentsContent;
         ScheduleContent _scheduleContent;
+        About _about;
 
         public IWebElement GroupLocation
         {
@@ -119,6 +120,8 @@ namespace CaesarLib
                 }
             }
         }
+
+
         public CenterContainer(IWebDriver webDriver)
         {
             this.webDriver = webDriver;

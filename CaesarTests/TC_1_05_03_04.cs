@@ -18,8 +18,7 @@ namespace CaesarTests
         TopMenu topMenuInstance;
         MainPage mainPageInstance;
 
-        //[OneTimeSetUp]
-        [SetUp]
+       [SetUp]
         public void Initialize()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
@@ -30,8 +29,8 @@ namespace CaesarTests
             loginPageInstance.LogIn("admin", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
-
         }
+
         [Test]
         public void ExecuteTest_ChooseLocationRivne_UsingKeyBoard()
         {
@@ -57,7 +56,6 @@ namespace CaesarTests
             Console.WriteLine(groupLocationInstance.GroupLocation.Text);
             Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
         }
-
 
         [OneTimeTearDown]
         public void CleanUp()
