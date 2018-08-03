@@ -13,7 +13,6 @@ namespace CaesarLib
         private CenterContainer _centerContainer;
         private ModalWindow _modalWindow;
         private IWebDriver driver;
-      
 
         public IWebElement ProfileButton
         {
@@ -214,6 +213,5 @@ namespace CaesarLib
             Actions builder = new Actions(driver);
             builder.DoubleClick(element).Build().Perform();
         }
-
     }
 }

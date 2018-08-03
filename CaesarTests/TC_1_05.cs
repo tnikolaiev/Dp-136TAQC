@@ -9,7 +9,7 @@ using NUnit.Framework.Internal;
 
 namespace CaesarTests
 {
- 
+
     [TestFixture]
     public class TC_1_05
     {
@@ -33,7 +33,7 @@ namespace CaesarTests
             loginPageInstance.LogIn("sasha", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
-           
+
         }
 
         static IEnumerable<object[]> GetLocationLists = Instruments.ReadXML("LocationLists.xml", "testData", "exeptedResult", "city");
@@ -45,7 +45,7 @@ namespace CaesarTests
             Acts.Click(topMenuInstance.LocationsItem);
             locationWindowInstance = new LocationWindow(driver);
             string[] parts = city.Split(',');
-            List<string> listOfCity = new List<string> (parts);
+            List<string> listOfCity = new List<string>(parts);
             IList<IWebElement> nonActiveCity = locationWindowInstance.GetLocationNonActiveWebElements();
             locationWindowInstance.ClickNonActiveButtonNames(nonActiveCity, listOfCity);
             Acts.Click(locationWindowInstance.ConfurmButton);
@@ -64,6 +64,6 @@ namespace CaesarTests
             driver.Close();
             driver.Quit();
         }
-        
+
     }
 }

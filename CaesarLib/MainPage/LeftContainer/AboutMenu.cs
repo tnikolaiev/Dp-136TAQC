@@ -9,12 +9,9 @@ namespace CaesarLib
     {
         private IWebDriver driver;
 
-
         public AboutMenu(IWebDriver driver)
         {
             this.driver = driver;
         }
-
-
     }
 }

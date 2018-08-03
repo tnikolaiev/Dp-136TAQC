@@ -67,18 +67,18 @@ namespace CaesarTests
 
 
 
-                //string exeptualResultTitle = "Development & Research";
-                //Console.WriteLine(groupLocationInstance.About.GetButtonsName());
-                //Assert.AreEqual(exeptualResultTitle, groupLocationInstance.About.DevelopmentResearch.Text);
-                //groupLocationInstance = new CenterContainer(driver);
+            //string exeptualResultTitle = "Development & Research";
+            //Console.WriteLine(groupLocationInstance.About.GetButtonsName());
+            //Assert.AreEqual(exeptualResultTitle, groupLocationInstance.About.DevelopmentResearch.Text);
+            //groupLocationInstance = new CenterContainer(driver);
 
-                //Assert.AreSame(string[],mainPageInstance.)
+            //Assert.AreSame(string[],mainPageInstance.)
         }
 
         [OneTimeTearDown]
         public void CleanUp()
         {
-           driver.Quit();
+            driver.Quit();
         }
     }
 }

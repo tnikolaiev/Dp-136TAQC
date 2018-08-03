@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CaesarLib
 {
-   public class About
+    public class About
     {
         private IWebDriver driver;
         private IWebElement developmentResearch;
@@ -97,15 +97,7 @@ namespace CaesarLib
             foreach (var item in elements)
             {
                 buttonNames.Add((item.Text));
-                //Console.WriteLine(item.Text);
             }
-            //int count = 0;
-            //foreach(var item in buttonNames)
-            //{
-            //    count++;
-            //    Console.WriteLine(item.ToString());
-            //    Console.WriteLine(count);
-        //}
             return buttonNames;
         }
     }

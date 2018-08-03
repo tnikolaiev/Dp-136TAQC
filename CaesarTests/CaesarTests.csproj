@@ -51,14 +51,19 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="WebDriver, Version=3.13.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.3.13.1\lib\net45\WebDriver.dll</HintPath>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebDriver, Version=3.14.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.14.0\lib\net45\WebDriver.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver.Support, Version=3.13.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.Support.3.13.1\lib\net45\WebDriver.Support.dll</HintPath>
+    <Reference Include="WebDriver.Support, Version=3.14.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.3.14.0\lib\net45\WebDriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TC_1_08_01.cs" />
+    <Compile Include="TC_1_05_05.cs" />
+    <Compile Include="TC_1_05_03_04.cs" />
     <Compile Include="TC_2_02.cs" />
     <Compile Include="TC_2_01_2.cs" />
     <Compile Include="TC_2_01_1.cs" />
@@ -74,9 +79,7 @@
     <Compile Include="TC_1_04_05.cs" />
     <Compile Include="TC_1_04_07.cs" />
     <Compile Include="TC_1_04_06.cs" />
-    <Compile Include="TC_1_05_01.cs" />
-    <Compile Include="TC_1_05_03_04.cs" />
-    <Compile Include="TC_1_05.cs" />
+    <Compile Include="TC_1_05_02.cs" />
     <Compile Include="TC_3_06_01.cs" />
     <Compile Include="TC_2_03_6.cs" />
     <Compile Include="TC_2_03_1.cs" />
@@ -86,8 +89,8 @@
     <Compile Include="TC_3_06_03.cs" />
     <Compile Include="TC_OpenClose_TopMenu.cs" />
     <Compile Include="TC_1_04_02.cs" />
-    <Compile Include="TC_1_05_02.cs" />
-    <Compile Include="TC_1_05_05.cs" />
+    <Compile Include="TC_1_05.cs" />
+    <Compile Include="TC_1_05_01.cs" />
     <Compile Include="TC_4_01.cs" />
     <Compile Include="TC_3_04_01.cs" />
     <Compile Include="TC_3_04_02.cs" />
@@ -111,12 +114,16 @@
   <ItemGroup>
     <Content Include="TestData\CreateGroupInvalidData.xml" />
     <Content Include="TestData\InvalidLoginCredentials.xml" />
-    <Content Include="TestData\LocationLists.xml">
+    <Content Include="TestData\LocationLists.xml" />
+    <Content Include="TestData\LoginPageInvalidData.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="TestData\LoginPageInvalidData.xml" />
-    <Content Include="TestData\NewGroupsCreationData.xml" />
-    <Content Include="TestData\StartFinishDateData.xml" />
+    <Content Include="TestData\NewGroupsCreationData.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="TestData\StartFinishDateData.xml">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -131,8 +138,10 @@
     <Error Condition="!Exists('..\packages\Microsoft.NET.Test.Sdk.15.8.0\build\net45\Microsoft.Net.Test.Sdk.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NET.Test.Sdk.15.8.0\build\net45\Microsoft.Net.Test.Sdk.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.NET.Test.Sdk.15.8.0\build\net45\Microsoft.Net.Test.Sdk.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.NET.Test.Sdk.15.8.0\build\net45\Microsoft.Net.Test.Sdk.targets'))" />
     <Error Condition="!Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.41.0\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.WebDriver.ChromeDriver.2.41.0\build\Selenium.WebDriver.ChromeDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.Chrome.WebDriver.2.40\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Chrome.WebDriver.2.40\build\Selenium.Chrome.WebDriver.targets'))" />
   </Target>
   <Import Project="..\packages\Microsoft.CodeCoverage.15.8.0\build\netstandard1.0\Microsoft.CodeCoverage.targets" Condition="Exists('..\packages\Microsoft.CodeCoverage.15.8.0\build\netstandard1.0\Microsoft.CodeCoverage.targets')" />
   <Import Project="..\packages\Microsoft.NET.Test.Sdk.15.8.0\build\net45\Microsoft.Net.Test.Sdk.targets" Condition="Exists('..\packages\Microsoft.NET.Test.Sdk.15.8.0\build\net45\Microsoft.Net.Test.Sdk.targets')" />
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.2.41.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.2.41.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
+  <Import Project="..\packages\Selenium.Chrome.WebDriver.2.40\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.2.40\build\Selenium.Chrome.WebDriver.targets')" />
 </Project>

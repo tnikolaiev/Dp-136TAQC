@@ -18,7 +18,7 @@ namespace CaesarTests
         TopMenu topMenuInstance;
         MainPage mainPageInstance;
 
-       [SetUp]
+        [SetUp]
         public void Initialize()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));

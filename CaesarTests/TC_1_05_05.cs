@@ -34,7 +34,7 @@ namespace CaesarTests
         [Test]
         public void ExecuteTest_LocationPageCloseWithoutChoosing()
         {
-            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.LocationsItem);
             Acts.Click(mainPageInstance.ModalWindow.LocationWindow.CityLviv);
             Acts.Click(mainPageInstance.ModalWindow.LocationWindow.CancelButton);
@@ -47,7 +47,7 @@ namespace CaesarTests
         [OneTimeTearDown]
         public void CleanUp()
         {
-           driver.Quit();
+            driver.Quit();
         }
     }
 }

@@ -13,7 +13,6 @@ namespace CaesarTests
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
         WebDriverWait wait;
-        LocationWindow locationWindowInstance;
         CenterContainer groupLocationInstance;
         TopMenu topMenuInstance;
         MainPage mainPageInstance;

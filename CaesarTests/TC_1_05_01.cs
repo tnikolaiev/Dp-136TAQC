@@ -18,7 +18,7 @@ namespace CaesarTests
         MainPage mainPageInstance;
         GroupsInLocation groupsInLocationInstance;
 
-        [OneTimeSetUp]
+        [SetUp]
         public void Initialize()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));

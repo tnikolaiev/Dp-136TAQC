@@ -1,5 +1,4 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Threading;
@@ -8,7 +7,6 @@ using System.Windows.Forms;
 namespace CaesarLib
 {
     public static class Acts
-      
     {
         public static void Click(IWebElement element)
         {
