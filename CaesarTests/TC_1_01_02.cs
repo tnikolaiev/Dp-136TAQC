@@ -18,14 +18,13 @@ namespace CaesarTests
         public void FirstInitialize()
         {
             driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         [SetUp]
         public void Initialize()
-        {
-            //driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        {  
             driver.Url = @"http://localhost:3000/logout";
             loginPageInstance = new LoginPage(driver);
         }
@@ -41,6 +40,7 @@ namespace CaesarTests
         public void ExecuteTest_LoginWithValidLoginCredentials(String login, String password)
         {
             loginPageInstance.LogIn(login, password, wait);
+            Log4Caesar.Log();
             Assert.IsTrue(wait.Until((d) => MainPage.IsMainPageOpened(d)));
         }
 

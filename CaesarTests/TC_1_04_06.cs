@@ -22,15 +22,15 @@ namespace CaesarTests
         public void FirstInitialize()
         {
             driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         [SetUp]
         public void Initialize()
-        {
-            driver.Manage().Window.Maximize();
+        {            
             driver.Url = "http://localhost:3000/logout";
-            action = new Actions(driver);
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            action = new Actions(driver);            
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("dmytro", "1234", wait);
             mainPageInstance = new MainPage(driver);
@@ -47,6 +47,7 @@ namespace CaesarTests
                 .SetStartDate(startDate);
             groupCreateWindow.GroupNameField.Click();
             String actualResult = groupCreateWindow.FinishDateField.GetAttribute("value");
+            Log4Caesar.Log();
             Assert.AreEqual(finishDate, actualResult);
         }
 

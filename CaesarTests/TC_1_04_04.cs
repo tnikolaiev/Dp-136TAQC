@@ -5,7 +5,6 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Threading;
 
 namespace CaesarTests
 {
@@ -22,15 +21,17 @@ namespace CaesarTests
         public void FirstInitialize()
         {
             driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);            
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         [SetUp]
         public void Initialize()
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
-            driver.Manage().Window.Maximize();
+            
             driver.Url = @"http://localhost:3000/logout";
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+           
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("dmytro", "1234", wait);
             mainPageInstance = new MainPage(driver);
@@ -46,6 +47,7 @@ namespace CaesarTests
             leftMenu.Open(action, wait);            
             wait.Until((d) => leftMenu.IsDeleteButtonVisible());
             (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].click();", leftMenu.DeleteButton);
+            Log4Caesar.Log();
             Assert.IsTrue(wait.Until((d) => groupDeleteConfirmantionWindow.IsOpened()));
         }
 
@@ -61,6 +63,7 @@ namespace CaesarTests
             wait.Until((d) => groupDeleteConfirmantionWindow.IsCancelButtonVisible());
             groupDeleteConfirmantionWindow.CancelButton.Click();
             bool isGroupDeleteConfirmationWindowClosed = wait.Until((d) => !groupDeleteConfirmantionWindow.IsOpened());
+            Log4Caesar.Log();
             Assert.IsTrue(isGroupDeleteConfirmationWindowClosed);
         }
 
@@ -76,6 +79,7 @@ namespace CaesarTests
             wait.Until((d) => groupDeleteConfirmantionWindow.IsOpened());
             action.SendKeys(Keys.Escape).Perform();
             bool isGroupDeleteConfirmationWindowClosed = wait.Until((d) => !groupDeleteConfirmantionWindow.IsOpened());
+            Log4Caesar.Log();
             Assert.IsTrue(isGroupDeleteConfirmationWindowClosed);
         }
 

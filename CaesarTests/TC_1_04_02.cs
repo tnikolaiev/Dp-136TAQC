@@ -22,14 +22,13 @@ namespace CaesarTests
         public void FirstInitialize()
         {
             driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         [SetUp]
         public void Initialize()
-        {
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        {                     
             driver.Url = @"http://localhost:3000/logout";
             action = new Actions(driver);
         }
@@ -46,6 +45,7 @@ namespace CaesarTests
 
             List<String> expectedResult = new List<String> { "Create", "Search" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
+            Log4Caesar.Log();
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
@@ -61,6 +61,7 @@ namespace CaesarTests
 
             List<String> expectedResult = new List<String> { "Create", "Search", "Edit", "Delete" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
+            Log4Caesar.Log();
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
@@ -76,6 +77,7 @@ namespace CaesarTests
 
             List<String> expectedResult = new List<String> { "Search" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
+            Log4Caesar.Log();
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
@@ -91,6 +93,7 @@ namespace CaesarTests
 
             List<String> expectedResult = new List<String> { "Search" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
+            Log4Caesar.Log();
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 

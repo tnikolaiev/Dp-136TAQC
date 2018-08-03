@@ -18,11 +18,6 @@ namespace CaesarTests
         public void FirstInitialize()
         {
             driver = new ChromeDriver();
-        }
-
-        [SetUp]
-        public void Initialization()
-        {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
@@ -32,6 +27,7 @@ namespace CaesarTests
         public void Test_NavigateToLinks_LoginPageOpened(String link)
         {
             driver.Url = link;
+            Log4Caesar.Log();
             Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPageOpened(driver)));
         }
 

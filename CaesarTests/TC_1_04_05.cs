@@ -22,14 +22,14 @@ namespace CaesarTests
         public void FirstInitialize()
         {
             driver = new ChromeDriver();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
+            driver.Manage().Window.Maximize();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         [SetUp]
         public void Initialize()
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
-            driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Url = @"http://localhost:3000/logout";
             loginPageInstance = new LoginPage(driver);
             action = new Actions(driver);
@@ -43,6 +43,7 @@ namespace CaesarTests
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
             bool LocationDdlEnabled = groupCreateWindow.LocationDDL.Enabled;
+            Log4Caesar.Log();
             Assert.IsTrue(groupCreateWindow.IsOpened() & !LocationDdlEnabled);
         }
 
@@ -70,6 +71,7 @@ namespace CaesarTests
             bool isGroupCreated = groupsList.GetGroupByName(groupName, wait) != null;
             groupsList.DeleteGroup(groupName, action, wait);
             bool isGroupDeleted = groupsList.GetGroupByName(groupName, wait) == null;
+            Log4Caesar.Log();
             Assert.IsTrue(isGroupCreated & isGroupDeleted);
         }
 
@@ -81,6 +83,7 @@ namespace CaesarTests
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
             bool LocationDdlEnabled = groupCreateWindow.LocationDDL.Enabled;
+            Log4Caesar.Log();
             Assert.IsTrue(groupCreateWindow.IsOpened() & LocationDdlEnabled);
         }
 

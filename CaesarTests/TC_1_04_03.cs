@@ -21,15 +21,14 @@ namespace CaesarTests
         public void FirstInitialize()
         {
             driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         [SetUp]
         public void Initialize()
-        {
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            driver.Manage().Window.Maximize();
+        {           
             driver.Url = @"http://localhost:3000/logout";
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             action = new Actions(driver);
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("dmytro", "1234", wait);
@@ -41,6 +40,7 @@ namespace CaesarTests
         {
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
+            Log4Caesar.Log();
             Assert.IsTrue(groupCreateWindow.IsOpened());
         }
 
@@ -51,6 +51,7 @@ namespace CaesarTests
             groupCreateWindow.Open(action, wait);
             groupCreateWindow.CancelGroupAddingButton.Click();
             bool isWindowClosed = wait.Until((d) => !groupCreateWindow.IsOpened());
+            Log4Caesar.Log();
             Assert.IsTrue(isWindowClosed);
         }
 
@@ -61,6 +62,7 @@ namespace CaesarTests
             groupCreateWindow.Open(action, wait);
             action.SendKeys(Keys.Escape).Perform();
             wait.Until((d) => !groupCreateWindow.IsOpened());
+            Log4Caesar.Log();
             Assert.IsFalse(groupCreateWindow.IsOpened());
         }
 
