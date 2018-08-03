@@ -12,30 +12,32 @@ namespace CaesarTests
     [TestFixture]
     class TC_2_03_1 : BaseTest
     {
-        static IEnumerable<object[]> StartFinishDateData = Instruments.ReadXML("LoginUnderDifferentRoles.xml", "testData", "login", "password");
-
+        static IEnumerable<object[]> LoginUnderDifferentRoles = Instruments.ReadXML("LoginUnderDifferentRoles.xml", "testData", "login", "password");
         [Test, TestCaseSource("LoginUnderDifferentRoles")]
 
-        public void IsScheduleEditorAvailable(string login, string password)
+        public void IsScheduleEditorAvailable(String login, String password)
         {
-            //Logging in
+            //Opening Caesar and Logging in
+            driver.Url = baseURL;
             loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn(login, password);
-            wait.Until((driver) => MainPage.IsMainPageOpened(driver));
+            loginPageInstance.LogIn(login, password, wait);
 
             //Opening Schedule Page
             MainPageInstance = new MainPage(driver);
             wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
             MainPageInstance.TopMenu.ScheduleItem.Click();
-          
-            //Select group from LeftContainer
+
+            //Selecting group
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
             //Click on cogweel for ScheduleEditor opening
             MainPageInstance.CenterContainer.ScheduleContent.ScheduleCogwheell.Click();
 
             //Assert ScheduleEditor is displayed
-            Assert.IsTrue(wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.IsScheduleEditorDisplayed(driver)));          
+            Assert.IsTrue(wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.IsScheduleEditorDisplayed(driver)));
+
+            //Close ScheduleEditor
+            MainPageInstance.ModalWindow.EditScheduleWindow.CancelButton.Click();
         }
       
     }

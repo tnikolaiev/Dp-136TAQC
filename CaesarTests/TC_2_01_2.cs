@@ -14,35 +14,41 @@ namespace CaesarTests
         KeyDatesTab KeyDatesTabInstance;
         string groupName;
 
-        protected override void BeforeTest()
+        [SetUp]
+
+        public void SetUp()
         {
+            //Opening Caesar and Logging in
+            driver.Url = baseURL;
+            loginPageInstance = new LoginPage(driver);
+            loginPageInstance.LogIn("qwerty", "1234", wait);
 
             //Opening Schedule Page
-
             MainPageInstance = new MainPage(driver);
             wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
-            MainPageInstance.TopMenu.ScheduleItem.Click();            
-
+            MainPageInstance.TopMenu.ScheduleItem.Click();
         }
 
         [Test]
 
         public void KeyDatesDisplayingOneGroup()
         {
+        
             //Selecting group
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
-            //Go to KeyDatesTab
-            MainPageInstance.CenterContainer.ScheduleContent.KeyDatesButton.Click();
-            wait.Until((d) => MainPageInstance.CenterContainer.ScheduleContent.KeyDatesTabInstance.IsKeyDatesDisplayed(driver));
-            KeyDatesTabInstance = new KeyDatesTab(driver);
+            //Go to KeyDatesTab and check groups which are displayed
+
+            KeyDatesTabInstance = MainPageInstance.CenterContainer.ScheduleContent.OpenKeyDatesTab(wait);
             groupName = KeyDatesTabInstance.KeyDatesTable.GetValueFromCell(1, "Group");
             Assert.AreEqual("DP-094-MQC", groupName);
 
         }
         [Test]
+
         public void KeyDatesDisplayingTwoGroups()
-        {
+        {         
+                     
             //Selecting groups
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS").Click();

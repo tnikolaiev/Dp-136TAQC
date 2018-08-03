@@ -11,15 +11,21 @@ namespace CaesarTests
 {
     [TestFixture]
     public class TC_2_02 : BaseTest
-    {       
+    {
+        [SetUp]
 
-        protected override void BeforeTest()
+        public void SetUp()
         {
-            //Opening Schedule Page
 
-            MainPageInstance = new MainPage(driver);
-            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
-            MainPageInstance.TopMenu.ScheduleItem.Click();            
+        //Opening Caesar and Logging in
+        driver.Url = baseURL;
+        loginPageInstance = new LoginPage(driver);
+        loginPageInstance.LogIn("qwerty", "1234", wait);
+
+        //Opening Schedule Page
+         MainPageInstance = new MainPage(driver);
+         wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
+         MainPageInstance.TopMenu.ScheduleItem.Click();            
 
         }
 

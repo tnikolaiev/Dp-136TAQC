@@ -5,15 +5,26 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
 
 namespace CaesarTests
 {
     [TestFixture]
     class TC_2_01_3 : BaseTest
-    {              
+    {
 
-        protected override void BeforeTest()
+        static IEnumerable<object[]> LoginUnderDifferentRoles = Instruments.ReadXML("LoginUnderDifferentRoles.xml", "testData", "login", "password");
+
+
+        [Test, TestCaseSource("LoginUnderDifferentRoles")]
+
+        public void IsMonthTabAvailable(string login, string password)
         {
+            //Opening Caesar and Logging in
+            driver.Url = baseURL;
+            loginPageInstance = new LoginPage(driver);
+            loginPageInstance.LogIn(login, password, wait);
+
             //Opening Schedule Page
 
             MainPageInstance = new MainPage(driver);
@@ -23,12 +34,7 @@ namespace CaesarTests
             //Select group from LeftContainer
 
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
-        }
 
-        [Test]
-
-        public void IsMonthTabAvailable()
-        {           
 
             //Assert MonthView tab is displayed
             Assert.IsTrue(MainPageInstance.CenterContainer
@@ -37,10 +43,25 @@ namespace CaesarTests
                 .IsMonthTabDisplayed(driver));          
         }
 
-        [Test]
+        [Test, TestCaseSource("LoginUnderDifferentRoles")]
 
-        public void IsWeekTabAvailable()
-        {           
+        public void IsWeekTabAvailable(string login, string password)
+        {
+
+            //Opening Caesar and Logging in
+            driver.Url = baseURL;
+            loginPageInstance = new LoginPage(driver);
+            loginPageInstance.LogIn("qwerty", "1234", wait);
+
+            //Opening Schedule Page
+
+            MainPageInstance = new MainPage(driver);
+            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
+            MainPageInstance.TopMenu.ScheduleItem.Click();
+
+            //Select group from LeftContainer
+
+            MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
             //Click on WeekView button
 
@@ -55,13 +76,29 @@ namespace CaesarTests
                 .IsWeekTabDisplayed(driver));
         }
 
-        [Test]
+        [Test, TestCaseSource("LoginUnderDifferentRoles")]
 
-        public void IsKeyDatesTabAvailable()
-        {
-            //Click on KeyDates button
+        public void IsKeyDatesTabAvailable(string login, string password)
+        {        
 
-            MainPageInstance.CenterContainer.ScheduleContent.KeyDatesButton.Click();
+            //Opening Caesar and Logging in
+             driver.Url = baseURL;
+             loginPageInstance = new LoginPage(driver);
+             loginPageInstance.LogIn("qwerty", "1234", wait);
+
+            //Opening Schedule Page
+
+            MainPageInstance = new MainPage(driver);
+            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
+            MainPageInstance.TopMenu.ScheduleItem.Click();
+
+            //Select group from LeftContainer
+
+            MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
+
+           //Click on KeyDates button
+
+             MainPageInstance.CenterContainer.ScheduleContent.KeyDatesButton.Click();
             
             //Assert KeyDates tab is displayed
             Assert.IsTrue(MainPageInstance

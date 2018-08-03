@@ -16,31 +16,32 @@ namespace CaesarTests
         protected WebDriverWait wait;
         protected LoginPage loginPageInstance;
         protected MainPage MainPageInstance;
-     
-        [SetUp]
+        protected string baseURL;
 
-        public void SetUp()
+        [OneTimeSetUp]
+
+        public void OneTimeSetUp()
         {
             driver = new ChromeDriver();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
             driver.Manage().Window.Maximize();
-
             //Navigating to Caesar app
-            string baseURL = "localhost:3000";
-            driver.Url = baseURL;           
-
-            BeforeTest();
-        }       
+            baseURL = "localhost:3000";
+        }
 
         [TearDown]
         public void TearDown()
-        {            
-            driver.Close();
-            driver.Quit();
-            AfterTest();
+        {
+            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
+            MainPageInstance.TopMenu.LogoutButton.Click();
         }
 
-        protected virtual void BeforeTest() { }
-        protected virtual void AfterTest() {}
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            driver.Close();
+            driver.Quit();           
+        }
+
     }
 }
