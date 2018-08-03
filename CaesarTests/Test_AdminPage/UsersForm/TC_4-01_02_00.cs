@@ -43,7 +43,7 @@ namespace CaesarTests
                 new object[] { "Lora", "Lavrova", "IvanovaH@", "Фьмвл12%к" }
         };        
 
-        [SetUp]
+        [OneTimeSetUp]
         public void OpenAdminPage()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
@@ -55,15 +55,19 @@ namespace CaesarTests
             driver.Url = @"http://localhost:3000/admin";
             wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
             usersForm = new CreateEditUsersForm(driver);            
+            
+        }
+        [SetUp]
+        public void AddUserClick()
+        {
             usersForm.addUsers();
+            usersForm.IsOpened(wait);
         }
         
         [Test]
         public void Test_CreateUserWithEmptyFields()
         {
-            usersForm.IsOpened(wait);
-            List<string> expectedResult = new List<string>();
-            expectedResult = usersForm.RememberUser();
+            List<string> expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
             usersForm.SubmitButton.Click();
             index = usersForm.Login.GetAttribute("value");
@@ -75,8 +79,6 @@ namespace CaesarTests
         [Test, TestCaseSource("UsersName")]
         public void Test_CreateUser_FirstNameIsInvalid(string name, string sername, string login, string password)
         {
-            List<string> expectedResult = new List<string>();
-            usersForm.IsOpened(wait);
             usersForm.setFirstName(name)
                 .setLastName(sername)
                 .setLogin(login)
@@ -84,7 +86,7 @@ namespace CaesarTests
                 .SubmitButton.Click();
 
             index = usersForm.Login.GetAttribute("value");
-            expectedResult = usersForm.RememberUser();
+            List<string> expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
             table = new Table(usersForm.GetTable, driver);
             Assert.IsFalse(table.FindRowInTable(expectedResult));
@@ -93,8 +95,6 @@ namespace CaesarTests
         [Test, TestCaseSource("UsersName")]
         public void Test_CreateUser_LastNameIsInvalid(string sername, string name, string login, string password)
         {
-            List<string> expectedResult = new List<string>();
-            usersForm.IsOpened(wait);
             usersForm.setFirstName(name)
                 .setLastName(sername)
                 .setLogin(login)
@@ -102,7 +102,7 @@ namespace CaesarTests
                 .SubmitButton.Click();
 
             index = usersForm.Login.GetAttribute("value");
-            expectedResult = usersForm.RememberUser();
+            List<string> expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
             table = new Table(usersForm.GetTable, driver);
             Assert.IsFalse(table.FindRowInTable(expectedResult));
@@ -110,8 +110,6 @@ namespace CaesarTests
         [Test, TestCaseSource("UsersLogin")]
         public void Test_CreateUser_LoginIsInvalid(string name, string sername, string login, string password)
         {
-            List<string> expectedResult = new List<string>();
-            usersForm.IsOpened(wait);
             usersForm.setFirstName(name)
                 .setLastName(sername)
                 .setLogin(login)
@@ -119,7 +117,7 @@ namespace CaesarTests
                 .SubmitButton.Click();
 
             index = usersForm.Login.GetAttribute("value");
-            expectedResult = usersForm.RememberUser();
+            List<string> expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
             table = new Table(usersForm.GetTable, driver);
             Assert.IsFalse(table.FindRowInTable(expectedResult));
@@ -128,8 +126,6 @@ namespace CaesarTests
         [Test, TestCaseSource("UsersPassword")]
         public void Test_CreateUser_PasswordIsInvalid(string name, string sername, string login, string password)
         {
-            List<string> expectedResult = new List<string>();
-            usersForm.IsOpened(wait);
             usersForm.setFirstName(name)
                 .setLastName(sername)
                 .setLogin(login)
@@ -137,7 +133,7 @@ namespace CaesarTests
                 .SubmitButton.Click();
 
             index = usersForm.Login.GetAttribute("value");
-            expectedResult = usersForm.RememberUser();
+            List<string> expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
             table = new Table(usersForm.GetTable, driver);
             Assert.IsFalse(table.FindRowInTable(expectedResult));
@@ -149,7 +145,6 @@ namespace CaesarTests
             wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
             Thread.Sleep(1000);
             usersForm.DeleteUser(table.GetRowNumberByValueInCell(index, 5));
-
         }
 
         [OneTimeTearDown]
