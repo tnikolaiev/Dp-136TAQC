@@ -21,7 +21,7 @@ namespace CaesarTests
         [SetUp]
         public void Initialize()
         {
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
             driver.Manage().Window.Maximize();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Url = @"http://localhost:3000/logout";

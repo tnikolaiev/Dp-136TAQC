@@ -176,11 +176,10 @@ namespace CaesarLib
         }
 
         //This method can return new instance of 'Schedule' page so change it in case of need
-        public ScheduleContent OpenScheduleContent()
+        public void OpenScheduleContent()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Acts.Click(topMenuInstance.ScheduleItem);
-            return new ScheduleContent(driver);
+            Acts.Click(topMenuInstance.ScheduleItem);            
         }
 
         //This method can return new instance of 'add' page so change it in case of need

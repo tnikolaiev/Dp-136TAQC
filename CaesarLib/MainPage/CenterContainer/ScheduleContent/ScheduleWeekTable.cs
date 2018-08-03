@@ -62,5 +62,10 @@ namespace CaesarLib
            string text = activity.Text;                
            return text.Contains(textInActivity) ? true : false;
         }
+
+        public int ActivitiesCountInCell (IWebElement cell)
+        {         
+            return cell.FindElements(By.XPath(".//div[@class='activity']")).Count;
+        }
     }
 }

@@ -9,42 +9,26 @@ using System;
 namespace CaesarTests
 {
     [TestFixture]
-    class TestsForScheduleTableClass_ScheduleEditWeekTable
-    {
-        IWebDriver driver;
-        WebDriverWait wait;
-        string baseURL = "localhost:3000";
-        LoginPage loginPageInstance;
-        MainPage mainPageInstance;
-        ScheduleContent scheduleContentInstance;
+    class TestsForScheduleTableClass_ScheduleEditWeekTable : BaseTest
+    {              
         EditScheduleWindow editscheduleWindowInstance;       
+                
 
-        [SetUp]
-
-        public void BeforeTest()
+        protected override void BeforeTest()
         {
-            //Initializations and logging in Caesar
-            driver = new ChromeDriver();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(20);
-            driver.Url = baseURL;
-            driver.Manage().Window.Maximize();
-            loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn("sasha", "1234");
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
-
             //Opening Schedule Page
 
-           mainPageInstance = new MainPage(driver);
-           scheduleContentInstance = mainPageInstance.OpenScheduleContent();
+            MainPageInstance = new MainPage(driver);
+            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
+            MainPageInstance.TopMenu.ScheduleItem.Click();
 
             //Select group from LeftContainer
 
-            mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
+            MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
             //Go toSchedule Editor
 
-            scheduleContentInstance.ScheduleCogwheell.Click();
+            MainPageInstance.CenterContainer.ScheduleContent.ScheduleCogwheell.Click();
 
             // Create instance of Schedule Edit Week Window
 
@@ -91,14 +75,6 @@ namespace CaesarTests
             cell.Click();
             Assert.True(editscheduleWindowInstance.ScheduleEditWeekTable.IsActivityCorrect(cell, "Lecture\r\nD. Petin\r\n740"));
         }
-
-        [TearDown]
-        public void CleanUp()
-        {
-            driver.Close();
-        }
-
-
-
+       
     }
 }
