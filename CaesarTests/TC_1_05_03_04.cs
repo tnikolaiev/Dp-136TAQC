@@ -8,17 +8,17 @@ using System;
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_1_05_01
+    class TC_1_05_03_04
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
         WebDriverWait wait;
+        LocationWindow locationWindowInstance;
         CenterContainer groupLocationInstance;
         TopMenu topMenuInstance;
         MainPage mainPageInstance;
-        GroupsInLocation groupsInLocationInstance;
 
-        [OneTimeSetUp]
+       [SetUp]
         public void Initialize()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
@@ -26,39 +26,42 @@ namespace CaesarTests
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
             wait.Until((d) => LoginPage.IsLoginPageOpened(d));
-            loginPageInstance.LogIn("dmytro", "1234");
+            loginPageInstance.LogIn("admin", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
-
         }
+
         [Test]
-        public void ExecuteTest_ChooseLocationSofia_UsingDoubleClick_LocationPageOpened()
+        public void ExecuteTest_ChooseLocationRivne_UsingKeyBoard()
         {
             topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.LocationsItem);
-            mainPageInstance.DoubleClick(mainPageInstance.ModalWindow.LocationWindow.CitySofia);
-            string exeptualResultTitle = "Sofia";
+            Acts.Click(mainPageInstance.ModalWindow.LocationWindow.CityRivne);
+            Acts.PressKeyboardButton("{Enter}");
+            string exeptualResultTitle = "Rivne";
             groupLocationInstance = new CenterContainer(driver);
             Console.WriteLine(groupLocationInstance.GroupLocation.Text);
             Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
         }
 
         [Test]
-        public void ExecuteTest_ChooseLocationSofia_UsingDoubleClick_CheckGroupsName()
+        public void ExecuteTest_CancelLocationIvanoFrankivsk_UsingKeyBoard()
         {
             topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.LocationsItem);
-            mainPageInstance.DoubleClick(mainPageInstance.ModalWindow.LocationWindow.CitySofia);
-            string exeptualResultTitle = "Sf-089-MQC";
-            Console.WriteLine(mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("Sf-089-MQC").Text);
-            Assert.AreEqual(exeptualResultTitle, mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("Sf-089-MQC").Text);
+            Acts.Click(mainPageInstance.ModalWindow.LocationWindow.CityIvanoFrankivsk);
+            Acts.PressKeyboardButton("{Esc}");
+            string exeptualResultTitle = "Lviv";
+            groupLocationInstance = new CenterContainer(driver);
+            Console.WriteLine(groupLocationInstance.GroupLocation.Text);
+            Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
         }
-
 
         [OneTimeTearDown]
         public void CleanUp()
         {
             driver.Quit();
+            driver.Close();
         }
     }
 }
