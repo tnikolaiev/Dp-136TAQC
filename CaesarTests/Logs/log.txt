@@ -541,3 +541,495 @@
 2018-08-04 11:11:54.4977 Debug CaesarTests.TC_1_01_03
 2018-08-04 11:11:54.4977 Debug ExecuteTest_EscKey_EmptyFields("dmytro","1234")
 2018-08-04 11:11:54.5286 Debug Passed
+2018-08-04 11:18:05.2684 Debug CaesarTests.TC_1_01_01
+2018-08-04 11:18:05.3033 Debug Test_NavigateToLinks_LoginPageOpened("http://localhost:3000")
+2018-08-04 11:18:05.3182 Debug Failed
+2018-08-04 11:18:05.4838 Debug CaesarTests.TC_1_01_01
+2018-08-04 11:18:05.5087 Debug Test_NavigateToLinks_LoginPageOpened("http://localhost:3000/Groups/Dnipro")
+2018-08-04 11:18:05.5207 Debug Failed
+2018-08-04 11:18:05.5975 Debug CaesarTests.TC_1_01_01
+2018-08-04 11:18:05.6304 Debug Test_NavigateToLinks_LoginPageOpened("http://localhost:3000/admin")
+2018-08-04 11:18:05.6424 Debug Failed
+2018-08-04 11:18:10.7149 Debug CaesarTests.TC_1_01_02
+2018-08-04 11:18:10.7399 Debug ExecuteTest_LoginWithValidLoginCredentials("admin","1234")
+2018-08-04 11:18:10.7618 Debug Failed
+2018-08-04 11:18:11.9985 Debug CaesarTests.TC_1_01_02
+2018-08-04 11:18:12.0175 Debug ExecuteTest_LoginWithValidLoginCredentials("sasha","1234")
+2018-08-04 11:18:12.0304 Debug Failed
+2018-08-04 11:18:13.2093 Debug CaesarTests.TC_1_01_02
+2018-08-04 11:18:13.2322 Debug ExecuteTest_LoginWithValidLoginCredentials("dmytro","1234")
+2018-08-04 11:18:13.2322 Debug Failed
+2018-08-04 11:18:17.1850 Debug CaesarTests.TC_1_01_03
+2018-08-04 11:18:17.1999 Debug ExecuteTest_EnterKey_Login("dmytro","1234")
+2018-08-04 11:18:17.2189 Debug Passed
+2018-08-04 11:18:17.5390 Debug CaesarTests.TC_1_01_03
+2018-08-04 11:18:17.5600 Debug ExecuteTest_EscKey_EmptyFields("dmytro","1234")
+2018-08-04 11:18:17.5600 Debug Passed
+2018-08-04 11:18:20.4645 Debug CaesarTests.TC_1_01_04
+2018-08-04 11:18:20.4774 Debug ExecuteTest_15lettersLoginField_Contains10
+2018-08-04 11:18:20.4904 Debug Passed
+2018-08-04 11:18:20.7148 Debug CaesarTests.TC_1_01_04
+2018-08-04 11:18:20.7258 Debug ExecuteTest_EmptyFields_EnterPressed_NoChanges
+2018-08-04 11:18:20.7367 Debug Passed
+2018-08-04 11:18:20.9741 Debug CaesarTests.TC_1_01_04
+2018-08-04 11:18:20.9911 Debug ExecuteTest_EmptyFields_LoginButtonClick_NoChanges
+2018-08-04 11:18:21.0030 Debug Passed
+2018-08-04 11:18:21.2364 Debug CaesarTests.TC_1_01_04
+2018-08-04 11:18:21.2484 Debug ExecuteTest_EmptyLoginField_LoginButtonUnactive
+2018-08-04 11:18:21.2484 Debug Passed
+2018-08-04 11:18:21.4628 Debug CaesarTests.TC_1_01_04
+2018-08-04 11:18:21.4748 Debug ExecuteTest_EmptyPassField_LoginButtonUnactive
+2018-08-04 11:18:21.4867 Debug Passed
+2018-08-04 11:18:21.9136 Debug CaesarTests.TC_1_01_04
+2018-08-04 11:18:21.9286 Debug ExecuteTest_InvalidValues_ErrorMessage("login1","$%^&\\;#*")
+2018-08-04 11:18:21.9405 Debug Passed
+2018-08-04 11:18:22.3714 Debug CaesarTests.TC_1_01_04
+2018-08-04 11:18:22.3853 Debug ExecuteTest_InvalidValues_ErrorMessage("#$%^#${}","pass2")
+2018-08-04 11:18:22.3973 Debug Passed
+2018-08-04 11:18:22.8501 Debug CaesarTests.TC_1_01_04
+2018-08-04 11:18:22.8690 Debug ExecuteTest_InvalidValues_ErrorMessage("4f4&4]3","#@#@#@")
+2018-08-04 11:18:22.8820 Debug Passed
+2018-08-04 11:18:23.2810 Debug CaesarTests.TC_1_01_04
+2018-08-04 11:18:23.3009 Debug ExecuteTest_InvalidValues_ErrorMessage("login","pa$$word")
+2018-08-04 11:18:23.3139 Debug Passed
+2018-08-04 11:18:23.6729 Debug CaesarTests.TC_1_01_04
+2018-08-04 11:18:23.6849 Debug ExecuteTest_InvalidValues_ErrorMessage("1234","12")
+2018-08-04 11:18:23.6849 Debug Passed
+2018-08-04 11:18:24.0828 Debug CaesarTests.TC_1_01_04
+2018-08-04 11:18:24.0988 Debug ExecuteTest_InvalidValues_ErrorMessage("12","1234")
+2018-08-04 11:18:24.1098 Debug Passed
+2018-08-04 11:18:27.1435 Debug CaesarTests.TC_1_01_05
+2018-08-04 11:18:27.1595 Debug ExecuteTest_LoginWithInvalidLoginCredentials("odmin","9234")
+2018-08-04 11:18:27.1724 Debug Passed
+2018-08-04 11:18:27.6482 Debug CaesarTests.TC_1_01_05
+2018-08-04 11:18:27.6631 Debug ExecuteTest_LoginWithInvalidLoginCredentials("sashq","5234")
+2018-08-04 11:18:27.6741 Debug Passed
+2018-08-04 11:18:28.0521 Debug CaesarTests.TC_1_01_05
+2018-08-04 11:18:28.0681 Debug ExecuteTest_LoginWithInvalidLoginCredentials("jtytro","1734")
+2018-08-04 11:18:28.0810 Debug Passed
+2018-08-04 11:18:34.4430 Debug CaesarTests.TC_1_02_01
+2018-08-04 11:18:34.4589 Debug Executetest_DropMouseFocus_RightMenuClosed
+2018-08-04 11:18:34.4729 Debug Passed
+2018-08-04 11:18:36.3522 Debug CaesarTests.TC_1_02_01
+2018-08-04 11:18:36.3631 Debug ExecuteTest_ProfileButtonClick_RightMenuOpened
+2018-08-04 11:18:36.3741 Debug Passed
+2018-08-04 11:18:42.3084 Debug CaesarTests.TC_1_02_02
+2018-08-04 11:18:42.3194 Debug ExecuteTest_ExitButtonClicked_LoginPageOpened
+2018-08-04 11:18:42.3324 Debug Passed
+2018-08-04 11:18:47.6923 Debug CaesarTests.TC_1_03_01
+2018-08-04 11:18:47.7052 Debug ExecuteTest_EndedGroupsFilter
+2018-08-04 11:18:47.7232 Debug Passed
+2018-08-04 11:18:49.0925 Debug CaesarTests.TC_1_03_01
+2018-08-04 11:18:49.0925 Debug ExecuteTest_FirstSignIn_AvailableGroupsList
+2018-08-04 11:18:49.1145 Debug Passed
+2018-08-04 11:18:50.5438 Debug CaesarTests.TC_1_03_01
+2018-08-04 11:18:50.5438 Debug ExecuteTest_FutureGroupsFilter
+2018-08-04 11:18:50.5668 Debug Passed
+2018-08-04 11:18:51.9520 Debug CaesarTests.TC_1_03_01
+2018-08-04 11:18:51.9660 Debug ExecuteTest_MyGroupsFilterChecked_NoneAvailableGroups
+2018-08-04 11:18:51.9660 Debug Passed
+2018-08-04 11:18:53.3353 Debug CaesarTests.TC_1_03_01
+2018-08-04 11:18:53.3493 Debug ExecuteTest_MyGroupsFilterCheckedUnchecked
+2018-08-04 11:18:53.3613 Debug Passed
+2018-08-04 11:18:59.1005 Debug CaesarTests.TC_1_04_01
+2018-08-04 11:18:59.1215 Debug ExecuteTest_CursorFocusOutOfMenu_LeftMenuClosed
+2018-08-04 11:18:59.1434 Debug Passed
+2018-08-04 11:19:01.0043 Debug CaesarTests.TC_1_04_01
+2018-08-04 11:19:01.0153 Debug ExecuteTest_CursorToLeftBorder_LeftMenuOpened
+2018-08-04 11:19:01.0153 Debug Passed
+2018-08-04 11:19:07.0646 Debug CaesarTests.TC_1_04_02
+2018-08-04 11:19:07.0765 Debug ExecuteTest_SignInAsCoordinatorOrAdmin_CheckGroup_FourButtonsAvailable("dmytro","1234")
+2018-08-04 11:19:07.0765 Debug Passed
+2018-08-04 11:19:09.1434 Debug CaesarTests.TC_1_04_02
+2018-08-04 11:19:09.1554 Debug ExecuteTest_SignInAsCoordinatorOrAdmin_CheckGroup_FourButtonsAvailable("artur","1234")
+2018-08-04 11:19:09.1554 Debug Passed
+2018-08-04 11:19:10.9980 Debug CaesarTests.TC_1_04_02
+2018-08-04 11:19:10.9980 Debug ExecuteTest_SignInAsCoordinatorOrAdmin_TwoButtonsAvailable("dmytro","1234")
+2018-08-04 11:19:11.0249 Debug Passed
+2018-08-04 11:19:12.8871 Debug CaesarTests.TC_1_04_02
+2018-08-04 11:19:12.8990 Debug ExecuteTest_SignInAsCoordinatorOrAdmin_TwoButtonsAvailable("artur","1234")
+2018-08-04 11:19:12.9100 Debug Passed
+2018-08-04 11:19:14.8738 Debug CaesarTests.TC_1_04_02
+2018-08-04 11:19:14.8738 Debug ExecuteTest_SignInAsTeacher_CheckGroup_OneButtonsAvailable("sasha","1234")
+2018-08-04 11:19:14.8987 Debug Passed
+2018-08-04 11:19:16.7357 Debug CaesarTests.TC_1_04_02
+2018-08-04 11:19:16.7467 Debug ExecuteTest_SignInAsTeacher_OneButtonsAvailable("sasha","1234")
+2018-08-04 11:19:16.7467 Debug Passed
+2018-08-04 11:19:22.7714 Debug CaesarTests.TC_1_04_03
+2018-08-04 11:19:22.7894 Debug ExecuteTest_ClickCancelButton_GroupCreateWindowClosed
+2018-08-04 11:19:22.8083 Debug Passed
+2018-08-04 11:19:24.7279 Debug CaesarTests.TC_1_04_03
+2018-08-04 11:19:24.7388 Debug ExecuteTest_ClickCreateButton_GroupCreateWindowOpened
+2018-08-04 11:19:24.7508 Debug Passed
+2018-08-04 11:19:26.7034 Debug CaesarTests.TC_1_04_03
+2018-08-04 11:19:26.7034 Debug ExecuteTest_PressEscKey_GroupCreateWindowClosed
+2018-08-04 11:19:26.7283 Debug Passed
+2018-08-04 11:19:35.9218 Debug CaesarTests.TC_1_04_04
+2018-08-04 11:19:35.9218 Debug ExecuteTest_ClickCancelButton_GroupDeleteConfirmantionWindowClosed
+2018-08-04 11:19:35.9497 Debug Passed
+2018-08-04 11:19:41.1065 Debug CaesarTests.TC_1_04_04
+2018-08-04 11:19:41.1065 Debug ExecuteTest_PressEscKey_GroupDeleteConfirmantionWindowOpenedClosed
+2018-08-04 11:19:41.1304 Debug Passed
+2018-08-04 11:19:43.1468 Debug CaesarTests.TC_1_04_04
+2018-08-04 11:19:43.1598 Debug ExecuteTest_SelectGroup_ClickDeleteButton_GroupDeleteConfirmantionWindowOpened
+2018-08-04 11:19:43.1727 Debug Passed
+2018-08-04 11:19:52.6468 Debug CaesarTests.TC_1_04_05
+2018-08-04 11:19:52.6608 Debug ExecuteTest_NewGroupCreate_GroupAppearedInGroupsList(".Net","groupNet","K. Kozak","SoftServe","02/13/2018","Expert")
+2018-08-04 11:19:52.6808 Debug Passed
+2018-08-04 11:19:57.4660 Debug CaesarTests.TC_1_04_05
+2018-08-04 11:19:57.4660 Debug ExecuteTest_NewGroupCreate_GroupAppearedInGroupsList("ISTQB","groupISTQB","O. Reuta","OpenGroup","11/19/2018","Expertik")
+2018-08-04 11:19:57.4950 Debug Passed
+2018-08-04 11:20:01.7304 Debug CaesarTests.TC_1_04_05
+2018-08-04 11:20:01.7474 Debug ExecuteTest_NewGroupCreate_GroupAppearedInGroupsList("iOS","groupIOS","D. Petin","SoftServe","06/11/2012","Expertok")
+2018-08-04 11:20:01.7663 Debug Passed
+2018-08-04 11:20:06.6038 Debug CaesarTests.TC_1_04_05
+2018-08-04 11:20:06.6190 Debug ExecuteTest_NewGroupCreate_GroupAppearedInGroupsList("UX","groupUX","P. Kucher","OpenGroup","01/05/2011","Testwoman")
+2018-08-04 11:20:06.6330 Debug Passed
+2018-08-04 11:20:11.5092 Debug CaesarTests.TC_1_04_05
+2018-08-04 11:20:11.5281 Debug ExecuteTest_NewGroupCreate_GroupAppearedInGroupsList("C/C++","groupC/C++","A. Koval","SoftServe","09/27/2017","Testman")
+2018-08-04 11:20:11.5471 Debug Passed
+2018-08-04 11:20:13.6765 Debug CaesarTests.TC_1_04_05
+2018-08-04 11:20:13.6884 Debug ExecuteTest_SignInAsAdministrator_OpenGroupCreateWindow_LocationDDlEnabled
+2018-08-04 11:20:13.6884 Debug Passed
+2018-08-04 11:20:15.6575 Debug CaesarTests.TC_1_04_05
+2018-08-04 11:20:15.6685 Debug ExecuteTest_SignInAsCoordinator_OpenGroupCreateWindow_LocationDDlnotEnabled
+2018-08-04 11:20:15.6685 Debug Passed
+2018-08-04 11:20:22.1278 Debug CaesarTests.TC_1_04_06
+2018-08-04 11:20:22.1438 Debug ExecuteTest_EnterStartDate_FinishDateFilled("MQC","03/15/2018","05/17/2018")
+2018-08-04 11:20:22.1657 Debug Passed
+2018-08-04 11:20:24.5103 Debug CaesarTests.TC_1_04_06
+2018-08-04 11:20:24.5363 Debug ExecuteTest_EnterStartDate_FinishDateFilled("ISTQB","01/20/2019","03/24/2019")
+2018-08-04 11:20:24.5562 Debug Passed
+2018-08-04 11:20:26.8850 Debug CaesarTests.TC_1_04_06
+2018-08-04 11:20:26.9090 Debug ExecuteTest_EnterStartDate_FinishDateFilled(".Net","12/12/2018","03/06/2019")
+2018-08-04 11:20:26.9349 Debug Passed
+2018-08-04 11:20:29.2920 Debug CaesarTests.TC_1_04_06
+2018-08-04 11:20:29.3149 Debug ExecuteTest_EnterStartDate_FinishDateFilled("WebUI","07/26/2018","10/18/2018")
+2018-08-04 11:20:29.3378 Debug Passed
+2018-08-04 11:20:35.5216 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:20:35.5366 Debug ExecuteTest_EmptyFieldsClickConfirm_FourHintsDisplayed
+2018-08-04 11:20:35.5535 Debug Passed
+2018-08-04 11:20:37.8385 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:20:37.8545 Debug Executetest_ExpertBeyondMinMaxBoundary_Warn("abcd")
+2018-08-04 11:20:37.8715 Debug Passed
+2018-08-04 11:20:40.1367 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:20:40.1547 Debug Executetest_ExpertBeyondMinMaxBoundary_Warn("exp")
+2018-08-04 11:20:40.1706 Debug Passed
+2018-08-04 11:20:42.5759 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:20:42.5759 Debug Executetest_ExpertBeyondMinMaxBoundary_Warn("abcabcabcabcabcabcabcabcas")
+2018-08-04 11:20:42.6088 Debug Passed
+2018-08-04 11:20:44.8571 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:20:44.8761 Debug Executetest_ExpertNameInvalidData_Warn("123")
+2018-08-04 11:20:44.8910 Debug Passed
+2018-08-04 11:20:47.2301 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:20:47.2520 Debug Executetest_ExpertNameInvalidData_Warn("@#$$#@")
+2018-08-04 11:20:47.2749 Debug Passed
+2018-08-04 11:20:49.5649 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:20:49.5868 Debug Executetest_ExpertNameInvalidData_Warn("_)(#")
+2018-08-04 11:20:49.6038 Debug Passed
+2018-08-04 11:20:51.8772 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:20:51.9021 Debug Executetest_GroupNameAboveMaxBoundary_Warn("012345678901234567890")
+2018-08-04 11:20:51.9220 Debug Passed
+2018-08-04 11:20:54.1375 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:20:54.1574 Debug Executetest_GroupNameAboveMaxBoundary_Warn("abcdefghiklmnopqrstuvw")
+2018-08-04 11:20:54.1714 Debug Passed
+2018-08-04 11:20:56.9073 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:20:56.9252 Debug Executetest_GroupNameAboveMaxBoundary_Warn("aaaaabbbbbcccccddddd1")
+2018-08-04 11:20:56.9502 Debug Passed
+2018-08-04 11:20:59.0729 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:20:59.0908 Debug ExecuteTest_GroupNameBelowLowerBoundary_Warn("a1b")
+2018-08-04 11:20:59.0908 Debug Passed
+2018-08-04 11:21:01.2370 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:21:01.2529 Debug ExecuteTest_GroupNameBelowLowerBoundary_Warn("123")
+2018-08-04 11:21:01.2689 Debug Passed
+2018-08-04 11:21:03.4745 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:21:03.4914 Debug ExecuteTest_GroupNameBelowLowerBoundary_Warn("abc")
+2018-08-04 11:21:03.5064 Debug Passed
+2018-08-04 11:21:05.9792 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:21:06.0021 Debug ExecuteTest_GroupNameStardDateInvalidData_Warns("!@#$%$^#@$","43453463")
+2018-08-04 11:21:06.0230 Debug Passed
+2018-08-04 11:21:08.9654 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:21:08.9873 Debug ExecuteTest_GroupNameStardDateInvalidData_Warns("hello$","9809039")
+2018-08-04 11:21:09.0093 Debug Passed
+2018-08-04 11:21:11.4095 Debug CaesarTests.TC_1_04_07
+2018-08-04 11:21:11.4264 Debug ExecuteTest_GroupNameStardDateInvalidData_Warns("hi^group","1234")
+2018-08-04 11:21:11.4464 Debug Passed
+2018-08-04 11:22:28.2480 | Debug | CaesarTests.TC_1_01_01 | 
+2018-08-04 11:22:28.2859 | Debug | Test_NavigateToLinks_LoginPageOpened("http://localhost:3000") | 
+2018-08-04 11:22:28.3018 | Debug | Failed | 
+2018-08-04 11:22:28.4574 | Debug | CaesarTests.TC_1_01_01 | 
+2018-08-04 11:22:28.4754 | Debug | Test_NavigateToLinks_LoginPageOpened("http://localhost:3000/Groups/Dnipro") | 
+2018-08-04 11:22:28.4883 | Debug | Failed | 
+2018-08-04 11:22:28.5941 | Debug | CaesarTests.TC_1_01_01 | 
+2018-08-04 11:22:28.6130 | Debug | Test_NavigateToLinks_LoginPageOpened("http://localhost:3000/admin") | 
+2018-08-04 11:22:28.6340 | Debug | Failed | 
+2018-08-04 11:22:33.8625 | Debug | CaesarTests.TC_1_01_02 | 
+2018-08-04 11:22:33.8824 | Debug | ExecuteTest_LoginWithValidLoginCredentials("admin","1234") | 
+2018-08-04 11:22:33.8964 | Debug | Failed | 
+2018-08-04 11:22:35.1361 | Debug | CaesarTests.TC_1_01_02 | 
+2018-08-04 11:22:35.1640 | Debug | ExecuteTest_LoginWithValidLoginCredentials("sasha","1234") | 
+2018-08-04 11:22:35.1750 | Debug | Failed | 
+2018-08-04 11:22:36.3987 | Debug | CaesarTests.TC_1_01_02 | 
+2018-08-04 11:22:36.4156 | Debug | ExecuteTest_LoginWithValidLoginCredentials("dmytro","1234") | 
+2018-08-04 11:22:36.4266 | Debug | Failed | 
+2018-08-04 11:22:41.0034 | Debug | CaesarTests.TC_1_01_03 | 
+2018-08-04 11:22:41.0144 | Debug | ExecuteTest_EnterKey_Login("dmytro","1234") | 
+2018-08-04 11:22:41.0303 | Debug | Passed | 
+2018-08-04 11:22:41.3425 | Debug | CaesarTests.TC_1_01_03 | 
+2018-08-04 11:22:41.3565 | Debug | ExecuteTest_EscKey_EmptyFields("dmytro","1234") | 
+2018-08-04 11:22:41.3565 | Debug | Passed | 
+2018-08-04 11:22:44.2489 | Debug | CaesarTests.TC_1_01_04 | 
+2018-08-04 11:22:44.2489 | Debug | ExecuteTest_15lettersLoginField_Contains10 | 
+2018-08-04 11:22:44.2798 | Debug | Passed | 
+2018-08-04 11:22:44.5172 | Debug | CaesarTests.TC_1_01_04 | 
+2018-08-04 11:22:44.5282 | Debug | ExecuteTest_EmptyFields_EnterPressed_NoChanges | 
+2018-08-04 11:22:44.5282 | Debug | Passed | 
+2018-08-04 11:22:44.7506 | Debug | CaesarTests.TC_1_01_04 | 
+2018-08-04 11:22:44.7685 | Debug | ExecuteTest_EmptyFields_LoginButtonClick_NoChanges | 
+2018-08-04 11:22:44.7795 | Debug | Passed | 
+2018-08-04 11:22:45.0059 | Debug | CaesarTests.TC_1_01_04 | 
+2018-08-04 11:22:45.0178 | Debug | ExecuteTest_EmptyLoginField_LoginButtonUnactive | 
+2018-08-04 11:22:45.0298 | Debug | Passed | 
+2018-08-04 11:22:45.2303 | Debug | CaesarTests.TC_1_01_04 | 
+2018-08-04 11:22:45.2422 | Debug | ExecuteTest_EmptyPassField_LoginButtonUnactive | 
+2018-08-04 11:22:45.2552 | Debug | Passed | 
+2018-08-04 11:22:45.6811 | Debug | CaesarTests.TC_1_01_04 | 
+2018-08-04 11:22:45.6971 | Debug | ExecuteTest_InvalidValues_ErrorMessage("login1","$%^&\\;#*") | 
+2018-08-04 11:22:45.7090 | Debug | Passed | 
+2018-08-04 11:22:46.1149 | Debug | CaesarTests.TC_1_01_04 | 
+2018-08-04 11:22:46.1309 | Debug | ExecuteTest_InvalidValues_ErrorMessage("#$%^#${}","pass2") | 
+2018-08-04 11:22:46.1428 | Debug | Passed | 
+2018-08-04 11:22:46.5733 | Debug | CaesarTests.TC_1_01_04 | 
+2018-08-04 11:22:46.5892 | Debug | ExecuteTest_InvalidValues_ErrorMessage("4f4&4]3","#@#@#@") | 
+2018-08-04 11:22:46.6022 | Debug | Passed | 
+2018-08-04 11:22:47.0251 | Debug | CaesarTests.TC_1_01_04 | 
+2018-08-04 11:22:47.0390 | Debug | ExecuteTest_InvalidValues_ErrorMessage("login","pa$$word") | 
+2018-08-04 11:22:47.0500 | Debug | Passed | 
+2018-08-04 11:22:47.4280 | Debug | CaesarTests.TC_1_01_04 | 
+2018-08-04 11:22:47.4460 | Debug | ExecuteTest_InvalidValues_ErrorMessage("1234","12") | 
+2018-08-04 11:22:47.4579 | Debug | Passed | 
+2018-08-04 11:22:47.8389 | Debug | CaesarTests.TC_1_01_04 | 
+2018-08-04 11:22:47.8509 | Debug | ExecuteTest_InvalidValues_ErrorMessage("12","1234") | 
+2018-08-04 11:22:47.8658 | Debug | Passed | 
+2018-08-04 11:22:50.9474 | Debug | CaesarTests.TC_1_01_05 | 
+2018-08-04 11:22:50.9684 | Debug | ExecuteTest_LoginWithInvalidLoginCredentials("odmin","9234") | 
+2018-08-04 11:22:50.9843 | Debug | Passed | 
+2018-08-04 11:22:51.4900 | Debug | CaesarTests.TC_1_01_05 | 
+2018-08-04 11:22:51.5059 | Debug | ExecuteTest_LoginWithInvalidLoginCredentials("sashq","5234") | 
+2018-08-04 11:22:51.5179 | Debug | Passed | 
+2018-08-04 11:22:51.9398 | Debug | CaesarTests.TC_1_01_05 | 
+2018-08-04 11:22:51.9547 | Debug | ExecuteTest_LoginWithInvalidLoginCredentials("jtytro","1734") | 
+2018-08-04 11:22:51.9657 | Debug | Passed | 
+2018-08-04 11:24:13.4073 | Debug | CaesarTests.TC_1_01_01 
+2018-08-04 11:24:13.4410 | Debug | Test_NavigateToLinks_LoginPageOpened("http://localhost:3000") 
+2018-08-04 11:24:13.4600 | Debug | Failed 
+2018-08-04 11:24:13.6136 | Debug | CaesarTests.TC_1_01_01 
+2018-08-04 11:24:13.6355 | Debug | Test_NavigateToLinks_LoginPageOpened("http://localhost:3000/Groups/Dnipro") 
+2018-08-04 11:24:13.6475 | Debug | Failed 
+2018-08-04 11:24:13.7472 | Debug | CaesarTests.TC_1_01_01 
+2018-08-04 11:24:13.7722 | Debug | Test_NavigateToLinks_LoginPageOpened("http://localhost:3000/admin") 
+2018-08-04 11:24:13.7851 | Debug | Failed 
+2018-08-04 11:24:19.0820 | Debug | CaesarTests.TC_1_01_02 
+2018-08-04 11:24:19.1059 | Debug | ExecuteTest_LoginWithValidLoginCredentials("admin","1234") 
+2018-08-04 11:24:19.1288 | Debug | Failed 
+2018-08-04 11:24:20.4294 | Debug | CaesarTests.TC_1_01_02 
+2018-08-04 11:24:20.4493 | Debug | ExecuteTest_LoginWithValidLoginCredentials("sasha","1234") 
+2018-08-04 11:24:20.4623 | Debug | Failed 
+2018-08-04 11:24:21.6571 | Debug | CaesarTests.TC_1_01_02 
+2018-08-04 11:24:21.6800 | Debug | ExecuteTest_LoginWithValidLoginCredentials("dmytro","1234") 
+2018-08-04 11:24:21.6960 | Debug | Failed 
+2018-08-04 11:24:25.7431 | Debug | CaesarTests.TC_1_01_03 
+2018-08-04 11:24:25.7560 | Debug | ExecuteTest_EnterKey_Login("dmytro","1234") 
+2018-08-04 11:24:25.7760 | Debug | Passed 
+2018-08-04 11:24:26.1071 | Debug | CaesarTests.TC_1_01_03 
+2018-08-04 11:24:26.1071 | Debug | ExecuteTest_EscKey_EmptyFields("dmytro","1234") 
+2018-08-04 11:24:26.1380 | Debug | Passed 
+2018-08-04 11:24:29.0003 | Debug | CaesarTests.TC_1_01_04 
+2018-08-04 11:24:29.0003 | Debug | ExecuteTest_15lettersLoginField_Contains10 
+2018-08-04 11:24:29.0272 | Debug | Passed 
+2018-08-04 11:24:29.2626 | Debug | CaesarTests.TC_1_01_04 
+2018-08-04 11:24:29.2626 | Debug | ExecuteTest_EmptyFields_EnterPressed_NoChanges 
+2018-08-04 11:24:29.2875 | Debug | Passed 
+2018-08-04 11:24:29.5129 | Debug | CaesarTests.TC_1_01_04 
+2018-08-04 11:24:29.5289 | Debug | ExecuteTest_EmptyFields_LoginButtonClick_NoChanges 
+2018-08-04 11:24:29.5289 | Debug | Passed 
+2018-08-04 11:24:29.7662 | Debug | CaesarTests.TC_1_01_04 
+2018-08-04 11:24:29.7782 | Debug | ExecuteTest_EmptyLoginField_LoginButtonUnactive 
+2018-08-04 11:24:29.7782 | Debug | Passed 
+2018-08-04 11:24:29.9946 | Debug | CaesarTests.TC_1_01_04 
+2018-08-04 11:24:30.0086 | Debug | ExecuteTest_EmptyPassField_LoginButtonUnactive 
+2018-08-04 11:24:30.0206 | Debug | Passed 
+2018-08-04 11:24:30.4544 | Debug | CaesarTests.TC_1_01_04 
+2018-08-04 11:24:30.4704 | Debug | ExecuteTest_InvalidValues_ErrorMessage("login1","$%^&\\;#*") 
+2018-08-04 11:24:30.4823 | Debug | Passed 
+2018-08-04 11:24:30.9052 | Debug | CaesarTests.TC_1_01_04 
+2018-08-04 11:24:30.9202 | Debug | ExecuteTest_InvalidValues_ErrorMessage("#$%^#${}","pass2") 
+2018-08-04 11:24:30.9202 | Debug | Passed 
+2018-08-04 11:24:31.3789 | Debug | CaesarTests.TC_1_01_04 
+2018-08-04 11:24:31.3999 | Debug | ExecuteTest_InvalidValues_ErrorMessage("4f4&4]3","#@#@#@") 
+2018-08-04 11:24:31.4118 | Debug | Passed 
+2018-08-04 11:24:31.8018 | Debug | CaesarTests.TC_1_01_04 
+2018-08-04 11:24:31.8217 | Debug | ExecuteTest_InvalidValues_ErrorMessage("login","pa$$word") 
+2018-08-04 11:24:31.8347 | Debug | Passed 
+2018-08-04 11:24:32.2007 | Debug | CaesarTests.TC_1_01_04 
+2018-08-04 11:24:32.2157 | Debug | ExecuteTest_InvalidValues_ErrorMessage("1234","12") 
+2018-08-04 11:24:32.2157 | Debug | Passed 
+2018-08-04 11:24:32.6007 | Debug | CaesarTests.TC_1_01_04 
+2018-08-04 11:24:32.6196 | Debug | ExecuteTest_InvalidValues_ErrorMessage("12","1234") 
+2018-08-04 11:24:32.6316 | Debug | Passed 
+2018-08-04 11:24:35.7776 | Debug | CaesarTests.TC_1_01_05 
+2018-08-04 11:24:35.7915 | Debug | ExecuteTest_LoginWithInvalidLoginCredentials("odmin","9234") 
+2018-08-04 11:24:35.8045 | Debug | Passed 
+2018-08-04 11:24:36.2523 | Debug | CaesarTests.TC_1_01_05 
+2018-08-04 11:24:36.2673 | Debug | ExecuteTest_LoginWithInvalidLoginCredentials("sashq","5234") 
+2018-08-04 11:24:36.2782 | Debug | Passed 
+2018-08-04 11:24:36.6663 | Debug | CaesarTests.TC_1_01_05 
+2018-08-04 11:24:36.6813 | Debug | ExecuteTest_LoginWithInvalidLoginCredentials("jtytro","1734") 
+2018-08-04 11:24:36.6942 | Debug | Passed 
+2018-08-04 11:24:42.9339 | Debug | CaesarTests.TC_1_02_01 
+2018-08-04 11:24:42.9499 | Debug | Executetest_DropMouseFocus_RightMenuClosed 
+2018-08-04 11:24:42.9499 | Debug | Passed 
+2018-08-04 11:24:44.8190 | Debug | CaesarTests.TC_1_02_01 
+2018-08-04 11:24:44.8310 | Debug | ExecuteTest_ProfileButtonClick_RightMenuOpened 
+2018-08-04 11:24:44.8423 | Debug | Passed 
+2018-08-04 11:24:50.7921 | Debug | CaesarTests.TC_1_02_02 
+2018-08-04 11:24:50.8060 | Debug | ExecuteTest_ExitButtonClicked_LoginPageOpened 
+2018-08-04 11:24:50.8190 | Debug | Passed 
+2018-08-04 11:24:56.1452 | Debug | CaesarTests.TC_1_03_01 
+2018-08-04 11:24:56.1561 | Debug | ExecuteTest_EndedGroupsFilter 
+2018-08-04 11:24:56.1751 | Debug | Passed 
+2018-08-04 11:24:57.5165 | Debug | CaesarTests.TC_1_03_01 
+2018-08-04 11:24:57.5325 | Debug | ExecuteTest_FirstSignIn_AvailableGroupsList 
+2018-08-04 11:24:57.5325 | Debug | Passed 
+2018-08-04 11:24:58.8619 | Debug | CaesarTests.TC_1_03_01 
+2018-08-04 11:24:58.8739 | Debug | ExecuteTest_FutureGroupsFilter 
+2018-08-04 11:24:58.8739 | Debug | Passed 
+2018-08-04 11:25:00.2582 | Debug | CaesarTests.TC_1_03_01 
+2018-08-04 11:25:00.2691 | Debug | ExecuteTest_MyGroupsFilterChecked_NoneAvailableGroups 
+2018-08-04 11:25:00.2811 | Debug | Passed 
+2018-08-04 11:25:01.6385 | Debug | CaesarTests.TC_1_03_01 
+2018-08-04 11:25:01.6535 | Debug | ExecuteTest_MyGroupsFilterCheckedUnchecked 
+2018-08-04 11:25:01.6535 | Debug | Passed 
+2018-08-04 11:25:07.3579 | Debug | CaesarTests.TC_1_04_01 
+2018-08-04 11:25:07.3719 | Debug | ExecuteTest_CursorFocusOutOfMenu_LeftMenuClosed 
+2018-08-04 11:25:07.3908 | Debug | Passed 
+2018-08-04 11:25:09.2234 | Debug | CaesarTests.TC_1_04_01 
+2018-08-04 11:25:09.2354 | Debug | ExecuteTest_CursorToLeftBorder_LeftMenuOpened 
+2018-08-04 11:25:09.2354 | Debug | Passed 
+2018-08-04 11:25:15.4115 | Debug | CaesarTests.TC_1_04_02 
+2018-08-04 11:25:15.4224 | Debug | ExecuteTest_SignInAsCoordinatorOrAdmin_CheckGroup_FourButtonsAvailable("dmytro","1234") 
+2018-08-04 11:25:15.4224 | Debug | Passed 
+2018-08-04 11:25:17.4486 | Debug | CaesarTests.TC_1_04_02 
+2018-08-04 11:25:17.4656 | Debug | ExecuteTest_SignInAsCoordinatorOrAdmin_CheckGroup_FourButtonsAvailable("artur","1234") 
+2018-08-04 11:25:17.4656 | Debug | Passed 
+2018-08-04 11:25:19.3239 | Debug | CaesarTests.TC_1_04_02 
+2018-08-04 11:25:19.3359 | Debug | ExecuteTest_SignInAsCoordinatorOrAdmin_TwoButtonsAvailable("dmytro","1234") 
+2018-08-04 11:25:19.3469 | Debug | Passed 
+2018-08-04 11:25:21.2574 | Debug | CaesarTests.TC_1_04_02 
+2018-08-04 11:25:21.2694 | Debug | ExecuteTest_SignInAsCoordinatorOrAdmin_TwoButtonsAvailable("artur","1234") 
+2018-08-04 11:25:21.2794 | Debug | Passed 
+2018-08-04 11:25:23.2135 | Debug | CaesarTests.TC_1_04_02 
+2018-08-04 11:25:23.2244 | Debug | ExecuteTest_SignInAsTeacher_CheckGroup_OneButtonsAvailable("sasha","1234") 
+2018-08-04 11:25:23.2354 | Debug | Passed 
+2018-08-04 11:25:25.5834 | Debug | CaesarTests.TC_1_04_02 
+2018-08-04 11:25:25.5944 | Debug | ExecuteTest_SignInAsTeacher_OneButtonsAvailable("sasha","1234") 
+2018-08-04 11:25:25.5944 | Debug | Passed 
+2018-08-04 11:25:31.7635 | Debug | CaesarTests.TC_1_04_03 
+2018-08-04 11:25:31.7814 | Debug | ExecuteTest_ClickCancelButton_GroupCreateWindowClosed 
+2018-08-04 11:25:31.8004 | Debug | Passed 
+2018-08-04 11:25:33.7600 | Debug | CaesarTests.TC_1_04_03 
+2018-08-04 11:25:33.7709 | Debug | ExecuteTest_ClickCreateButton_GroupCreateWindowOpened 
+2018-08-04 11:25:33.7829 | Debug | Passed 
+2018-08-04 11:25:35.7260 | Debug | CaesarTests.TC_1_04_03 
+2018-08-04 11:25:35.7390 | Debug | ExecuteTest_PressEscKey_GroupCreateWindowClosed 
+2018-08-04 11:25:35.7539 | Debug | Passed 
+2018-08-04 11:25:44.8240 | Debug | CaesarTests.TC_1_04_04 
+2018-08-04 11:25:44.8409 | Debug | ExecuteTest_ClickCancelButton_GroupDeleteConfirmantionWindowClosed 
+2018-08-04 11:25:44.8409 | Debug | Passed 
+2018-08-04 11:25:49.9942 | Debug | CaesarTests.TC_1_04_04 
+2018-08-04 11:25:50.0062 | Debug | ExecuteTest_PressEscKey_GroupDeleteConfirmantionWindowOpenedClosed 
+2018-08-04 11:25:50.0192 | Debug | Passed 
+2018-08-04 11:25:52.0973 | Debug | CaesarTests.TC_1_04_04 
+2018-08-04 11:25:52.1123 | Debug | ExecuteTest_SelectGroup_ClickDeleteButton_GroupDeleteConfirmantionWindowOpened 
+2018-08-04 11:25:52.1232 | Debug | Passed 
+2018-08-04 11:26:01.6794 | Debug | CaesarTests.TC_1_04_05 
+2018-08-04 11:26:01.6933 | Debug | ExecuteTest_NewGroupCreate_GroupAppearedInGroupsList(".Net","groupNet","K. Kozak","SoftServe","02/13/2018","Expert") 
+2018-08-04 11:26:01.7083 | Debug | Passed 
+2018-08-04 11:26:06.5961 | Debug | CaesarTests.TC_1_04_05 
+2018-08-04 11:26:06.6141 | Debug | ExecuteTest_NewGroupCreate_GroupAppearedInGroupsList("ISTQB","groupISTQB","O. Reuta","OpenGroup","11/19/2018","Expertik") 
+2018-08-04 11:26:06.6290 | Debug | Passed 
+2018-08-04 11:26:11.5508 | Debug | CaesarTests.TC_1_04_05 
+2018-08-04 11:26:11.5707 | Debug | ExecuteTest_NewGroupCreate_GroupAppearedInGroupsList("iOS","groupIOS","D. Petin","SoftServe","06/11/2012","Expertok") 
+2018-08-04 11:26:11.5887 | Debug | Passed 
+2018-08-04 11:26:16.3401 | Debug | CaesarTests.TC_1_04_05 
+2018-08-04 11:26:16.3550 | Debug | ExecuteTest_NewGroupCreate_GroupAppearedInGroupsList("UX","groupUX","P. Kucher","OpenGroup","01/05/2011","Testwoman") 
+2018-08-04 11:26:16.3730 | Debug | Passed 
+2018-08-04 11:26:20.6099 | Debug | CaesarTests.TC_1_04_05 
+2018-08-04 11:26:20.6228 | Debug | ExecuteTest_NewGroupCreate_GroupAppearedInGroupsList("C/C++","groupC/C++","A. Koval","SoftServe","09/27/2017","Testman") 
+2018-08-04 11:26:20.6378 | Debug | Passed 
+2018-08-04 11:26:22.7142 | Debug | CaesarTests.TC_1_04_05 
+2018-08-04 11:26:22.7311 | Debug | ExecuteTest_SignInAsAdministrator_OpenGroupCreateWindow_LocationDDlEnabled 
+2018-08-04 11:26:22.7481 | Debug | Passed 
+2018-08-04 11:26:24.6919 | Debug | CaesarTests.TC_1_04_05 
+2018-08-04 11:26:24.7029 | Debug | ExecuteTest_SignInAsCoordinator_OpenGroupCreateWindow_LocationDDlnotEnabled 
+2018-08-04 11:26:24.7029 | Debug | Passed 
+2018-08-04 11:26:31.0627 | Debug | CaesarTests.TC_1_04_06 
+2018-08-04 11:26:31.0807 | Debug | ExecuteTest_EnterStartDate_FinishDateFilled("MQC","03/15/2018","05/17/2018") 
+2018-08-04 11:26:31.1096 | Debug | Passed 
+2018-08-04 11:26:33.5489 | Debug | CaesarTests.TC_1_04_06 
+2018-08-04 11:26:33.5768 | Debug | ExecuteTest_EnterStartDate_FinishDateFilled("ISTQB","01/20/2019","03/24/2019") 
+2018-08-04 11:26:33.6027 | Debug | Passed 
+2018-08-04 11:26:36.4643 | Debug | CaesarTests.TC_1_04_06 
+2018-08-04 11:26:36.4912 | Debug | ExecuteTest_EnterStartDate_FinishDateFilled(".Net","12/12/2018","03/06/2019") 
+2018-08-04 11:26:36.5231 | Debug | Passed 
+2018-08-04 11:26:38.8569 | Debug | CaesarTests.TC_1_04_06 
+2018-08-04 11:26:38.8768 | Debug | ExecuteTest_EnterStartDate_FinishDateFilled("WebUI","07/26/2018","10/18/2018") 
+2018-08-04 11:26:38.9127 | Debug | Passed 
+2018-08-04 11:26:44.9898 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:26:45.0058 | Debug | ExecuteTest_EmptyFieldsClickConfirm_FourHintsDisplayed 
+2018-08-04 11:26:45.0237 | Debug | Passed 
+2018-08-04 11:26:47.3727 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:26:47.3727 | Debug | Executetest_ExpertBeyondMinMaxBoundary_Warn("abcd") 
+2018-08-04 11:26:47.4056 | Debug | Passed 
+2018-08-04 11:26:49.6782 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:26:49.6962 | Debug | Executetest_ExpertBeyondMinMaxBoundary_Warn("exp") 
+2018-08-04 11:26:49.7141 | Debug | Passed 
+2018-08-04 11:26:52.1829 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:26:52.1998 | Debug | Executetest_ExpertBeyondMinMaxBoundary_Warn("abcabcabcabcabcabcabcabcas") 
+2018-08-04 11:26:52.2168 | Debug | Passed 
+2018-08-04 11:26:54.4653 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:26:54.4902 | Debug | Executetest_ExpertNameInvalidData_Warn("123") 
+2018-08-04 11:26:54.5122 | Debug | Passed 
+2018-08-04 11:26:57.3080 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:26:57.3260 | Debug | Executetest_ExpertNameInvalidData_Warn("@#$$#@") 
+2018-08-04 11:26:57.3459 | Debug | Passed 
+2018-08-04 11:26:59.5978 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:26:59.6167 | Debug | Executetest_ExpertNameInvalidData_Warn("_)(#") 
+2018-08-04 11:26:59.6407 | Debug | Passed 
+2018-08-04 11:27:02.4063 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:27:02.4222 | Debug | Executetest_GroupNameAboveMaxBoundary_Warn("012345678901234567890") 
+2018-08-04 11:27:02.4382 | Debug | Passed 
+2018-08-04 11:27:04.6587 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:27:04.6747 | Debug | Executetest_GroupNameAboveMaxBoundary_Warn("abcdefghiklmnopqrstuvw") 
+2018-08-04 11:27:04.6906 | Debug | Passed 
+2018-08-04 11:27:06.9076 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:27:06.9246 | Debug | Executetest_GroupNameAboveMaxBoundary_Warn("aaaaabbbbbcccccddddd1") 
+2018-08-04 11:27:06.9505 | Debug | Passed 
+2018-08-04 11:27:09.0758 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:27:09.0958 | Debug | ExecuteTest_GroupNameBelowLowerBoundary_Warn("a1b") 
+2018-08-04 11:27:09.1117 | Debug | Passed 
+2018-08-04 11:27:11.2461 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:27:11.2611 | Debug | ExecuteTest_GroupNameBelowLowerBoundary_Warn("123") 
+2018-08-04 11:27:11.2780 | Debug | Passed 
+2018-08-04 11:27:13.4150 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:27:13.4329 | Debug | ExecuteTest_GroupNameBelowLowerBoundary_Warn("abc") 
+2018-08-04 11:27:13.4488 | Debug | Passed 
+2018-08-04 11:27:15.9604 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:27:15.9814 | Debug | ExecuteTest_GroupNameStardDateInvalidData_Warns("!@#$%$^#@$","43453463") 
+2018-08-04 11:27:16.0003 | Debug | Passed 
+2018-08-04 11:27:18.4283 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:27:18.4483 | Debug | ExecuteTest_GroupNameStardDateInvalidData_Warns("hello$","9809039") 
+2018-08-04 11:27:18.4662 | Debug | Passed 
+2018-08-04 11:27:20.8537 | Debug | CaesarTests.TC_1_04_07 
+2018-08-04 11:27:20.8716 | Debug | ExecuteTest_GroupNameStardDateInvalidData_Warns("hi^group","1234") 
+2018-08-04 11:27:20.8945 | Debug | Passed 
