@@ -36,7 +36,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_ClickCreateButton_GroupCreateWindowOpened()
+        public void Test_ClickCreateButton_GroupCreateWindowOpened()
         {
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
@@ -45,7 +45,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_ClickCancelButton_GroupCreateWindowClosed()
+        public void Test_ClickCancelButton_GroupCreateWindowClosed()
         {
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
@@ -56,7 +56,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_PressEscKey_GroupCreateWindowClosed()
+        public void Test_PressEscKey_GroupCreateWindowClosed()
         {
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);

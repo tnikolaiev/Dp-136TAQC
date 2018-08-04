@@ -27,10 +27,10 @@ namespace CaesarTests
             var dateTime = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss.fff");
             var message = TestContext.CurrentContext.Result.Message;
 
-            GenerateReport(className, methodName, arguments, result, dateTime, String.IsNullOrEmpty(message) ? "-" : message);
+            GenerateReport(dateTime, result, className, methodName, arguments, String.IsNullOrEmpty(message) ? "-" : message);
         }
 
-        public static void GenerateReport(String ClassName, String MethodName, object[] Arguments, ResultState iResult, String iTime, String iMessage)
+        public static void GenerateReport(String iTime, ResultState iResult, String ClassName, String MethodName, object[] Arguments, String iMessage)
         {
             String iPathReportFile = AppDomain.CurrentDomain.BaseDirectory + @"\..\..\Logs\log.html";
             //String iPathReportFile = AppDomain.CurrentDomain.BaseDirectory + @"C:\Users\Nikita\source\repos\Dp-136TAQC\CaesarTests\Logs\log.html";
@@ -49,29 +49,33 @@ namespace CaesarTests
             {
                 for (int i = 0; i < Arguments.Length; i++)
                 {
-                    arguments += i == Arguments.Length ? Arguments[i] : Arguments[i] + "</br>";
+                    arguments += (i == Arguments.Length-1) ? String.Format("\"{0}\"",Arguments[i]) : String.Format("\"{0}\", ", Arguments[i]);
                 }
             }
 
+            if (MethodName.Length > 40) MethodName = (MethodName.Substring(0, 40) + "</br>" + MethodName.Substring(40, MethodName.Length-40));
+
             if (iResult == ResultState.Success) // passed test record
             {
-                sw.WriteLine(@"<tr style='color: green;'>" + "\n" +
+                sw.WriteLine(@"<tr style='color: green;'>" + "\n" + 
+                    @"<td>" + iTime + @"</td>" + "\n" +
+                    @"<td>Passed</td>" + "\n" +                  
                     @"<td>" + ClassName + "</td>" + "\n" +
                     @"<td>" + MethodName + "</td>" + "\n" +
                     @"<td>" + arguments + "</td>" + "\n" +
-                    @"<td>Passed</td>" + "\n" +
-                    @"<td>" + iTime + @"</td>" + "\n" +
-                    @"<td>" + iMessage + @"</td>");
+                    @"<td>" + iMessage + @"</td>" + "\n" +
+                    @"</tr>");
             }
             if (!(iResult == ResultState.Success)) // failed test record
             {
-                sw.WriteLine(@"<tr style='color: red;'>" + "\n" +
+                sw.WriteLine(@"<tr style='color: red;'>" + "\n" + 
+                    @"<td>" + iTime + @"</td>" + "\n" +
+                    @"<td>Failed</td>" + "\n" +                   
                     @"<td>" + ClassName + "</td>" + "\n" +
                     @"<td>" + MethodName + "</td>" + "\n" +
                     @"<td>" + arguments + "</td>" + "\n" +
-                    @"<td>Failed</td>" + "\n" +
-                    @"<td>" + iTime + @"</td>" + "\n" +
-                    @"<td>" + iMessage + @"</td>");
+                    @"<td>" + iMessage + @"</td>" + "\n" +
+                    @"</tr>");
             }
 
             sw.WriteLine(@"</table>" + "\n" +

@@ -37,7 +37,7 @@ namespace CaesarTests
         };
 
         [Test, TestCaseSource("LoginCredentials")]
-        public void ExecuteTest_LoginWithValidLoginCredentials(String login, String password)
+        public void Test_LoginWithValidLoginCredentials(String login, String password)
         {
             loginPageInstance.LogIn(login, password, wait);
 

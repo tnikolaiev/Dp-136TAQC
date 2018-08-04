@@ -39,7 +39,7 @@ namespace CaesarTests
         static IEnumerable<object[]> StartFinishDateData = Instruments.ReadXML("StartFinishDateData.xml", "testData", "direction", "startDate", "finishDate");
 
         [Test, TestCaseSource("StartFinishDateData")]
-        public void ExecuteTest_EnterStartDate_FinishDateFilled(String direction, String startDate, String finishDate)
+        public void Test_EnterStartDate_FinishDateFilled(String direction, String startDate, String finishDate)
         {
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);

@@ -31,28 +31,28 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_EmptyFields_LoginButtonClick_NoChanges()
+        public void Test_EmptyFields_LoginButtonClick_NoChanges()
         {
             loginPageInstance.LoginButton.Click();
             Assert.IsTrue(LoginPage.IsLoginPageOpened(driver));
         }
 
         [Test]
-        public void ExecuteTest_EmptyFields_EnterPressed_NoChanges()
+        public void Test_EmptyFields_EnterPressed_NoChanges()
         {
             loginPageInstance.LoginField.SendKeys(Keys.Enter);
             Assert.IsTrue(LoginPage.IsLoginPageOpened(driver));
         }
 
         [Test]
-        public void ExecuteTest_EmptyLoginField_LoginButtonUnactive()
+        public void Test_EmptyLoginField_LoginButtonUnactive()
         {
             Acts.InputValue(loginPageInstance.PasswordField, "pass");
             Assert.IsFalse(loginPageInstance.LoginButton.Enabled);
         }
 
         [Test]
-        public void ExecuteTest_EmptyPassField_LoginButtonUnactive()
+        public void Test_EmptyPassField_LoginButtonUnactive()
         {
             Acts.InputValue(loginPageInstance.LoginField, "log1");
             Assert.IsFalse(loginPageInstance.LoginButton.Enabled);
@@ -64,7 +64,7 @@ namespace CaesarTests
         }
 
         [Test, TestCaseSource("LoginInvalidData")]
-        public void ExecuteTest_InvalidValues_ErrorMessage(String login, String password)
+        public void Test_InvalidValues_ErrorMessage(String login, String password)
         {
             loginPageInstance.LogIn(login, password);
             bool passFieldEmpty = String.Empty.Equals(loginPageInstance.PasswordField.GetAttribute("value"));
@@ -77,7 +77,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_15lettersLoginField_Contains10()
+        public void Test_15lettersLoginField_Contains10()
         {
             Acts.InputValue(loginPageInstance.LoginField, "abcdefghijklmno");
             Assert.AreEqual("abcdefghij", loginPageInstance.LoginField.GetAttribute("value"));

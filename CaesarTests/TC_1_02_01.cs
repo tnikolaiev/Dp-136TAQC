@@ -34,14 +34,14 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_ProfileButtonClick_RightMenuOpened()
+        public void Test_ProfileButtonClick_RightMenuOpened()
         {
             mainPageInstance.RightMenu.Open(wait);
             Assert.IsTrue(mainPageInstance.RightMenu.IsOpened());
         }
 
         [Test]
-        public void Executetest_DropMouseFocus_RightMenuClosed()
+        public void Test_DropMouseFocus_RightMenuClosed()
         {
             Actions act = new Actions(driver);
             mainPageInstance.RightMenu.Open(wait);

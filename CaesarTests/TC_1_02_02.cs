@@ -33,7 +33,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_ExitButtonClicked_LoginPageOpened()
+        public void Test_ExitButtonClicked_LoginPageOpened()
         {
             mainPageInstance.RightMenu.Open(wait);
             mainPageInstance.RightMenu.SignOutButton.Click();

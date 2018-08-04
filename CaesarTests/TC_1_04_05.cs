@@ -36,7 +36,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_SignInAsCoordinator_OpenGroupCreateWindow_LocationDDlnotEnabled()
+        public void Test_SignInAsCoordinator_OpenGroupCreateWindow_LocationDDlnotEnabled()
         {
             loginPageInstance.LogIn("dmytro", "1234", wait);
             mainPageInstance = new MainPage(driver);
@@ -51,7 +51,7 @@ namespace CaesarTests
             "testData", "direction", "groupName", "teacher", "budgetOwner", "startDate", "expert");
 
         [Test, TestCaseSource("NewGroupsCreationData")]
-        public void ExecuteTest_NewGroupCreate_GroupAppearedInGroupsList
+        public void Test_NewGroupCreate_GroupAppearedInGroupsList
             (String direction, String groupName, String teacher, String budgetOwner, String startDate, String expert)
         {
             loginPageInstance.LogIn("dmytro", "1234", wait);
@@ -76,7 +76,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_SignInAsAdministrator_OpenGroupCreateWindow_LocationDDlEnabled()
+        public void Test_SignInAsAdministrator_OpenGroupCreateWindow_LocationDDlEnabled()
         {
             loginPageInstance.LogIn("admin", "1234", wait);
             mainPageInstance = new MainPage(driver);

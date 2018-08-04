@@ -54,7 +54,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_EmptyFieldsClickConfirm_FourHintsDisplayed()
+        public void Test_EmptyFieldsClickConfirm_FourHintsDisplayed()
         {
             groupCreateWindow.SaveGroupButton.Click();
             wait.Until((d) => groupCreateWindow.IsGroupNameHintVisible());
@@ -70,7 +70,7 @@ namespace CaesarTests
             "testData", "groupNameInvalid", "startDateInvalid");
 
         [Test, TestCaseSource("GroupNameStartDateInvalidData")]
-        public void ExecuteTest_GroupNameStardDateInvalidData_Warns(String groupNameInvalid, String startDateInvalid)
+        public void Test_GroupNameStardDateInvalidData_Warns(String groupNameInvalid, String startDateInvalid)
         {
             groupCreateWindow
                 .SetStartDate(startDateInvalid)
@@ -90,7 +90,7 @@ namespace CaesarTests
             "testData", "groupNameMinLength");
 
         [Test, TestCaseSource("GroupNameMinLengthData")]
-        public void ExecuteTest_GroupNameBelowLowerBoundary_Warn(String groupNameMinLength)
+        public void Test_GroupNameBelowLowerBoundary_Warn(String groupNameMinLength)
         {
             groupCreateWindow.SetGroupName(groupNameMinLength);
             groupCreateWindow.SaveGroupButton.Click();
@@ -105,7 +105,7 @@ namespace CaesarTests
      "testData", "groupNameMaxLength");
 
         [Test, TestCaseSource("GroupNameMaxLengthData")]
-        public void Executetest_GroupNameAboveMaxBoundary_Warn(String groupNameMaxLength)
+        public void Test_GroupNameAboveMaxBoundary_Warn(String groupNameMaxLength)
         {
             groupCreateWindow.SetGroupName(groupNameMaxLength);
             groupCreateWindow.SaveGroupButton.Click();
@@ -120,7 +120,7 @@ namespace CaesarTests
      "testData", "expertNameSpecSymb");
 
         [Test, TestCaseSource("ExpertNameInvalidData")]
-        public void Executetest_ExpertNameInvalidData_Warn(String expertNameSpecSymb)
+        public void Test_ExpertNameInvalidData_Warn(String expertNameSpecSymb)
         {
             groupCreateWindow.AddExpertButton.Click();
             groupCreateWindow
@@ -135,7 +135,7 @@ namespace CaesarTests
     "testData", "expertNameMinMaxLength");
 
         [Test, TestCaseSource("ExpertInputMinMaxBoundaryData")]
-        public void Executetest_ExpertBeyondMinMaxBoundary_Warn(String expertNameMinMaxLength)
+        public void Test_ExpertBeyondMinMaxBoundary_Warn(String expertNameMinMaxLength)
         {
             groupCreateWindow.AddExpertButton.Click();
             groupCreateWindow.SetExpertName(expertNameMinMaxLength)

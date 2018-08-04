@@ -111,6 +111,7 @@
     <Compile Include="Test_SelectGroupWindow.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Logs\log.html" />
     <Content Include="Logs\log.txt" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

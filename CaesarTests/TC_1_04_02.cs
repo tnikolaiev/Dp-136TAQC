@@ -36,7 +36,7 @@ namespace CaesarTests
         static object[] CoordAdminCredentials = { new String[] { "dmytro", "1234" }, new String[] { "artur", "1234" } };
 
         [Test, TestCaseSource("CoordAdminCredentials")]
-        public void ExecuteTest_SignInAsCoordinatorOrAdmin_TwoButtonsAvailable(String login, String password)
+        public void Test_SignInAsCoordinatorOrAdmin_TwoButtonsAvailable(String login, String password)
         {
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn(login, password, wait);
@@ -50,7 +50,7 @@ namespace CaesarTests
         }
 
         [Test, TestCaseSource("CoordAdminCredentials")]
-        public void ExecuteTest_SignInAsCoordinatorOrAdmin_CheckGroup_FourButtonsAvailable(String login, String password)
+        public void Test_SignInAsCoordinatorOrAdmin_CheckGroup_FourButtonsAvailable(String login, String password)
         {
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn(login, password, wait);
@@ -68,7 +68,7 @@ namespace CaesarTests
         static object[] TeacherCredentials = { new String[] { "sasha", "1234" } };
 
         [Test, TestCaseSource("TeacherCredentials")]
-        public void ExecuteTest_SignInAsTeacher_OneButtonsAvailable(String login, String password)
+        public void Test_SignInAsTeacher_OneButtonsAvailable(String login, String password)
         {
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn(login, password, wait);
@@ -82,7 +82,7 @@ namespace CaesarTests
         }
 
         [Test, TestCaseSource("TeacherCredentials")]
-        public void ExecuteTest_SignInAsTeacher_CheckGroup_OneButtonsAvailable(String login, String password)
+        public void Test_SignInAsTeacher_CheckGroup_OneButtonsAvailable(String login, String password)
         {
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn(login, password, wait);

@@ -39,7 +39,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_SelectGroup_ClickDeleteButton_GroupDeleteConfirmantionWindowOpened()
+        public void Test_SelectGroup_ClickDeleteButton_GroupDeleteConfirmantionWindowOpened()
         {
             var groupDeleteConfirmantionWindow = mainPageInstance.ModalWindow.GroupDeleteConfirmationWindow;
             var leftMenu = mainPageInstance.LeftMenu;
@@ -52,7 +52,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_ClickCancelButton_GroupDeleteConfirmantionWindowClosed()
+        public void Test_ClickCancelButton_GroupDeleteConfirmantionWindowClosed()
         {
             var groupDeleteConfirmantionWindow = mainPageInstance.ModalWindow.GroupDeleteConfirmationWindow;
             var leftMenu = mainPageInstance.LeftMenu;
@@ -68,7 +68,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_PressEscKey_GroupDeleteConfirmantionWindowOpenedClosed()
+        public void Test_PressEscKey_GroupDeleteConfirmantionWindowOpenedClosed()
         {
             var groupDeleteConfirmantionWindow = mainPageInstance.ModalWindow.GroupDeleteConfirmationWindow;
             var leftMenu = mainPageInstance.LeftMenu;
