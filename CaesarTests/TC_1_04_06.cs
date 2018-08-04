@@ -47,12 +47,18 @@ namespace CaesarTests
                 .SetStartDate(startDate);
             groupCreateWindow.GroupNameField.Click();
             String actualResult = groupCreateWindow.FinishDateField.GetAttribute("value");
-            Log4Caesar.Log();
+            
             Assert.AreEqual(finishDate, actualResult);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }

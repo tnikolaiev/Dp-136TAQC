@@ -40,7 +40,7 @@ namespace CaesarTests
         {
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
-            Log4Caesar.Log();
+            
             Assert.IsTrue(groupCreateWindow.IsOpened());
         }
 
@@ -51,7 +51,7 @@ namespace CaesarTests
             groupCreateWindow.Open(action, wait);
             groupCreateWindow.CancelGroupAddingButton.Click();
             bool isWindowClosed = wait.Until((d) => !groupCreateWindow.IsOpened());
-            Log4Caesar.Log();
+            
             Assert.IsTrue(isWindowClosed);
         }
 
@@ -62,12 +62,18 @@ namespace CaesarTests
             groupCreateWindow.Open(action, wait);
             action.SendKeys(Keys.Escape).Perform();
             wait.Until((d) => !groupCreateWindow.IsOpened());
-            Log4Caesar.Log();
+            
             Assert.IsFalse(groupCreateWindow.IsOpened());
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }

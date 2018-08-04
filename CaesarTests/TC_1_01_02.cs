@@ -40,8 +40,15 @@ namespace CaesarTests
         public void ExecuteTest_LoginWithValidLoginCredentials(String login, String password)
         {
             loginPageInstance.LogIn(login, password, wait);
+
+            //Assert.IsTrue(wait.Until((d) => MainPage.IsMainPageOpened(d)));
+            throw new Exception("Test ex");
+        }
+
+        [TearDown]
+        public void CleanUp()
+        {
             Log4Caesar.Log();
-            Assert.IsTrue(wait.Until((d) => MainPage.IsMainPageOpened(d)));
         }
 
         [OneTimeTearDown]

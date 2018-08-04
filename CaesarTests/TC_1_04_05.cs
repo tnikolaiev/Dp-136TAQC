@@ -43,7 +43,7 @@ namespace CaesarTests
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
             bool LocationDdlEnabled = groupCreateWindow.LocationDDL.Enabled;
-            Log4Caesar.Log();
+            
             Assert.IsTrue(groupCreateWindow.IsOpened() & !LocationDdlEnabled);
         }
 
@@ -71,7 +71,7 @@ namespace CaesarTests
             bool isGroupCreated = groupsList.GetGroupByName(groupName, wait) != null;
             groupsList.DeleteGroup(groupName, action, wait);
             bool isGroupDeleted = groupsList.GetGroupByName(groupName, wait) == null;
-            Log4Caesar.Log();
+            
             Assert.IsTrue(isGroupCreated & isGroupDeleted);
         }
 
@@ -83,12 +83,18 @@ namespace CaesarTests
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
             bool LocationDdlEnabled = groupCreateWindow.LocationDDL.Enabled;
-            Log4Caesar.Log();
+            
             Assert.IsTrue(groupCreateWindow.IsOpened() & LocationDdlEnabled);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {
             driver.Quit();
         }

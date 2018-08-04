@@ -27,12 +27,18 @@ namespace CaesarTests
         public void Test_NavigateToLinks_LoginPageOpened(String link)
         {
             driver.Url = link;
+            // Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPageOpened(driver)));
+            Assert.Fail();
+        }
+
+        [TearDown]
+        public void CleanUp()
+        {
             Log4Caesar.Log();
-            Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPageOpened(driver)));
         }
 
         [OneTimeTearDown]
-        public void CleanUp()
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }

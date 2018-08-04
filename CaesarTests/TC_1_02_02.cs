@@ -39,9 +39,15 @@ namespace CaesarTests
             mainPageInstance.RightMenu.SignOutButton.Click();
             Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPageOpened(d)));
         }
-        
-        [OneTimeTearDown]
+
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }

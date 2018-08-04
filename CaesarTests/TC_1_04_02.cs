@@ -45,7 +45,7 @@ namespace CaesarTests
 
             List<String> expectedResult = new List<String> { "Create", "Search" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
-            Log4Caesar.Log();
+            
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
@@ -61,7 +61,7 @@ namespace CaesarTests
 
             List<String> expectedResult = new List<String> { "Create", "Search", "Edit", "Delete" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
-            Log4Caesar.Log();
+            
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
@@ -77,7 +77,7 @@ namespace CaesarTests
 
             List<String> expectedResult = new List<String> { "Search" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
-            Log4Caesar.Log();
+            
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
@@ -93,12 +93,18 @@ namespace CaesarTests
 
             List<String> expectedResult = new List<String> { "Search" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
-            Log4Caesar.Log();
+            
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }

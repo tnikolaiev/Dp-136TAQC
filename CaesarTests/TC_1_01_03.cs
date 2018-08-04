@@ -53,8 +53,14 @@ namespace CaesarTests
             Assert.IsTrue(wait.Until(d => MainPage.IsMainPageOpened(d)));
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }

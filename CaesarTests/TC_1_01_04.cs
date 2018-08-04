@@ -83,8 +83,14 @@ namespace CaesarTests
             Assert.AreEqual("abcdefghij", loginPageInstance.LoginField.GetAttribute("value"));
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }

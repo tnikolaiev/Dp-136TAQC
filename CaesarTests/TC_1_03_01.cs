@@ -81,8 +81,14 @@ namespace CaesarTests
             CollectionAssert.AreEquivalent(expectedResult, actualResult);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }

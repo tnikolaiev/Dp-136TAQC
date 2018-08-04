@@ -45,8 +45,14 @@ namespace CaesarTests
             loginPageInstance.LoginField.SendKeys(Keys.Escape);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }

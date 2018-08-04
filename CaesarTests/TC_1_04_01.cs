@@ -52,8 +52,14 @@ namespace CaesarTests
             Assert.IsTrue(isLeftMenuClosed);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }
