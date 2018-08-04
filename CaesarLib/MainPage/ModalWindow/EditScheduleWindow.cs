@@ -47,7 +47,7 @@ namespace CaesarLib
                 if (_cancelButton != null) return _cancelButton;
                 else
                 {
-                    _cancelButton = _driverInstance.FindElement(By.Id("'cancel'"));
+                    _cancelButton = _driverInstance.FindElement(By.Id("cancel"));
                     return _cancelButton;
                 }
             }
@@ -182,7 +182,7 @@ namespace CaesarLib
 
         public bool IsScheduleEditorDisplayed(IWebDriver driverInstance)
         {
-            return driverInstance.FindElements(By.ClassName("scheduleEditorWeek-view")).Count > 0 ?
+            return driverInstance.FindElements(By.ClassName("weekView")).Count > 0 ?
                true : false;
         }
 

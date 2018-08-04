@@ -9,59 +9,41 @@ using System;
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_2_03_6
-    {
-        IWebDriver driver;
-        WebDriverWait wait;
-        string baseURL = "localhost:3000";
-        LoginPage loginPageInstance;
-        ScheduleContent ScheduleContentInstance;
-        MainPage mainPageInstance;
-
-        [SetUp]
-        public void BeforeTest()
-        {
-            //Initializations and logging in Caesar
-            driver = new ChromeDriver();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-            driver.Url = baseURL;
-            driver.Manage().Window.Maximize();
-            loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn("sasha", "1234");
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
-
-            //Opening Schedule Page
-
-            mainPageInstance = new MainPage(driver);
-             mainPageInstance.OpenScheduleContent();
-
-            //Select group from LeftContainer
-
-            mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
-        }
-
+    class TC_2_03_6 : BaseTest
+    {     
         [Test]
 
         public void CheckQAEventsScheduleEditor()
-        {           
-
-            //Click on cogweel for ScheduleEditor opening
-            ScheduleContentInstance.ClickCogwheel();
-
-            //Check if correct events present
-            Assert.IsTrue(Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Lecture')]")));
-            Assert.IsTrue(Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Weekly report')]")));
-            Assert.IsTrue(Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Consultation')]")));
-            Assert.IsTrue(Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Work with Expert')]")));
-
-
-        }
-        [TearDown]
-        public void TearDown()
         {
-            driver.Close();
+            {
+                //Opening Caesar and Logging in
+                driver.Url = baseURL;
+                loginPageInstance = new LoginPage(driver);
+                loginPageInstance.LogIn("qwerty", "1234", wait);
+
+                //Opening Schedule Page
+                MainPageInstance = new MainPage(driver);
+                wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
+                MainPageInstance.TopMenu.ScheduleItem.Click();
+
+                //Selecting group
+                MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
+
+
+                //Click on cogweel for ScheduleEditor opening
+                MainPageInstance.CenterContainer.ScheduleContent.ClickCogwheel(wait);
+             
+                //Check if correct events present
+                Assert.IsTrue(Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Lecture')]")));
+                Assert.IsTrue(Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Weekly report')]")));
+                Assert.IsTrue(Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Consultation')]")));
+                Assert.IsTrue(Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Work with Expert')]")));
+
+                //Close ScheduleEditor
+                MainPageInstance.ModalWindow.EditScheduleWindow.CancelButton.Click();
+            }
         }
+        
     }
 
 }

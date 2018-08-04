@@ -128,6 +128,7 @@ namespace CaesarLib
         {
             return ExpectedConditions.ElementIsVisible(By.XPath("//p[@class='hint']"));
         }
+       
 
     }
 }

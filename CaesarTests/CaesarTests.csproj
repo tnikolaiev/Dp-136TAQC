@@ -115,6 +115,9 @@
     <Content Include="TestData\CreateGroupInvalidData.xml" />
     <Content Include="TestData\InvalidLoginCredentials.xml" />
     <Content Include="TestData\LocationLists.xml" />
+    <Content Include="TestData\LoginUnderDifferentRoles.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestData\LoginPageInvalidData.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
