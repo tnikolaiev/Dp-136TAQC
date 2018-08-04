@@ -132,9 +132,10 @@ namespace CaesarLib
 
         //Actions
 
-        public EditScheduleWindow ClickCogwheel()
+        public EditScheduleWindow ClickCogwheel(WebDriverWait wait)
         {
             ScheduleCogwheell.Click();
+            wait.Until((d) => EditScheduleWindowInstance.IsScheduleEditorDisplayed(_driverInstance));
             return new EditScheduleWindow(_driverInstance);
         }
 

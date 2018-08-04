@@ -5,6 +5,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
 
 namespace CaesarTests
 {
@@ -15,36 +16,32 @@ namespace CaesarTests
         protected WebDriverWait wait;
         protected LoginPage loginPageInstance;
         protected MainPage MainPageInstance;
+        protected string baseURL;
 
-        [SetUp]
+        [OneTimeSetUp]
 
-        public void SetUp()
+        public void OneTimeSetUp()
         {
             driver = new ChromeDriver();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
             driver.Manage().Window.Maximize();
-
             //Navigating to Caesar app
-            string baseURL = "localhost:3000";
-            driver.Url = baseURL;
-
-            //Logging in
-            loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn("sasha", "1234");
-            wait.Until((driver) => MainPage.IsMainPageOpened(driver));
-
-            BeforeTest();
-        }       
+            baseURL = "localhost:3000";
+        }
 
         [TearDown]
         public void TearDown()
-        {            
-            driver.Close();
-            driver.Quit();
-            AfterTest();
+        {
+            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
+            MainPageInstance.TopMenu.LogoutButton.Click();
         }
 
-        protected virtual void BeforeTest() { }
-        protected virtual void AfterTest() {}
+        [OneTimeTearDown]
+        public void OneTimeTearDown()
+        {
+            driver.Close();
+            driver.Quit();           
+        }
+
     }
 }

@@ -4,7 +4,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using OpenQA.Selenium.Interactions;
 
 namespace CaesarTests
 {
@@ -14,15 +13,14 @@ namespace CaesarTests
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
         WebDriverWait wait;
-        LocationWindow locationPageInstance;
         CenterContainer groupLocationInstance;
         TopMenu topMenuInstance;
         MainPage mainPageInstance;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Initialize()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
             driver.Url = @"http://localhost:3000/logout";
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
@@ -30,25 +28,26 @@ namespace CaesarTests
             loginPageInstance.LogIn("sasha", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
+
         }
         [Test]
-        public void ExecuteTest_LocationPageCloseWithoutChoosing()
+        public void ExecuteTest_ChooseLocationChernivtsy_LocationPageOpened()
         {
-            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.LocationsItem);
-            locationPageInstance = new LocationWindow(driver);
-            Acts.Click(locationPageInstance.CityLviv);
-            Acts.Click(locationPageInstance.CancelButton);
-            string exeptualResultTitle = "Dnipro";
+            Acts.Click(mainPageInstance.ModalWindow.LocationWindow.CityChernivtsy);
+            Acts.Click(mainPageInstance.ModalWindow.LocationWindow.ConfurmButton);
+            string exeptualResultTitle = "Chernivtsy";
             groupLocationInstance = new CenterContainer(driver);
             Console.WriteLine(groupLocationInstance.GroupLocation.Text);
             Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
         }
 
+
         [OneTimeTearDown]
         public void CleanUp()
         {
-           driver.Quit();
+            driver.Quit();
         }
     }
 }

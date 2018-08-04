@@ -14,24 +14,27 @@ namespace CaesarTests
         EditScheduleWindow editscheduleWindowInstance;       
                 
 
-        protected override void BeforeTest()
-        {
-            //Opening Schedule Page
+        [SetUp]
 
+        public void SetUp()
+        {
+            //Opening Caesar and Logging in
+            driver.Url = baseURL;
+            loginPageInstance = new LoginPage(driver);
+            loginPageInstance.LogIn("qwerty", "1234", wait);
+
+            //Opening Schedule Page
             MainPageInstance = new MainPage(driver);
             wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
             MainPageInstance.TopMenu.ScheduleItem.Click();
 
             //Select group from LeftContainer
-
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
-            //Go toSchedule Editor
-
+            //Go to Schedule Editor
             MainPageInstance.CenterContainer.ScheduleContent.ScheduleCogwheell.Click();
 
             // Create instance of Schedule Edit Week Window
-
             editscheduleWindowInstance = new EditScheduleWindow(driver);
 
         }

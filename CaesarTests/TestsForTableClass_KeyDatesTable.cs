@@ -15,19 +15,22 @@ namespace CaesarTests
         KeyDatesTab scheduleKeyDatesTabInstance;       
         String textFromCell;
 
-       protected override void BeforeTest()
+        [SetUp]
+
+        public void SetUp()
         {
+            //Opening Caesar and Logging in
+            driver.Url = baseURL;
+            loginPageInstance = new LoginPage(driver);
+            loginPageInstance.LogIn("qwerty", "1234", wait);
 
             //Opening Schedule Page
-
             MainPageInstance = new MainPage(driver);
             wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
             MainPageInstance.TopMenu.ScheduleItem.Click();
 
             //Select group from LeftContainer
-
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
-        MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS").Click();
 
             //Go to Key-Dates tab
 
