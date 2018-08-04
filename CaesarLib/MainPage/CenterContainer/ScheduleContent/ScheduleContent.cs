@@ -121,14 +121,12 @@ namespace CaesarLib
         {
             get
             {
-                if (_editScheduleWindowInstance != null) return _editScheduleWindowInstance;
-                else
-                {
+                
                     _editScheduleWindowInstance = new EditScheduleWindow(_driverInstance);
                     return _editScheduleWindowInstance;
-                }
             }
         }
+        
 
         //Actions
 

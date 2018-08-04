@@ -32,15 +32,15 @@ namespace CaesarTests
         [TearDown]
         public void TearDown()
         {
-            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
-            MainPageInstance.TopMenu.LogoutButton.Click();
+           // wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
+          //  MainPageInstance.TopMenu.LogoutButton.Click();
         }
 
         [OneTimeTearDown]
         public void OneTimeTearDown()
         {
-            driver.Close();
-            driver.Quit();           
+          //  driver.Close();
+          //  driver.Quit();           
         }
 
     }
