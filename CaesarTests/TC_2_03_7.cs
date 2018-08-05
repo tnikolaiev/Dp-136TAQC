@@ -11,11 +11,11 @@ using System.Threading;
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_2_03_3 : BaseTest
+    class TC_2_03_7 : BaseTest
     {
         [Test]
 
-        public void CheckCancelButtonInScheduleditor()
+        public void CheckCreatingEventInScheduleditor()
         {
             //Opening Caesar and Logging in
             driver.Url = baseURL;
@@ -45,24 +45,21 @@ namespace CaesarTests
             MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/08").Click();
             wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.IsActivityExists(MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/08")));
 
-            // Click Cancel
-            MainPageInstance.ModalWindow.EditScheduleWindow.CancelButton.Click();
+            // Click Save
+            MainPageInstance.ModalWindow.EditScheduleWindow.SaveButton.Click();
             wait.Until((d) => MainPageInstance.CenterContainer.ScheduleContent.IsOpened(driver));
 
             //Open ScheduleEditor  again           
             MainPageInstance.CenterContainer.ScheduleContent.ScheduleCogwheell.Click();
             wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.IsScheduleEditorDisplayed(driver));
 
-            //Assert that there is no event in cell
-            Assert.Null(MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetValueFromCell("9:00", "Wednesday\r\n08/08"));
+            //Assert that event is in cell
+            IWebElement cell = MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/08");
+            Assert.True(MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.IsActivityCorrect(cell, "Weekly report\r\nO. Reuta\r\n740"));
 
             //Close ScheduleEditor
             MainPageInstance.ModalWindow.EditScheduleWindow.CancelButton.Click();
-
-
         }
-
-
 
     }
 
