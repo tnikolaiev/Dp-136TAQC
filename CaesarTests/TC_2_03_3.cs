@@ -46,16 +46,15 @@ namespace CaesarTests
             wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.IsActivityExists(MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/08")));
 
             // Click Cancel
-             MainPageInstance.ModalWindow.EditScheduleWindow.CancelButton.Click();
-            wait.Until((d) => MainPageInstance.CenterContainer.ScheduleContent.MonthTabInstance.IsMonthTabDisplayed(driver));
-         
+            MainPageInstance.ModalWindow.EditScheduleWindow.CancelButton.Click();
+            wait.Until((d) => MainPageInstance.CenterContainer.ScheduleContent.IsOpened(driver));
+
             //Open ScheduleEditor  again           
             MainPageInstance.CenterContainer.ScheduleContent.ScheduleCogwheell.Click();
             wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.IsScheduleEditorDisplayed(driver));
 
             //Assert that there is no event in cell
             Assert.Null(MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetValueFromCell("9:00", "Wednesday\r\n08/08"));
-
         }
 
 

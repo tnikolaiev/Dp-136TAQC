@@ -151,6 +151,12 @@ namespace CaesarLib
             return new KeyDatesTab(_driverInstance);
         }
 
+        public bool IsOpened(IWebDriver driver)
+        {
+            return driver.FindElements(By.ClassName("scheduleView")).Count > 0 ?
+               true : false;
+        }
+         
     }
 }
 
