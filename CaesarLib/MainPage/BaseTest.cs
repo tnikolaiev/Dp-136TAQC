@@ -32,6 +32,7 @@ namespace CaesarTests
         [TearDown]
         public void TearDown()
         {
+            //Log out from app
             wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
             MainPageInstance.TopMenu.LogoutButton.Click();
         }
