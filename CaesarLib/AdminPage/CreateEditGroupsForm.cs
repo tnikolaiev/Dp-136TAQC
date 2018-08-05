@@ -109,7 +109,7 @@ namespace CaesarLib
             }
         }
 
-        public CreateEditGroupsForm setLocationDDL(string value)
+        public CreateEditGroupsForm setLocationDDL(int value)
         {
             Acts.SelectOptionFromDDL(LocationDDL, value);
             return this;
@@ -127,6 +127,11 @@ namespace CaesarLib
                 }
             }
         }
+        public CreateEditGroupsForm checkBudgetOwner()
+        {
+            BudgetOwnerCheckbox.Click();
+            return this;
+        }
 
         public IWebElement DirectionDDL
         {
@@ -141,7 +146,7 @@ namespace CaesarLib
             }
         }
 
-        public CreateEditGroupsForm setDirectionDDL(string value)
+        public CreateEditGroupsForm setDirectionDDL(int value)
         {
             Acts.SelectOptionFromDDL(DirectionDDL, value);
             return this;
@@ -160,6 +165,11 @@ namespace CaesarLib
             }
         }
 
+        public CreateEditGroupsForm setStartDate(string value)
+        {
+            StartDate.SendKeys(value);
+            return this;
+        }
         public IWebElement FinishDate
         {
             get
@@ -172,7 +182,11 @@ namespace CaesarLib
                 }
             }
         }
-
+        public CreateEditGroupsForm setFinishDate(string value)
+        {
+            FinishDate.SendKeys(value);
+            return this;
+        }
         public IWebElement TeachersField
         {
             get
@@ -224,7 +238,7 @@ namespace CaesarLib
             }
         }
 
-        public CreateEditGroupsForm setStageDDL(string value)
+        public CreateEditGroupsForm setStageDDL(int value)
         {
             Acts.SelectOptionFromDDL(StageDDL, value);
             return this;
@@ -236,7 +250,6 @@ namespace CaesarLib
             group.Add(LocationDDL.GetAttribute("value"));
 
             group.Add(DirectionDDL.GetAttribute("value"));
-            group.Add(LocationDDL.GetAttribute("value"));
             group.Add(StartDate.GetAttribute("value"));
             group.Add(FinishDate.GetAttribute("value"));
             group.Add(TeachersField.GetAttribute("value"));

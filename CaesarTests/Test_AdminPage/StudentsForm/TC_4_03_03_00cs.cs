@@ -62,7 +62,7 @@ namespace CaesarTests
         }
                
         [Test, TestCaseSource("StudentInfo")]
-        public void Test_StudentFormGroupIdIsEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
+        public void Test_StudentFormGroupIdIsNotEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
         {
             studentForm.GroupIdField.Clear();
             studentForm.setGroupId(groupId)
@@ -74,7 +74,7 @@ namespace CaesarTests
 
         }
         [Test, TestCaseSource("StudentInfo")]
-        public void Test_StudentFormFirstNameIsEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
+        public void Test_StudentFormFirstNameIsNotEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
         {
             studentForm.NameField.Clear();
             studentForm.setName(name)
@@ -86,7 +86,7 @@ namespace CaesarTests
         }
 
         [Test, TestCaseSource("StudentInfo")]
-        public void Test_StudentFormLastNameIsEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
+        public void Test_StudentFormLastNameIsNotEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
         {
             studentForm.LastNameField.Clear();
             studentForm.setLastName(lastName)
@@ -97,7 +97,7 @@ namespace CaesarTests
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
         [Test, TestCaseSource("StudentInfo")]
-        public void Test_StudentFormEnglishLevelIsEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
+        public void Test_StudentFormEnglishLevelIsNotEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
         {
             studentForm.setEnglishLevelDDL(englishLevel)
                 .SubmitButton.Click();
@@ -108,7 +108,7 @@ namespace CaesarTests
         }
 
         [Test, TestCaseSource("StudentInfo")]
-        public void Test_StudentFormEntryScorelIsEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
+        public void Test_StudentFormEntryScorelIsNotEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
         {
             studentForm.EntryScoreField.Clear();
             studentForm.setEntryScore(entryScore)
@@ -119,7 +119,7 @@ namespace CaesarTests
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
         [Test, TestCaseSource("StudentInfo")]
-        public void Test_StudentFormApprovedByIsEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
+        public void Test_StudentFormApprovedByIsNotEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
         {
             studentForm.ApprovedByField.Clear();
             studentForm.setApprovedBy(approved)

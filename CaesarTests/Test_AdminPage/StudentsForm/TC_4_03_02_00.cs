@@ -18,19 +18,22 @@ namespace CaesarTests
         Table table;
         string index;
 
-        static object[] StudentInfo =
+        static object[] StudentText =
         {
-            new object[] { "DP-093-JS", "Olga", "Ivanova", 0, "25", "N. Varenko" },
-            new object[] { "DP-093-JS", "Hanna", "Lavrova", 1, "36", "N. Varenko" },
-            new object[] { "DP-093-JS", "Thor", "Thorov", 2,  "45", "N. Varenko" },
-            new object[] { "DP-093-JS", "Halk", "Halkov", 3,  "50", "N. Varenko" },
-            new object[] { "DP-093-JS", "Iron", "Ironon",  4, "30", "N. Varenko" },
-            new object[] { "DP-093-JS", "Lady", "Ivanova", 5, "45", "N. Varenko" },
-            new object[] { "DP-093-JS", "Sima", "Kotova", 6, "50", "N. Varenko" },
-            new object[] { "DP-093-JS", "Thor", "Thorov", 7,  "45", "N. Varenko" },
-            new object[] { "DP-093-JS", "Halk", "Halkov", 8,  "50", "N. Varenko" },
-            new object[] { "DP-093-JS", "Iron", "Ironon",  9, "30", "N. Varenko" },
-            new object[] { "DP-093-JS", "Lady", "Ivanova", 10, "45", "N. Varenko" }
+            new object[] { "123456", "Olga", "Ivanova", 0, "25", "N. Varenko" },
+            new object[] { "InputFirstNameCharacter", "Hanna", "Lavrova", 1, "36", "N. Varenko" },
+            new object[] { "!@#$%$^#@$", "Thor", "Thorov", 2,  "45", "N. Varenko" },
+            new object[] { "Фьмвл12%к", "Halk", "Halkov", 3,  "50", "N. Varenko" }
+        };
+
+        static object[] StudentInfo =
+       {
+            new object[] { "DP-093-JS", "Sima", "Kotova", 6, "9999999999999999999999999999999999", "N. Varenko" },
+            new object[] { "DP-093-JS", "Thor", "Thorov", 7,  "-100", "N. Varenko" },
+            new object[] { "DP-093-JS", "Halk", "Halkov", 8,  "0", "N. Varenko" },
+            new object[] { "DP-093-JS", "Iron", "Ironon",  9, "0.00000000001", "N. Varenko" },
+            new object[] { "DP-093-JS", "Lady", "Ivanova", 10, "6", "N. Varenko" }
+
         };
 
         [OneTimeSetUp]
@@ -52,33 +55,91 @@ namespace CaesarTests
         {
             studentForm = new CreateEditStudentsForm(driver);
             studentForm.GoToStudents.Click();
+            table = new Table(studentForm.GetTable, driver);
             studentForm.addStudents();
             studentForm.IsOpened(wait);
         }
 
-        [Test, TestCaseSource("StudentInfo")]
-        public void Test_CreateStudent_Success(string groupId, string name, string lastName, int englishLevel, string entryScore, string approvedBy)
+       
+        [Test, TestCaseSource("StudentText")]
+        public void Test_StudentFormGroupIdIsNotEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
         {
             studentForm.setGroupId(groupId)
                 .setName(name)
                 .setLastName(lastName)
                 .setEnglishLevelDDL(englishLevel)
                 .setEntryScore(entryScore)
-                .setApprovedBy(approvedBy);
-
-            List<String> expectedResult = studentForm.RememberStudent();
+                .setApprovedBy(approved)
+                .SubmitButton.Click();
             index = studentForm.LastNameField.GetAttribute("value");
-            studentForm.SubmitButton.Click();
-            table = new Table(studentForm.GetTable, driver);
+            List<string> expectedResult = studentForm.RememberStudent();
+            Assert.IsFalse(table.FindRowInTable(expectedResult));
+        }
+      
+        [Test, TestCaseSource("StudentText")]
+        public void Test_StudentFormFirstNameIsNotEdit(string name, string groupId, string lastName, int englishLevel, string entryScore, string approved)
+        {
+            studentForm.setGroupId(groupId)
+               .setName(name)
+               .setLastName(lastName)
+               .setEnglishLevelDDL(englishLevel)
+               .setEntryScore(entryScore)
+               .setApprovedBy(approved)
+               .SubmitButton.Click();
+            index = studentForm.LastNameField.GetAttribute("value");
+            List<string> expectedResult = studentForm.RememberStudent();
+            Assert.IsFalse(table.FindRowInTable(expectedResult));
+        }
 
-            Assert.IsTrue(table.FindRowInTable(expectedResult));
+        [Test, TestCaseSource("StudentText")]
+        public void Test_StudentFormLastNameIsNotEdit(string lastName, string name, string groupId, int englishLevel, string entryScore, string approved)
+        {
+            studentForm.setGroupId(groupId)
+               .setName(name)
+               .setLastName(lastName)
+               .setEnglishLevelDDL(englishLevel)
+               .setEntryScore(entryScore)
+               .setApprovedBy(approved)
+               .SubmitButton.Click();
+            index = studentForm.LastNameField.GetAttribute("value");
+            List<string> expectedResult = studentForm.RememberStudent();
+            Assert.IsFalse(table.FindRowInTable(expectedResult));
+        }
+      
+        [Test, TestCaseSource("StudentInfo")]
+        public void Test_StudentFormEntryScorelIsNotEdit(string groupId, string name, string lastName, int englishLevel, string entryScore, string approved)
+        {
+            studentForm.setGroupId(groupId)
+                 .setName(name)
+                 .setLastName(lastName)
+                 .setEnglishLevelDDL(englishLevel)
+                 .setEntryScore(entryScore)
+                 .setApprovedBy(approved)
+                 .SubmitButton.Click();
+            index = studentForm.LastNameField.GetAttribute("value");
+            List<string> expectedResult = studentForm.RememberStudent();
+            Assert.IsFalse(table.FindRowInTable(expectedResult));
+        }
+        [Test, TestCaseSource("StudentText")]
+        public void Test_StudentFormApprovedByIsNotEdit(string approved, string name, string lastName, int englishLevel, string entryScore, string groupId)
+        {
+            studentForm.setGroupId(groupId)
+                  .setName(name)
+                  .setLastName(lastName)
+                  .setEnglishLevelDDL(englishLevel)
+                  .setEntryScore(entryScore)
+                  .setApprovedBy(approved)
+                  .SubmitButton.Click();
+            index = studentForm.LastNameField.GetAttribute("value");
+            List<string> expectedResult = studentForm.RememberStudent();
+            Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
         [TearDown]
         public void Delete()
         {
             wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
-            studentForm.DeleteStudent(table.GetRowNumberByValueInCell(index, 5));
+            studentForm.DeleteStudent(table.GetRowNumberByValueInCell(index, 2));
         }
         [OneTimeTearDown]
         public void CleanUp()
