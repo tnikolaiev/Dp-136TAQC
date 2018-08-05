@@ -54,12 +54,14 @@ namespace CaesarTests
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             driver.Url = @"http://localhost:3000/admin";
             wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
-            usersForm = new CreateEditUsersForm(driver);            
+                        
             
         }
         [SetUp]
         public void AddUserClick()
         {
+            usersForm = new CreateEditUsersForm(driver);
+            table = new Table(usersForm.GetTable, driver);
             usersForm.addUsers();
             usersForm.IsOpened(wait);
         }
@@ -71,8 +73,7 @@ namespace CaesarTests
             expectedResult.Add("EditDelete");
             usersForm.SubmitButton.Click();
             index = usersForm.Login.GetAttribute("value");
-            Thread.Sleep(1000);
-            table = new Table(usersForm.GetTable, driver);
+            Thread.Sleep(1000);            
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
@@ -88,7 +89,6 @@ namespace CaesarTests
             index = usersForm.Login.GetAttribute("value");
             List<string> expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
-            table = new Table(usersForm.GetTable, driver);
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
@@ -104,7 +104,6 @@ namespace CaesarTests
             index = usersForm.Login.GetAttribute("value");
             List<string> expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
-            table = new Table(usersForm.GetTable, driver);
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
         [Test, TestCaseSource("UsersLogin")]
@@ -119,7 +118,6 @@ namespace CaesarTests
             index = usersForm.Login.GetAttribute("value");
             List<string> expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
-            table = new Table(usersForm.GetTable, driver);
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
@@ -135,15 +133,12 @@ namespace CaesarTests
             index = usersForm.Login.GetAttribute("value");
             List<string> expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
-            table = new Table(usersForm.GetTable, driver);
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
         [TearDown]
         public void Delete()
         {
-            wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
-            Thread.Sleep(1000);
             usersForm.DeleteUser(table.GetRowNumberByValueInCell(index, 5));
         }
 

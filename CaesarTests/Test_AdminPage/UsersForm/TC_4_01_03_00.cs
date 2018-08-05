@@ -18,15 +18,29 @@ namespace CaesarTests
         WebDriverWait wait;
         Table table;
         string index;
-        List<string> user;
 
-        static object[] UsersInfo =
+        static object[] UsersName =
         {
-            new object[] { "123456", "123456", "123456", "123456789" },
-            new object[] { "InputFirstNameCharacter", "InputFirstNameCharacter", "InputFirstNameCharacter", "InputFirstNameCharacter" },
-            new object[] { "!@#$%$^#@$", "!@#$%$^#@$", "!@#$%$^#@$@", "qwe12#" },
-            new object[] { "Lora", "Lavrova", "IvanovaH@", "Фьмвл12%к" },
-             new object[] { "Thor", "Thorov", "Thor@", "!@#$%$^#@$@" }
+            new object[] { "123456", "Ivanova", "IvanovaO@", "qwerty12#" },
+            new object[] { "InputFirstNameCharacter", "Lavrova", "IvanovaH@", "qwerty12#" },
+            new object[] { "!@#$%$^#@$", "Thorov",  "Thor@", "qwerty12#" }
+        };
+
+        static object[] UsersLogin =
+        {
+            new object[] { "Ivan", "Ivanova","123456", "qwerty12#" },
+            new object[] { "Lora", "Lavrova", "InputFirstNameCharacter@", "qwerty12#" },
+            new object[] { "Thor", "Thorov", "!@#$%$^#@$@", "qwerty12#" },
+            new object[] { "Thor", "Thorov",  "Фьмвл12%к", "qwerty12#" }
+        };
+
+        static object[] UsersPassword =
+        {
+            new object[] { "Ivan", "Ivanova", "IvanovaO@", "123456789" },
+            new object[] { "Lora", "Lavrova", "IvanovaH@", "InputFirstName" },
+            new object[] { "Thor", "Thorov", "Thor@", "qwe12#" },
+            new object[] { "Thor", "Thorov", "Thor@", "!@#$%$^#@$@" },
+            new object[] { "Lora", "Lavrova", "IvanovaH@", "Фьмвл12%к" }
         };
 
         [OneTimeSetUp]
@@ -55,81 +69,60 @@ namespace CaesarTests
 
         [SetUp]
         public void EditUser()
-        {
-            wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
+        {           
+            usersForm = new CreateEditUsersForm(driver);
             table = new Table(usersForm.GetTable, driver);
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("add-new-user")));
             usersForm.EditUser(table.GetRowNumberByValueInCell(index, 5));
+            usersForm.IsOpened(wait);
         }
 
         [Test, TestCaseSource("UsersName") ]
         public void Test_UserFormFirstNameIsNotEdit_Fail(string name, string sername, string login, string password)
         {
-            usersForm = new CreateEditUsersForm(driver);
-            usersForm.IsOpened(wait);
             usersForm.FirstNameField.Clear();
             usersForm.setFirstName(name)
                 .SubmitButton.Click();
             List<string> expectedResult = usersForm.RememberUser();
-            index = usersForm.Login.GetAttribute("value");
-            List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 5));
-            actualResult.RemoveAt(7);
-            CollectionAssert.AreEqual(expectedResult, actualResult);
+            expectedResult.Add("EditDelete");
+            Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
-        [Test]
+        [Test, TestCaseSource("UsersName")]
         public void Test_UserFormLastNameIsNotEdit_Fail(string name, string sername, string login, string password)
         {
-            usersForm = new CreateEditUsersForm(driver);
-            usersForm.IsOpened(wait);
             usersForm.LastNameField.Clear();
-
-            usersForm.setLastName(sername)
+            usersForm.setLastName(name)
                 .SubmitButton.Click();
             List<string> expectedResult = usersForm.RememberUser();
-            index = usersForm.Login.GetAttribute("value");
-            List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 5));
-            actualResult.RemoveAt(7);
-            CollectionAssert.AreEqual(expectedResult, actualResult);
+            expectedResult.Add("EditDelete");
+            Assert.IsFalse(table.FindRowInTable(expectedResult));
         }              
     
-        [Test]
+        [Test, TestCaseSource("UsersLogin")]
         public void Test_UserFormLoginIsNotEdit_Fail(string name, string sername, string login, string password)
         {
-            usersForm = new CreateEditUsersForm(driver);
-            usersForm.IsOpened(wait);
             usersForm.Login.Clear();
 
             usersForm.setLogin(login)
                 .SubmitButton.Click();
             List<string> expectedResult = usersForm.RememberUser();
             index = usersForm.Login.GetAttribute("value");
-            List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 5));
-            actualResult.RemoveAt(7);
-            CollectionAssert.AreEqual(expectedResult, actualResult);
+            expectedResult.Add("EditDelete");
+            Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
-        [Test]
+        [Test, TestCaseSource("UsersPassword")]
         public void Test_UserFormPasswordIsNotEdit_Fail(string name, string sername, string login, string password)
         {
-            usersForm = new CreateEditUsersForm(driver);
-            usersForm.IsOpened(wait);
             usersForm.Password.Clear();
             usersForm.setPassword(password)
                 .SubmitButton.Click();
             List<string> expectedResult = usersForm.RememberUser();
-            index = usersForm.Login.GetAttribute("value");
-            List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 5));
-            actualResult.RemoveAt(7);
-            CollectionAssert.AreEqual(expectedResult, actualResult);
+            expectedResult.Add("EditDelete");
+            Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
-        [TearDown]
-        public void Delete()
-        {
-            wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
-            Thread.Sleep(1000);
-            usersForm.DeleteUser(table.GetRowNumberByValueInCell(index, 5));
-        }
 
         [OneTimeTearDown]
         public void CleanUp()

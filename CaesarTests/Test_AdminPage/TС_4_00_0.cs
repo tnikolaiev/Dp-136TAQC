@@ -17,7 +17,7 @@ namespace CaesarTests
         AdminPage adminPage;
         WebDriverWait wait;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Initialize()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
@@ -32,7 +32,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void Test_CreateUserFormIsDisplayed()
+        public void Test_EscapeHomeIsClick()
         {
             adminPage.EscapeHome.Click();
 

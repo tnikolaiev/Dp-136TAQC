@@ -9,7 +9,7 @@ using System.Threading;
 namespace CaesarTests
 {
     [TestFixture]
-    public class TC_4_03_02_11
+    public class TC_4_03_02_00
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
@@ -45,7 +45,7 @@ namespace CaesarTests
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             driver.Url = @"http://localhost:3000/admin";
             wait.Until((d) => CreateEditStudentsForm.IsAdminPageOpened(d));
-            
+
         }
         [SetUp]
         public void OpenStudentForm()
@@ -65,13 +65,13 @@ namespace CaesarTests
                 .setEnglishLevelDDL(englishLevel)
                 .setEntryScore(entryScore)
                 .setApprovedBy(approvedBy);
-            
+
             List<String> expectedResult = studentForm.RememberStudent();
             index = studentForm.LastNameField.GetAttribute("value");
             studentForm.SubmitButton.Click();
             table = new Table(studentForm.GetTable, driver);
 
-            Assert.IsTrue(table.FindRowInTable(expectedResult));            
+            Assert.IsTrue(table.FindRowInTable(expectedResult));
         }
 
         [TearDown]
@@ -82,7 +82,7 @@ namespace CaesarTests
         }
         [OneTimeTearDown]
         public void CleanUp()
-        {           
+        {
             driver.Close();
             driver.Quit();
         }

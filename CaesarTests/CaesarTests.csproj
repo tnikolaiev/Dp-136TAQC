@@ -61,6 +61,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Test_AdminPage\StudentsForm\TC_4_03_03_00cs.cs" />
+    <Compile Include="Test_AdminPage\StudentsForm\TC_4_03_02_00.cs" />
+    <Compile Include="Test_AdminPage\StudentsForm\TC_4_03_03_11.cs" />
     <Compile Include="Test_AdminPage\UsersForm\TC_4_01_03_00.cs" />
     <Compile Include="Test_AdminPage\UsersForm\TC_4_01_03_11.cs" />
     <Compile Include="Test_AdminPage\UsersForm\TC_4_01_01.cs" />

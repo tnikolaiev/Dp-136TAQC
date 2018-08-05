@@ -17,8 +17,7 @@ namespace CaesarTests
         CreateEditUsersForm usersForm;
         WebDriverWait wait;
         Table table;
-        string index;
-        List<string> user;
+        string index ;
 
         [OneTimeSetUp]
         public void Initialize()
@@ -39,24 +38,26 @@ namespace CaesarTests
                 .selectRole(2)
                 .selectLocation(3)
                 .setLogin("IvanIvan")
-                .setPassword("qwerty12~")
-                .SubmitButton.Click();
+                .setPassword("qwerty12~")   
+                 .SubmitButton.Click();
             index = usersForm.Login.GetAttribute("value");
         }
 
         [SetUp]
         public void EditUser()
-        {            
-            wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
-            table = new Table(usersForm.GetTable, driver);    
+        {
+            usersForm = new CreateEditUsersForm(driver);
+            table = new Table(usersForm.GetTable, driver);
+            wait.Until(ExpectedConditions.ElementIsVisible(By.Id("add-new-user")));
             usersForm.EditUser(table.GetRowNumberByValueInCell(index, 5));
+            usersForm.IsOpened(wait);
         }
 
         [Test]
         public void Test_EditUserFormIsDisplayed()
         {
             List<string> expectedResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 5));
-            expectedResult.RemoveAt(7);                                    
+            expectedResult.RemoveAt(7);                                   
            
             List<string> actualResult = usersForm.RememberUser();
             usersForm.SubmitButton.Click();
@@ -66,13 +67,10 @@ namespace CaesarTests
         [Test]
         public void Test_UserFormFirstNameIsEdit()
         {
-            usersForm = new CreateEditUsersForm(driver);
-            usersForm.IsOpened(wait);
             usersForm.FirstNameField.Clear();
             usersForm.setFirstName("Olga")
                 .SubmitButton.Click();
             List<string> expectedResult = usersForm.RememberUser();
-            index = usersForm.Login.GetAttribute("value");
             List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 5));
             actualResult.RemoveAt(7);
             CollectionAssert.AreEqual(expectedResult, actualResult);
@@ -81,14 +79,11 @@ namespace CaesarTests
         [Test]
         public void Test_UserFormLastNameIsEdit()
         {
-            usersForm = new CreateEditUsersForm(driver);
-            usersForm.IsOpened(wait);
             usersForm.LastNameField.Clear();
 
             usersForm.setLastName("Ivanova")
                 .SubmitButton.Click();
             List<string> expectedResult = usersForm.RememberUser();
-            index = usersForm.Login.GetAttribute("value");
             List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 5));
             actualResult.RemoveAt(7);
             CollectionAssert.AreEqual(expectedResult, actualResult);
@@ -97,13 +92,9 @@ namespace CaesarTests
         [Test]
         public void Test_UserFormRoleIsEdit()
         {
-            usersForm = new CreateEditUsersForm(driver);
-            usersForm.IsOpened(wait);
-
             usersForm.selectRole(0)
                 .SubmitButton.Click();
             List<string> expectedResult = usersForm.RememberUser();
-            index = usersForm.Login.GetAttribute("value");
             List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 5));
             actualResult.RemoveAt(7);
             CollectionAssert.AreEqual(expectedResult, actualResult);
@@ -111,12 +102,9 @@ namespace CaesarTests
         [Test]
         public void Test_UserFormLocationIsEdit()
         {
-            usersForm = new CreateEditUsersForm(driver);
-            usersForm.IsOpened(wait);
             usersForm.selectLocation(0)
                 .SubmitButton.Click();
             List<string> expectedResult = usersForm.RememberUser();
-            index = usersForm.Login.GetAttribute("value");
             List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 5));
             actualResult.RemoveAt(7);
             CollectionAssert.AreEqual(expectedResult, actualResult);
@@ -124,8 +112,6 @@ namespace CaesarTests
         [Test]
         public void Test_UserFormLoginIsEdit()
         {
-            usersForm = new CreateEditUsersForm(driver);
-            usersForm.IsOpened(wait);
             usersForm.Login.Clear();
 
             usersForm.setLogin("IvanovaOlga")
@@ -140,13 +126,10 @@ namespace CaesarTests
         [Test]
         public void Test_UserFormPasswordIsEdit()
         {
-            usersForm = new CreateEditUsersForm(driver);
-            usersForm.IsOpened(wait);
             usersForm.Password.Clear();
             usersForm.setPassword("asdfghj12`")
                 .SubmitButton.Click();
             List<string> expectedResult = usersForm.RememberUser();
-            index = usersForm.Login.GetAttribute("value");
             List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 5));
             actualResult.RemoveAt(7);
             CollectionAssert.AreEqual(expectedResult, actualResult);

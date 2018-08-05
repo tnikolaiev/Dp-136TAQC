@@ -17,7 +17,7 @@ namespace CaesarTests
         CreateEditUsersForm usersForm;
         WebDriverWait wait;
        
-        [SetUp]
+        [OneTimeSetUp]
         public void Initialize()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
@@ -30,78 +30,73 @@ namespace CaesarTests
             wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
             usersForm = new CreateEditUsersForm(driver);
             usersForm.addUsers();
+            usersForm.IsOpened(wait);
         }
-
+       
         [Test]
         public void Test_CreateUserFormIsDisplayed()
-        {
+        {           
             List<string> expectedResult = new List<string> { "", "", "Teacher", "Chernivtsy", "", "", "" };
             List<string> actualResult = usersForm.RememberUser();
-
             Assert.AreEqual(expectedResult, actualResult);
         }
 
         [Test]
         public void Test_FirstNameFieldDisplayedText()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             usersForm.FirstNameField.SendKeys("someText");
-            Assert.AreEqual("someText", usersForm.FirstNameField.GetAttribute("value"));
-            usersForm.Close.Click();
+            string actualResult = usersForm.FirstNameField.GetAttribute("value");
+            Assert.AreEqual("someText", actualResult);
         }
 
         [Test]
         public void Test_LastNameFieldDisplayedText()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             usersForm.LastNameField.SendKeys("someText");
-            Assert.AreEqual("someText", usersForm.LastNameField.GetAttribute("value"));
-            usersForm.Close.Click();
+            string actualResult = usersForm.LastNameField.GetAttribute("value");
+            Assert.AreEqual("someText", actualResult);
         }
 
         [Test]
         public void Test_RoleIsDisplayedText()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             usersForm.selectRole(1);
-            Assert.AreEqual("Coordinator", usersForm.RoleDDL.GetAttribute("value"));
-            usersForm.Close.Click();
+            string actualResult = usersForm.RoleDDL.GetAttribute("value");
+            Assert.AreEqual("Coordinator", actualResult);
         }
 
         [Test]
         public void Test_LocationIsDisplayedText()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             usersForm.selectLocation(1);
-            Assert.AreEqual("Dnipro", usersForm.LocationDDL.GetAttribute("value"));
-            usersForm.Close.Click();
+            string actualResult = usersForm.LocationDDL.GetAttribute("value");
+            Assert.AreEqual("Dnipro", actualResult);
         }
 
         [Test]
         public void Test_PhotoFieldDisplayedText()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             usersForm.Photo.SendKeys("someText");
-            Assert.AreEqual("someText", usersForm.Photo.GetAttribute("value"));
-            usersForm.Close.Click();
+            string actualResult = usersForm.Photo.GetAttribute("value");
+            Assert.AreEqual("someText", actualResult);
+           
         }
 
         [Test]
         public void Test_LoginFieldDisplayedText()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             usersForm.Login.SendKeys("someText");
-            Assert.AreEqual("someText", usersForm.Login.GetAttribute("value"));
-            usersForm.Close.Click();
+            string actualResult = usersForm.Login.GetAttribute("value");
+            Assert.AreEqual("someText", actualResult);
+
         }
 
         [Test]
         public void Test_PasswordFieldDisplayedText()
         {
-            wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName("modal-title")));
             usersForm.Password.SendKeys("someText");
-            Assert.AreEqual("someText", usersForm.Password.GetAttribute("value"));
-            usersForm.Close.Click();
+            string actualResult = usersForm.Password.GetAttribute("value");
+            Assert.AreEqual("someText", actualResult);
         }
        
         [OneTimeTearDown]
