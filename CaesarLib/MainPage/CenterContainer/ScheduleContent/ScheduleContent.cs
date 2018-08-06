@@ -121,14 +121,12 @@ namespace CaesarLib
         {
             get
             {
-                if (_editScheduleWindowInstance != null) return _editScheduleWindowInstance;
-                else
-                {
+                
                     _editScheduleWindowInstance = new EditScheduleWindow(_driverInstance);
                     return _editScheduleWindowInstance;
-                }
             }
         }
+        
 
         //Actions
 
@@ -153,6 +151,12 @@ namespace CaesarLib
             return new KeyDatesTab(_driverInstance);
         }
 
+        public bool IsOpened(IWebDriver driver)
+        {
+            return driver.FindElements(By.ClassName("scheduleView")).Count > 0 ?
+               true : false;
+        }
+         
     }
 }
 
