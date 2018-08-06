@@ -9,9 +9,7 @@ using System.Collections.Generic;
 namespace CaesarTests
 {
     [TestFixture]
-    public class TC_2_01_1 : BaseTest    {
-                
-        MonthTab MonthTabInstance;
+    public class TC_2_01_1 : BaseTest    {                
     
         [Test]
 
@@ -24,16 +22,13 @@ namespace CaesarTests
 
             //Opening Schedule Page
             MainPageInstance = new MainPage(driver);
-            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
-            MainPageInstance.TopMenu.ScheduleItem.Click();
+            MainPageInstance.OpenScheduleContent(wait);
 
             //Selecting group
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
             //Go to MonthTab and check month name
-            wait.Until((d) => MainPageInstance.CenterContainer.ScheduleContent.MonthTabInstance.IsMonthTabDisplayed(driver));
-            MonthTabInstance = new MonthTab(driver);
-            String currentMonth = MonthTabInstance.MonthName.Text;
+            String currentMonth = MainPageInstance.CenterContainer.ScheduleContent.OpenMonthTab(wait).MonthName.Text;
             Assert.AreEqual("August", currentMonth);
         }
     }

@@ -23,7 +23,7 @@ namespace CaesarTests
         public void OneTimeSetUp()
         {
             driver = new ChromeDriver();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Manage().Window.Maximize();
             //Navigating to Caesar app
             baseURL = "localhost:3000";
@@ -35,6 +35,7 @@ namespace CaesarTests
             //Log out from app
             wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
             MainPageInstance.TopMenu.LogoutButton.Click();
+            Log4Caesar.Log();
         }
 
         [OneTimeTearDown]

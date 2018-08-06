@@ -24,16 +24,14 @@ namespace CaesarTests
 
             //Opening Schedule Page
             MainPageInstance = new MainPage(driver);
-            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
-            MainPageInstance.TopMenu.ScheduleItem.Click();
+            MainPageInstance.OpenScheduleContent(wait);
 
             //Selecting group
             MainPageInstance.LeftContainer.GroupsInLocation.EndedGroupsToggle.Click();
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-092-NET").Click();
 
             //Open ScheduleEditor
-            MainPageInstance.CenterContainer.ScheduleContent.ScheduleCogwheell.Click();
-            wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.IsScheduleEditorDisplayed(driver));
+            MainPageInstance.CenterContainer.ScheduleContent.ClickCogwheel(wait);
 
             //Choose options for event
 
@@ -42,8 +40,8 @@ namespace CaesarTests
             MainPageInstance.ModalWindow.EditScheduleWindow.WeeklyReportEvent.Click();
 
             // Put event in cell
-            MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/08").Click();
-            wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.IsActivityExists(MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/08")));
+            IWebElement cell = MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/08");
+            MainPageInstance.ModalWindow.EditScheduleWindow.PutEventInCell(MainPageInstance, cell, wait);
 
             //Assert EventCounter changed
             Assert.AreEqual("1/2", MainPageInstance.ModalWindow.EditScheduleWindow.GetEventCounter(MainPageInstance.ModalWindow.EditScheduleWindow.WeeklyReportEvent));

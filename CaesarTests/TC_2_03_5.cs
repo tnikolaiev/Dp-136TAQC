@@ -22,8 +22,7 @@ namespace CaesarTests
 
             //Opening Schedule Page
             MainPageInstance = new MainPage(driver);
-            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
-            MainPageInstance.TopMenu.ScheduleItem.Click();
+            MainPageInstance.OpenScheduleContent(wait);
         }
 
         [Test]
@@ -35,8 +34,7 @@ namespace CaesarTests
                 MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
                 //Open ScheduleEditor
-                MainPageInstance.CenterContainer.ScheduleContent.ScheduleCogwheell.Click();
-                wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.IsScheduleEditorDisplayed(driver));
+                MainPageInstance.CenterContainer.ScheduleContent.ClickCogwheel(wait);
 
                 //Check if correct events present
                 MainPageInstance.ModalWindow.EditScheduleWindow.AreQAEventsExist(driver);
@@ -54,8 +52,7 @@ namespace CaesarTests
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
             //Open ScheduleEditor
-            MainPageInstance.CenterContainer.ScheduleContent.ScheduleCogwheell.Click();
-            wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.IsScheduleEditorDisplayed(driver));
+            MainPageInstance.CenterContainer.ScheduleContent.ClickCogwheel(wait);
 
             //Check if correct events present
             MainPageInstance.ModalWindow.EditScheduleWindow.AreDevEventsExist(driver);

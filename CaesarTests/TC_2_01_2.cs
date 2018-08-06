@@ -10,10 +10,7 @@ namespace CaesarTests
 {
     [TestFixture]
     public class TC_2_01_2 : BaseTest
-    {
-        KeyDatesTab KeyDatesTabInstance;
-        string groupName;
-
+    {       
         [SetUp]
 
         public void SetUp()
@@ -25,8 +22,7 @@ namespace CaesarTests
 
             //Opening Schedule Page
             MainPageInstance = new MainPage(driver);
-            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
-            MainPageInstance.TopMenu.ScheduleItem.Click();
+            MainPageInstance.OpenScheduleContent(wait);
         }
 
         [Test]
@@ -37,10 +33,10 @@ namespace CaesarTests
             //Selecting group
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
-            //Go to KeyDatesTab and check groups which are displayed
-
-            KeyDatesTabInstance = MainPageInstance.CenterContainer.ScheduleContent.OpenKeyDatesTab(wait);
-            groupName = KeyDatesTabInstance.KeyDatesTable.GetValueFromCell(1, "Group");
+            //Go to KeyDatesTab 
+            MainPageInstance.CenterContainer.ScheduleContent.OpenKeyDatesTab(wait);
+            
+            string groupName = MainPageInstance.CenterContainer.ScheduleContent.KeyDatesTabInstance.KeyDatesTable.GetValueFromCell(1, "Group");
             Assert.AreEqual("DP-094-MQC", groupName);
 
         }
@@ -53,17 +49,15 @@ namespace CaesarTests
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS").Click();
 
-            //Go to KeyDatesTab and check data
-            MainPageInstance.CenterContainer.ScheduleContent.KeyDatesButton.Click();
-            wait.Until((d) => MainPageInstance.CenterContainer.ScheduleContent.KeyDatesTabInstance.IsKeyDatesDisplayed(driver));
-            KeyDatesTabInstance = new KeyDatesTab(driver);
-            groupName = KeyDatesTabInstance.KeyDatesTable.GetValueFromCell(1, "Group");
-            Assert.AreEqual("DP-093-JS", groupName);
-            groupName = KeyDatesTabInstance.KeyDatesTable.GetValueFromCell(2, "Group");
-            Assert.AreEqual("DP-094-MQC", groupName);
-            int rowsCount = KeyDatesTabInstance.KeyDatesTable.GetRows().Count;         
-            Assert.AreEqual(2, rowsCount);
+            //Go to KeyDatesTab
+            MainPageInstance.CenterContainer.ScheduleContent.OpenKeyDatesTab(wait);
 
+            //Check groups which are displayed and count of rows in table
+            string group1Name = MainPageInstance.CenterContainer.ScheduleContent.KeyDatesTabInstance.KeyDatesTable.GetValueFromCell(1, "Group"); 
+            string group2Name = MainPageInstance.CenterContainer.ScheduleContent.KeyDatesTabInstance.KeyDatesTable.GetValueFromCell(2, "Group");
+            int rowsCount = MainPageInstance.CenterContainer.ScheduleContent.KeyDatesTabInstance.KeyDatesTable.GetRows().Count;
+
+            Assert.That("DP-093-JS" == group1Name & "DP-094-MQC" == group2Name & 2 == rowsCount);         
         }
     }
 }
