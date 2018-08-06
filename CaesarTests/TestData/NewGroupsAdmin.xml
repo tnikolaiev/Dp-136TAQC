@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+  <testData location ="0" direction="3" groupName="groupNet" teacher="K. Kozak" startDate="02/13/2018" finishData="06/13/2018" expert="Expert" />
+  <testData location="1" direction="11" groupName="groupISTQB" teacher="O. Reuta" startDate="11/19/2018" finishData="03/19/2018" expert="Expertik" />
+  <testData location="2" direction="5" groupName="groupIOS" teacher="D. Petin"  startDate="06/11/2012" finishData="11/11/2012" expert="Expertok" />
+  <testData location="3" direction="13" groupName="groupUX" teacher="P. Kucher"  startDate="01/05/2011" finishData="04/05/2011" expert="Testwoman" />
+  <testData location="4" direction="6" groupName="groupC/C++" teacher="A. Koval" startDate="09/27/2017" finishData="12/27/2017" expert="Testman" />
+</Data>

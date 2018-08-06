@@ -61,6 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TC_4_02_02_00.cs" />
+    <Compile Include="Test_AdminPage\GroupsForm\TC_4_02_02_11.cs" />
     <Compile Include="Test_AdminPage\UsersForm\TC_4_01_03_00.cs" />
     <Compile Include="Test_AdminPage\UsersForm\TC_4_01_03_11.cs" />
     <Compile Include="Test_AdminPage\UsersForm\TC_4_01_01.cs" />
@@ -116,6 +118,7 @@
     <Content Include="TestData\LoginPageInvalidData.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestData\NewGroupsAdmin.xml" />
     <Content Include="TestData\NewGroupsCreationData.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -123,9 +126,7 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Test_AdminPage\GroupsForm\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -66,11 +66,7 @@ namespace CaesarLib
             Edit[index - 1].Click();
             return this;
         }
-
-        public CreateEditGroupsForm(IWebDriver driver) : base(driver)
-        {
-            this._driver = driver;
-        }
+               
 
         public CreateEditGroupsForm addGroups()
         {
@@ -109,7 +105,7 @@ namespace CaesarLib
             }
         }
 
-        public CreateEditGroupsForm setLocationDDL(string value)
+        public CreateEditGroupsForm setLocationDDL(int value)
         {
             Acts.SelectOptionFromDDL(LocationDDL, value);
             return this;
@@ -141,7 +137,7 @@ namespace CaesarLib
             }
         }
 
-        public CreateEditGroupsForm setDirectionDDL(string value)
+        public CreateEditGroupsForm setDirectionDDL(int value)
         {
             Acts.SelectOptionFromDDL(DirectionDDL, value);
             return this;
@@ -159,6 +155,11 @@ namespace CaesarLib
                 }
             }
         }
+        public CreateEditGroupsForm setStartDate(string value)
+        {
+            StartDate.SendKeys(value);
+            return this;
+        }
 
         public IWebElement FinishDate
         {
@@ -172,7 +173,11 @@ namespace CaesarLib
                 }
             }
         }
-
+        public CreateEditGroupsForm setFinishDate(string value)
+        {
+            FinishDate.SendKeys(value);
+            return this;
+        }
         public IWebElement TeachersField
         {
             get
@@ -224,19 +229,22 @@ namespace CaesarLib
             }
         }
 
-        public CreateEditGroupsForm setStageDDL(string value)
+        public CreateEditGroupsForm setStageDDL(int value)
         {
             Acts.SelectOptionFromDDL(StageDDL, value);
             return this;
+        }
+
+        public CreateEditGroupsForm(IWebDriver driver):base(driver)
+        {
+            this._driver = driver;
         }
         public List<string> RememberGroup()
         {
             List<string> group = new List<string>();
             group.Add(NameField.GetAttribute("value"));
             group.Add(LocationDDL.GetAttribute("value"));
-
             group.Add(DirectionDDL.GetAttribute("value"));
-            group.Add(LocationDDL.GetAttribute("value"));
             group.Add(StartDate.GetAttribute("value"));
             group.Add(FinishDate.GetAttribute("value"));
             group.Add(TeachersField.GetAttribute("value"));
