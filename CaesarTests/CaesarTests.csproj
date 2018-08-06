@@ -77,6 +77,7 @@
     <Compile Include="TC_1_04_07.cs" />
     <Compile Include="TC_1_04_06.cs" />
     <Compile Include="TC_1_05_03.cs" />
+    <Compile Include="TC_3_04_04.cs" />
     <Compile Include="TC_3_06_01.cs" />
     <Compile Include="TC_2_03_6.cs" />
     <Compile Include="TC_2_03_1.cs" />
