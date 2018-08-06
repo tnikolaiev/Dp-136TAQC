@@ -25,6 +25,9 @@ namespace CaesarLib
         private IWebElement _consultationEvent;
         private IWebElement _practiceEvent;
         private ScheduleWeekTable _scheduleEditWeekTable;
+        private IWebElement _groupName;
+        private IWebElement _prevWeek;
+        private IWebElement _nextWeek;
 
 
         // properties
@@ -164,6 +167,45 @@ namespace CaesarLib
             }
         }
 
+        public IWebElement GroupName
+        {
+            get
+            {
+                if (_groupName != null) return _groupName;
+                else
+                {
+                    _groupName = _driverInstance.FindElement(By.XPath("//div[@class='header-modal-editSchedule']/span"));
+                    return _groupName;
+                }
+            }
+        }
+
+        public IWebElement PrevWeek
+        {
+            get
+            {
+                if (_prevWeek!= null) return _prevWeek;
+                else
+                {
+                    _prevWeek = _driverInstance.FindElement(By.XPath("//i[@class='fa fa-caret-left prevWeek']"));
+                    return _prevWeek;
+                }
+            }
+        }
+
+        public IWebElement NextWeek
+        {
+            get
+            {
+                if (_nextWeek != null) return _nextWeek;
+                else
+                {
+                    _nextWeek = _driverInstance.FindElement(By.XPath("//i[@class='fa fa-caret-left prevWeek']"));
+                    return _nextWeek;
+                }
+            }
+        }
+
         //constructor 
 
 
@@ -171,7 +213,6 @@ namespace CaesarLib
         {
             _driverInstance = driverInstance;
         }
-
 
 
         // actions

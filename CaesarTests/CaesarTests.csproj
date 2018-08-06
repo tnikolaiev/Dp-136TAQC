@@ -80,6 +80,8 @@
     <Compile Include="TC_1_04_07.cs" />
     <Compile Include="TC_1_04_06.cs" />
     <Compile Include="TC_1_05_02.cs" />
+    <Compile Include="TC_2_03_10.cs" />
+    <Compile Include="TC_2_03_9.cs" />
     <Compile Include="TC_2_03_8.cs" />
     <Compile Include="TC_2_03_7.cs" />
     <Compile Include="TC_2_03_3.cs" />
