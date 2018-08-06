@@ -259,3 +259,9 @@
 2018-08-06 14:07:20.0858 | Debug | CaesarTests.Test_SelectGroupWindow 
 2018-08-06 14:07:20.1008 | Debug | ExecuteTest_2_SelectGroup_EditScheduleWindowForSelectedGroupIsOpened 
 2018-08-06 14:07:20.1008 | Debug | Passed 
+2018-08-06 15:19:31.1889 | Debug | CaesarTests.TC_3_0_01 
+2018-08-06 15:19:31.2159 | Debug | AvailablaFunctionsCoordinator 
+2018-08-06 15:19:31.2159 | Debug | Passed 
+2018-08-06 15:19:46.6958 | Debug | CaesarTests.TC_3_0_01 
+2018-08-06 15:19:46.6958 | Debug | AvailablaFunctionsTeacher 
+2018-08-06 15:19:46.6958 | Debug | Passed 
