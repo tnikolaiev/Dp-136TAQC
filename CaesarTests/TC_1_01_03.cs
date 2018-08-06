@@ -34,7 +34,7 @@ namespace CaesarTests
         static object[] loginCredentials = { new String[] { "dmytro", "1234" } };
 
         [Test, TestCaseSource("loginCredentials")]
-        public void ExecuteTest_EscKey_EmptyFields(String login, String password)
+        public void Test_EscKey_EmptyFields(String login, String password)
         {
             Acts.InputValue(loginPageInstance.LoginField, login);
             Acts.InputValue(loginPageInstance.PasswordField, password);
@@ -45,7 +45,7 @@ namespace CaesarTests
         }
 
         [Test, TestCaseSource("loginCredentials")]
-        public void ExecuteTest_EnterKey_Login(String login, String password)
+        public void Test_EnterKey_Login(String login, String password)
         {
             Acts.InputValue(loginPageInstance.LoginField, login);
             Acts.InputValue(loginPageInstance.PasswordField, password);
@@ -53,8 +53,14 @@ namespace CaesarTests
             Assert.IsTrue(wait.Until(d => MainPage.IsMainPageOpened(d)));
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }

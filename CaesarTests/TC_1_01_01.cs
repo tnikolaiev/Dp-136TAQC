@@ -1,10 +1,13 @@
 ﻿using CaesarLib;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace CaesarTests
 {
@@ -18,11 +21,6 @@ namespace CaesarTests
         public void FirstInitialize()
         {
             driver = new ChromeDriver();
-        }
-
-        [SetUp]
-        public void Initialization()
-        {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
@@ -31,13 +29,20 @@ namespace CaesarTests
         [Test, TestCaseSource("LinksList")]
         public void Test_NavigateToLinks_LoginPageOpened(String link)
         {
+
             driver.Url = link;
             Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPageOpened(driver)));
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
-        {            
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {
             driver.Quit();
         }
     }
