@@ -57,7 +57,7 @@ namespace CaesarTests
             wait.Until((d) => EditStudentWindow.IsOpened(d));
         }
         [Test]
-        public void ExecuteTest_UploadFiles_FilesUploaded()
+        public void ExecuteTest_DropFiles_FilesUploaded()
         {
             //Upload CV
             path = EditStudentWindow.GetTestFile("TC_3_04 CV.doc");

@@ -6,6 +6,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace CaesarTests
 {
@@ -39,12 +40,11 @@ namespace CaesarTests
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
         }
         [Test]
-        public void ExecuteTest_ImportStudentList_ListImported()
+        public void ExecuteTest_DeclieStudentList_ListNotImported()
         {
             mainPageInstance.ModalWindow.EditStudentListWindow.ImportStudentsButton.Click();
             path = EditStudentListWindow.GetTestFile("TC_3_06_01-03.txt");
             Acts.UploadFile(path);
-            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
             mainPageInstance.ModalWindow.EditStudentListWindow.ExitFormButton.Click();
             IList<IWebElement> rowsInTable = mainPageInstance.CenterContainer.StudentsContent.StudentTable.GetRows();
             string expected = "";
