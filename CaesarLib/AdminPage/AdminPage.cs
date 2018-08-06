@@ -12,15 +12,15 @@ namespace CaesarLib
         private IWebElement _goToUsers;
         private IWebElement _goToStudents;
         private IWebElement _goToGroups;
-        
+
         private IList<IWebElement> _AddButton;
         private IList<IWebElement> _DeleteButtons;
-        private IList<IWebElement> _EditButtons;
+        private IList<IWebElement> _EditButtons;        
         private IWebElement _submitButton;
         private IWebElement _closeButton;
         private IWebElement _close;
         private IWebElement _escapeHomeButton;
-
+                
         public IList<IWebElement> AddButton
         {
             get
@@ -96,25 +96,25 @@ namespace CaesarLib
             }
         }
               
-        public AdminPage EditClick(IList<IList<IWebElement>> rows, int rowIndex)
-        {
-            IList<IWebElement> row = rows[rowIndex-1];
-            IWebElement action = row[row.Count - 1];
-            IWebElement edit = action.FindElement(By.ClassName("btn-info"));
-            edit.Click();
+        //public AdminPage EditClick(IList<IList<IWebElement>> rows, int rowIndex)
+        //{
+        //    IList<IWebElement> row = rows[rowIndex-1];
+        //    IWebElement action = row[row.Count - 1];
+        //    IWebElement edit = action.FindElement(By.ClassName("btn-info"));
+        //    edit.Click();
 
-            return this;
-        }
+        //    return this;
+        //}
 
-        public AdminPage DeleteClick(IList<IList<IWebElement>> rows, int rowIndex)
-        {
-            IList<IWebElement> row = rows[rowIndex - 1];
-            IWebElement action = row[row.Count - 1];
-            IWebElement delete = action.FindElement(By.ClassName("btn-info"));
-            delete.Click();
+        //public AdminPage DeleteClick(IList<IList<IWebElement>> rows, int rowIndex)
+        //{
+        //    IList<IWebElement> row = rows[rowIndex - 1];
+        //    IWebElement action = row[row.Count - 1];
+        //    IWebElement delete = action.FindElement(By.ClassName("btn-info"));
+        //    delete.Click();
 
-            return this;
-        }
+        //    return this;
+        //}
 
         public IWebElement SubmitButton
         {

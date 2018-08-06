@@ -64,7 +64,7 @@ namespace CaesarTests
         [Test]
         public void Test_BudgetOwnerCheckBox()
         {
-            groupForm.checkBudgetOwner();
+            groupForm.setBudgetOwner(true);
             Assert.IsTrue(groupForm.BudgetOwnerCheckbox.Selected);
         }
         [Test]
@@ -102,12 +102,12 @@ namespace CaesarTests
             Assert.AreEqual("finished", groupForm.StageDDL.GetAttribute("value"));
         }
 
-        //[OneTimeTearDown]
-        //public void CleanUp()
-        //{
-        //    driver.Close();
-        //    driver.Quit();
-        //}
+        [OneTimeTearDown]
+        public void CleanUp()
+        {
+            driver.Close();
+            driver.Quit();
+        }
 
     }
 }

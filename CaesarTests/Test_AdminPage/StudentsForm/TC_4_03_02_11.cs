@@ -17,7 +17,7 @@ namespace CaesarTests
         WebDriverWait wait;
         Table table;
         string index;
-
+        List<String> expectedResult;
         static object[] StudentInfo =
         {
             new object[] { "DP-093-JS", "Olga", "Ivanova", 0, "25", "N. Varenko" },
@@ -66,7 +66,7 @@ namespace CaesarTests
                 .setEntryScore(entryScore)
                 .setApprovedBy(approvedBy);
             
-            List<String> expectedResult = studentForm.RememberStudent();
+            expectedResult = studentForm.RememberStudent();
             index = studentForm.LastNameField.GetAttribute("value");
             studentForm.SubmitButton.Click();
             table = new Table(studentForm.GetTable, driver);
@@ -77,8 +77,10 @@ namespace CaesarTests
         [TearDown]
         public void Delete()
         {
-            wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
-            studentForm.DeleteStudent(table.GetRowNumberByValueInCell(index, 5));
+            if (table.FindRowInTable(expectedResult))
+            {
+                studentForm.DeleteStudent(table.GetRowNumberByValueInCell(index, 5));
+            }
         }
         [OneTimeTearDown]
         public void CleanUp()

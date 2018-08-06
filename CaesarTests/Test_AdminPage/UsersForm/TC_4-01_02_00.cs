@@ -18,7 +18,7 @@ namespace CaesarTests
         WebDriverWait wait;
         Table table;
         string index;
-
+        List<string> expectedResult;
         static object[] UsersName =
         {
             new object[] { "123456", "Ivanova", "IvanovaO@", "qwerty12#" },
@@ -69,7 +69,7 @@ namespace CaesarTests
         [Test]
         public void Test_CreateUserWithEmptyFields()
         {
-            List<string> expectedResult = usersForm.RememberUser();
+            expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
             usersForm.SubmitButton.Click();
             index = usersForm.Login.GetAttribute("value");
@@ -87,7 +87,7 @@ namespace CaesarTests
                 .SubmitButton.Click();
 
             index = usersForm.Login.GetAttribute("value");
-            List<string> expectedResult = usersForm.RememberUser();
+            expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
@@ -102,7 +102,7 @@ namespace CaesarTests
                 .SubmitButton.Click();
 
             index = usersForm.Login.GetAttribute("value");
-            List<string> expectedResult = usersForm.RememberUser();
+            expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
@@ -116,7 +116,7 @@ namespace CaesarTests
                 .SubmitButton.Click();
 
             index = usersForm.Login.GetAttribute("value");
-            List<string> expectedResult = usersForm.RememberUser();
+            expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
@@ -131,7 +131,7 @@ namespace CaesarTests
                 .SubmitButton.Click();
 
             index = usersForm.Login.GetAttribute("value");
-            List<string> expectedResult = usersForm.RememberUser();
+            expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
@@ -139,7 +139,10 @@ namespace CaesarTests
         [TearDown]
         public void Delete()
         {
-            usersForm.DeleteUser(table.GetRowNumberByValueInCell(index, 5));
+            if (table.FindRowInTable(expectedResult))
+            {
+                usersForm.DeleteUser(table.GetRowNumberByValueInCell(index, 5));
+            }
         }
 
         [OneTimeTearDown]

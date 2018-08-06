@@ -17,8 +17,9 @@ namespace CaesarTests
         WebDriverWait wait;
         Table table;
         string index;
+        List<string> expectedResult;
 
-        [OneTimeSetUp]
+       [OneTimeSetUp]
         public void Initialize()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
@@ -57,7 +58,7 @@ namespace CaesarTests
         [Test]
         public void Test_EditStudentFormIsDisplayed()
         {          
-            List<String> expectedResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 2));
+            expectedResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 2));
             expectedResult.RemoveAt(8);
 
             List<string> actualResult = studentForm.RememberStudent();
@@ -70,7 +71,7 @@ namespace CaesarTests
             studentForm.GroupIdField.Clear();
             studentForm.setGroupId("DP-136-TAQC")
                 .SubmitButton.Click();
-            List<string> expectedResult = studentForm.RememberStudent();
+            expectedResult = studentForm.RememberStudent();
             List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 2));
             actualResult.RemoveAt(8);
             CollectionAssert.AreEqual(expectedResult, actualResult);
@@ -82,7 +83,7 @@ namespace CaesarTests
             studentForm.NameField.Clear();
             studentForm.setName("Ivan")
                 .SubmitButton.Click();
-            List<string> expectedResult = studentForm.RememberStudent();
+            expectedResult = studentForm.RememberStudent();
             List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 2));
             actualResult.RemoveAt(8);
             CollectionAssert.AreEqual(expectedResult, actualResult);
@@ -94,7 +95,7 @@ namespace CaesarTests
             studentForm.LastNameField.Clear();
             studentForm.setLastName("Ivanov")
                 .SubmitButton.Click();
-            List<string> expectedResult = studentForm.RememberStudent();
+            expectedResult = studentForm.RememberStudent();
             List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 2));
             actualResult.RemoveAt(8);
             CollectionAssert.AreEqual(expectedResult, actualResult);
@@ -104,7 +105,7 @@ namespace CaesarTests
         {
             studentForm.setEnglishLevelDDL(5)
                 .SubmitButton.Click();
-            List<string> expectedResult = studentForm.RememberStudent();
+            expectedResult = studentForm.RememberStudent();
             List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 2));
             actualResult.RemoveAt(8);
             CollectionAssert.AreEqual(expectedResult, actualResult);
@@ -115,7 +116,7 @@ namespace CaesarTests
             studentForm.CvUrlField.Clear();
             studentForm.setCvUrl("someText")
                 .SubmitButton.Click();
-            List<string> expectedResult = studentForm.RememberStudent();
+            expectedResult = studentForm.RememberStudent();
             List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 2));
             actualResult.RemoveAt(8);
             CollectionAssert.AreEqual(expectedResult, actualResult);
@@ -126,7 +127,7 @@ namespace CaesarTests
             studentForm.ImageUrlField.Clear();
             studentForm.setImageUrl("someText")
                 .SubmitButton.Click();
-            List<string> expectedResult = studentForm.RememberStudent();
+           expectedResult = studentForm.RememberStudent();
             List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 2));
             actualResult.RemoveAt(8);
             CollectionAssert.AreEqual(expectedResult, actualResult);
@@ -137,7 +138,7 @@ namespace CaesarTests
             studentForm.EntryScoreField.Clear();
             studentForm.setEntryScore("130")
                 .SubmitButton.Click();
-            List<string> expectedResult = studentForm.RememberStudent();
+            expectedResult = studentForm.RememberStudent();
             List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 2));
             actualResult.RemoveAt(8);
             CollectionAssert.AreEqual(expectedResult, actualResult);
@@ -148,16 +149,18 @@ namespace CaesarTests
             studentForm.ApprovedByField.Clear();
             studentForm.setApprovedBy("O. Reuta")
                 .SubmitButton.Click();
-            List<string> expectedResult = studentForm.RememberStudent();
+            expectedResult = studentForm.RememberStudent();
             List<string> actualResult = table.getRowWithColumns(table.GetRowNumberByValueInCell(index, 2));
             actualResult.RemoveAt(8);
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
-        
         [OneTimeTearDown]
         public void CleanUp()
         {
-            studentForm.DeleteStudent(table.GetRowNumberByValueInCell(index, 2));
+            if (table.FindRowInTable(expectedResult))
+            {
+                studentForm.DeleteStudent(table.GetRowNumberByValueInCell(index, 2));
+            }
             driver.Close();
             driver.Quit();
         }

@@ -17,6 +17,7 @@ namespace CaesarTests
         WebDriverWait wait;
         Table table;
         string index;
+        List<string> expectedResult;
 
         static object[] StudentText =
         {
@@ -72,7 +73,7 @@ namespace CaesarTests
                 .setApprovedBy(approved)
                 .SubmitButton.Click();
             index = studentForm.LastNameField.GetAttribute("value");
-            List<string> expectedResult = studentForm.RememberStudent();
+            expectedResult = studentForm.RememberStudent();
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
       
@@ -87,7 +88,7 @@ namespace CaesarTests
                .setApprovedBy(approved)
                .SubmitButton.Click();
             index = studentForm.LastNameField.GetAttribute("value");
-            List<string> expectedResult = studentForm.RememberStudent();
+            expectedResult = studentForm.RememberStudent();
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
@@ -102,7 +103,7 @@ namespace CaesarTests
                .setApprovedBy(approved)
                .SubmitButton.Click();
             index = studentForm.LastNameField.GetAttribute("value");
-            List<string> expectedResult = studentForm.RememberStudent();
+            expectedResult = studentForm.RememberStudent();
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
       
@@ -117,7 +118,7 @@ namespace CaesarTests
                  .setApprovedBy(approved)
                  .SubmitButton.Click();
             index = studentForm.LastNameField.GetAttribute("value");
-            List<string> expectedResult = studentForm.RememberStudent();
+            expectedResult = studentForm.RememberStudent();
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
         [Test, TestCaseSource("StudentText")]
@@ -131,19 +132,22 @@ namespace CaesarTests
                   .setApprovedBy(approved)
                   .SubmitButton.Click();
             index = studentForm.LastNameField.GetAttribute("value");
-            List<string> expectedResult = studentForm.RememberStudent();
+            expectedResult = studentForm.RememberStudent();
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
 
         [TearDown]
         public void Delete()
         {
-            wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
-            studentForm.DeleteStudent(table.GetRowNumberByValueInCell(index, 2));
+            if (table.FindRowInTable(expectedResult))
+            {
+                studentForm.DeleteStudent(table.GetRowNumberByValueInCell(index, 2));
+            }
         }
         [OneTimeTearDown]
         public void CleanUp()
         {
+
             driver.Close();
             driver.Quit();
         }

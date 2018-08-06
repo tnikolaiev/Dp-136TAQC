@@ -251,11 +251,6 @@ namespace CaesarLib
             return driver.FindElements(By.XPath("/html/body/div[1]/ul/li[3]/a")).Count > 0 &
                driver.FindElements(By.ClassName("add-new-user")).Count > 0 ?
                true : false;
-            //List<string> headre = new List<string>();
-            //List<string> expect = new List<string>();
-            //expect.Add("groupId"); expect.Add("name"); expect.Add("lastName");
-            //expect.Add("englishLevel"); expect.Add("CvUrl"); expect.Add("imageUrl");
-            //expect.Add("entryScore"); 
         }
        
     }

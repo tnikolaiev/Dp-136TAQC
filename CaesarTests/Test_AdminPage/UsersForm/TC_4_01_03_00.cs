@@ -18,6 +18,7 @@ namespace CaesarTests
         WebDriverWait wait;
         Table table;
         string index;
+        List<string> expectedResult;
 
         static object[] UsersName =
         {
@@ -83,7 +84,7 @@ namespace CaesarTests
             usersForm.FirstNameField.Clear();
             usersForm.setFirstName(name)
                 .SubmitButton.Click();
-            List<string> expectedResult = usersForm.RememberUser();
+           expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
@@ -94,7 +95,7 @@ namespace CaesarTests
             usersForm.LastNameField.Clear();
             usersForm.setLastName(name)
                 .SubmitButton.Click();
-            List<string> expectedResult = usersForm.RememberUser();
+            expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }              
@@ -106,7 +107,7 @@ namespace CaesarTests
 
             usersForm.setLogin(login)
                 .SubmitButton.Click();
-            List<string> expectedResult = usersForm.RememberUser();
+            expectedResult = usersForm.RememberUser();
             index = usersForm.Login.GetAttribute("value");
             expectedResult.Add("EditDelete");
             Assert.IsFalse(table.FindRowInTable(expectedResult));
@@ -118,7 +119,7 @@ namespace CaesarTests
             usersForm.Password.Clear();
             usersForm.setPassword(password)
                 .SubmitButton.Click();
-            List<string> expectedResult = usersForm.RememberUser();
+            expectedResult = usersForm.RememberUser();
             expectedResult.Add("EditDelete");
             Assert.IsFalse(table.FindRowInTable(expectedResult));
         }
@@ -127,7 +128,11 @@ namespace CaesarTests
         [OneTimeTearDown]
         public void CleanUp()
         {
-            usersForm.DeleteUser(table.GetRowNumberByValueInCell(index, 5));
+            if (table.FindRowInTable(expectedResult))
+            {
+                usersForm.DeleteUser(table.GetRowNumberByValueInCell(index, 5));
+            }
+            driver.Close();
             driver.Quit();
         }
     }

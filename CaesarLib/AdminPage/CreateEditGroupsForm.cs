@@ -56,12 +56,13 @@ namespace CaesarLib
                 }
             }
         }
+        
         public CreateEditGroupsForm DeleteGroup(int index)
         {
             Delete[index - 1].Click();
             return this;
         }
-        public CreateEditGroupsForm EditStudent(int index)
+        public CreateEditGroupsForm EditGroup(int index)
         {
             Edit[index - 1].Click();
             return this;
@@ -127,7 +128,7 @@ namespace CaesarLib
                 }
             }
         }
-        public CreateEditGroupsForm checkBudgetOwner()
+        public CreateEditGroupsForm setBudgetOwner(bool value)
         {
             BudgetOwnerCheckbox.Click();
             return this;

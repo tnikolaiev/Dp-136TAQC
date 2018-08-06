@@ -18,6 +18,7 @@ namespace CaesarTests
         WebDriverWait wait;
         Table table;
         string index;
+        List<string> expectedResult;
 
         static object[] UsersInfo =
         {
@@ -61,7 +62,7 @@ namespace CaesarTests
                 .setPassword(password)
                 .SubmitButton.Click();
 
-            List<string> expectedResult = usersForm.RememberUser();
+            expectedResult = usersForm.RememberUser();
             index = usersForm.Login.GetAttribute("value");
             table = new Table(usersForm.GetTable, driver);
             Assert.IsTrue(table.FindRowInTable(expectedResult));
@@ -69,8 +70,10 @@ namespace CaesarTests
         [TearDown]
         public void Delete()
         {
-            wait.Until((d) => CreateEditUsersForm.IsAdminPageOpened(d));
-            usersForm.DeleteUser(table.GetRowNumberByValueInCell(index, 5));
+            if (table.FindRowInTable(expectedResult))
+            {
+                usersForm.DeleteUser(table.GetRowNumberByValueInCell(index, 5));
+            }
         }
 
         [OneTimeTearDown]
