@@ -47,17 +47,17 @@ namespace CaesarTests
             {
                 for (int i = 0; i < Arguments.Length; i++)
                 {
-                    arguments += (i == Arguments.Length-1) ? String.Format("\"{0}\"",Arguments[i]) : String.Format("\"{0}\", ", Arguments[i]);
+                    arguments += (i == Arguments.Length - 1) ? String.Format("\"{0}\"", Arguments[i]) : String.Format("\"{0}\", ", Arguments[i]);
                 }
             }
 
-            if (MethodName.Length > 40) MethodName = (MethodName.Substring(0, 40) + "</br>" + MethodName.Substring(40, MethodName.Length-40));
+            if (MethodName.Length > 40) MethodName = (MethodName.Substring(0, 40) + "</br>" + MethodName.Substring(40, MethodName.Length - 40));
 
             if (iResult == ResultState.Success) // passed test record
             {
-                sw.WriteLine(@"<tr style='color: green;'>" + "\n" + 
+                sw.WriteLine(@"<tr style='color: green;'>" + "\n" +
                     @"<td>" + iTime + @"</td>" + "\n" +
-                    @"<td>Passed</td>" + "\n" +                  
+                    @"<td>Passed</td>" + "\n" +
                     @"<td>" + ClassName + "</td>" + "\n" +
                     @"<td>" + MethodName + "</td>" + "\n" +
                     @"<td>" + arguments + "</td>" + "\n" +
@@ -66,9 +66,9 @@ namespace CaesarTests
             }
             if (!(iResult == ResultState.Success)) // failed test record
             {
-                sw.WriteLine(@"<tr style='color: red;'>" + "\n" + 
+                sw.WriteLine(@"<tr style='color: red;'>" + "\n" +
                     @"<td>" + iTime + @"</td>" + "\n" +
-                    @"<td>Failed</td>" + "\n" +                   
+                    @"<td>Failed</td>" + "\n" +
                     @"<td>" + ClassName + "</td>" + "\n" +
                     @"<td>" + MethodName + "</td>" + "\n" +
                     @"<td>" + arguments + "</td>" + "\n" +

@@ -24,7 +24,7 @@ namespace CaesarTests
 
         [SetUp]
         public void Initialize()
-        {  
+        {
             driver.Url = @"http://localhost:3000/logout";
             loginPageInstance = new LoginPage(driver);
         }
@@ -41,8 +41,7 @@ namespace CaesarTests
         {
             loginPageInstance.LogIn(login, password, wait);
 
-            //Assert.IsTrue(wait.Until((d) => MainPage.IsMainPageOpened(d)));
-            throw new Exception("Test ex");
+            Assert.IsTrue(wait.Until((d) => MainPage.IsMainPageOpened(d)));
         }
 
         [TearDown]
