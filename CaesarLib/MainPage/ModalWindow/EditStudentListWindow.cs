@@ -1,9 +1,11 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CaesarLib
@@ -47,7 +49,7 @@ namespace CaesarLib
         }
         public static String GetTestFile(String fileName)
         {
-            return AppDomain.CurrentDomain.BaseDirectory + @"..\..\TC_3_06 files\" + fileName;
+            return Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory + @"..\..\TC_3_06 files\" + fileName);
         }
     }
 }

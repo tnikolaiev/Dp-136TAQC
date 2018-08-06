@@ -41,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoItX3.Assembly, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a646454c8d475470, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoItX.3.3.12.0\lib\AutoItX3.Assembly.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.CodeCoverage.Shim, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeCoverage.15.8.0\lib\net45\Microsoft.VisualStudio.CodeCoverage.Shim.dll</HintPath>
       <Private>True</Private>
@@ -80,6 +83,7 @@
     <Compile Include="TC_2_01_3.cs" />
     <Compile Include="TC_1_02_02_additional.cs" />
     <Compile Include="TC_1_04_03.cs" />
+    <Compile Include="TC_3_06_02.cs" />
     <Compile Include="TC_3_06_03.cs" />
     <Compile Include="TC_3_06_05.cs" />
     <Compile Include="TC_OpenClose_TopMenu.cs" />
