@@ -9,14 +9,20 @@ using System;
 namespace CaesarTests
 {
     [TestFixture]
-    class TestsForScheduleTableClass_ScheduleViewWeekTable :BaseTest
+    class TestsForScheduleTableClass_ScheduleViewWeekTable : BaseTest
     {      
         WeekTab weekTabInstance;       
         String textFromCell;
-                
 
-        protected override void BeforeTest()
+
+        [SetUp]
+
+        public void SetUp()
         {
+            //Opening Caesar and Logging in
+            driver.Url = baseURL;
+            loginPageInstance = new LoginPage(driver);
+            loginPageInstance.LogIn("qwerty", "1234", wait);
 
             //Opening Schedule Page
             MainPageInstance = new MainPage(driver);
@@ -24,9 +30,8 @@ namespace CaesarTests
             MainPageInstance.TopMenu.ScheduleItem.Click();
 
             //Select group from LeftContainer
-
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
-            
+
             //Go to Week tab
 
             MainPageInstance.CenterContainer.ScheduleContent.WeekButton.Click();

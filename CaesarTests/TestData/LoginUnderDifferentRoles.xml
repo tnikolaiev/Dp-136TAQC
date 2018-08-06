@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Data>
+  <testData login="qwerty" password="1234"/>
+  <testData login="dmytro" password="1234"/>
+  <testData login="sasha" password="1234"/>  
+</Data>
