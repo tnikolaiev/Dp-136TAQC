@@ -74,6 +74,9 @@
     <Compile Include="TC_1_04_07.cs" />
     <Compile Include="TC_1_04_06.cs" />
     <Compile Include="TC_1_05_03.cs" />
+    <Compile Include="TC_3_01.cs" />
+    <Compile Include="TC_3_02.cs" />
+    <Compile Include="TC_3_03.cs" />
     <Compile Include="TC_3_06_01.cs" />
     <Compile Include="TC_2_03_6.cs" />
     <Compile Include="TC_2_03_1.cs" />
@@ -81,6 +84,13 @@
     <Compile Include="TC_1_02_02_additional.cs" />
     <Compile Include="TC_1_04_03.cs" />
     <Compile Include="TC_3_06_03.cs" />
+    <Compile Include="TC_3_0_01.cs" />
+    <Compile Include="TC_3_0_02.cs" />
+    <Compile Include="TC_3_0_03.cs" />
+    <Compile Include="TC_3_0_04.cs" />
+    <Compile Include="TC_3_0_05.cs" />
+    <Compile Include="TC_3_0_06.cs" />
+    <Compile Include="TC_3_0_07.cs" />
     <Compile Include="TC_OpenClose_TopMenu.cs" />
     <Compile Include="TC_1_04_02.cs" />
     <Compile Include="TC_1_05_01.cs" />

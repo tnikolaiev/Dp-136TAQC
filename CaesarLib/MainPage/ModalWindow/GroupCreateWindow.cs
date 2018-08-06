@@ -434,5 +434,265 @@ namespace CaesarLib
             leftMenu.CreateButton.Click();
             wait.Until((d) => IsCancelButtonVisible());
         }
+
+        private IWebElement removeteacher;
+        private IWebElement addteacher;
+        private IWebElement stageteacher;
+        private IWebElement confirmteacher;
+
+        public IWebElement RemoveTeacher
+        {
+            get
+            {
+                if (removeteacher != null) return removeteacher;
+                else
+                {
+                    removeteacher = driver.FindElement(By.XPath("//*[@id='teachers']/div/ul/li/span[2]"));
+                    return removeteacher;
+                }
+            }
+        }
+
+        public IWebElement AddingTeacher
+        {
+            get
+            {
+                if (addteacher != null) return addteacher;
+                else
+                {
+                    addteacher = driver.FindElement(By.XPath("//*[@id='teachers']/div/div/span"));
+                    return addteacher;
+                }
+            }
+        }
+        public IWebElement StageTeacher
+        {
+            get
+            {
+                if (stageteacher != null) return stageteacher;
+                else
+                {
+                    stageteacher = driver.FindElement(By.Name("teacher"));
+                    return stageteacher;
+                }
+            }
+        }
+
+        public IWebElement ConfirmTeacher
+        {
+            get
+            {
+                if (confirmteacher != null) return confirmteacher;
+                else
+                {
+                    confirmteacher = driver.FindElement(By.Id("acceptSelect"));
+                    return confirmteacher;
+                }
+            }
+        }
+
+        public void EditTeacher(string teachername)
+        {
+            RemoveTeacher.Click();
+            AddingTeacher.Click();
+            var selTeacher = new SelectElement(StageTeacher);
+            selTeacher.SelectByValue(teachername);
+            ConfirmTeacher.Click();
+        }
+
+
+        private IWebElement removeexpert;
+        private IWebElement addexpert;
+        private IWebElement enterexpert;
+        private IWebElement confirmexpert;
+
+        public IWebElement RemoveExpert
+        {
+            get
+            {
+                if (removeexpert != null) return removeexpert;
+                else
+                {
+                    removeexpert = driver.FindElement(By.XPath("//*[@id='experts']/div/ul/li/span[2]"));
+                    return removeexpert;
+                }
+            }
+        }
+
+        public IWebElement AddingExpert
+        {
+            get
+            {
+                if (addexpert != null) return addexpert;
+                else
+                {
+                    addexpert = driver.FindElement(By.XPath("//*[@id='experts']/div/div/span"));
+                    return addexpert;
+                }
+            }
+        }
+
+        public IWebElement EnterExpert
+        {
+            get
+            {
+                if (enterexpert != null) return enterexpert;
+                else
+                {
+                    enterexpert = driver.FindElement(By.Name("expert"));
+                    return enterexpert;
+                }
+            }
+        }
+
+        public IWebElement ConfirmExpert
+        {
+            get
+            {
+                if (confirmexpert != null) return confirmexpert;
+                else
+                {
+                    confirmexpert = driver.FindElement(By.XPath("//*[@id='acceptInput']"));
+                    return confirmexpert;
+                }
+            }
+        }
+
+        public void EditExpert(string expertname)
+        {
+            RemoveExpert.Click();
+            AddingExpert.Click();
+            EnterExpert.SendKeys(expertname);
+            ConfirmExpert.Click();
+        }
+
+        private IWebElement _oneMoreTeacher;
+        private IWebElement _stageTeacher;
+        private IWebElement _saveTeacher;
+
+
+        public IWebElement OneMoreTeacher
+        {
+            get
+            {
+                if (_oneMoreTeacher != null) return _oneMoreTeacher;
+                else
+                {
+                    _oneMoreTeacher = driver.FindElement(By.XPath("//*[@id='teachers']/div/div/span"));
+                    return _oneMoreTeacher;
+                }
+            }
+        }
+        public IWebElement SecondStageTeacher
+        {
+            get
+            {
+                if (_stageTeacher != null) return _stageTeacher;
+                else
+                {
+                    _stageTeacher = driver.FindElement(By.XPath("//*[@id='teachers']"));
+                    return _stageTeacher;
+                }
+            }
+        }
+        public IWebElement SaveSecondTeacher
+        {
+            get
+            {
+                if (_saveTeacher != null) return _saveTeacher;
+                else
+                {
+                    _saveTeacher = driver.FindElement(By.XPath("//*[@id='acceptSelect']"));
+                    return _saveTeacher;
+                }
+            }
+        }
+
+        public void AddSecondTeacher(string teachername)
+        {
+            OneMoreTeacher.Click();
+            var selTeacher = new SelectElement(SecondStageTeacher);
+            selTeacher.SelectByValue(teachername);
+            SaveSecondTeacher.Click();
+        }
+
+        private IWebElement _oneMoreExpert;
+        private IWebElement _enterSecondExpert;
+        private IWebElement _saveSecondExpert;
+
+        public IWebElement OneMoreExpert
+        {
+            get
+            {
+                if (_oneMoreExpert != null) return _oneMoreExpert;
+                else
+                {
+                    _oneMoreExpert = driver.FindElement(By.XPath("//span[@class='add-expert-btn']"));
+                    return _oneMoreExpert;
+                }
+            }
+        }
+
+        public IWebElement EnterSecondExpert
+        {
+            get
+            {
+                if (_enterSecondExpert != null) return _enterSecondExpert;
+                else
+                {
+                    _enterSecondExpert = driver.FindElement(By.XPath("//input[@name='expert']"));
+                    return _enterSecondExpert;
+                }
+            }
+        }
+
+        public IWebElement SaveSecondExpert
+        {
+            get
+            {
+                if (_saveSecondExpert != null) return _saveSecondExpert;
+                else
+                {
+                    _saveSecondExpert = driver.FindElement(By.XPath("//*[@id='acceptInput']"));
+                    return _saveSecondExpert;
+                }
+            }
+        }
+
+        public void AddSecondExpert(string expertname)
+        {
+            OneMoreExpert.Click();
+            EnterSecondExpert.SendKeys(expertname);
+            SaveSecondExpert.Click();
+        }
+
+        private IWebElement _deleteSecondTeacher;
+        private IWebElement _deleteSecondExpert;
+
+        public IWebElement DeleteSecondTeacher
+        {
+            get
+            {
+                if (_deleteSecondTeacher != null) return _deleteSecondTeacher;
+                else
+                {
+                    _deleteSecondTeacher = driver.FindElement(By.XPath("//*[@id='teachers']/div/ul/li[2]/span[2]"));
+                    return _deleteSecondTeacher;
+                }
+            }
+        }
+
+        public IWebElement DeleteSecondExpert
+        {
+            get
+            {
+                if (_deleteSecondExpert != null) return _deleteSecondExpert;
+                else
+                {
+                    _deleteSecondExpert = driver.FindElement(By.XPath("//*[@id='experts']/div/ul/li[2]/span[2]"));
+                    return _deleteSecondExpert;
+                }
+            }
+        }
     }
 }

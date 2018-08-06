@@ -64,6 +64,8 @@
     <Compile Include="Acts.cs" />
     <Compile Include="Instruments.cs" />
     <Compile Include="MainPage\CenterContainer\GroupsContent\GroupsContent.cs" />
+    <Compile Include="MainPage\CenterContainer\GroupsContent\InfoPage.cs" />
+    <Compile Include="MainPage\CenterContainer\GroupsContent\MessagePage.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleContent.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\WeekTab.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleWeekTable.cs" />
