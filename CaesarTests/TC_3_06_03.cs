@@ -46,6 +46,7 @@ namespace CaesarTests
             path = EditStudentListWindow.GetTestFile("TC_3_06_01-03.txt");
             Acts.UploadFile(path);
             wait.Until((d) => EditStudentListWindow.IsOpened(d));
+            Thread.Sleep(1000);
             mainPageInstance.ModalWindow.EditStudentListWindow.ExitFormButton.Click();
             IList<IWebElement> rowsInTable = mainPageInstance.CenterContainer.StudentsContent.StudentTable.GetRows();
             string expected = "";

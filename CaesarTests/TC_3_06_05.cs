@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Threading;
 
 namespace CaesarTests
 {
@@ -39,12 +40,11 @@ namespace CaesarTests
         [Test]
         public void ExecuteTest_ImportStudentList_ListNotImported()
         {
-            int expeted = 0;
-            int actual;
             mainPageInstance.ModalWindow.EditStudentListWindow.ImportStudentsButton.Click();
             path = EditStudentListWindow.GetTestFile("TC_3_06_05.docx");
             Acts.UploadFile(path);
             wait.Until((d) => EditStudentListWindow.IsOpened(d));
+            Thread.Sleep(1000);
             Assert.AreEqual(0, mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count);
         }
         [TearDown]
