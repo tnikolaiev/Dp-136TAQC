@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ namespace CaesarLib
                 if (_cancelButton != null) return _cancelButton;
                 else
                 {
-                    _cancelButton = _driverInstance.FindElement(By.Id("'cancel'"));
+                    _cancelButton = _driverInstance.FindElement(By.Id("cancel"));
                     return _cancelButton;
                 }
             }
@@ -76,6 +77,8 @@ namespace CaesarLib
                 }
             }
         }
+      
+
         public IWebElement EventControl
         {
             get
@@ -182,8 +185,26 @@ namespace CaesarLib
 
         public bool IsScheduleEditorDisplayed(IWebDriver driverInstance)
         {
-            return driverInstance.FindElements(By.ClassName("scheduleEditorWeek-view")).Count > 0 ?
+            return driverInstance.FindElements(By.ClassName("weekView")).Count > 0 ?
                true : false;
+        }
+
+        public bool AreQAEventsExist(IWebDriver driver)
+        {
+           return
+           Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Lecture')]")) &
+           Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Weekly report')]"))&
+           Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Consultation')]"))&
+           Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Work with Expert')]"));
+           
+        }
+
+        public bool AreDevEventsExist(IWebDriver driver)
+        {
+          return
+          Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Practice')]")) &
+          Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Weekly report')]")) &          
+          Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Work with Expert')]"));
         }
 
 

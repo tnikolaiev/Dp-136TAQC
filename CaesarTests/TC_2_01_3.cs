@@ -5,92 +5,109 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
 
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_2_01_3
+    class TC_2_01_3 : BaseTest
     {
-        IWebDriver driver;
-        WebDriverWait wait;
-        string baseURL = "localhost:3000";
-        LoginPage loginPageInstance;
-        ScheduleContent ScheduleContentInstance;
-        MainPage mainPageInstance;
 
-        [SetUp]
-        public void BeforeTest()
+        static IEnumerable<object[]> LoginUnderDifferentRoles = Instruments.ReadXML("LoginUnderDifferentRoles.xml", "testData", "login", "password");
+
+
+        [Test, TestCaseSource("LoginUnderDifferentRoles")]
+
+        public void IsMonthTabAvailable(string login, string password)
         {
-            //Initializations and logging in Caesar
-            driver = new ChromeDriver();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //Opening Caesar and Logging in
             driver.Url = baseURL;
-            driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn("sasha", "1234");
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
+            loginPageInstance.LogIn(login, password, wait);
 
             //Opening Schedule Page
 
-            mainPageInstance = new MainPage(driver);
-            ScheduleContentInstance = mainPageInstance.OpenScheduleContent();
+            MainPageInstance = new MainPage(driver);
+            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
+            MainPageInstance.TopMenu.ScheduleItem.Click();
 
             //Select group from LeftContainer
 
-            mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
-        }
+            MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
-        [Test]
-
-        public void IsMonthTabAvailable()
-        {
-           
 
             //Assert MonthView tab is displayed
-            Assert.IsTrue(ScheduleContentInstance
+            Assert.IsTrue(MainPageInstance.CenterContainer
+                .ScheduleContent
                 .MonthTabInstance
                 .IsMonthTabDisplayed(driver));          
         }
 
-        [Test]
+        [Test, TestCaseSource("LoginUnderDifferentRoles")]
 
-        public void IsWeekTabAvailable()
+        public void IsWeekTabAvailable(string login, string password)
         {
-           
+
+            //Opening Caesar and Logging in
+            driver.Url = baseURL;
+            loginPageInstance = new LoginPage(driver);
+            loginPageInstance.LogIn("qwerty", "1234", wait);
+
+            //Opening Schedule Page
+
+            MainPageInstance = new MainPage(driver);
+            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
+            MainPageInstance.TopMenu.ScheduleItem.Click();
+
+            //Select group from LeftContainer
+
+            MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
             //Click on WeekView button
 
-            Acts.Click(ScheduleContentInstance.WeekButton);
+            MainPageInstance.CenterContainer.ScheduleContent.WeekButton.Click();
 
 
             //Assert Week tab is displayed
-            Assert.IsTrue(ScheduleContentInstance
+            Assert.IsTrue(MainPageInstance
+                .CenterContainer
+                .ScheduleContent
                 .WeekTabInstance
                 .IsWeekTabDisplayed(driver));
         }
 
-        [Test]
+        [Test, TestCaseSource("LoginUnderDifferentRoles")]
 
-        public void IsKeyDatesTabAvailable()
-        {            
+        public void IsKeyDatesTabAvailable(string login, string password)
+        {        
 
-            //Click on KeyDates button
+            //Opening Caesar and Logging in
+             driver.Url = baseURL;
+             loginPageInstance = new LoginPage(driver);
+             loginPageInstance.LogIn("qwerty", "1234", wait);
 
-            Acts.Click(ScheduleContentInstance.KeyDatesButton);
+            //Opening Schedule Page
 
+            MainPageInstance = new MainPage(driver);
+            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
+            MainPageInstance.TopMenu.ScheduleItem.Click();
 
+            //Select group from LeftContainer
+
+            MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
+
+           //Click on KeyDates button
+
+             MainPageInstance.CenterContainer.ScheduleContent.KeyDatesButton.Click();
+            
             //Assert KeyDates tab is displayed
-            Assert.IsTrue(ScheduleContentInstance
+            Assert.IsTrue(MainPageInstance
+                .CenterContainer
+                .ScheduleContent
                 .KeyDatesTabInstance
                 .IsKeyDatesDisplayed(driver));
         }
-
-        [TearDown]
-        public void TearDown()
-        {
-            driver.Close();
-        }
+      
     }
 
 }

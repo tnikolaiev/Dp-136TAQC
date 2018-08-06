@@ -175,11 +175,10 @@ namespace CaesarLib
         }
 
         //This method can return new instance of 'Schedule' page so change it in case of need
-        public ScheduleContent OpenScheduleContent()
+        public void OpenScheduleContent()
         {
             TopMenu topMenuInstance = MoveToTopMenu();
-            Acts.Click(topMenuInstance.ScheduleItem);
-            return new ScheduleContent(driver);
+            Acts.Click(topMenuInstance.ScheduleItem);            
         }
 
         //This method can return new instance of 'add' page so change it in case of need
@@ -207,6 +206,12 @@ namespace CaesarLib
             Actions builder = new Actions(driver);
             builder.MoveToElement(driver.FindElement(By.ClassName("groupLocation"))).Build().Perform();
             return new CenterContainer(driver);
+        }
+
+        public void DoubleClick(IWebElement element)
+        {
+            Actions builder = new Actions(driver);
+            builder.DoubleClick(element).Build().Perform();
         }
     }
 }

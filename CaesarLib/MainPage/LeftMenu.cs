@@ -114,10 +114,10 @@ namespace CaesarLib
             return (LeftMenuSection.GetAttribute("class").Equals("contextMenu open"));
         }
 
-        //public Func<IWebDriver, IWebElement> IsCreateButtonClickable()
-        //{
-        //    return ExpectedConditions.ElementToBeClickable(By.XPath("//div[@id='left-menu']//button[@title='Create']/i"));
-        //}
+        public Func<IWebDriver, IWebElement> IsCreateButtonClickable()
+        {
+            return ExpectedConditions.ElementToBeClickable(By.XPath("//div[@id='left-menu']//button[@title='Create']/i"));
+        }
 
         public bool IsSearchButtonVisible()
         {
@@ -126,12 +126,12 @@ namespace CaesarLib
 
         public bool IsCreateButtonVisible()
         {
-            return Acts.IsElementVisible(driver, By.XPath("//div[@id='left-menu']//button[@title='Create']/i"));
+            return Acts.IsElementVisible(driver, By.XPath("//div[@id='left-menu']//button[@title='Create' and not(@disabled)]"));
         }
 
         public bool IsDeleteButtonVisible()
         {
-            return Acts.IsElementVisible(driver, By.XPath("//div[@id='left-menu']//button[@title='Delete']/i"));
+            return Acts.IsElementVisible(driver, By.XPath("//div[@id='left-menu']//button[@title='Delete' and not(@disabled)]"));
         }
     }
 }

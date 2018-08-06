@@ -14,14 +14,20 @@ namespace CaesarTests
     {
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         WebDriverWait wait;
         Actions action;
+
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+        }
 
         [SetUp]
         public void Initialize()
         {
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
             driver.Manage().Window.Maximize();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Url = @"http://localhost:3000/logout";
@@ -81,7 +87,6 @@ namespace CaesarTests
         [OneTimeTearDown]
         public void CleanUp()
         {
-            driver.Close();
             driver.Quit();
         }
     }

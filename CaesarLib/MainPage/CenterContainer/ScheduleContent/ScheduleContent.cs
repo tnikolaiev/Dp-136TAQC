@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace CaesarLib
 {
@@ -120,23 +121,42 @@ namespace CaesarLib
         {
             get
             {
-                if (_editScheduleWindowInstance != null) return _editScheduleWindowInstance;
-                else
-                {
+                
                     _editScheduleWindowInstance = new EditScheduleWindow(_driverInstance);
                     return _editScheduleWindowInstance;
-                }
             }
         }
+        
 
         //Actions
 
-        public EditScheduleWindow ClickCogwheel()
+        public EditScheduleWindow ClickCogwheel(WebDriverWait wait)
         {
             ScheduleCogwheell.Click();
+            wait.Until((d) => EditScheduleWindowInstance.IsScheduleEditorDisplayed(_driverInstance));
             return new EditScheduleWindow(_driverInstance);
         }
 
+        public WeekTab OpenWeekTab(WebDriverWait wait)
+        {            
+            WeekButton.Click();
+            wait.Until((d) => WeekTabInstance.IsWeekTabDisplayed(_driverInstance));
+            return new WeekTab(_driverInstance);
+        }
+
+        public KeyDatesTab OpenKeyDatesTab(WebDriverWait wait)
+        {
+            KeyDatesButton.Click();
+            wait.Until((d) =>KeyDatesTabInstance.IsKeyDatesDisplayed(_driverInstance));
+            return new KeyDatesTab(_driverInstance);
+        }
+
+        public bool IsOpened(IWebDriver driver)
+        {
+            return driver.FindElements(By.ClassName("scheduleView")).Count > 0 ?
+               true : false;
+        }
+         
     }
 }
 

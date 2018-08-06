@@ -16,7 +16,7 @@ namespace CaesarLib
             this.webDriver = webDriver;
         }
 
-        public static bool IsSelectGroupWindowOpened(IWebDriver webDriver)
+        public bool IsSelectGroupWindowOpened(IWebDriver webDriver)
         {
             return Acts.IsElementPresent(webDriver, By.ClassName("editGroup-wrapper"));
         }

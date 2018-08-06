@@ -11,9 +11,15 @@ namespace CaesarTests
     [TestFixture]
     class TC_1_01_05
     {
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         LoginPage loginPageInstance;
         WebDriverWait wait;
+
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+        }
 
         [SetUp]
         public void Initialize()
@@ -41,8 +47,7 @@ namespace CaesarTests
 
         [OneTimeTearDown]
         public void CleanUp()
-        {
-            driver.Close();
+        {            
             driver.Quit();
         }
     }

@@ -10,17 +10,16 @@ using System.Collections.Generic;
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_2_03_1 : BaseTest
+    class TC_2_03_2 : BaseTest
     {
-        static IEnumerable<object[]> LoginUnderDifferentRoles = Instruments.ReadXML("LoginUnderDifferentRoles.xml", "testData", "login", "password");
-        [Test, TestCaseSource("LoginUnderDifferentRoles")]
+        [Test]
 
-        public void IsScheduleEditorAvailable(String login, String password)
+        public void IsScheduleEditorUnavailableWhenFewGroupsSelected()
         {
             //Opening Caesar and Logging in
             driver.Url = baseURL;
             loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn(login, password, wait);
+            loginPageInstance.LogIn("Dmytro", "1234", wait);
 
             //Opening Schedule Page
             MainPageInstance = new MainPage(driver);
@@ -29,18 +28,18 @@ namespace CaesarTests
 
             //Selecting group
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
+            MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS").Click();
 
             //Click on cogweel for ScheduleEditor opening
             MainPageInstance.CenterContainer.ScheduleContent.ScheduleCogwheell.Click();
 
-            //Assert ScheduleEditor is displayed
-            Assert.IsTrue(wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.IsScheduleEditorDisplayed(driver)));
+            //Assert modal window for groups multiselecting is displayed
+            Assert.IsTrue(wait.Until((d) => MainPageInstance.ModalWindow.SelectGroupWindow.IsSelectGroupWindowOpened(driver)));
 
-            //Close ScheduleEditor
-            MainPageInstance.ModalWindow.EditScheduleWindow.CancelButton.Click();
+            //Close SelectGroupWindow
+            MainPageInstance.ModalWindow.SelectGroupWindow.CancelButton.Click();
         }
-      
+
     }
 
 }
-

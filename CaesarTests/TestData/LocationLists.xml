@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+  <testData exeptedResult =" Dnipro,Lviv" city = "Dnipro,Lviv"/>
+  <testData exeptedResult =" Chernivtsy,Dnipro,Lviv" city = "Chernivtsy"/>
+  <testData exeptedResult =" Chernivtsy,Dnipro,Ivano-Frankivsk,Kyiv,Lviv,Rivne,Sofia" city = "Ivano-Frankivsk,Kyiv,Rivne,Sofia"/>
+</data>

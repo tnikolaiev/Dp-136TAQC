@@ -9,43 +9,32 @@ using System;
 namespace CaesarTests
 {
     [TestFixture]
-    class TestsForScheduleTableClass_ScheduleViewWeekTable
-    {
-        IWebDriver driver;
-        WebDriverWait wait;
-        string baseURL = "localhost:3000";
-        LoginPage loginPageInstance;
-        MainPage mainPageInstance;
-        ScheduleContent scheduleContentInstance;
+    class TestsForScheduleTableClass_ScheduleViewWeekTable : BaseTest
+    {      
         WeekTab weekTabInstance;       
         String textFromCell;
 
+
         [SetUp]
 
-        public void BeforeTest()
+        public void SetUp()
         {
-            //Initializations and logging in Caesar
-            driver = new ChromeDriver();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            //Opening Caesar and Logging in
             driver.Url = baseURL;
-            driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn("sasha", "1234");
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
+            loginPageInstance.LogIn("qwerty", "1234", wait);
 
             //Opening Schedule Page
-
-           mainPageInstance = new MainPage(driver);
-           scheduleContentInstance = mainPageInstance.OpenScheduleContent();
+            MainPageInstance = new MainPage(driver);
+            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
+            MainPageInstance.TopMenu.ScheduleItem.Click();
 
             //Select group from LeftContainer
+            MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
-            mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
-            
             //Go to Week tab
 
-            scheduleContentInstance.WeekButton.Click();
+            MainPageInstance.CenterContainer.ScheduleContent.WeekButton.Click();
 
             // Create instance of Schedule Week table
 
@@ -84,13 +73,7 @@ namespace CaesarTests
             textFromCell = weekTabInstance.ScheduleViewWeekTable.GetValueFromCell(3,"Wednesday");
             Assert.AreEqual(textFromCell, "Expert Meeting\r\nN. Varenko\r\n309");
 
-        }
-
-        [TearDown]
-        public void CleanUp()
-        {
-            driver.Close();
-        }
+        }      
 
     }
 }
