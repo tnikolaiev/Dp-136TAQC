@@ -36,7 +36,7 @@ namespace CaesarTests
             wait.Until((d) => StudentsContent.IsOpened(d));
             //Open modal window 'EditStudentListWindow'
             mainPageInstance.CenterContainer.StudentsContent.EditButton.Click();
-            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
+            wait.Until((d) => EditStudentListWindow.IsOpened(d));
         }
         [Test]
         public void ExecuteTest_ImportStudentList_CorrectDataImported()
@@ -44,9 +44,14 @@ namespace CaesarTests
             mainPageInstance.ModalWindow.EditStudentListWindow.ImportStudentsButton.Click();
             path = EditStudentListWindow.GetTestFile("TC_3_06_04.csv");
             Acts.UploadFile(path);
-            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
+            wait.Until((d) => EditStudentListWindow.IsOpened(d));
             mainPageInstance.ModalWindow.EditStudentListWindow.SaveFormButton.Click();
             Assert.AreEqual(1, mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count);
+        }
+        [TearDown]
+        public void CleanUp()
+        {
+            Log4Caesar.Log();
         }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()

@@ -43,13 +43,13 @@ namespace CaesarTests
             wait.Until((d) => StudentsContent.IsOpened(d));
             //Open modal window 'EditStudentListWindow'
             mainPageInstance.CenterContainer.StudentsContent.EditButton.Click();
-            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
+            wait.Until((d) => EditStudentListWindow.IsOpened(d));
             //Create new student for test
             mainPageInstance.ModalWindow.EditStudentListWindow.CreateStudentButton.Click();
             wait.Until((d) => EditStudentWindow.IsOpened(d));
             mainPageInstance.ModalWindow.EditStudentWindow.FillForm("Andrey", "Magera", 3, "137", "4.2", 1);
             mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
-            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
+            wait.Until((d) => EditStudentListWindow.IsOpened(d));
         }
         [SetUp]
         public void SetUpTest()
@@ -78,7 +78,7 @@ namespace CaesarTests
                 webDriver.SwitchTo().Alert().Accept();
             //Save changes
             mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
-            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
+            wait.Until((d) => EditStudentListWindow.IsOpened(d));
             //Check if files saved
             mainPageInstance.ModalWindow.EditStudentListWindow.StudentTable.GetElementFromCell
                 (mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count, EditStudentListWindow.EditButtonsColumn).Click();
@@ -88,6 +88,7 @@ namespace CaesarTests
         [TearDown]
         public void TearDownTest()
         {
+            Log4Caesar.Log();
             //Delete files
             try { mainPageInstance.ModalWindow.EditStudentWindow.RemoveCVButton.Click(); }
             catch { }
@@ -95,7 +96,7 @@ namespace CaesarTests
             try { mainPageInstance.ModalWindow.EditStudentWindow.RemovePhotoButton.Click(); }
             catch { }
            
-            mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
+            mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();          
         }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()
@@ -104,7 +105,7 @@ namespace CaesarTests
             mainPageInstance.ModalWindow.EditStudentListWindow.StudentTable.GetElementFromCell
                 (mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count, EditStudentListWindow.DeleteButtonsColumn).Click();
             Acts.PressKeyboardButton(@"{Enter}");
-            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
+            wait.Until((d) => EditStudentListWindow.IsOpened(d));
             webDriver.Close();
             webDriver.Quit();
         }

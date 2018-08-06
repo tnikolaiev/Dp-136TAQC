@@ -55,6 +55,11 @@ namespace CaesarTests
             mainPageInstance.ModalWindow.SelectGroupWindow.SaveButton.Click();
             Assert.IsTrue(mainPageInstance.ModalWindow.EditScheduleWindow.IsScheduleEditorDisplayed(webDriver));
         }
+        [TearDown]
+        public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()
         {
