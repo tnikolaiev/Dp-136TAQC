@@ -93,7 +93,6 @@
     <Compile Include="TC_1_04_05.cs" />
     <Compile Include="TC_1_04_07.cs" />
     <Compile Include="TC_1_04_06.cs" />
-    <Compile Include="TC_1_05_03.cs" />
     <Compile Include="TC_3_01.cs" />
     <Compile Include="TC_3_02.cs" />
     <Compile Include="TC_3_03.cs" />

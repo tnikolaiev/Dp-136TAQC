@@ -79,6 +79,7 @@ namespace CaesarTests
         [TearDown]
         public void CleanUp()
         {
+            Log4Caesar.Log();
             driver.Quit();
         }
     }

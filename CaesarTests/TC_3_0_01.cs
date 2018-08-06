@@ -23,7 +23,7 @@ namespace CaesarTests
         public void Initialize()
         {
             driver = new ChromeDriver();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3));
             driver.Url = @"http://localhost:3000/logout";
             driver.Manage().Window.Maximize();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
@@ -65,6 +65,7 @@ namespace CaesarTests
         [TearDown]
         public void CleanUp()
         {
+            Log4Caesar.Log();
             driver.Quit();
         }
 

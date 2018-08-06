@@ -67,6 +67,7 @@ namespace CaesarTests
         [TearDown]
         public void CleanUp()
         {
+            Log4Caesar.Log();
             mainPageInstance1.CenterContainer.GroupsContent.InfoTab.Click();
             mainPageInstance1.CenterContainer.GroupsContent.CogWheel.Click();
             mainPageInstance1.ModalWindow.GroupCreateWindow.GroupNameField.Clear();
