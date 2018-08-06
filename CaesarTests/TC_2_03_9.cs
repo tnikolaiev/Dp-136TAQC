@@ -57,10 +57,10 @@ namespace CaesarTests
             MainPageInstance.ModalWindow.EditScheduleWindow.CancelButton.Click();
         }
 
-        [Test]
+          [Test]
 
-        public void CheckNextWeekToggles()
-        {
+          public void CheckNextWeekToggles()
+          {
 
             //Remember header names
             List<String> currentWeekHeaders = MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetHeadingsText();
@@ -76,7 +76,7 @@ namespace CaesarTests
 
             //Close ScheduleEditor
             MainPageInstance.ModalWindow.EditScheduleWindow.CancelButton.Click();
-        }
+          }
 
     }
 
