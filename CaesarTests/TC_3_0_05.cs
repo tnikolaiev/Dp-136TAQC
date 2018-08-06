@@ -39,9 +39,8 @@ namespace CaesarTests
         public void EditingDate()
         {
             List<string> expected = new List<string>();
-            expected.Add("");
-            expected.Add("Date start: 02/02/2017");
-            expected.Add("Date finish: 04/26/2017");
+            expected.Add("02/02/2017");
+            expected.Add("04/26/2017");
 
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             mainPageInstance.LeftContainer.GroupsInLocation.EndedGroupsToggle.Click();
@@ -54,11 +53,8 @@ namespace CaesarTests
             mainPageInstance.ModalWindow.GroupCreateWindow.SaveGroupButton.Click();
 
             List<string> actual = new List<string>();
-            foreach (var item in mainPageInstance.CenterContainer.GroupsContent.InfoPage.GroupInfo.GetRows())
-            {
-                actual.Add(item.Text);
-            }
-
+            actual.Add(mainPageInstance.CenterContainer.GroupsContent.InfoPage.GroupInfo.GetValueFromCell(2, 2));
+            actual.Add(mainPageInstance.CenterContainer.GroupsContent.InfoPage.GroupInfo.GetValueFromCell(3, 2));
             CollectionAssert.AreEqual(expected,actual);
 
         }

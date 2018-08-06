@@ -46,7 +46,7 @@ namespace CaesarTests
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-027-JS").Click();
             mainPageInstance.CenterContainer.GroupsContent.CogWheel.Click();
             mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField.Clear();
-            mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField.SendKeys("09/05/2018");
+            mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField.SendKeys("09/10/2018");
             mainPageInstance.ModalWindow.GroupCreateWindow.SaveGroupButton.Click();
             mainPageInstance.LeftContainer.GroupsInLocation.FutureGroupsToggle.Click();
 
@@ -81,7 +81,7 @@ namespace CaesarTests
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-027-JS").Click();
             mainPageInstance.CenterContainer.GroupsContent.CogWheel.Click();
             mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField.Clear();
-            mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField.SendKeys("08/05/2018");
+            mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField.SendKeys("08/10/2018");
             mainPageInstance.ModalWindow.GroupCreateWindow.SaveGroupButton.Click();
             mainPageInstance.LeftContainer.GroupsInLocation.CurrentGroupsToggle.Click();
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-027-JS").Click();
@@ -100,7 +100,7 @@ namespace CaesarTests
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-027-JS").Click();
             mainPageInstance.CenterContainer.GroupsContent.CogWheel.Click();
             mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField.Clear();
-            mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField.SendKeys("08/03/2018");
+            mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField.SendKeys("08/08/2018");
             mainPageInstance.ModalWindow.GroupCreateWindow.SaveGroupButton.Click();
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-027-JS").Click();
 
@@ -117,8 +117,8 @@ namespace CaesarTests
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-027-JS").Click();
             mainPageInstance.CenterContainer.GroupsContent.CogWheel.Click();
-            mainPageInstance.ModalWindow.GroupCreateWindow.FinishDateField.Clear();
-            mainPageInstance.ModalWindow.GroupCreateWindow.FinishDateField.SendKeys("08/24/2018");
+            mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField.Clear();
+            mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField.SendKeys("05/24/2018");
             mainPageInstance.ModalWindow.GroupCreateWindow.SaveGroupButton.Click();
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-027-JS").Click();
 
@@ -135,8 +135,8 @@ namespace CaesarTests
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-027-JS").Click();
             mainPageInstance.CenterContainer.GroupsContent.CogWheel.Click();
-            mainPageInstance.ModalWindow.GroupCreateWindow.FinishDateField.Clear();
-            mainPageInstance.ModalWindow.GroupCreateWindow.FinishDateField.SendKeys("08/03/2018");
+            mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField.Clear();
+            mainPageInstance.ModalWindow.GroupCreateWindow.StartDateField.SendKeys("05/01/2018");
             mainPageInstance.ModalWindow.GroupCreateWindow.SaveGroupButton.Click();
             mainPageInstance.LeftContainer.GroupsInLocation.EndedGroupsToggle.Click();
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-027-JS").Click();

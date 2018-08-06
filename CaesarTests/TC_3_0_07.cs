@@ -44,7 +44,7 @@ namespace CaesarTests
             List<int> expected = new List<int>();
             expected.Add(12);
             expected.Add(9);
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
             mainPageInstance.LeftContainer.GroupsInLocation.EndedGroupsToggle.Click();
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-027-JS").Click();
             mainPageInstance.CenterContainer.GroupsContent.CogWheel.Click();
@@ -55,18 +55,9 @@ namespace CaesarTests
 
 
             List<int> actual = new List<int>();
-            List<DateTime> time1 = new List<DateTime>();
-            foreach (var item in mainPageInstance.CenterContainer.GroupsContent.InfoPage.GroupInfo.GetRows())
-            {
-                if (item.Text != "")
-                {
-                    string[] words = item.Text.Split(new char[] { ' ' });
-                    time1.Add(DateTime.ParseExact(words[1], "MM/dd/yyyy", System.Globalization.CultureInfo.CurrentCulture));
-                }
-
-            }
-            
-            TimeSpan timeSpan1 = time1[1] - time1[0];
+            DateTime date1 = DateTime.ParseExact(mainPageInstance.CenterContainer.GroupsContent.InfoPage.GroupInfo.GetValueFromCell(2, 2), "MM/dd/yyyy", System.Globalization.CultureInfo.CurrentCulture);
+            DateTime date2 = DateTime.ParseExact(mainPageInstance.CenterContainer.GroupsContent.InfoPage.GroupInfo.GetValueFromCell(3, 2), "MM/dd/yyyy", System.Globalization.CultureInfo.CurrentCulture);
+            TimeSpan timeSpan1 = date2 - date1;
             actual.Add(timeSpan1.Days/7);
 
             mainPageInstance1.LeftContainer.GroupsInLocation.GetGroupByName("DP-027-JS").Click();
@@ -76,19 +67,11 @@ namespace CaesarTests
             mainPageInstance1.ModalWindow.GroupCreateWindow.StartDateField.SendKeys("01/01/2018");
             mainPageInstance1.ModalWindow.GroupCreateWindow.SaveGroupButton.Click();
 
-
-            foreach (var item in mainPageInstance.CenterContainer.GroupsContent.InfoPage.GroupInfo.GetRows())
-            {
-                if (item.Text != "")
-                {
-                    string[] words = item.Text.Split(new char[] { ' ' });
-                    time1.Add(DateTime.ParseExact(words[1], "MM/dd/yyyy", System.Globalization.CultureInfo.CurrentCulture));
-                }
-
-            }
-
-            TimeSpan timeSpan2 = time1[4] - time1[3];
+            DateTime date3 = DateTime.ParseExact(mainPageInstance.CenterContainer.GroupsContent.InfoPage.GroupInfo.GetValueFromCell(2, 2), "MM/dd/yyyy", System.Globalization.CultureInfo.CurrentCulture);
+            DateTime date4 = DateTime.ParseExact(mainPageInstance.CenterContainer.GroupsContent.InfoPage.GroupInfo.GetValueFromCell(3, 2), "MM/dd/yyyy", System.Globalization.CultureInfo.CurrentCulture);
+            TimeSpan timeSpan2 = date4 - date3;
             actual.Add(timeSpan2.Days / 7);
+
             CollectionAssert.AreEqual(expected, actual);
 
         }

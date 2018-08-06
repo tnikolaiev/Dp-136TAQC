@@ -42,7 +42,7 @@ namespace CaesarTests
         {
             string expected1 = "D. Petin";
             string expected2 = "A. Koval";
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
             mainPageInstance.LeftContainer.GroupsInLocation.EndedGroupsToggle.Click();
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-092-NET").Click();
             mainPageInstance.CenterContainer.GroupsContent.CogWheel.Click();
@@ -67,7 +67,7 @@ namespace CaesarTests
         {
             string expected1 = "D. Petin";
             string expected2 = "A. Koval";
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
             mainPageInstance.LeftContainer.GroupsInLocation.EndedGroupsToggle.Click();
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-092-NET").Click();
             mainPageInstance.CenterContainer.GroupsContent.CogWheel.Click();
