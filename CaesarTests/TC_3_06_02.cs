@@ -45,6 +45,8 @@ namespace CaesarTests
             path = EditStudentListWindow.GetTestFile("TC_3_06_01-03.txt");
             IWebElement droparea = webDriver.FindElement(By.ClassName("modal_editStudentlist"));
             Acts.DropFile(droparea, path);
+            mainPageInstance.ModalWindow.EditStudentListWindow.SaveFormButton.Click();
+            Assert.AreEqual(4, mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count);
         }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()

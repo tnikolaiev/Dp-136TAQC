@@ -42,7 +42,7 @@ namespace CaesarTests
         public void ExecuteTest_ImportStudentList_ListImported()
         {
             mainPageInstance.ModalWindow.EditStudentListWindow.ImportStudentsButton.Click();
-            path = EditStudentListWindow.GetTestFile("TC_3_06_01-03 ValidStudentList.txt");
+            path = EditStudentListWindow.GetTestFile("TC_3_06_01-03.txt");
             Acts.UploadFile(path);
             wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
             mainPageInstance.ModalWindow.EditStudentListWindow.ExitFormButton.Click();
