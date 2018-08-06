@@ -75,8 +75,8 @@ namespace CaesarLib
 
         public List<String> GetTitleGroup()
         {
-            IList<IWebElement> elements = driver.FindElements(By.ClassName("ContentAbout row"));
-            List<String> titleGroup = new List<String>();
+            IList<IWebElement> elements = driver.FindElements(By.XPath("//div[@class='ContentAbout row']/div//p"));
+            List <String> titleGroup = new List<String>();
             foreach (var item in elements)
             {
                 titleGroup.Add(item.Text);
@@ -92,11 +92,11 @@ namespace CaesarLib
         public List<String> GetButtonsName(WebDriverWait wait)
         {
             wait.Until((d) => AreAboutButtonVisible());
-            IList<IWebElement> elements = driver.FindElements(By.ClassName("contributors-menu"));
+            IList<IWebElement> elements = driver.FindElements(By.XPath("//div[@class='contributors-menu']/div//p"));
             List<String> buttonNames = new List<String>();
             foreach (var item in elements)
             {
-                buttonNames.Add((item.Text));
+                buttonNames.Add(item.Text);
             }
             return buttonNames;
         }

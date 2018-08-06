@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_1_08_01
+    class TC_1_08_02
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
@@ -20,6 +20,7 @@ namespace CaesarTests
         TopMenu topMenuInstance;
         MainPage mainPageInstance;
         About aboutInstance;
+        CenterContainer groupLocationInstance;
 
         [SetUp]
         public void Initialize()
@@ -36,19 +37,25 @@ namespace CaesarTests
 
         static Object[] GroupsOfContributors =
         {
-            new String[] { "Development & Research,Quality Assurance,Management and Mentoring,Additional Thanks" },
+            new String[] { "Team Doloto,Floppy-Drive 8,Fix Machine" },
         };
 
         [Test, TestCaseSource("GroupsOfContributors")]
-        public void ExecuteTest_CheckButtonAbout(string expectedResult)
+        public void ExecuteTest_CheckListDevelopmentAndResearch(string expectedResult)
         {
             topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.AboutItem);
+            //Thread.Sleep(6000);
+            groupLocationInstance = new CenterContainer(driver);
             aboutInstance = new About(driver);
-            List<String> actualResult = aboutInstance.GetButtonsName(wait);
-            string lineActualResult = (string.Join(",", actualResult.ToArray()));
-            Console.WriteLine(lineActualResult);
-            Assert.AreEqual(expectedResult, lineActualResult);
+            Acts.Click(aboutInstance.DevelopmentResearch);
+            List<string> actualResult = aboutInstance.GetTitleGroup();
+            Console.WriteLine(actualResult);
+            string[] listExpRes = expectedResult.Split(',');
+            List<string> expectedRes = new List<string>(listExpRes);
+            CollectionAssert.AreEqual(expectedRes, actualResult);
+
+
         }
 
         [OneTimeTearDown]

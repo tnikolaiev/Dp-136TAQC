@@ -61,6 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TC_1_08_02.cs" />
     <Compile Include="TC_1_08_01.cs" />
     <Compile Include="TC_1_05_05.cs" />
     <Compile Include="TC_1_05_03_04.cs" />
