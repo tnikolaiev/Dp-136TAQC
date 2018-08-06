@@ -97,6 +97,7 @@
     <Compile Include="TC_3_02.cs" />
     <Compile Include="TC_3_03.cs" />
     <Compile Include="TC_3_04_04.cs" />
+    <Compile Include="TC_3_05.cs" />
     <Compile Include="TC_3_06_01.cs" />
     <Compile Include="TC_2_03_5.cs" />
     <Compile Include="TC_2_03_1.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="TC_3_06_03.cs" />
     <Compile Include="TC_3_06_04.cs" />
     <Compile Include="TC_3_06_05.cs" />
+    <Compile Include="TC_3_08_01.cs" />
     <Compile Include="TC_3_0_01.cs" />
     <Compile Include="TC_3_0_02.cs" />
     <Compile Include="TC_3_0_03.cs" />

@@ -39,6 +39,12 @@ namespace CaesarLib
             else
                 return false;
         }
+        public static bool IsNotEmpty(IWebDriver driver)
+        {
+            if (Acts.IsElementVisible(driver, By.XPath("//*[@id='modal-window']//tbody")))
+                return true;
+            else return false;
+        }
         public IWebElement GetLastElement(IList<IWebElement> webElements)
         {
             return webElements.Last();
