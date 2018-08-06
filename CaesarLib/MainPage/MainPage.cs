@@ -213,5 +213,12 @@ namespace CaesarLib
             Actions builder = new Actions(driver);
             builder.DoubleClick(element).Build().Perform();
         }
+
+        public About MoveToAboutCourse()
+        {
+            Actions builder = new Actions(driver);
+            builder.MoveToElement(driver.FindElement(By.ClassName("contributorsView"))).Build().Perform();
+            return new About(driver);
+        }
     }
 }

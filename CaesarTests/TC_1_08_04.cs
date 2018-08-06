@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_1_08_02
+    class TC_1_08_04
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
@@ -20,9 +20,8 @@ namespace CaesarTests
         TopMenu topMenuInstance;
         MainPage mainPageInstance;
         About aboutInstance;
-        CenterContainer groupLocationInstance;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void Initialize()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(4));
@@ -35,25 +34,23 @@ namespace CaesarTests
             mainPageInstance = new MainPage(driver);
         }
 
-        static Object[] GroupsOfContributors =
-        {
-            new String[] { "Team Doloto,Floppy-Drive 8,Fix Machine" },
-        };
+        static IEnumerable<object[]> GetNamesOfGroups = Instruments.ReadXML("NamesOfFirstGroups.xml", "testData", "name", "exeptedResult1", "exeptedResult2");
 
-        [Test, TestCaseSource("GroupsOfContributors")]
-        public void ExecuteTest_CheckListDevelopmentAndResearch(string expectedResult)
+        [Test, TestCaseSource("GetNamesOfGroups")]
+        public void ExecuteTest_CheckGroupNameAndCourseDevelopmentResearch(string name, string exeptedResult1, string exeptedResult2)
         {
             topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.AboutItem);
             aboutInstance = new About(driver);
             Acts.Click(aboutInstance.DevelopmentResearch);
-            List<string> actualResult = aboutInstance.GetTitleGroup();
-            Console.WriteLine(actualResult);
-            string[] listExpRes = expectedResult.Split(',');
-            List<string> expectedRes = new List<string>(listExpRes);
-            CollectionAssert.AreEqual(expectedRes, actualResult);
-
-
+            IList<IWebElement> listGetTitleGroup = aboutInstance.GetTitleGroups();
+            aboutInstance.MoveToAboutCourse(listGetTitleGroup, name);
+            wait.Until(aboutInstance.IsContentHeaderGroupNameHintVisible());
+            bool first = (exeptedResult1==aboutInstance.ContentHeaderGroupNameHint.Text);
+            bool second = (exeptedResult2==aboutInstance.ContentHeaderGroupNumberHint.Text);
+            Console.WriteLine(aboutInstance.ContentHeaderGroupNameHint.Text);
+            Console.WriteLine(aboutInstance.ContentHeaderGroupNumberHint.Text);
+            Assert.IsTrue(first && second);
         }
 
         [OneTimeTearDown]

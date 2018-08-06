@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_1_08_02
+    class TC_1_08_03
     {
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
@@ -37,16 +37,16 @@ namespace CaesarTests
 
         static Object[] GroupsOfContributors =
         {
-            new String[] { "Team Doloto,Floppy-Drive 8,Fix Machine" },
+            new String[] { "The Light side,Fluffy Dots,Charming Chaos" },
         };
 
         [Test, TestCaseSource("GroupsOfContributors")]
-        public void ExecuteTest_CheckListDevelopmentAndResearch(string expectedResult)
+        public void ExecuteTest_CheckListQualityAssurance(string expectedResult)
         {
             topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.AboutItem);
             aboutInstance = new About(driver);
-            Acts.Click(aboutInstance.DevelopmentResearch);
+            Acts.Click(aboutInstance.QualityAssurance);
             List<string> actualResult = aboutInstance.GetTitleGroup();
             Console.WriteLine(actualResult);
             string[] listExpRes = expectedResult.Split(',');
