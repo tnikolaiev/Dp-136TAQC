@@ -33,7 +33,7 @@ namespace CaesarTests
         static IEnumerable<object[]> InvalidLoginCredentials = Instruments.ReadXML("InvalidLoginCredentials.xml", "testData", "login", "password");
 
         [Test, TestCaseSource("InvalidLoginCredentials")]
-        public void ExecuteTest_LoginWithInvalidLoginCredentials(String login, String password)
+        public void Test_LoginWithInvalidLoginCredentials(String login, String password)
         {
             loginPageInstance.LogIn(login, password);
             bool firstCondition = login.Equals(loginPageInstance.LoginField.GetAttribute("value"));
@@ -45,8 +45,14 @@ namespace CaesarTests
             loginPageInstance.LoginField.SendKeys(Keys.Escape);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }

@@ -35,7 +35,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_CursorToLeftBorder_LeftMenuOpened()
+        public void Test_CursorToLeftBorder_LeftMenuOpened()
         {
             Actions acts = new Actions(driver);
             mainPageInstance.LeftMenu.Open(acts, wait);
@@ -43,7 +43,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_CursorFocusOutOfMenu_LeftMenuClosed()
+        public void Test_CursorFocusOutOfMenu_LeftMenuClosed()
         {
             Actions acts = new Actions(driver);
             mainPageInstance.LeftMenu.Open(acts, wait);
@@ -52,8 +52,14 @@ namespace CaesarTests
             Assert.IsTrue(isLeftMenuClosed);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }
