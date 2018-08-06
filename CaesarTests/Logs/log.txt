@@ -265,3 +265,84 @@
 2018-08-06 15:19:46.6958 | Debug | CaesarTests.TC_3_0_01 
 2018-08-06 15:19:46.6958 | Debug | AvailablaFunctionsTeacher 
 2018-08-06 15:19:46.6958 | Debug | Passed 
+2018-08-06 19:48:54.0325 | Debug | CaesarTests.TC_1_08_06 
+2018-08-06 19:48:54.0815 | Debug | ExecuteTest_CheckListQualityAssurance("The Light side,Fluffy Dots,Charming Chaos") 
+2018-08-06 19:48:54.0815 | Debug | Passed 
+2018-08-06 19:55:03.5386 | Debug | CaesarTests.TC_1_08_06 
+2018-08-06 19:55:03.5726 | Debug | ExecuteTest_CheckListQualityAssurance("The Light side,Fluffy Dots,Charming Chaos") 
+2018-08-06 19:55:03.5726 | Debug | Passed 
+2018-08-06 19:58:11.7904 | Debug | CaesarTests.TC_1_08_06 
+2018-08-06 19:58:11.8314 | Debug | ExecuteTest_CheckListQualityAssurance("The Light side,Fluffy Dots,Charming Chaos") 
+2018-08-06 19:58:11.8314 | Debug | Passed 
+2018-08-06 19:59:24.8946 | Debug | CaesarTests.TC_1_08_06 
+2018-08-06 19:59:24.9356 | Debug | ExecuteTest_CheckListQualityAssurance("The Light side,Fluffy Dots,Charming Chaos") 
+2018-08-06 19:59:24.9356 | Debug | Passed 
+2018-08-06 20:00:22.2878 | Debug | CaesarTests.TC_1_08_03 
+2018-08-06 20:00:22.3248 | Debug | ExecuteTest_CheckListQualityAssurance("The Light side,Fluffy Dots,Charming Chaos") 
+2018-08-06 20:00:22.3248 | Debug | Passed 
+2018-08-06 20:19:52.5308 | Debug | CaesarTests.TC_1_08_03 
+2018-08-06 20:19:52.5848 | Debug | ExecuteTest_CheckListQualityAssurance("The Light side,Fluffy Dots,Charming Chaos") 
+2018-08-06 20:19:52.5848 | Debug | Passed 
+2018-08-06 20:20:14.6630 | Debug | CaesarTests.TC_1_08_04 
+2018-08-06 20:20:14.7000 | Debug | ExecuteTest_CheckGroupNameAndCourseDevelopmentResearch("Team Doloto","Development & Research","Dp-080-UI") 
+2018-08-06 20:20:14.7000 | Debug | Passed 
+2018-08-06 20:20:19.6053 | Debug | CaesarTests.TC_1_08_04 
+2018-08-06 20:20:19.6053 | Debug | ExecuteTest_CheckGroupNameAndCourseDevelopmentResearch("Floppy-Drive 8","Development & Research","Dp-09-JS") 
+2018-08-06 20:20:19.6053 | Debug | Failed 
+2018-08-06 20:20:20.4874 | Debug | CaesarTests.TC_1_08_04 
+2018-08-06 20:20:20.4874 | Debug | ExecuteTest_CheckGroupNameAndCourseDevelopmentResearch("Fix Machine","Development & Research","Dp-099-JS") 
+2018-08-06 20:20:21.0164 | Debug | Passed 
+2018-08-06 20:20:42.4396 | Debug | CaesarTests.TC_1_08_04 
+2018-08-06 20:20:42.4736 | Debug | ExecuteTest_CheckGroupNameAndCourseDevelopmentResearch("Team Doloto","Development & Research","Dp-080-UI") 
+2018-08-06 20:20:42.4736 | Debug | Passed 
+2018-08-06 20:20:43.5757 | Debug | CaesarTests.TC_1_08_04 
+2018-08-06 20:20:43.5757 | Debug | ExecuteTest_CheckGroupNameAndCourseDevelopmentResearch("Floppy-Drive 8","Development & Research","Dp-09-JS") 
+2018-08-06 20:20:43.5757 | Debug | Passed 
+2018-08-06 20:20:44.5948 | Debug | CaesarTests.TC_1_08_04 
+2018-08-06 20:20:44.5948 | Debug | ExecuteTest_CheckGroupNameAndCourseDevelopmentResearch("Fix Machine","Development & Research","Dp-099-JS") 
+2018-08-06 20:20:44.5948 | Debug | Passed 
+2018-08-06 20:21:03.6018 | Debug | CaesarTests.TC_1_08_05 
+2018-08-06 20:21:03.6498 | Debug | ExecuteTest_CheckGroupNameAndCourseQualityAssurance("The Light side","Quality Assurance","Dp-082-MQC") 
+2018-08-06 20:21:03.6538 | Debug | Passed 
+2018-08-06 20:21:04.5579 | Debug | CaesarTests.TC_1_08_05 
+2018-08-06 20:21:04.5579 | Debug | ExecuteTest_CheckGroupNameAndCourseQualityAssurance("Fluffy Dots","Quality Assurance","Dp-088-MQC") 
+2018-08-06 20:21:04.5579 | Debug | Passed 
+2018-08-06 20:21:05.2889 | Debug | CaesarTests.TC_1_08_05 
+2018-08-06 20:21:05.2929 | Debug | ExecuteTest_CheckGroupNameAndCourseQualityAssurance("Charming Chaos","Quality Assurance","Dp-094-MQC") 
+2018-08-06 20:21:05.2929 | Debug | Passed 
+2018-08-06 20:21:23.7240 | Debug | CaesarTests.TC_1_08_02 
+2018-08-06 20:21:23.7620 | Debug | ExecuteTest_CheckListDevelopmentAndResearch("Team Doloto,Floppy-Drive 8,Fix Machine") 
+2018-08-06 20:21:23.7620 | Debug | Passed 
+2018-08-06 20:21:44.0472 | Debug | CaesarTests.TC_1_08_01 
+2018-08-06 20:21:44.0812 | Debug | ExecuteTest_CheckButtonAbout("Development & Research,Quality Assurance,Management and Mentoring,Additional Thanks") 
+2018-08-06 20:21:44.0912 | Debug | Passed 
+2018-08-06 20:22:04.3033 | Debug | CaesarTests.TC_1_05_05 
+2018-08-06 20:22:04.3443 | Debug | ExecuteTest_LocationPageCloseWithoutChoosing 
+2018-08-06 20:22:04.3443 | Debug | Passed 
+2018-08-06 20:22:21.2873 | Debug | CaesarTests.TC_1_05_03_04 
+2018-08-06 20:22:21.3233 | Debug | ExecuteTest_CancelLocationIvanoFrankivsk_UsingKeyBoard 
+2018-08-06 20:22:21.3333 | Debug | Passed 
+2018-08-06 20:22:24.3105 | Debug | CaesarTests.TC_1_05_03_04 
+2018-08-06 20:22:24.3105 | Debug | ExecuteTest_ChooseLocationRivne_UsingKeyBoard 
+2018-08-06 20:22:24.3105 | Debug | Passed 
+2018-08-06 20:22:56.3393 | Debug | CaesarTests.TC_1_05_01 
+2018-08-06 20:22:56.3733 | Debug | ExecuteTest_ChooseLocationSofia_UsingDoubleClick_CheckGroupsName 
+2018-08-06 20:22:56.3733 | Debug | Passed 
+2018-08-06 20:22:58.9474 | Debug | CaesarTests.TC_1_05_01 
+2018-08-06 20:22:58.9724 | Debug | ExecuteTest_ChooseLocationSofia_UsingDoubleClick_LocationPageOpened 
+2018-08-06 20:22:59.0004 | Debug | Failed 
+2018-08-06 20:23:20.1237 | Debug | CaesarTests.TC_1_05_01 
+2018-08-06 20:23:20.1597 | Debug | ExecuteTest_ChooseLocationSofia_UsingDoubleClick_CheckGroupsName 
+2018-08-06 20:23:20.1737 | Debug | Passed 
+2018-08-06 20:23:24.1109 | Debug | CaesarTests.TC_1_05_01 
+2018-08-06 20:23:24.1199 | Debug | ExecuteTest_ChooseLocationSofia_UsingDoubleClick_LocationPageOpened 
+2018-08-06 20:23:24.1199 | Debug | Passed 
+2018-08-06 20:23:43.2060 | Debug | CaesarTests.TC_1_05 
+2018-08-06 20:23:43.2450 | Debug | TestLocationList(" Dnipro,Lviv","Dnipro,Lviv") 
+2018-08-06 20:23:43.2580 | Debug | Passed 
+2018-08-06 20:23:44.3110 | Debug | CaesarTests.TC_1_05 
+2018-08-06 20:23:44.3110 | Debug | TestLocationList(" Chernivtsy,Dnipro,Lviv","Chernivtsy") 
+2018-08-06 20:23:44.3110 | Debug | Passed 
+2018-08-06 20:23:46.5962 | Debug | CaesarTests.TC_1_05 
+2018-08-06 20:23:46.5962 | Debug | TestLocationList(" Chernivtsy,Dnipro,Ivano-Frankivsk,Kyiv,Lviv,Rivne,Sofia","Ivano-Frankivsk,Kyiv,Rivne,Sofia") 
+2018-08-06 20:23:46.5962 | Debug | Passed 

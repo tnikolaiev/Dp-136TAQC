@@ -20,7 +20,6 @@ namespace CaesarTests
         TopMenu topMenuInstance;
         MainPage mainPageInstance;
         About aboutInstance;
-        CenterContainer groupLocationInstance;
 
         [SetUp]
         public void Initialize()
@@ -52,12 +51,16 @@ namespace CaesarTests
             string[] listExpRes = expectedResult.Split(',');
             List<string> expectedRes = new List<string>(listExpRes);
             CollectionAssert.AreEqual(expectedRes, actualResult);
+        }
 
-
+        [TearDown]
+        public void CleanUp()
+        {
+            Log4Caesar.Log();
         }
 
         [OneTimeTearDown]
-        public void CleanUp()
+        public void FinalCleanUp()
         {
             driver.Quit();
         }

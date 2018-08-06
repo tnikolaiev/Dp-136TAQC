@@ -46,15 +46,21 @@ namespace CaesarTests
             IList<IWebElement> listGetTitleGroup = aboutInstance.GetTitleGroups();
             aboutInstance.MoveToAboutCourse(listGetTitleGroup, name);
             wait.Until(aboutInstance.IsContentHeaderGroupNameHintVisible());
-            bool first = (exeptedResult1==aboutInstance.ContentHeaderGroupNameHint.Text);
-            bool second = (exeptedResult2==aboutInstance.ContentHeaderGroupNumberHint.Text);
+            bool firstCondition = (exeptedResult1==aboutInstance.ContentHeaderGroupNameHint.Text);
+            bool secondCondition = (exeptedResult2==aboutInstance.ContentHeaderGroupNumberHint.Text);
             Console.WriteLine(aboutInstance.ContentHeaderGroupNameHint.Text);
             Console.WriteLine(aboutInstance.ContentHeaderGroupNumberHint.Text);
-            Assert.IsTrue(first && second);
+            Assert.IsTrue(firstCondition && secondCondition);
+        }
+
+        [TearDown]
+        public void CleanUp()
+        {
+            Log4Caesar.Log();
         }
 
         [OneTimeTearDown]
-        public void CleanUp()
+        public void FinalCleanUp()
         {
             driver.Quit();
         }

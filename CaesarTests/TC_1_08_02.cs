@@ -20,7 +20,6 @@ namespace CaesarTests
         TopMenu topMenuInstance;
         MainPage mainPageInstance;
         About aboutInstance;
-        CenterContainer groupLocationInstance;
 
         [SetUp]
         public void Initialize()
@@ -56,8 +55,14 @@ namespace CaesarTests
 
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {
             driver.Quit();
         }

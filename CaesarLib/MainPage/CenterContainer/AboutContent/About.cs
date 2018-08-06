@@ -158,6 +158,17 @@ namespace CaesarLib
                 }
         }
 
+        public void ClickToGroupeName(IList<IWebElement> GetTitleGroups, string name)
+        {
+            foreach (var item in GetTitleGroups)
+            {
+                if (item.Text == name)
+                {
+                    Actions actions = new Actions(driver);
+                    actions.MoveToElement(item).Build().Perform();
+                }
+            }
+        }
 
     }
 }
