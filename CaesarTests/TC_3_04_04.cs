@@ -4,11 +4,15 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_3_04_02
+    class TC_3_04_04
     {
         IWebDriver webDriver = new ChromeDriver();
         WebDriverWait wait;
@@ -16,6 +20,7 @@ namespace CaesarTests
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
         String path;
+
         [OneTimeSetUp]
         public void OneTimeSetUpTest()
         {
@@ -42,7 +47,6 @@ namespace CaesarTests
             mainPageInstance.ModalWindow.EditStudentWindow.FillForm("Andrey", "Magera", 3, "137", "4.2", 1);
             mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
             wait.Until((d) => EditStudentListWindow.IsOpened(d));
-
         }
         [SetUp]
         public void SetUpTest()
@@ -51,45 +55,38 @@ namespace CaesarTests
             mainPageInstance.ModalWindow.EditStudentListWindow.StudentTable.GetElementFromCell
                 (mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count, EditStudentListWindow.EditButtonsColumn).Click();
             wait.Until((d) => EditStudentWindow.IsOpened(d));
-            //Upload CV and photo
-            path = EditStudentWindow.GetTestFile("TC_3_04 CV.docx");
-            mainPageInstance.ModalWindow.EditStudentWindow.BrowseCVButton.Click();
-            Acts.UploadFile(path);
-            path = EditStudentWindow.GetTestFile("TC_3_04 photo.png");
-            mainPageInstance.ModalWindow.EditStudentWindow.BrowsePhotoButton.Click();
-            Acts.UploadFile(path);
-            //Save changes
-            mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
-            wait.Until((d) => EditStudentListWindow.IsOpened(d));
-            //Open last student in table for editing
-            mainPageInstance.ModalWindow.EditStudentListWindow.StudentTable.GetElementFromCell
-                (mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count, EditStudentListWindow.EditButtonsColumn).Click();
-            wait.Until((d) => EditStudentWindow.IsOpened(d));
         }
         [Test]
-        public void ExecuteTest_DeleteFiles_FilesDeleted()
+        public void ExecuteTest_DropFiles_FilesUploaded()
         {
-            //Remove files
-            mainPageInstance.ModalWindow.EditStudentWindow.RemoveCVButton.Click();
-            mainPageInstance.ModalWindow.EditStudentWindow.RemovePhotoButton.Click();
+            //Upload CV
+            path = EditStudentWindow.GetTestFile("TC_3_04 CV.doc");
+            IWebElement droparea = webDriver.FindElement(By.ClassName("modal_singleStudent"));
+            Acts.DropFile(droparea, path);
+            //Upload photo
+            path = EditStudentWindow.GetTestFile("TC_3_04 photo.png");
+            Acts.DropFile(droparea, path);
             //Save changes
             mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
             wait.Until((d) => EditStudentListWindow.IsOpened(d));
-
-            //Open last student in table for editing
+            //Check if files saved
             mainPageInstance.ModalWindow.EditStudentListWindow.StudentTable.GetElementFromCell
                 (mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count, EditStudentListWindow.EditButtonsColumn).Click();
             wait.Until((d) => EditStudentWindow.IsOpened(d));
-
-            Assert.AreEqual(0, mainPageInstance.ModalWindow.EditStudentWindow.CountUploadedFiles());
+            Assert.AreEqual(2, mainPageInstance.ModalWindow.EditStudentWindow.CountUploadedFiles());
         }
         [TearDown]
         public void TearDownTest()
         {
             Log4Caesar.Log();
-            //Save changes
+            //Delete files
+            try { mainPageInstance.ModalWindow.EditStudentWindow.RemoveCVButton.Click(); }
+            catch { }
+
+            try { mainPageInstance.ModalWindow.EditStudentWindow.RemovePhotoButton.Click(); }
+            catch { }
+
             mainPageInstance.ModalWindow.EditStudentWindow.SaveButton.Click();
-            wait.Until((d) => EditStudentListWindow.IsOpened(d));          
         }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()

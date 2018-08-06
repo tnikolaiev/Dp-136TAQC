@@ -52,7 +52,7 @@ namespace CaesarLib
         }
         public static String GetTestFile(String fileName)
         {
-            return AppDomain.CurrentDomain.BaseDirectory + @"..\..\TC_3_04 files\" + fileName;
+            return Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory + @"..\..\TC_3_04 files\" + fileName);
         }
     }
 }

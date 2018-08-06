@@ -1,9 +1,11 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Remote;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CaesarLib
@@ -16,7 +18,7 @@ namespace CaesarLib
         public Table StudentTable { get => new Table(webDriver.FindElement(By.XPath("//*[@id='modal-window']//table"))); }
         public IList<IWebElement> Students { get => StudentTable.GetRows(); }
         public IWebElement SaveFormButton { get => webDriver.FindElement(By.ClassName("save")); }
-        public IWebElement ExitFormButton { get => webDriver.FindElement(By.XPath("//*[@id='modal-window']/section/section/section/button[2]")); }
+        public IWebElement ExitFormButton { get => webDriver.FindElement(By.ClassName("exit")); }
         public IWebElement RightshifterButton { get => webDriver.FindElement(By.ClassName("right")); }
         public static int DownloadButtonsColumn { get => 4; }
         public static int EditButtonsColumn { get => 5; }
@@ -28,11 +30,11 @@ namespace CaesarLib
         {
             this.webDriver = webDriver;
         }
-        public static bool IsEditStudentListWindowOpened(IWebDriver driver)
+        public static bool IsOpened(IWebDriver driver)
         {
             if (driver.FindElement(By.Id("modal-window")).FindElements(By.ClassName("students_list")).Count > 0 &&
                 driver.FindElements(By.ClassName("createStudent")).Count > 0 &&
-                driver.FindElements(By.ClassName("exit")).Count > 0)
+                Acts.IsElementPresent(driver,By.ClassName("exit")))
                 return true;
             else
                 return false;
@@ -47,7 +49,7 @@ namespace CaesarLib
         }
         public static String GetTestFile(String fileName)
         {
-            return AppDomain.CurrentDomain.BaseDirectory + @"..\..\TC_3_06 files\" + fileName;
+            return Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory + @"..\..\TC_3_06 files\" + fileName);
         }
     }
 }

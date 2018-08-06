@@ -25,7 +25,21 @@ namespace CaesarLib
             IList<IWebElement> headingColumns = HeadingsRow.FindElements(By.XPath(".//div[contains(@class,'Cell')]"));
             return headingColumns;
         }
-                
+
+        public List<String> GetHeadingsText()
+        {
+            List<String> headingsText = new List<String>();
+            IWebElement HeadingsRow = TableElement.FindElement(By.XPath(".//div[@class='Heading']"));
+            IList<IWebElement> headingColumns = HeadingsRow.FindElements(By.XPath(".//div[contains(@class,'Cell')]"));
+
+            foreach (var item in headingColumns)
+            {
+                headingsText.Add(item.Text);
+            }
+            return headingsText;
+        }
+
+
         public override List<IList<IWebElement>> GetRowsWithColumns()
         {
             IList<IWebElement> rows = GetRows();

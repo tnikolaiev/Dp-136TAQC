@@ -44,8 +44,13 @@
       <HintPath>..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -66,6 +71,8 @@
     <Compile Include="MainPage\BaseTest.cs" />
     <Compile Include="MainPage\CenterContainer\AboutContent\About.cs" />
     <Compile Include="MainPage\CenterContainer\GroupsContent\GroupsContent.cs" />
+    <Compile Include="MainPage\CenterContainer\GroupsContent\InfoPage.cs" />
+    <Compile Include="MainPage\CenterContainer\GroupsContent\MessagePage.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleContent.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\WeekTab.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleWeekTable.cs" />
@@ -93,9 +100,6 @@
     <Compile Include="MainPage\CenterContainer\ScheduleContent\MonthTab.cs" />
     <Compile Include="MainPage\TopMenu.cs" />
     <Compile Include="Table.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

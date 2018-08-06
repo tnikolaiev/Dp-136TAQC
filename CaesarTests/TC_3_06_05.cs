@@ -8,7 +8,7 @@ using System;
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_3_06_01
+    class TC_3_06_05
     {
         IWebDriver webDriver = new ChromeDriver();
         WebDriverWait wait;
@@ -25,11 +25,9 @@ namespace CaesarTests
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
             //Open Login Page
             webDriver.Url = baseURL;
-            wait.Until((driver) => LoginPage.IsLoginPageOpened(driver));
             loginPageInstance = new LoginPage(webDriver);
             //Login as Teacher
-            loginPageInstance.LogIn("sasha", "1234");
-            wait.Until((d) => MainPage.IsMainPageOpened(d));
+            loginPageInstance.LogIn("sasha", "1234", wait);
             mainPageInstance = new MainPage(webDriver);
             //Go to group's LV-023-UX students page
             webDriver.Url = baseURL + "/Students/Lviv/Lv-023-UX/list";
@@ -39,13 +37,15 @@ namespace CaesarTests
             wait.Until((d) => EditStudentListWindow.IsOpened(d));
         }
         [Test]
-        public void ExecuteTest_ImportStudentList_ListImported()
+        public void ExecuteTest_ImportStudentList_ListNotImported()
         {
+            int expeted = 0;
+            int actual;
             mainPageInstance.ModalWindow.EditStudentListWindow.ImportStudentsButton.Click();
-            path = EditStudentListWindow.GetTestFile("TC_3_06_01-03.txt");
+            path = EditStudentListWindow.GetTestFile("TC_3_06_05.docx");
             Acts.UploadFile(path);
-            mainPageInstance.ModalWindow.EditStudentListWindow.SaveFormButton.Click();
-            Assert.AreEqual(4, mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count);
+            wait.Until((d) => EditStudentListWindow.IsOpened(d));
+            Assert.AreEqual(0, mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count);
         }
         [TearDown]
         public void CleanUp()
@@ -55,12 +55,6 @@ namespace CaesarTests
         [OneTimeTearDown]
         public void OneTimeTearDownTest()
         {
-            while (mainPageInstance.ModalWindow.EditStudentListWindow.DeleteButtons.Count != 0)
-            {
-                mainPageInstance.ModalWindow.EditStudentListWindow.StudentTable.GetElementFromCell
-               (mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count, EditStudentListWindow.DeleteButtonsColumn).Click();
-                Acts.PressKeyboardButton(@"{Enter}");
-            }
             webDriver.Close();
             webDriver.Quit();
         }

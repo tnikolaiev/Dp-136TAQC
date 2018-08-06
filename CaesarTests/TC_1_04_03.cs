@@ -21,15 +21,14 @@ namespace CaesarTests
         public void FirstInitialize()
         {
             driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         [SetUp]
         public void Initialize()
-        {
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            driver.Manage().Window.Maximize();
+        {           
             driver.Url = @"http://localhost:3000/logout";
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             action = new Actions(driver);
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("dmytro", "1234", wait);
@@ -37,35 +36,44 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_ClickCreateButton_GroupCreateWindowOpened()
+        public void Test_ClickCreateButton_GroupCreateWindowOpened()
         {
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
+            
             Assert.IsTrue(groupCreateWindow.IsOpened());
         }
 
         [Test]
-        public void ExecuteTest_ClickCancelButton_GroupCreateWindowClosed()
+        public void Test_ClickCancelButton_GroupCreateWindowClosed()
         {
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
             groupCreateWindow.CancelGroupAddingButton.Click();
             bool isWindowClosed = wait.Until((d) => !groupCreateWindow.IsOpened());
+            
             Assert.IsTrue(isWindowClosed);
         }
 
         [Test]
-        public void ExecuteTest_PressEscKey_GroupCreateWindowClosed()
+        public void Test_PressEscKey_GroupCreateWindowClosed()
         {
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
             action.SendKeys(Keys.Escape).Perform();
             wait.Until((d) => !groupCreateWindow.IsOpened());
+            
             Assert.IsFalse(groupCreateWindow.IsOpened());
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
         {            
             driver.Quit();
         }

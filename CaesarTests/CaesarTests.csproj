@@ -41,16 +41,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoItX3.Assembly, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a646454c8d475470, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoItX.3.3.12.0\lib\AutoItX3.Assembly.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.CodeCoverage.Shim, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeCoverage.15.8.0\lib\net45\Microsoft.VisualStudio.CodeCoverage.Shim.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.7\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.10.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WebDriver, Version=3.14.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -65,6 +78,7 @@
     <Compile Include="TC_1_08_04.cs" />
     <Compile Include="TC_1_08_03.cs" />
     <Compile Include="TC_1_08_02.cs" />
+    <Compile Include="Logs\Log4Caesar.cs" />
     <Compile Include="TC_1_08_01.cs" />
     <Compile Include="TC_1_05_05.cs" />
     <Compile Include="TC_1_05_03_04.cs" />
@@ -83,18 +97,24 @@
     <Compile Include="TC_1_04_05.cs" />
     <Compile Include="TC_1_04_07.cs" />
     <Compile Include="TC_1_04_06.cs" />
-    <Compile Include="TC_1_05_02.cs" />
-    <Compile Include="TC_2_03_8.cs" />
-    <Compile Include="TC_2_03_7.cs" />
-    <Compile Include="TC_2_03_3.cs" />
-    <Compile Include="TC_2_03_2.cs" />
+    <Compile Include="TC_3_01.cs" />
+    <Compile Include="TC_3_02.cs" />
+    <Compile Include="TC_3_03.cs" />
     <Compile Include="TC_3_06_01.cs" />
     <Compile Include="TC_2_03_5.cs" />
     <Compile Include="TC_2_03_1.cs" />
     <Compile Include="TC_2_01_3.cs" />
     <Compile Include="TC_1_02_02_additional.cs" />
     <Compile Include="TC_1_04_03.cs" />
+    <Compile Include="TC_3_06_02.cs" />
     <Compile Include="TC_3_06_03.cs" />
+    <Compile Include="TC_3_0_01.cs" />
+    <Compile Include="TC_3_0_02.cs" />
+    <Compile Include="TC_3_0_03.cs" />
+    <Compile Include="TC_3_0_04.cs" />
+    <Compile Include="TC_3_0_05.cs" />
+    <Compile Include="TC_3_0_06.cs" />
+    <Compile Include="TC_3_0_07.cs" />
     <Compile Include="TC_OpenClose_TopMenu.cs" />
     <Compile Include="TC_1_04_02.cs" />
     <Compile Include="TC_1_05.cs" />
@@ -111,6 +131,14 @@
     <Compile Include="Test_SelectGroupWindow.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Logs\log.html" />
+    <Content Include="Logs\log.txt" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
