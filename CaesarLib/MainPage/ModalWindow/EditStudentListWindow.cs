@@ -32,9 +32,9 @@ namespace CaesarLib
         }
         public static bool IsOpened(IWebDriver driver)
         {
-            if (Acts.IsElementVisible(driver, By.XPath("//*[@id='modal-window']//table")) &&
-                driver.FindElements(By.ClassName("createStudent")).Count > 0 &&
-                Acts.IsElementVisible(driver,By.ClassName("exit")))
+            if (Acts.IsElementPresent(driver, By.XPath("//*[@id='modal-window']//table")) &&
+                Acts.IsElementPresent(driver, By.ClassName("createStudent")) &&
+                Acts.IsElementPresent(driver,By.ClassName("exit")))
                 return true;
             else
                 return false;
