@@ -4,20 +4,19 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Threading;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_3_06_05
+    public class TC_3_05
     {
         IWebDriver webDriver = new ChromeDriver();
         WebDriverWait wait;
         string baseURL = "localhost:3000";
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
-        String path;
-
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
@@ -26,25 +25,29 @@ namespace CaesarTests
             webDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
             //Open Login Page
             webDriver.Url = baseURL;
+            wait.Until((driver) => LoginPage.IsLoginPageOpened(driver));
             loginPageInstance = new LoginPage(webDriver);
             //Login as Teacher
-            loginPageInstance.LogIn("sasha", "1234", wait);
+            loginPageInstance.LogIn("sasha", "1234");
+            wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(webDriver);
-            //Go to group's LV-023-UX students page
-            webDriver.Url = baseURL + "/Students/Lviv/Lv-023-UX/list";
+            //Go to group's DP-093-JS students page
+            webDriver.Url = baseURL + "/Students/Dnipro/DP-093-JS/list";
             wait.Until((d) => StudentsContent.IsOpened(d));
             //Open modal window 'EditStudentListWindow'
             mainPageInstance.CenterContainer.StudentsContent.EditButton.Click();
             wait.Until((d) => EditStudentListWindow.IsOpened(d));
         }
         [Test]
-        public void ExecuteTest_ImportStudentList_ListNotImported()
+        public void ExecuteTest_ClickRightshofter_ApprovedByViewOpened()
         {
-            mainPageInstance.ModalWindow.EditStudentListWindow.ImportStudentsButton.Click();
-            path = EditStudentListWindow.GetTestFile("TC_3_06_05.docx");
-            Acts.UploadFile(path);
-            wait.Until((d) => EditStudentListWindow.IsNotEmpty(d));
-            Assert.AreEqual(0, mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count);
+            List<string> headings = new List<string>();
+            mainPageInstance.ModalWindow.EditStudentListWindow.RightshifterButton.Click();
+            foreach (var item in mainPageInstance.ModalWindow.EditStudentListWindow.StudentTable.GetHeadings())
+            {
+                headings.Add(item.Text);
+            }
+            CollectionAssert.Contains(headings, "Approved by");          
         }
         [TearDown]
         public void CleanUp()
@@ -54,8 +57,8 @@ namespace CaesarTests
         [OneTimeTearDown]
         public void OneTimeTearDownTest()
         {
-            webDriver.Close();
             webDriver.Quit();
+            webDriver.Close();
         }
     }
 }

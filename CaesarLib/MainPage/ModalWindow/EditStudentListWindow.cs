@@ -32,12 +32,18 @@ namespace CaesarLib
         }
         public static bool IsOpened(IWebDriver driver)
         {
-            if (driver.FindElement(By.Id("modal-window")).FindElements(By.ClassName("students_list")).Count > 0 &&
-                driver.FindElements(By.ClassName("createStudent")).Count > 0 &&
+            if (Acts.IsElementPresent(driver, By.XPath("//*[@id='modal-window']//table")) &&
+                Acts.IsElementPresent(driver, By.ClassName("createStudent")) &&
                 Acts.IsElementPresent(driver,By.ClassName("exit")))
                 return true;
             else
                 return false;
+        }
+        public static bool IsNotEmpty(IWebDriver driver)
+        {
+            if (Acts.IsElementVisible(driver, By.XPath("//*[@id='modal-window']//tbody")))
+                return true;
+            else return false;
         }
         public IWebElement GetLastElement(IList<IWebElement> webElements)
         {
