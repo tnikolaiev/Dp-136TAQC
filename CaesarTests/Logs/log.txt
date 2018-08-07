@@ -1,0 +1,39 @@
+2018-08-07 09:55:20.7603 | Debug | CaesarTests.TC_1_08_04 
+2018-08-07 09:55:20.8333 | Debug | ExecuteTest_CheckGroupNameAndCourseDevelopmentResearch("Team Doloto","Development & Research","Dp-080-UI") 
+2018-08-07 09:55:20.8333 | Debug | Passed 
+2018-08-07 09:55:22.0554 | Debug | CaesarTests.TC_1_08_04 
+2018-08-07 09:55:22.0554 | Debug | ExecuteTest_CheckGroupNameAndCourseDevelopmentResearch("Floppy-Drive 8","Development & Research","Dp-09-JS") 
+2018-08-07 09:55:22.0594 | Debug | Passed 
+2018-08-07 09:55:23.1275 | Debug | CaesarTests.TC_1_08_04 
+2018-08-07 09:55:23.1275 | Debug | ExecuteTest_CheckGroupNameAndCourseDevelopmentResearch("Fix Machine","Development & Research","Dp-099-JS") 
+2018-08-07 09:55:23.1275 | Debug | Passed 
+2018-08-07 10:20:13.5007 | Debug | CaesarTests.TC_1_05 
+2018-08-07 10:20:13.5457 | Debug | TestLocationList(" Dnipro,Lviv","Dnipro,Lviv") 
+2018-08-07 10:20:13.5457 | Debug | Passed 
+2018-08-07 10:20:14.6258 | Debug | CaesarTests.TC_1_05 
+2018-08-07 10:20:14.6258 | Debug | TestLocationList(" Chernivtsy,Dnipro,Lviv","Chernivtsy") 
+2018-08-07 10:20:14.6318 | Debug | Passed 
+2018-08-07 10:20:16.3229 | Debug | CaesarTests.TC_1_05 
+2018-08-07 10:20:16.3309 | Debug | TestLocationList(" Chernivtsy,Dnipro,Ivano-Frankivsk,Kyiv,Lviv,Rivne,Sofia","Ivano-Frankivsk,Kyiv,Rivne,Sofia") 
+2018-08-07 10:20:16.3309 | Debug | Passed 
+2018-08-07 10:22:21.4230 | Debug | CaesarTests.TC_1_05_01 
+2018-08-07 10:22:21.4560 | Debug | ExecuteTest_ChooseLocationSofia_UsingDoubleClick_CheckGroupsName 
+2018-08-07 10:22:21.4600 | Debug | Passed 
+2018-08-07 10:22:25.2372 | Debug | CaesarTests.TC_1_05_01 
+2018-08-07 10:22:25.2372 | Debug | ExecuteTest_ChooseLocationSofia_UsingDoubleClick_LocationPageOpened 
+2018-08-07 10:22:25.2372 | Debug | Passed 
+2018-08-07 10:23:13.6530 | Debug | CaesarTests.TC_1_05_03_04 
+2018-08-07 10:23:13.6910 | Debug | ExecuteTest_CancelLocationIvanoFrankivsk_UsingKeyBoard 
+2018-08-07 10:23:13.7030 | Debug | Failed 
+2018-08-07 10:23:17.9603 | Debug | CaesarTests.TC_1_05_03_04 
+2018-08-07 10:23:17.9623 | Debug | ExecuteTest_ChooseLocationRivne_UsingKeyBoard 
+2018-08-07 10:23:17.9623 | Debug | Passed 
+2018-08-07 10:23:40.6286 | Debug | CaesarTests.TC_1_05_03_04 
+2018-08-07 10:23:40.6666 | Debug | ExecuteTest_CancelLocationIvanoFrankivsk_UsingKeyBoard 
+2018-08-07 10:23:40.6666 | Debug | Failed 
+2018-08-07 10:24:00.4417 | Debug | CaesarTests.TC_1_05_03_04 
+2018-08-07 10:24:00.5017 | Debug | ExecuteTest_CancelLocationIvanoFrankivsk_UsingKeyBoard 
+2018-08-07 10:24:00.5107 | Debug | Passed 
+2018-08-07 10:24:04.6759 | Debug | CaesarTests.TC_1_05_03_04 
+2018-08-07 10:24:04.6759 | Debug | ExecuteTest_ChooseLocationRivne_UsingKeyBoard 
+2018-08-07 10:24:04.6759 | Debug | Passed 
