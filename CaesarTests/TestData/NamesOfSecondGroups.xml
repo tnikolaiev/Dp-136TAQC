@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+  <testData name = "The Light side" exeptedResult1 = "Quality Assurance" exeptedResult2="Dp-082-MQC"/>
+  <testData name = "Fluffy Dots" exeptedResult1 = "Quality Assurance" exeptedResult2="Dp-088-MQC"/>
+  <testData name = "Charming Chaos" exeptedResult1 = "Quality Assurance" exeptedResult2="Dp-094-MQC"/>
+</data>
