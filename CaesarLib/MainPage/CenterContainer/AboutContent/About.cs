@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,8 @@ namespace CaesarLib
         private IWebElement qualityAssurance;
         private IWebElement managementAndMentoring;
         private IWebElement additionalThanks;
+        private IWebElement contentHeaderGroupNameHint;
+        private IWebElement contentHeaderGroupNumberHint;
 
         public About(IWebDriver driver)
         {
@@ -75,8 +78,8 @@ namespace CaesarLib
 
         public List<String> GetTitleGroup()
         {
-            IList<IWebElement> elements = driver.FindElements(By.ClassName("ContentAbout row"));
-            List<String> titleGroup = new List<String>();
+            IList<IWebElement> elements = driver.FindElements(By.XPath("//div[@class='ContentAbout row']/div//p"));
+            List <String> titleGroup = new List<String>();
             foreach (var item in elements)
             {
                 titleGroup.Add(item.Text);
@@ -92,13 +95,80 @@ namespace CaesarLib
         public List<String> GetButtonsName(WebDriverWait wait)
         {
             wait.Until((d) => AreAboutButtonVisible());
-            IList<IWebElement> elements = driver.FindElements(By.ClassName("contributors-menu"));
+            IList<IWebElement> elements = driver.FindElements(By.XPath("//div[@class='contributors-menu']/div//p"));
             List<String> buttonNames = new List<String>();
             foreach (var item in elements)
             {
-                buttonNames.Add((item.Text));
+                buttonNames.Add(item.Text);
             }
             return buttonNames;
         }
+
+        public IWebElement ContentHeaderGroupNameHint
+        {
+            get
+            {
+                if (contentHeaderGroupNameHint != null) return contentHeaderGroupNameHint;
+                else
+                {
+                    contentHeaderGroupNameHint = driver.FindElement(By.XPath("//div[@class='content-header-group-name']//p"));
+                    return contentHeaderGroupNameHint;
+                }
+            }
+        }
+
+        public IWebElement ContentHeaderGroupNumberHint
+        {
+            get
+            {
+                if (contentHeaderGroupNumberHint != null) return contentHeaderGroupNumberHint;
+                else
+                {
+                    contentHeaderGroupNumberHint = driver.FindElement(By.XPath("//div[@class='stageView']//p"));
+                    return contentHeaderGroupNumberHint;
+                }
+            }
+        }
+
+        public Func<IWebDriver, IWebElement> IsContentHeaderGroupNameHintVisible()
+        {
+            return ExpectedConditions.ElementIsVisible(By.XPath("//div[@class='content-header-group-name']//p"));
+        }
+
+        public IList<IWebElement> GetTitleGroups()
+        {
+            IList<IWebElement> elements = driver.FindElements(By.XPath("//div[@class='ContentAbout row']/div//p"));
+            List<IWebElement> titleGroup = new List<IWebElement>();
+            foreach (var item in elements)
+            {
+                titleGroup.Add(item);
+            }
+            return titleGroup;
+        }
+
+        public void MoveToAboutCourse(IList<IWebElement> GetTitleGroups, string name)
+        {
+                 foreach (var item in GetTitleGroups)
+                {
+                    if (item.Text == name)
+                    {
+                        Actions actions = new Actions(driver);
+                        actions.MoveToElement(item).Build().Perform();
+                    }
+                }
+        }
+
+        public void ClickToGroupeName(IList<IWebElement> GetTitleGroups, string name)
+        {
+            foreach (var item in GetTitleGroups)
+            {
+                if (item.Text == name)
+                {
+                    Actions actions = new Actions(driver);
+                    actions.MoveToElement(item).Build().Perform();
+                }
+            }
+        }
+
     }
 }

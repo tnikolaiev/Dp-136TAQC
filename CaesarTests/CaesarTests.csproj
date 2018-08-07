@@ -74,6 +74,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TC_1_08_05.cs" />
+    <Compile Include="TC_1_08_04.cs" />
+    <Compile Include="TC_1_08_03.cs" />
+    <Compile Include="TC_1_08_02.cs" />
+    <Compile Include="BaseTest.cs" />
     <Compile Include="Logs\Log4Caesar.cs" />
     <Compile Include="TC_1_08_01.cs" />
     <Compile Include="TC_1_05_05.cs" />
@@ -158,12 +163,17 @@
     <Content Include="TestData\LoginPageInvalidData.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestData\NamesOfSecondGroups.xml" />
+    <Content Include="TestData\NamesOfFirstGroups.xml" />
     <Content Include="TestData\NewGroupsCreationData.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="TestData\StartFinishDateData.xml">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="RightContainer\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

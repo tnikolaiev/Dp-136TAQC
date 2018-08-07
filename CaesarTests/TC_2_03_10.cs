@@ -24,15 +24,13 @@ namespace CaesarTests
 
             //Opening Schedule Page
             MainPageInstance = new MainPage(driver);
-            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
-            MainPageInstance.TopMenu.ScheduleItem.Click();
+            MainPageInstance.OpenScheduleContent(wait);
 
             //Selecting group
             MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
             //Open ScheduleEditor
-            MainPageInstance.CenterContainer.ScheduleContent.ScheduleCogwheell.Click();
-            wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.IsScheduleEditorDisplayed(driver));
+            MainPageInstance.CenterContainer.ScheduleContent.ClickCogwheel(wait);
 
             //Assert GroupName is correct
             string GroupName = MainPageInstance.ModalWindow.EditScheduleWindow.GroupName.Text;

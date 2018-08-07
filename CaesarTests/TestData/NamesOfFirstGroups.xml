@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<data>
+  <testData name = "Team Doloto" exeptedResult1 = "Development &amp; Research" exeptedResult2="Dp-080-UI"/>
+  <testData name = "Floppy-Drive 8" exeptedResult1 = "Development &amp; Research" exeptedResult2="Dp-09-JS"/>
+  <testData name = "Fix Machine" exeptedResult1 = "Development &amp; Research" exeptedResult2="Dp-099-JS"/>
+</data>

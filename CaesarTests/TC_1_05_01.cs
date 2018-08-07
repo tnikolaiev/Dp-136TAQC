@@ -54,9 +54,14 @@ namespace CaesarTests
             Assert.AreEqual(exeptualResultTitle, mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("Sf-089-MQC").Text);
         }
 
+        [TearDown]
+        public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
 
         [OneTimeTearDown]
-        public void CleanUp()
+        public void FinalCleanUp()
         {
             driver.Quit();
         }

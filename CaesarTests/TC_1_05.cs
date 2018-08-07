@@ -58,10 +58,15 @@ namespace CaesarTests
 
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {
             driver.Quit();
         }
 

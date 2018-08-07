@@ -110,5 +110,6 @@ namespace CaesarLib
         {
             return driver.FindElements(By.XPath("//div[@id='modal-window']//div")).Count > 0;
         }
+
     }
 }

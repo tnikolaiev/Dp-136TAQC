@@ -248,9 +248,23 @@ namespace CaesarLib
           Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Work with Expert')]"));
         }
 
+        public void ClickSave(MainPage MainPageInstance, WebDriverWait wait, IWebDriver driver)
+        {
+            SaveButton.Click();
+            wait.Until((d) => MainPageInstance.CenterContainer.ScheduleContent.IsOpened(driver));
+        }
 
+        public void ClickCancel(MainPage MainPageInstance, WebDriverWait wait, IWebDriver driver)
+        {
+           CancelButton.Click();
+           wait.Until((d) => MainPageInstance.CenterContainer.ScheduleContent.IsOpened(driver));
+        }
 
-
+        public void PutEventInCell(MainPage MainPageInstance, IWebElement cell, WebDriverWait wait)
+        {
+            cell.Click();
+            wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.IsActivityExists(cell));
+        }
 
     }
 }

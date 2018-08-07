@@ -13,7 +13,6 @@ namespace CaesarTests
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
         WebDriverWait wait;
-        LocationWindow locationWindowInstance;
         CenterContainer groupLocationInstance;
         TopMenu topMenuInstance;
         MainPage mainPageInstance;
@@ -57,11 +56,16 @@ namespace CaesarTests
             Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {
             driver.Quit();
-            driver.Close();
         }
     }
 }

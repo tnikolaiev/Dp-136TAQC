@@ -144,6 +144,13 @@ namespace CaesarLib
             return new WeekTab(_driverInstance);
         }
 
+        public MonthTab OpenMonthTab(WebDriverWait wait)
+        {
+            MonthButton.Click();
+            wait.Until((d) => MonthTabInstance.IsMonthTabDisplayed(_driverInstance));
+            return new MonthTab(_driverInstance);
+        }
+
         public KeyDatesTab OpenKeyDatesTab(WebDriverWait wait)
         {
             KeyDatesButton.Click();
