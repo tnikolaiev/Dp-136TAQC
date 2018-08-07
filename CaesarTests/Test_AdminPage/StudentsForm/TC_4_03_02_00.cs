@@ -56,7 +56,7 @@ namespace CaesarTests
         {
             studentForm = new CreateEditStudentsForm(driver);
             studentForm.GoToStudents.Click();
-            table = new Table(studentForm.GetTable, driver);
+            table = new Table(studentForm.GetTable);
             studentForm.addStudents();
             studentForm.IsOpened(wait);
         }

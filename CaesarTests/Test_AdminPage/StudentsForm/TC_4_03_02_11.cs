@@ -69,7 +69,7 @@ namespace CaesarTests
             expectedResult = studentForm.RememberStudent();
             index = studentForm.LastNameField.GetAttribute("value");
             studentForm.SubmitButton.Click();
-            table = new Table(studentForm.GetTable, driver);
+            table = new Table(studentForm.GetTable);
 
             Assert.IsTrue(table.FindRowInTable(expectedResult));            
         }

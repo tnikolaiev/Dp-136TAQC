@@ -144,7 +144,6 @@
     <Compile Include="TC_1_04_02.cs" />
     <Compile Include="TC_1_05.cs" />
     <Compile Include="TC_1_05_01.cs" />
-    <Compile Include="TC_4_01.cs" />
     <Compile Include="TC_1_05_02.cs" />
     <Compile Include="Test_AdminPage\TС_4_00_0.cs" />
     <Compile Include="Test_AdminPage\UsersForm\TC_4_01_02_11.cs" />
@@ -156,7 +155,6 @@
     <Compile Include="TestsForScheduleTableClass_ScheduleEditWeekTable.cs" />
     <Compile Include="TestsForScheduleTableClass_ScheduleViewWeekTable.cs" />
     <Compile Include="TestsForTableClass_KeyDatesTable.cs" />
-    <Compile Include="TestsForTableClass.cs" />
     <Compile Include="Test_AdminPage\UsersForm\TC_4-01_02_00.cs" />
     <Compile Include="Test_SelectGroupWindow.cs" />
   </ItemGroup>

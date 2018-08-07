@@ -57,9 +57,8 @@ namespace CaesarTests
         [SetUp]
         public void EditGroupClick()
         {
-            wait.Until((d) => CreateEditGroupsForm.IsAdminPageOpened(d));
             groupsForm = new CreateEditGroupsForm(driver);
-            table = new Table(groupsForm.GetTable, driver);
+            table = new Table(groupsForm.GetTable);
             groupsForm.EditGroup(table.GetRowNumberByValueInCell(index, 0));
             groupsForm.IsOpened(wait);
         }
@@ -131,10 +130,7 @@ namespace CaesarTests
         [OneTimeTearDown]
         public void CleanUp()
         {
-            if (table.FindRowInTable(expectedResult))
-            {
-                groupsForm.DeleteGroup(table.GetRowNumberByValueInCell(index, 0));
-            }
+            groupsForm.DeleteGroup(table.GetRowNumberByValueInCell(index, 0));
             driver.Close();
             driver.Quit();
         }

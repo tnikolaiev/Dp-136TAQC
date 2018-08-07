@@ -61,7 +61,7 @@ namespace CaesarTests
         public void AddUserClick()
         {
             usersForm = new CreateEditUsersForm(driver);
-            table = new Table(usersForm.GetTable, driver);
+            table = new Table(usersForm.GetTable);
             usersForm.addUsers();
             usersForm.IsOpened(wait);
         }

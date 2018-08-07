@@ -45,7 +45,7 @@ namespace CaesarTests
         public void AddUserClick()
         {
             groupsForm = new CreateEditGroupsForm(driver);
-            table = new Table(groupsForm.GetTable, driver);
+            table = new Table(groupsForm.GetTable);
             groupsForm.GoToGroups.Click();
             groupsForm.addGroups();
             groupsForm.IsOpened(wait);

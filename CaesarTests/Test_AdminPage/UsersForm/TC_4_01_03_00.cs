@@ -72,7 +72,7 @@ namespace CaesarTests
         public void EditUser()
         {           
             usersForm = new CreateEditUsersForm(driver);
-            table = new Table(usersForm.GetTable, driver);
+            table = new Table(usersForm.GetTable);
             wait.Until(ExpectedConditions.ElementIsVisible(By.Id("add-new-user")));
             usersForm.EditUser(table.GetRowNumberByValueInCell(index, 5));
             usersForm.IsOpened(wait);
@@ -128,10 +128,7 @@ namespace CaesarTests
         [OneTimeTearDown]
         public void CleanUp()
         {
-            if (table.FindRowInTable(expectedResult))
-            {
-                usersForm.DeleteUser(table.GetRowNumberByValueInCell(index, 5));
-            }
+            usersForm.DeleteUser(table.GetRowNumberByValueInCell(index, 5));            
             driver.Close();
             driver.Quit();
         }

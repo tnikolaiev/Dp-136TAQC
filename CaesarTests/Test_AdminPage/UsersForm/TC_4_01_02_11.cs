@@ -64,7 +64,7 @@ namespace CaesarTests
 
             expectedResult = usersForm.RememberUser();
             index = usersForm.Login.GetAttribute("value");
-            table = new Table(usersForm.GetTable, driver);
+            table = new Table(usersForm.GetTable);
             Assert.IsTrue(table.FindRowInTable(expectedResult));
         }
         [TearDown]
