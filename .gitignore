@@ -259,3 +259,7 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# CaesarLogFiles
+CaesarTests/Logs/log.txt
+CaesarTests/Logs/log.html
