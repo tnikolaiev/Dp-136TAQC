@@ -5,133 +5,40 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
 
 namespace CaesarTests
 {
     [TestFixture]
-    class TC_2_03_1
+    class TC_2_03_1 : BaseTest
     {
-        IWebDriver driver;
-        WebDriverWait wait;
-        string baseURL = "localhost:3000";
-        LoginPage loginPageInstance;
-        ScheduleContent ScheduleContentInstance;        
+        static IEnumerable<object[]> LoginUnderDifferentRoles = Instruments.ReadXML("LoginUnderDifferentRoles.xml", "testData", "login", "password");
+        [Test, TestCaseSource("LoginUnderDifferentRoles")]
 
-        [SetUp]
-        public void BeforeTest()
+        public void IsScheduleEditorAvailable(String login, String password)
         {
-            //Initializations and logging in Caesar
-            driver = new ChromeDriver();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-                        
-        }
-
-        [Test]
-
-        public void IsScheduleEditorAvailableUnderAdmin()
-        {
-            //logging in under admin
+            //Opening Caesar and Logging in
             driver.Url = baseURL;
-            driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn("qwerty", "1234");
+            loginPageInstance.LogIn(login, password, wait);
 
             //Opening Schedule Page
-            TopMenu topMenuInstance = new TopMenu(driver);
-            Actions builder = new Actions(driver);
-            builder.MoveToElement(topMenuInstance.TopMenuSection).Build().Perform();
-            Acts.Click(topMenuInstance.ScheduleItem);
+            MainPageInstance = new MainPage(driver);
+            MainPageInstance.OpenScheduleContent(wait);
 
-
-            //Select group from LeftContainer
-            ScheduleContentInstance = new ScheduleContent(driver);
-            Acts.Click(ScheduleContentInstance
-                .LeftContainerInstance
-                .GroupsInLocation
-                .GetGroupByName("DP-094-MQC"));
+            //Selecting group
+            MainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
 
             //Click on cogweel for ScheduleEditor opening
-            ScheduleContentInstance.ClickCogwheel();
+            MainPageInstance.CenterContainer.ScheduleContent.ScheduleCogwheell.Click();
 
             //Assert ScheduleEditor is displayed
-            Assert.IsTrue(ScheduleContentInstance
-                .EditScheduleWindowInstance
-                .IsScheduleEditorDisplayed(driver));          
+            Assert.IsTrue(wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.IsScheduleEditorDisplayed(driver)));
+
+            //Close ScheduleEditor
+            MainPageInstance.ModalWindow.EditScheduleWindow.CancelButton.Click();
         }
-
-        [Test]
-
-        public void IsScheduleEditorAvailableUnderCoordinator()
-        {
-            //logging in under admin
-            driver.Url = baseURL;
-            driver.Manage().Window.Maximize();
-            loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn("Dmytro", "1234");            
-
-            //Opening Schedule Page
-            TopMenu topMenuInstance = new TopMenu(driver);
-            Actions builder = new Actions(driver);
-            builder.MoveToElement(topMenuInstance.TopMenuSection).Build().Perform();
-            Acts.Click(topMenuInstance.ScheduleItem);
-
-
-            //Select group from LeftContainer
-            ScheduleContentInstance = new ScheduleContent(driver);
-            Acts.Click(ScheduleContentInstance
-                .LeftContainerInstance
-                .GroupsInLocation
-                .GetGroupByName("DP-094-MQC"));
-
-            //Click on cogweel for ScheduleEditor opening
-            ScheduleContentInstance.ClickCogwheel();
-
-            //Assert ScheduleEditor is displayed
-            Assert.IsTrue(ScheduleContentInstance
-                .EditScheduleWindowInstance
-                .IsScheduleEditorDisplayed(driver));
-        }
-
-        [Test]
-
-        public void IsScheduleEditorAvailableUnderTeacher()
-        {
-            //logging in under admin
-            driver.Url = baseURL;
-            driver.Manage().Window.Maximize();
-            loginPageInstance = new LoginPage(driver);
-            loginPageInstance.LogIn("sasha", "1234");
-
-            //Opening Schedule Page
-            TopMenu topMenuInstance = new TopMenu(driver);
-            Actions builder = new Actions(driver);
-            builder.MoveToElement(topMenuInstance.TopMenuSection).Build().Perform();
-            Acts.Click(topMenuInstance.ScheduleItem);
-
-
-            //Select group from LeftContainer
-            ScheduleContentInstance = new ScheduleContent(driver);
-            Acts.Click(ScheduleContentInstance
-                .LeftContainerInstance
-                .GroupsInLocation
-                .GetGroupByName("DP-094-MQC"));
-
-            //Click on cogweel for ScheduleEditor opening
-            ScheduleContentInstance.ClickCogwheel();
-
-            //Assert ScheduleEditor is displayed
-            Assert.IsTrue(ScheduleContentInstance
-                .EditScheduleWindowInstance
-                .IsScheduleEditorDisplayed(driver));
-        }
-
-
-        [TearDown]
-        public void TearDown()
-        {
-            driver.Close();
-        }
+      
     }
 
 }

@@ -12,19 +12,25 @@ namespace CaesarTests
     [TestFixture]
     class TC_1_04_06
     {
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         Actions action;
         WebDriverWait wait;
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
 
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        }
+
         [SetUp]
         public void Initialize()
-        {
-            driver.Manage().Window.Maximize();
+        {            
             driver.Url = "http://localhost:3000/logout";
-            action = new Actions(driver);
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            action = new Actions(driver);            
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("dmytro", "1234", wait);
             mainPageInstance = new MainPage(driver);
@@ -33,7 +39,7 @@ namespace CaesarTests
         static IEnumerable<object[]> StartFinishDateData = Instruments.ReadXML("StartFinishDateData.xml", "testData", "direction", "startDate", "finishDate");
 
         [Test, TestCaseSource("StartFinishDateData")]
-        public void ExecuteTest_EnterStartDate_FinishDateFilled(String direction, String startDate, String finishDate)
+        public void Test_EnterStartDate_FinishDateFilled(String direction, String startDate, String finishDate)
         {
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
@@ -41,13 +47,19 @@ namespace CaesarTests
                 .SetStartDate(startDate);
             groupCreateWindow.GroupNameField.Click();
             String actualResult = groupCreateWindow.FinishDateField.GetAttribute("value");
+            
             Assert.AreEqual(finishDate, actualResult);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {            
             driver.Quit();
         }
     }

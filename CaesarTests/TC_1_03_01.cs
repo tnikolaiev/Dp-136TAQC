@@ -13,9 +13,15 @@ namespace CaesarTests
     {
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         WebDriverWait wait;
         GroupsInLocation groupsList;
+
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+        }
 
         [SetUp]
         public void Initialize()
@@ -31,7 +37,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_FirstSignIn_AvailableGroupsList()
+        public void Test_FirstSignIn_AvailableGroupsList()
         {
             List<String> expectedResult = new List<String> { "Lv-084-QB", "Lv-045-DL", "Lv-023-UX" };
             wait.Until((d) => groupsList.AreGroupsVisible());
@@ -40,7 +46,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_MyGroupsFilterCheckedUnchecked()
+        public void Test_MyGroupsFilterCheckedUnchecked()
         {
             mainPageInstance.LeftContainer.GroupsInLocation.MyGroupsFilter.Click();
             bool isMyGroupsFilterChecked = "myGroups pressed".Equals(groupsList.MyGroupsFilter.GetAttribute("class"));
@@ -50,7 +56,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_MyGroupsFilterChecked_NoneAvailableGroups()
+        public void Test_MyGroupsFilterChecked_NoneAvailableGroups()
         {
             groupsList.MyGroupsFilter.Click();
             List<String> actualResult = groupsList.GetAvailableGroupsNames(wait);
@@ -58,7 +64,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_FutureGroupsFilter()
+        public void Test_FutureGroupsFilter()
         {
             groupsList.FutureGroupsToggle.Click();
             List<String> actualResult = groupsList.GetAvailableGroupsNames(wait);
@@ -66,7 +72,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_EndedGroupsFilter()
+        public void Test_EndedGroupsFilter()
         {
             groupsList.EndedGroupsToggle.Click();
             List<String> expectedResult = new List<String> { "Lv-087-RD", "Lv-077-IOS" };
@@ -75,10 +81,15 @@ namespace CaesarTests
             CollectionAssert.AreEquivalent(expectedResult, actualResult);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {            
             driver.Quit();
         }
     }

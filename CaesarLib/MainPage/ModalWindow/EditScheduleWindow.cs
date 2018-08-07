@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,10 @@ namespace CaesarLib
         private IWebElement _workWithExpertEvent;
         private IWebElement _consultationEvent;
         private IWebElement _practiceEvent;
-        private ScheduleWeekViewAndEdit _scheduleWeekView;
+        private ScheduleWeekTable _scheduleEditWeekTable;
+        private IWebElement _groupName;
+        private IWebElement _prevWeek;
+        private IWebElement _nextWeek;
 
 
         // properties
@@ -47,7 +51,7 @@ namespace CaesarLib
                 if (_cancelButton != null) return _cancelButton;
                 else
                 {
-                    _cancelButton = _driverInstance.FindElement(By.Id("'cancel'"));
+                    _cancelButton = _driverInstance.FindElement(By.Id("cancel"));
                     return _cancelButton;
                 }
             }
@@ -76,6 +80,8 @@ namespace CaesarLib
                 }
             }
         }
+      
+
         public IWebElement EventControl
         {
             get
@@ -148,19 +154,57 @@ namespace CaesarLib
                 }
             }
         }
-        public ScheduleWeekViewAndEdit ScheduleWeekViewAndEditInstance
+        public ScheduleWeekTable ScheduleEditWeekTable
         {
             get
             {
-                if (_scheduleWeekView != null) return _scheduleWeekView;
+                if (_scheduleEditWeekTable != null) return _scheduleEditWeekTable;
                 else
                 {
-                    _scheduleWeekView = new ScheduleWeekViewAndEdit(_driverInstance);
-                    return _scheduleWeekView;
+                    _scheduleEditWeekTable = new ScheduleWeekTable(_driverInstance.FindElement(By.XPath("//div[contains(@class,'Table')]")));
+                    return _scheduleEditWeekTable;
                 }
             }
         }
 
+        public IWebElement GroupName
+        {
+            get
+            {
+                if (_groupName != null) return _groupName;
+                else
+                {
+                    _groupName = _driverInstance.FindElement(By.XPath("//div[@class='header-modal-editSchedule']/span"));
+                    return _groupName;
+                }
+            }
+        }
+
+        public IWebElement PrevWeek
+        {
+            get
+            {
+                if (_prevWeek!= null) return _prevWeek;
+                else
+                {
+                    _prevWeek = _driverInstance.FindElement(By.XPath("//i[@class='fa fa-caret-left prevWeek']"));
+                    return _prevWeek;
+                }
+            }
+        }
+
+        public IWebElement NextWeek
+        {
+            get
+            {
+                if (_nextWeek != null) return _nextWeek;
+                else
+                {
+                    _nextWeek = _driverInstance.FindElement(By.XPath("//i[@class='fa fa-caret-left prevWeek']"));
+                    return _nextWeek;
+                }
+            }
+        }
 
         //constructor 
 
@@ -169,7 +213,6 @@ namespace CaesarLib
         {
             _driverInstance = driverInstance;
         }
-
 
 
         // actions
@@ -183,13 +226,45 @@ namespace CaesarLib
 
         public bool IsScheduleEditorDisplayed(IWebDriver driverInstance)
         {
-            return driverInstance.FindElements(By.ClassName("scheduleEditorWeek-view")).Count > 0 ?
+            return driverInstance.FindElements(By.ClassName("weekView")).Count > 0 ?
                true : false;
         }
 
+        public bool AreQAEventsExist(IWebDriver driver)
+        {
+           return
+           Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Lecture')]")) &
+           Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Weekly report')]"))&
+           Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Consultation')]"))&
+           Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Work with Expert')]"));
+           
+        }
 
+        public bool AreDevEventsExist(IWebDriver driver)
+        {
+          return
+          Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Practice')]")) &
+          Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Weekly report')]")) &          
+          Acts.IsElementPresent(driver, By.XPath("//li[@class='lectures-wrapper-button']/child::label[contains (text(),'Work with Expert')]"));
+        }
 
+        public void ClickSave(MainPage MainPageInstance, WebDriverWait wait, IWebDriver driver)
+        {
+            SaveButton.Click();
+            wait.Until((d) => MainPageInstance.CenterContainer.ScheduleContent.IsOpened(driver));
+        }
 
+        public void ClickCancel(MainPage MainPageInstance, WebDriverWait wait, IWebDriver driver)
+        {
+           CancelButton.Click();
+           wait.Until((d) => MainPageInstance.CenterContainer.ScheduleContent.IsOpened(driver));
+        }
+
+        public void PutEventInCell(MainPage MainPageInstance, IWebElement cell, WebDriverWait wait)
+        {
+            cell.Click();
+            wait.Until((d) => MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.IsActivityExists(cell));
+        }
 
     }
 }

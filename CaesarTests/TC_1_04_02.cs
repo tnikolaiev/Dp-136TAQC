@@ -14,16 +14,21 @@ namespace CaesarTests
     {
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         WebDriverWait wait;
         Actions action;
 
-        [SetUp]
-        public void Initialize()
+        [OneTimeSetUp]
+        public void FirstInitialize()
         {
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            driver = new ChromeDriver();
             driver.Manage().Window.Maximize();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        }
+
+        [SetUp]
+        public void Initialize()
+        {                     
             driver.Url = @"http://localhost:3000/logout";
             action = new Actions(driver);
         }
@@ -31,7 +36,7 @@ namespace CaesarTests
         static object[] CoordAdminCredentials = { new String[] { "dmytro", "1234" }, new String[] { "artur", "1234" } };
 
         [Test, TestCaseSource("CoordAdminCredentials")]
-        public void ExecuteTest_SignInAsCoordinatorOrAdmin_TwoButtonsAvailable(String login, String password)
+        public void Test_SignInAsCoordinatorOrAdmin_TwoButtonsAvailable(String login, String password)
         {
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn(login, password, wait);
@@ -40,11 +45,12 @@ namespace CaesarTests
 
             List<String> expectedResult = new List<String> { "Create", "Search" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
+            
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
         [Test, TestCaseSource("CoordAdminCredentials")]
-        public void ExecuteTest_SignInAsCoordinatorOrAdmin_CheckGroup_FourButtonsAvailable(String login, String password)
+        public void Test_SignInAsCoordinatorOrAdmin_CheckGroup_FourButtonsAvailable(String login, String password)
         {
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn(login, password, wait);
@@ -55,13 +61,14 @@ namespace CaesarTests
 
             List<String> expectedResult = new List<String> { "Create", "Search", "Edit", "Delete" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
+            
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
         static object[] TeacherCredentials = { new String[] { "sasha", "1234" } };
 
         [Test, TestCaseSource("TeacherCredentials")]
-        public void ExecuteTest_SignInAsTeacher_OneButtonsAvailable(String login, String password)
+        public void Test_SignInAsTeacher_OneButtonsAvailable(String login, String password)
         {
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn(login, password, wait);
@@ -70,11 +77,12 @@ namespace CaesarTests
 
             List<String> expectedResult = new List<String> { "Search" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
+            
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
         [Test, TestCaseSource("TeacherCredentials")]
-        public void ExecuteTest_SignInAsTeacher_CheckGroup_OneButtonsAvailable(String login, String password)
+        public void Test_SignInAsTeacher_CheckGroup_OneButtonsAvailable(String login, String password)
         {
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn(login, password, wait);
@@ -85,13 +93,19 @@ namespace CaesarTests
 
             List<String> expectedResult = new List<String> { "Search" };
             List<String> actualResult = mainPageInstance.LeftMenu.GetAvailableButtonsTitles();
+            
             CollectionAssert.AreEqual(expectedResult, actualResult);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {            
             driver.Quit();
         }
     }

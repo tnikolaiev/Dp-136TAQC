@@ -23,11 +23,50 @@ namespace CaesarLib
         public IWebElement CancelButton { get => webDriver.FindElement(By.ClassName("close-modal-window")); }
         public IWebElement RemoveCVButton { get => webDriver.FindElement(By.ClassName("remove-cv")); }
         public IWebElement RemovePhotoButton { get => webDriver.FindElement(By.ClassName("remove-photo")); }
+        public IWebElement Hint { get=> webDriver.FindElement(By.ClassName("hint")); }
         public EditStudentWindow(IWebDriver webDriver)
         {
             this.webDriver = webDriver;
         }
-        public static bool IsEditStudentWindowOpened(IWebDriver driver)
+        public bool IsHintVisible()
+        {
+            return Acts.IsElementVisible(webDriver, By.ClassName("hint"));
+        }
+        public EditStudentWindow setFirstName(string firstName)
+        {
+            FirstName.Clear();
+            FirstName.SendKeys(firstName);
+            return this;
+        }
+        public EditStudentWindow setLastName(string lastName)
+        {
+            LastName.Clear();
+            LastName.SendKeys(lastName);
+            return this;
+        }
+        public EditStudentWindow setEnglishLevel(int englishLevelIndex)
+        {
+            Acts.SelectOptionFromDDL(EnglishLevel, englishLevelIndex);
+            return this;
+        }
+        public EditStudentWindow setIncomingTest(string incomingTest)
+        {
+            IncomingTest.Clear();
+            IncomingTest.SendKeys(incomingTest);
+            return this;
+        }
+        public EditStudentWindow setEntryScore(string entryScore)
+        {
+            EntryScore.Clear();
+            EntryScore.SendKeys(entryScore);
+            return this;
+        }
+        public EditStudentWindow setApprovedBy(int approvedBy)
+        {
+            Acts.SelectOptionFromDDL(ApprovedBy, approvedBy);
+            return this;
+        }
+        public static bool IsOpened(IWebDriver driver)
         {
             if (driver.FindElements(By.ClassName("BrowsePhoto")).Count > 0 &&
                 driver.FindElements(By.ClassName("BrowseCV")).Count > 0 &&
@@ -52,15 +91,7 @@ namespace CaesarLib
         }
         public static String GetTestFile(String fileName)
         {
-            Dictionary<String, String> fileNamePathPairs = new Dictionary<String, String>();
-
-            String[] files = Directory.GetFiles(@"DP-136TAQC\CaesarTests\TC_3_04 files");
-
-            for (int i = 0; i < files.Length; i++)
-            {
-                fileNamePathPairs.Add(Path.GetFileName(files[i]), Path.GetFullPath(files[i]));
-            }
-            return fileNamePathPairs[fileName];
+            return Path.GetFullPath(AppDomain.CurrentDomain.BaseDirectory + @"..\..\TC_3_04 files\" + fileName);
         }
     }
 }

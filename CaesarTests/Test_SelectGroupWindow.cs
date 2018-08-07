@@ -44,7 +44,7 @@ namespace CaesarTests
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-094-MQC").Click();
             //Click cogwheel button to edit schedule content -> SelectGroupWindow is opened
             mainPageInstance.CenterContainer.ScheduleContent.ScheduleCogwheell.Click();
-            wait.Until((driver)=>SelectGroupWindow.IsSelectGroupWindowOpened(driver));
+            wait.Until((driver) => mainPageInstance.ModalWindow.SelectGroupWindow.IsSelectGroupWindowOpened(driver));
             CollectionAssert.AreEquivalent(expected, mainPageInstance.ModalWindow.SelectGroupWindow.GetSelectedGroupNames());
         }
         [Test]
@@ -54,6 +54,11 @@ namespace CaesarTests
             mainPageInstance.ModalWindow.SelectGroupWindow.GetGroupByName("DP-093-JS").Click();
             mainPageInstance.ModalWindow.SelectGroupWindow.SaveButton.Click();
             Assert.IsTrue(mainPageInstance.ModalWindow.EditScheduleWindow.IsScheduleEditorDisplayed(webDriver));
+        }
+        [TearDown]
+        public void CleanUp()
+        {
+            Log4Caesar.Log();
         }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()

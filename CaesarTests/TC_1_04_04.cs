@@ -11,19 +11,27 @@ namespace CaesarTests
     [TestFixture]
     class TC_1_04_04
     {
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         WebDriverWait wait;
         Actions action;
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
 
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);            
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        }
+
         [SetUp]
         public void Initialize()
         {
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            driver.Manage().Window.Maximize();
+            
             driver.Url = @"http://localhost:3000/logout";
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+           
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("dmytro", "1234", wait);
             mainPageInstance = new MainPage(driver);
@@ -31,45 +39,59 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_SelectGroup_ClickDeleteButton_GroupDeleteConfirmantionWindowOpened()
+        public void Test_SelectGroup_ClickDeleteButton_GroupDeleteConfirmantionWindowOpened()
         {
             var groupDeleteConfirmantionWindow = mainPageInstance.ModalWindow.GroupDeleteConfirmationWindow;
+            var leftMenu = mainPageInstance.LeftMenu;
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS", wait).Click();
-            mainPageInstance.LeftMenu.Open(action, wait);
-            mainPageInstance.LeftMenu.DeleteButton.Click();
+            leftMenu.Open(action, wait);            
+            wait.Until((d) => leftMenu.IsDeleteButtonVisible());
+            (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].click();", leftMenu.DeleteButton);
+            
             Assert.IsTrue(wait.Until((d) => groupDeleteConfirmantionWindow.IsOpened()));
         }
 
         [Test]
-        public void ExecuteTest_ClickCancelButton_GroupDeleteConfirmantionWindowClosed()
+        public void Test_ClickCancelButton_GroupDeleteConfirmantionWindowClosed()
         {
             var groupDeleteConfirmantionWindow = mainPageInstance.ModalWindow.GroupDeleteConfirmationWindow;
+            var leftMenu = mainPageInstance.LeftMenu;
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS", wait).Click();
-            mainPageInstance.LeftMenu.Open(action, wait);
-            mainPageInstance.LeftMenu.DeleteButton.Click();
+            leftMenu.Open(action, wait);
+            wait.Until((d) => leftMenu.IsDeleteButtonVisible());
+            (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].click();", leftMenu.DeleteButton);
             wait.Until((d) => groupDeleteConfirmantionWindow.IsCancelButtonVisible());
             groupDeleteConfirmantionWindow.CancelButton.Click();
             bool isGroupDeleteConfirmationWindowClosed = wait.Until((d) => !groupDeleteConfirmantionWindow.IsOpened());
+            
             Assert.IsTrue(isGroupDeleteConfirmationWindowClosed);
         }
 
         [Test]
-        public void ExecuteTest_PressEscKey_GroupDeleteConfirmantionWindowOpenedClosed()
+        public void Test_PressEscKey_GroupDeleteConfirmantionWindowOpenedClosed()
         {
             var groupDeleteConfirmantionWindow = mainPageInstance.ModalWindow.GroupDeleteConfirmationWindow;
+            var leftMenu = mainPageInstance.LeftMenu;
             mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("DP-093-JS", wait).Click();
-            mainPageInstance.LeftMenu.Open(action, wait);
-            mainPageInstance.LeftMenu.DeleteButton.Click();
+            leftMenu.Open(action, wait);
+            wait.Until((d) => leftMenu.IsDeleteButtonVisible());
+            (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].click();", leftMenu.DeleteButton);
             wait.Until((d) => groupDeleteConfirmantionWindow.IsOpened());
             action.SendKeys(Keys.Escape).Perform();
             bool isGroupDeleteConfirmationWindowClosed = wait.Until((d) => !groupDeleteConfirmantionWindow.IsOpened());
+            
             Assert.IsTrue(isGroupDeleteConfirmationWindowClosed);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {            
             driver.Quit();
         }
     }

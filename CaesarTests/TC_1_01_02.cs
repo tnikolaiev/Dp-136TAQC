@@ -10,15 +10,21 @@ namespace CaesarTests
     [TestFixture]
     class TC_1_01_02
     {
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         LoginPage loginPageInstance;
         WebDriverWait wait;
+
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        }
 
         [SetUp]
         public void Initialize()
         {
-            driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
             driver.Url = @"http://localhost:3000/logout";
             loginPageInstance = new LoginPage(driver);
         }
@@ -31,16 +37,22 @@ namespace CaesarTests
         };
 
         [Test, TestCaseSource("LoginCredentials")]
-        public void ExecuteTest_LoginWithValidLoginCredentials(String login, String password)
+        public void Test_LoginWithValidLoginCredentials(String login, String password)
         {
             loginPageInstance.LogIn(login, password, wait);
+
             Assert.IsTrue(wait.Until((d) => MainPage.IsMainPageOpened(d)));
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void LastCleanUp()
+        {
             driver.Quit();
         }
     }

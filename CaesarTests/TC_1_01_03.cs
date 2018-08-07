@@ -12,15 +12,21 @@ namespace CaesarTests
     [TestFixture]
     class TC_1_01_03
     {
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         LoginPage loginPageInstance;
         WebDriverWait wait;
+
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+        }
 
         [SetUp]
         public void Initialize()
         {
             driver.Url = @"http://localhost:3000/logout";
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until((d) => LoginPage.IsLoginPageOpened(d));
             loginPageInstance = new LoginPage(driver);
         }
@@ -28,7 +34,7 @@ namespace CaesarTests
         static object[] loginCredentials = { new String[] { "dmytro", "1234" } };
 
         [Test, TestCaseSource("loginCredentials")]
-        public void ExecuteTest_EscKey_EmptyFields(String login, String password)
+        public void Test_EscKey_EmptyFields(String login, String password)
         {
             Acts.InputValue(loginPageInstance.LoginField, login);
             Acts.InputValue(loginPageInstance.PasswordField, password);
@@ -39,7 +45,7 @@ namespace CaesarTests
         }
 
         [Test, TestCaseSource("loginCredentials")]
-        public void ExecuteTest_EnterKey_Login(String login, String password)
+        public void Test_EnterKey_Login(String login, String password)
         {
             Acts.InputValue(loginPageInstance.LoginField, login);
             Acts.InputValue(loginPageInstance.PasswordField, password);
@@ -47,10 +53,15 @@ namespace CaesarTests
             Assert.IsTrue(wait.Until(d => MainPage.IsMainPageOpened(d)));
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {            
             driver.Quit();
         }
     }

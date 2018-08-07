@@ -10,10 +10,16 @@ namespace CaesarTests
     [TestFixture]
     class TC_1_02_02
     {
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
         WebDriverWait wait;
+
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+        }
 
         [SetUp]
         public void Initialize()
@@ -27,17 +33,22 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_ExitButtonClicked_LoginPageOpened()
+        public void Test_ExitButtonClicked_LoginPageOpened()
         {
             mainPageInstance.RightMenu.Open(wait);
             mainPageInstance.RightMenu.SignOutButton.Click();
             Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPageOpened(d)));
         }
-        
-        [OneTimeTearDown]
+
+        [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {            
             driver.Quit();
         }
     }

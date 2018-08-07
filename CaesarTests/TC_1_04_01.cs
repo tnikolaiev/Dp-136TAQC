@@ -13,15 +13,21 @@ namespace CaesarTests
     {
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         WebDriverWait wait;
+
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+        }
 
         [SetUp]
         public void Initialize()
         {
             //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
             driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Url = @"http://localhost:3000/logout";
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("sasha", "1234", wait);
@@ -29,7 +35,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_CursorToLeftBorder_LeftMenuOpened()
+        public void Test_CursorToLeftBorder_LeftMenuOpened()
         {
             Actions acts = new Actions(driver);
             mainPageInstance.LeftMenu.Open(acts, wait);
@@ -37,7 +43,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_CursorFocusOutOfMenu_LeftMenuClosed()
+        public void Test_CursorFocusOutOfMenu_LeftMenuClosed()
         {
             Actions acts = new Actions(driver);
             mainPageInstance.LeftMenu.Open(acts, wait);
@@ -46,10 +52,15 @@ namespace CaesarTests
             Assert.IsTrue(isLeftMenuClosed);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {            
             driver.Quit();
         }
     }

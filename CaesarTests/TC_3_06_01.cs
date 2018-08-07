@@ -33,19 +33,24 @@ namespace CaesarTests
             mainPageInstance = new MainPage(webDriver);
             //Go to group's LV-023-UX students page
             webDriver.Url = baseURL + "/Students/Lviv/Lv-023-UX/list";
-            wait.Until((d) => StudentsContent.IsStudentsContentOpened(d));
+            wait.Until((d) => StudentsContent.IsOpened(d));
             //Open modal window 'EditStudentListWindow'
             mainPageInstance.CenterContainer.StudentsContent.EditButton.Click();
-            wait.Until((d) => EditStudentListWindow.IsEditStudentListWindowOpened(d));
+            wait.Until((d) => EditStudentListWindow.IsOpened(d));
         }
         [Test]
         public void ExecuteTest_ImportStudentList_ListImported()
         {
             mainPageInstance.ModalWindow.EditStudentListWindow.ImportStudentsButton.Click();
-            path = EditStudentListWindow.GetTestFile("TC_3_06_01 ValidStudentList.txt");
+            path = EditStudentListWindow.GetTestFile("TC_3_06_01-03.txt");
             Acts.UploadFile(path);
             mainPageInstance.ModalWindow.EditStudentListWindow.SaveFormButton.Click();
             Assert.AreEqual(4, mainPageInstance.ModalWindow.EditStudentListWindow.Students.Count);
+        }
+        [TearDown]
+        public void CleanUp()
+        {
+            Log4Caesar.Log();
         }
         [OneTimeTearDown]
         public void OneTimeTearDownTest()

@@ -11,10 +11,16 @@ namespace CaesarTests
     [TestFixture]
     class TC_1_02_01
     {
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
         WebDriverWait wait;
+
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+        }
 
         [SetUp]
         public void Initialize()
@@ -28,14 +34,14 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_ProfileButtonClick_RightMenuOpened()
+        public void Test_ProfileButtonClick_RightMenuOpened()
         {
             mainPageInstance.RightMenu.Open(wait);
             Assert.IsTrue(mainPageInstance.RightMenu.IsOpened());
         }
 
         [Test]
-        public void Executetest_DropMouseFocus_RightMenuClosed()
+        public void Test_DropMouseFocus_RightMenuClosed()
         {
             Actions act = new Actions(driver);
             mainPageInstance.RightMenu.Open(wait);
@@ -47,10 +53,15 @@ namespace CaesarTests
             Assert.IsTrue(isRightMenuClosed);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {            
             driver.Quit();
         }
     }

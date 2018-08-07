@@ -12,7 +12,7 @@ namespace CaesarTests
     [TestFixture]
     class TC_1_04_07
     {
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         Actions action;
         WebDriverWait wait;
         LoginPage loginPageInstance;
@@ -33,13 +33,19 @@ namespace CaesarTests
             ["expNameLength"] = "Name should be from 5 to 25 chars."
         };
 
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        }
+
         [SetUp]
         public void Initialize()
         {
-            driver.Manage().Window.Maximize();
             driver.Url = "http://localhost:3000/logout";
             action = new Actions(driver);
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("dmytro", "1234", wait);
             mainPageInstance = new MainPage(driver);
@@ -48,7 +54,7 @@ namespace CaesarTests
         }
 
         [Test]
-        public void ExecuteTest_EmptyFieldsClickConfirm_FourHintsDisplayed()
+        public void Test_EmptyFieldsClickConfirm_FourHintsDisplayed()
         {
             groupCreateWindow.SaveGroupButton.Click();
             wait.Until((d) => groupCreateWindow.IsGroupNameHintVisible());
@@ -56,6 +62,7 @@ namespace CaesarTests
             bool emptyDirection = warnings["emptyDirection"].Equals(groupCreateWindow.DirectionHint.GetAttribute("textContent").Trim());
             bool emptyStartDate = warnings["emptyStartDate"].Equals(groupCreateWindow.StartDateHint.GetAttribute("textContent").Trim());
             bool emptyFinishDate = warnings["emptyFinishDate"].Equals(groupCreateWindow.FinishDateHint.GetAttribute("textContent").Trim());
+            
             Assert.IsTrue(emptyGroupName & emptyDirection & emptyStartDate & emptyFinishDate);
         }
 
@@ -63,17 +70,19 @@ namespace CaesarTests
             "testData", "groupNameInvalid", "startDateInvalid");
 
         [Test, TestCaseSource("GroupNameStartDateInvalidData")]
-        public void ExecuteTest_GroupNameStardDateInvalidData_Warns(String groupNameInvalid, String startDateInvalid)
+        public void Test_GroupNameStardDateInvalidData_Warns(String groupNameInvalid, String startDateInvalid)
         {
             groupCreateWindow
                 .SetStartDate(startDateInvalid)
                 .SetGroupName(groupNameInvalid);
             groupCreateWindow.SaveGroupButton.Click();
-
             bool isGroupCreateWindowOpened = groupCreateWindow.IsOpened();
+            wait.Until((d) => groupCreateWindow.IsGroupNameHintVisible());
             bool invalidGroupNameWarn = warnings["groupNameInvalid"].Equals(groupCreateWindow.GroupNameHint.GetAttribute("textContent").Trim());
+            wait.Until((d) => groupCreateWindow.IsStartDateHintVisible());
             bool invalidStartDateWarn = warnings["wrongDateFormat"].Equals(groupCreateWindow.StartDateHint.GetAttribute("textContent").Trim());
             bool invalidDateFinishDataValue = "Invalid date".Equals(groupCreateWindow.FinishDateField.GetAttribute("value"));
+            
             Assert.IsTrue(isGroupCreateWindowOpened & invalidGroupNameWarn & invalidStartDateWarn & invalidDateFinishDataValue);
         }
 
@@ -81,12 +90,14 @@ namespace CaesarTests
             "testData", "groupNameMinLength");
 
         [Test, TestCaseSource("GroupNameMinLengthData")]
-        public void ExecuteTest_GroupNameBelowLowerBoundary_Warn(String groupNameMinLength)
+        public void Test_GroupNameBelowLowerBoundary_Warn(String groupNameMinLength)
         {
             groupCreateWindow.SetGroupName(groupNameMinLength);
             groupCreateWindow.SaveGroupButton.Click();
             bool isGroupCreateWindowOpened = groupCreateWindow.IsOpened();
+            wait.Until((d) => groupCreateWindow.IsGroupNameHintVisible());
             bool symbolsDeficiencyWarn = warnings["groupNameMinLength"].Equals(groupCreateWindow.GroupNameHint.GetAttribute("textContent").Trim());
+            
             Assert.IsTrue(isGroupCreateWindowOpened & symbolsDeficiencyWarn);
         }
 
@@ -94,12 +105,14 @@ namespace CaesarTests
      "testData", "groupNameMaxLength");
 
         [Test, TestCaseSource("GroupNameMaxLengthData")]
-        public void Executetest_GroupNameAboveMaxBoundary_Warn(String groupNameMaxLength)
+        public void Test_GroupNameAboveMaxBoundary_Warn(String groupNameMaxLength)
         {
             groupCreateWindow.SetGroupName(groupNameMaxLength);
             groupCreateWindow.SaveGroupButton.Click();
             bool isGroupCreateWindowOpened = groupCreateWindow.IsOpened();
+            wait.Until((d) => groupCreateWindow.IsGroupNameHintVisible());
             bool symbolsExcessWarn = warnings["groupNameMaxLength"].Equals(groupCreateWindow.GroupNameHint.GetAttribute("textContent").Trim());
+            
             Assert.IsTrue(isGroupCreateWindowOpened & symbolsExcessWarn);
         }
 
@@ -107,12 +120,14 @@ namespace CaesarTests
      "testData", "expertNameSpecSymb");
 
         [Test, TestCaseSource("ExpertNameInvalidData")]
-        public void Executetest_ExpertNameInvalidData_Warn(String expertNameSpecSymb)
+        public void Test_ExpertNameInvalidData_Warn(String expertNameSpecSymb)
         {
             groupCreateWindow.AddExpertButton.Click();
             groupCreateWindow
                 .SetExpertName(expertNameSpecSymb)
                 .AcceptInputExpertButton.Click();
+            wait.Until((d) => groupCreateWindow.IsExpertHintVisible());
+            
             Assert.AreEqual(warnings["expNameSpecSymbolsNA"], groupCreateWindow.ExpertHint.GetAttribute("textContent").Trim());
         }
 
@@ -120,18 +135,25 @@ namespace CaesarTests
     "testData", "expertNameMinMaxLength");
 
         [Test, TestCaseSource("ExpertInputMinMaxBoundaryData")]
-        public void Executetest_ExpertBeyondMinMaxBoundary_Warn(String expertNameMinMaxLength)
+        public void Test_ExpertBeyondMinMaxBoundary_Warn(String expertNameMinMaxLength)
         {
             groupCreateWindow.AddExpertButton.Click();
             groupCreateWindow.SetExpertName(expertNameMinMaxLength)
                 .AcceptInputExpertButton.Click();
+            wait.Until((d) => groupCreateWindow.IsExpertHintVisible());
+            
             Assert.AreEqual(warnings["expNameLength"], groupCreateWindow.ExpertHint.GetAttribute("textContent").Trim());
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {
             driver.Quit();
         }
     }

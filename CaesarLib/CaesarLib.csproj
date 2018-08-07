@@ -44,8 +44,13 @@
       <HintPath>..\packages\NUnit.3.10.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,11 +58,11 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WebDriver, Version=3.13.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.WebDriver.3.13.1\lib\net45\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=3.14.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.14.0\lib\net45\WebDriver.dll</HintPath>
     </Reference>
-    <Reference Include="WebDriver.Support, Version=3.13.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Selenium.Support.3.13.1\lib\net45\WebDriver.Support.dll</HintPath>
+    <Reference Include="WebDriver.Support, Version=3.14.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.3.14.0\lib\net45\WebDriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -66,17 +71,21 @@
     <Compile Include="AdminPage\CreateEditUsersForm.cs" />
     <Compile Include="AdminPage\CreateEditGroupsForm.cs" />
     <Compile Include="Instruments.cs" />
+    <Compile Include="MainPage\CenterContainer\AboutContent\About.cs" />
     <Compile Include="MainPage\CenterContainer\GroupsContent\GroupsContent.cs" />
+    <Compile Include="MainPage\CenterContainer\GroupsContent\InfoPage.cs" />
+    <Compile Include="MainPage\CenterContainer\GroupsContent\MessagePage.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleContent.cs" />
-    <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleKeyDatesTab.cs" />
+    <Compile Include="MainPage\CenterContainer\ScheduleContent\WeekTab.cs" />
+    <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleWeekTable.cs" />
     <Compile Include="MainPage\CenterContainer\StudentsContent\StudentsContent.cs" />
     <Compile Include="MainPage\LeftContainer\AboutMenu.cs" />
+    <Compile Include="MainPage\ModalWindow\ModalWindow.cs" />
     <Compile Include="MainPage\ModalWindow\SelectGroupWindow.cs" />
     <Compile Include="MainPage\ModalWindow\GroupCreateWindow.cs" />
     <Compile Include="MainPage\ModalWindow\GroupDeleteConfirmationWindow.cs" />
     <Compile Include="MainPage\ModalWindow\EditStudentListWindow.cs" />
     <Compile Include="MainPage\ModalWindow\EditStudentWindow.cs" />
-    <Compile Include="MainPage\ModalWindow\ModalWindow.cs" />
     <Compile Include="MainPage\ModalWindow\EditScheduleWindow.cs" />
     <Compile Include="MainPage\CenterContainer\CenterContainer.cs" />
     <Compile Include="MainPage\ModalWindow\LocationWindow.cs" />
@@ -88,19 +97,15 @@
     <Compile Include="MainPage\MainPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MainPage\RightMenu.cs" />
-    <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleMonthView.cs" />
-    <Compile Include="MainPage\CenterContainer\ScheduleContent\ScheduleWeekViewAndEdit.cs" />
+    <Compile Include="MainPage\CenterContainer\ScheduleContent\KeyDatesTab.cs" />
+    <Compile Include="MainPage\CenterContainer\ScheduleContent\MonthTab.cs" />
     <Compile Include="MainPage\TopMenu.cs" />
     <Compile Include="Table.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MainPage\CenterContainer\AboutContent\" />
     <Folder Include="MainPage\RightContainer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

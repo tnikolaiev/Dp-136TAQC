@@ -45,12 +45,9 @@ namespace CaesarLib
         {
             get
             {
-                if (_editScheduleWindow != null) return _editScheduleWindow;
-                else
-                {
-                    _editScheduleWindow = new EditScheduleWindow(driver);
+                   _editScheduleWindow = new EditScheduleWindow(driver);
                     return _editScheduleWindow;
-                }
+                
             }
         }
 
@@ -113,5 +110,6 @@ namespace CaesarLib
         {
             return driver.FindElements(By.XPath("//div[@id='modal-window']//div")).Count > 0;
         }
+
     }
 }

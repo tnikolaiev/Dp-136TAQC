@@ -1,23 +1,27 @@
 ﻿using CaesarLib;
 using NUnit.Framework;
+using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace CaesarTests
 {
     [TestFixture]
     public class TC_1_01_01
     {
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         WebDriverWait wait;
 
-        [SetUp]
-        public void Initialization()
+        [OneTimeSetUp]
+        public void FirstInitialize()
         {
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            driver = new ChromeDriver();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         static List<String> LinksList = new List<String> { @"http://localhost:3000", @"http://localhost:3000/Groups/Dnipro", @"http://localhost:3000/admin" };
@@ -25,14 +29,20 @@ namespace CaesarTests
         [Test, TestCaseSource("LinksList")]
         public void Test_NavigateToLinks_LoginPageOpened(String link)
         {
+
             driver.Url = link;
             Assert.IsTrue(wait.Until((d) => LoginPage.IsLoginPageOpened(driver)));
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {
             driver.Quit();
         }
     }

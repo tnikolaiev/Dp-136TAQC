@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace CaesarLib
 {
@@ -13,11 +14,10 @@ namespace CaesarLib
         private IWebElement _monthButton;
         private IWebElement _weekButton;
         private IWebElement _keyDatesButton;
+        private WeekTab _weekTabInstance;
+        private MonthTab _monthTabInstance;        
+        private KeyDatesTab _keyDatesTabInstance;       
         private EditScheduleWindow _editScheduleWindowInstance;
-        private ScheduleMonthView _scheduleMonthViewInstance;
-        private ScheduleWeekViewAndEdit _scheduleWeekViewInstance;
-        private ScheduleKeyDatesTab _scheduleKeyDatesInstance;
-        private LeftContainer _leftContainerInstance;
 
         //Constructor  
 
@@ -77,76 +77,93 @@ namespace CaesarLib
                 }
             }
         }
+        
+        public MonthTab MonthTabInstance
+        {
+            get
+            {
+                if (_monthTabInstance != null) return _monthTabInstance;
+                else
+                {
+                    _monthTabInstance = new MonthTab(_driverInstance);
+                    return _monthTabInstance;
+                }
+            }
+        }
+
+        public WeekTab WeekTabInstance
+        {
+            get
+            {
+                if (_weekTabInstance != null) return _weekTabInstance;
+                else
+                {
+                    _weekTabInstance = new WeekTab(_driverInstance);
+                    return _weekTabInstance;
+                }
+            }
+        }
+
+        public KeyDatesTab KeyDatesTabInstance
+        {
+            get
+            {
+                if (_keyDatesTabInstance != null) return _keyDatesTabInstance;
+                else
+                {
+                    _keyDatesTabInstance = new KeyDatesTab(_driverInstance);
+                    return _keyDatesTabInstance;
+                }
+            }
+        }
+
         public EditScheduleWindow EditScheduleWindowInstance
         {
             get
             {
-                if (_editScheduleWindowInstance != null) return _editScheduleWindowInstance;
-                else
-                {
+                
                     _editScheduleWindowInstance = new EditScheduleWindow(_driverInstance);
                     return _editScheduleWindowInstance;
-                }
             }
         }
-        public ScheduleMonthView ScheduleMonthViewInstance
-        {
-            get
-            {
-                if (_scheduleMonthViewInstance != null) return _scheduleMonthViewInstance;
-                else
-                {
-                    _scheduleMonthViewInstance = new ScheduleMonthView(_driverInstance);
-                    return _scheduleMonthViewInstance;
-                }
-            }
-        }
-        public ScheduleWeekViewAndEdit ScheduleWeekViewAndEditInstance
-        {
-            get
-            {
-                if (_scheduleWeekViewInstance != null) return _scheduleWeekViewInstance;
-                else
-                {
-                    _scheduleWeekViewInstance = new ScheduleWeekViewAndEdit(_driverInstance);
-                    return _scheduleWeekViewInstance;
-                }
-            }
-        }
-        public ScheduleKeyDatesTab ScheduleKeyDatesInstance
-        {
-            get
-            {
-                if (_scheduleKeyDatesInstance != null) return _scheduleKeyDatesInstance;
-                else
-                {
-                    _scheduleKeyDatesInstance = new ScheduleKeyDatesTab(_driverInstance);
-                    return _scheduleKeyDatesInstance;
-                }
-            }
-        }
-
-        public LeftContainer LeftContainerInstance
-        {
-            get
-            {
-                if (_leftContainerInstance != null) return _leftContainerInstance;
-                else
-                {
-                    _leftContainerInstance = new LeftContainer(_driverInstance);
-                    return _leftContainerInstance;
-                }
-            }
-        }
+        
 
         //Actions
 
-        public EditScheduleWindow ClickCogwheel()
+        public EditScheduleWindow ClickCogwheel(WebDriverWait wait)
         {
             ScheduleCogwheell.Click();
+            wait.Until((d) => EditScheduleWindowInstance.IsScheduleEditorDisplayed(_driverInstance));
             return new EditScheduleWindow(_driverInstance);
         }
 
+        public WeekTab OpenWeekTab(WebDriverWait wait)
+        {            
+            WeekButton.Click();
+            wait.Until((d) => WeekTabInstance.IsWeekTabDisplayed(_driverInstance));
+            return new WeekTab(_driverInstance);
+        }
+
+        public MonthTab OpenMonthTab(WebDriverWait wait)
+        {
+            MonthButton.Click();
+            wait.Until((d) => MonthTabInstance.IsMonthTabDisplayed(_driverInstance));
+            return new MonthTab(_driverInstance);
+        }
+
+        public KeyDatesTab OpenKeyDatesTab(WebDriverWait wait)
+        {
+            KeyDatesButton.Click();
+            wait.Until((d) =>KeyDatesTabInstance.IsKeyDatesDisplayed(_driverInstance));
+            return new KeyDatesTab(_driverInstance);
+        }
+
+        public bool IsOpened(IWebDriver driver)
+        {
+            return driver.FindElements(By.ClassName("scheduleView")).Count > 0 ?
+               true : false;
+        }
+         
     }
 }
 

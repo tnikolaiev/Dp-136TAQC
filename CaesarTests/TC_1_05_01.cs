@@ -4,8 +4,6 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
-using OpenQA.Selenium.Interactions;
-using System.Threading;
 
 namespace CaesarTests
 {
@@ -15,13 +13,12 @@ namespace CaesarTests
         IWebDriver driver = new ChromeDriver();
         LoginPage loginPageInstance;
         WebDriverWait wait;
-        LocationWindow locationWindowInstance;
         CenterContainer groupLocationInstance;
         TopMenu topMenuInstance;
         MainPage mainPageInstance;
+        GroupsInLocation groupsInLocationInstance;
 
-        [OneTimeSetUp]
-       // [SetUp]
+        [SetUp]
         public void Initialize()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
@@ -29,28 +26,42 @@ namespace CaesarTests
             driver.Manage().Window.Maximize();
             loginPageInstance = new LoginPage(driver);
             wait.Until((d) => LoginPage.IsLoginPageOpened(d));
-            loginPageInstance.LogIn("sasha", "1234");
+            loginPageInstance.LogIn("dmytro", "1234");
             wait.Until((d) => MainPage.IsMainPageOpened(d));
             mainPageInstance = new MainPage(driver);
 
         }
         [Test]
-        public void ExecuteTest_ChooseLocationChernivtsy_LocationPageOpened()
+        public void ExecuteTest_ChooseLocationSofia_UsingDoubleClick_LocationPageOpened()
         {
-            TopMenu topMenuInstance = mainPageInstance.MoveToTopMenu();
+            topMenuInstance = mainPageInstance.MoveToTopMenu();
             Acts.Click(topMenuInstance.LocationsItem);
-            locationWindowInstance = new LocationWindow(driver);
-            Acts.Click(locationWindowInstance.CityChernivtsy);
-            Acts.Click(locationWindowInstance.ConfurmButton);
-            string exeptualResultTitle = "Chernivtsy";
+            mainPageInstance.DoubleClick(mainPageInstance.ModalWindow.LocationWindow.CitySofia);
+            string exeptualResultTitle = "Sofia";
             groupLocationInstance = new CenterContainer(driver);
             Console.WriteLine(groupLocationInstance.GroupLocation.Text);
             Assert.AreEqual(exeptualResultTitle, groupLocationInstance.GroupLocation.Text);
         }
 
+        [Test]
+        public void ExecuteTest_ChooseLocationSofia_UsingDoubleClick_CheckGroupsName()
+        {
+            topMenuInstance = mainPageInstance.MoveToTopMenu();
+            Acts.Click(topMenuInstance.LocationsItem);
+            mainPageInstance.DoubleClick(mainPageInstance.ModalWindow.LocationWindow.CitySofia);
+            string exeptualResultTitle = "Sf-089-MQC";
+            Console.WriteLine(mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("Sf-089-MQC").Text);
+            Assert.AreEqual(exeptualResultTitle, mainPageInstance.LeftContainer.GroupsInLocation.GetGroupByName("Sf-089-MQC").Text);
+        }
+
+        [TearDown]
+        public void CleanUp()
+        {
+            Log4Caesar.Log();
+        }
 
         [OneTimeTearDown]
-        public void CleanUp()
+        public void FinalCleanUp()
         {
             driver.Quit();
         }

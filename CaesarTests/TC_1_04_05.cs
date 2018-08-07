@@ -14,29 +14,36 @@ namespace CaesarTests
     {
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
-        IWebDriver driver = new ChromeDriver();
+        IWebDriver driver;
         WebDriverWait wait;
         Actions action;
+
+        [OneTimeSetUp]
+        public void FirstInitialize()
+        {
+            driver = new ChromeDriver();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
+            driver.Manage().Window.Maximize();
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+        }
 
         [SetUp]
         public void Initialize()
         {
-            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
-            driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             driver.Url = @"http://localhost:3000/logout";
             loginPageInstance = new LoginPage(driver);
             action = new Actions(driver);
         }
 
         [Test]
-        public void ExecuteTest_SignInAsCoordinator_OpenGroupCreateWindow_LocationDDlnotEnabled()
+        public void Test_SignInAsCoordinator_OpenGroupCreateWindow_LocationDDlnotEnabled()
         {
             loginPageInstance.LogIn("dmytro", "1234", wait);
             mainPageInstance = new MainPage(driver);
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
             bool LocationDdlEnabled = groupCreateWindow.LocationDDL.Enabled;
+            
             Assert.IsTrue(groupCreateWindow.IsOpened() & !LocationDdlEnabled);
         }
 
@@ -44,7 +51,7 @@ namespace CaesarTests
             "testData", "direction", "groupName", "teacher", "budgetOwner", "startDate", "expert");
 
         [Test, TestCaseSource("NewGroupsCreationData")]
-        public void ExecuteTest_NewGroupCreate_GroupAppearedInGroupsList
+        public void Test_NewGroupCreate_GroupAppearedInGroupsList
             (String direction, String groupName, String teacher, String budgetOwner, String startDate, String expert)
         {
             loginPageInstance.LogIn("dmytro", "1234", wait);
@@ -64,24 +71,31 @@ namespace CaesarTests
             bool isGroupCreated = groupsList.GetGroupByName(groupName, wait) != null;
             groupsList.DeleteGroup(groupName, action, wait);
             bool isGroupDeleted = groupsList.GetGroupByName(groupName, wait) == null;
+            
             Assert.IsTrue(isGroupCreated & isGroupDeleted);
         }
 
         [Test]
-        public void ExecuteTest_SignInAsAdministrator_OpenGroupCreateWindow_LocationDDlEnabled()
+        public void Test_SignInAsAdministrator_OpenGroupCreateWindow_LocationDDlEnabled()
         {
             loginPageInstance.LogIn("admin", "1234", wait);
             mainPageInstance = new MainPage(driver);
             var groupCreateWindow = mainPageInstance.ModalWindow.GroupCreateWindow;
             groupCreateWindow.Open(action, wait);
             bool LocationDdlEnabled = groupCreateWindow.LocationDDL.Enabled;
+            
             Assert.IsTrue(groupCreateWindow.IsOpened() & LocationDdlEnabled);
         }
 
-        [OneTimeTearDown]
+        [TearDown]
         public void CleanUp()
         {
-            driver.Close();
+            Log4Caesar.Log();
+        }
+
+        [OneTimeTearDown]
+        public void FinalCleanUp()
+        {
             driver.Quit();
         }
     }
