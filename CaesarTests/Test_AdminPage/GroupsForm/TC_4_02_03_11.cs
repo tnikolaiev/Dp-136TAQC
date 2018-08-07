@@ -59,7 +59,7 @@ namespace CaesarTests
         {
             wait.Until((d) => CreateEditGroupsForm.IsAdminPageOpened(d));
             groupsForm = new CreateEditGroupsForm(driver);
-            table = new Table(groupsForm.GetTable, driver);
+            table = new Table(groupsForm.GetTable);
             groupsForm.EditGroup(table.GetRowNumberByValueInCell(index, 0));
             groupsForm.IsOpened(wait);
         }

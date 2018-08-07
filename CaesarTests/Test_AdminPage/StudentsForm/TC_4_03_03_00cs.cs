@@ -58,7 +58,7 @@ namespace CaesarTests
         public void OpenStudentForm()
         {
             studentForm = new CreateEditStudentsForm(driver);
-            table = new Table(studentForm.GetTable, driver);
+            table = new Table(studentForm.GetTable);
             studentForm.EditStudent(table.GetRowNumberByValueInCell(index, 2));
             studentForm.IsOpened(wait);
         }
