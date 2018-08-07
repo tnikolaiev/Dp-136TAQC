@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 
 namespace CaesarLib
 {
@@ -175,10 +176,11 @@ namespace CaesarLib
         }
 
         //This method can return new instance of 'Schedule' page so change it in case of need
-        public void OpenScheduleContent()
+        public void OpenScheduleContent(WebDriverWait wait)
         {
-            TopMenu topMenuInstance = MoveToTopMenu();
-            Acts.Click(topMenuInstance.ScheduleItem);            
+            wait.Until((d) => MoveToTopMenu().IsOpened());
+            TopMenu.ScheduleItem.Click();
+       
         }
 
         //This method can return new instance of 'add' page so change it in case of need

@@ -26,10 +26,8 @@ namespace CaesarTests
             loginPageInstance.LogIn(login, password, wait);
 
             //Opening Schedule Page
-
             MainPageInstance = new MainPage(driver);
-            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
-            MainPageInstance.TopMenu.ScheduleItem.Click();
+            MainPageInstance.OpenScheduleContent(wait);
 
             //Select group from LeftContainer
 
@@ -37,10 +35,7 @@ namespace CaesarTests
 
 
             //Assert MonthView tab is displayed
-            Assert.IsTrue(MainPageInstance.CenterContainer
-                .ScheduleContent
-                .MonthTabInstance
-                .IsMonthTabDisplayed(driver));          
+            Assert.IsTrue(wait.Until((d) => MainPageInstance.CenterContainer.ScheduleContent.MonthTabInstance.IsMonthTabDisplayed(driver)));          
         }
 
         [Test, TestCaseSource("LoginUnderDifferentRoles")]
@@ -54,10 +49,8 @@ namespace CaesarTests
             loginPageInstance.LogIn("qwerty", "1234", wait);
 
             //Opening Schedule Page
-
             MainPageInstance = new MainPage(driver);
-            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
-            MainPageInstance.TopMenu.ScheduleItem.Click();
+            MainPageInstance.OpenScheduleContent(wait);
 
             //Select group from LeftContainer
 
@@ -69,11 +62,7 @@ namespace CaesarTests
 
 
             //Assert Week tab is displayed
-            Assert.IsTrue(MainPageInstance
-                .CenterContainer
-                .ScheduleContent
-                .WeekTabInstance
-                .IsWeekTabDisplayed(driver));
+            Assert.IsTrue(wait.Until((d) => MainPageInstance.CenterContainer.ScheduleContent.WeekTabInstance.IsWeekTabDisplayed(driver)));
         }
 
         [Test, TestCaseSource("LoginUnderDifferentRoles")]
@@ -87,10 +76,8 @@ namespace CaesarTests
              loginPageInstance.LogIn("qwerty", "1234", wait);
 
             //Opening Schedule Page
-
             MainPageInstance = new MainPage(driver);
-            wait.Until((d) => MainPageInstance.MoveToTopMenu().IsOpened());
-            MainPageInstance.TopMenu.ScheduleItem.Click();
+            MainPageInstance.OpenScheduleContent(wait);
 
             //Select group from LeftContainer
 
@@ -101,11 +88,7 @@ namespace CaesarTests
              MainPageInstance.CenterContainer.ScheduleContent.KeyDatesButton.Click();
             
             //Assert KeyDates tab is displayed
-            Assert.IsTrue(MainPageInstance
-                .CenterContainer
-                .ScheduleContent
-                .KeyDatesTabInstance
-                .IsKeyDatesDisplayed(driver));
+            Assert.IsTrue(wait.Until((d) => MainPageInstance.CenterContainer.ScheduleContent.KeyDatesTabInstance.IsKeyDatesDisplayed(driver)));
         }
       
     }
