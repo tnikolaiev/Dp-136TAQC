@@ -67,6 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Acts.cs" />
+    <Compile Include="AdminPage\CreateEditStudentsForm.cs" />
+    <Compile Include="AdminPage\CreateEditUsersForm.cs" />
+    <Compile Include="AdminPage\CreateEditGroupsForm.cs" />
     <Compile Include="Instruments.cs" />
     <Compile Include="MainPage\CenterContainer\AboutContent\About.cs" />
     <Compile Include="MainPage\CenterContainer\GroupsContent\GroupsContent.cs" />
@@ -86,14 +89,13 @@
     <Compile Include="MainPage\ModalWindow\EditScheduleWindow.cs" />
     <Compile Include="MainPage\CenterContainer\CenterContainer.cs" />
     <Compile Include="MainPage\ModalWindow\LocationWindow.cs" />
-    <Compile Include="AdminPage.cs" />
+    <Compile Include="AdminPage\AdminPage.cs" />
     <Compile Include="MainPage\LeftContainer\GroupsInLocation.cs" />
     <Compile Include="MainPage\LeftContainer\LeftContainer.cs" />
     <Compile Include="MainPage\LeftMenu.cs" />
     <Compile Include="LoginPage.cs" />
     <Compile Include="MainPage\MainPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomText.cs" />
     <Compile Include="MainPage\RightMenu.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\KeyDatesTab.cs" />
     <Compile Include="MainPage\CenterContainer\ScheduleContent\MonthTab.cs" />
