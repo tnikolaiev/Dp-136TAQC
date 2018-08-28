@@ -111,10 +111,7 @@ namespace CaesarTests
         [OneTimeTearDown]
         public void CleanUp()
         {
-            if (table.FindRowInTable(expectedResult))
-            {
-                groupsForm.DeleteGroup(table.GetRowNumberByValueInCell(index, 0));
-            }
+            groupsForm.DeleteGroup(table.GetRowNumberByValueInCell(index, 0));
             driver.Close();
             driver.Quit();
         }
