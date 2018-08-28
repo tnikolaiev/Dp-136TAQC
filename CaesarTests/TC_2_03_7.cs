@@ -40,7 +40,7 @@ namespace CaesarTests
             MainPageInstance.ModalWindow.EditScheduleWindow.WeeklyReportEvent.Click();
 
             // Put event in cell
-            IWebElement cell = MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/08");
+            IWebElement cell = MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/29");
             MainPageInstance.ModalWindow.EditScheduleWindow.PutEventInCell(MainPageInstance, cell, wait);
 
             // Click Save
@@ -50,7 +50,7 @@ namespace CaesarTests
             MainPageInstance.CenterContainer.ScheduleContent.ClickCogwheel(wait);
 
             //Assert that event is in cell
-            IWebElement cell1 = MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/08");
+            IWebElement cell1 = MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/29");
             Assert.True(MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.IsActivityCorrect(cell1, "Weekly report\r\nO. Reuta\r\n740"));
 
             //Close ScheduleEditor
