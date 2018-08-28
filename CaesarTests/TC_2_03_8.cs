@@ -40,7 +40,7 @@ namespace CaesarTests
             MainPageInstance.ModalWindow.EditScheduleWindow.WeeklyReportEvent.Click();
 
             // Put event in cell
-            IWebElement cell = MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/08");
+            IWebElement cell = MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/29");
             MainPageInstance.ModalWindow.EditScheduleWindow.PutEventInCell(MainPageInstance, cell, wait);
 
             //Assert EventCounter changed

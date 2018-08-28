@@ -1,0 +1,9 @@
+2018-08-28 11:14:31.3540 | Debug | CaesarTests.TC_2_03_7 
+2018-08-28 11:14:31.3911 | Debug | CheckCreatingEventInScheduleditor 
+2018-08-28 11:14:31.4222 | Debug | Failed 
+2018-08-28 11:19:57.1522 | Debug | CaesarTests.TC_2_03_7 
+2018-08-28 11:19:57.1822 | Debug | CheckCreatingEventInScheduleditor 
+2018-08-28 11:19:57.1822 | Debug | Passed 
+2018-08-28 11:22:33.6324 | Debug | CaesarTests.TC_2_03_8 
+2018-08-28 11:22:33.6574 | Debug | CheckEventCounterInSchedulEditor 
+2018-08-28 11:22:33.6605 | Debug | Passed 

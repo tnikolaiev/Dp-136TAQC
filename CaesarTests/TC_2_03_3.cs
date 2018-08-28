@@ -40,7 +40,7 @@ namespace CaesarTests
             MainPageInstance.ModalWindow.EditScheduleWindow.WeeklyReportEvent.Click();
 
             // Put event in cell
-            IWebElement cell = MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/08");
+            IWebElement cell = MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetCell("9:00", "Wednesday\r\n08/29");
             MainPageInstance.ModalWindow.EditScheduleWindow.PutEventInCell(MainPageInstance, cell, wait);
 
             // Click Cancel
@@ -50,7 +50,7 @@ namespace CaesarTests
             MainPageInstance.CenterContainer.ScheduleContent.ClickCogwheel(wait);
 
             //Assert that there is no event in cell
-            Assert.Null(MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetValueFromCell("9:00", "Wednesday\r\n08/08"));
+            Assert.Null(MainPageInstance.ModalWindow.EditScheduleWindow.ScheduleEditWeekTable.GetValueFromCell("9:00", "Wednesday\r\n08/29"));
 
             //Close ScheduleEditor
             MainPageInstance.ModalWindow.EditScheduleWindow.CancelButton.Click();
