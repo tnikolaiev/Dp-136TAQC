@@ -128,10 +128,7 @@ namespace CaesarTests
         [OneTimeTearDown]
         public void CleanUp()
         {
-            if (table.FindRowInTable(expectedResult))
-            {
-                usersForm.DeleteUser(table.GetRowNumberByValueInCell(index, 5));
-            }
+            usersForm.DeleteUser(table.GetRowNumberByValueInCell(index, 5));            
             driver.Close();
             driver.Quit();
         }
