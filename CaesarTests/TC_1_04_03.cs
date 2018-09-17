@@ -16,19 +16,23 @@ namespace CaesarTests
         Actions action;
         LoginPage loginPageInstance;
         MainPage mainPageInstance;
+        ChromeOptions options;
 
         [OneTimeSetUp]
         public void FirstInitialize()
         {
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
+            options = new ChromeOptions();
+            options.AddArgument("--start-maximized");
+            driver = new ChromeDriver(options);
+            //driver.Manage().Window.Maximize();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         [SetUp]
         public void Initialize()
-        {           
-            driver.Url = @"http://localhost:3000/logout";
+        {
+            //driver.Url = @"http://localhost:3000/logout";
+            driver.Navigate().GoToUrl(@"http://localhost:3000/logout");
             action = new Actions(driver);
             loginPageInstance = new LoginPage(driver);
             loginPageInstance.LogIn("dmytro", "1234", wait);

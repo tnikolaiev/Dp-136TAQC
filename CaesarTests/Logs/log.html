@@ -50,6 +50,778 @@
 <td></td>
 <td>-</td>
 </tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:29.854</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_01</td>
+<td>Test_NavigateToLinks_LoginPageOpened</td>
+<td>"http://localhost:3000"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:29.956</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_01</td>
+<td>Test_NavigateToLinks_LoginPageOpened</td>
+<td>"http://localhost:3000/Groups/Dnipro"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:30.043</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_01</td>
+<td>Test_NavigateToLinks_LoginPageOpened</td>
+<td>"http://localhost:3000/admin"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:35.451</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_02</td>
+<td>Test_LoginWithValidLoginCredentials</td>
+<td>"admin", "1234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:36.827</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_02</td>
+<td>Test_LoginWithValidLoginCredentials</td>
+<td>"sasha", "1234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:37.619</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_02</td>
+<td>Test_LoginWithValidLoginCredentials</td>
+<td>"dmytro", "1234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:41.709</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_03</td>
+<td>Test_EnterKey_Login</td>
+<td>"dmytro", "1234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:41.961</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_03</td>
+<td>Test_EscKey_EmptyFields</td>
+<td>"dmytro", "1234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:45.401</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_04</td>
+<td>Test_15lettersLoginField_Contains10</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:45.550</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_04</td>
+<td>Test_EmptyFields_EnterPressed_NoChanges</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:45.702</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_04</td>
+<td>Test_EmptyFields_LoginButtonClick_NoChan</br>ges</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:45.845</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_04</td>
+<td>Test_EmptyLoginField_LoginButtonUnactive</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:45.974</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_04</td>
+<td>Test_EmptyPassField_LoginButtonUnactive</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:46.260</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_04</td>
+<td>Test_InvalidValues_ErrorMessage</td>
+<td>"login1", "$%^&\;#*"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:46.523</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_04</td>
+<td>Test_InvalidValues_ErrorMessage</td>
+<td>"#$%^#${}", "pass2"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:46.823</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_04</td>
+<td>Test_InvalidValues_ErrorMessage</td>
+<td>"4f4&4]3", "#@#@#@"</td>
+<td>-</td>
+</tr>
+<tr style='color: red;'>
+<td>09.07.2018 11:52:47.141</td>
+<td>Failed</td>
+<td>CaesarTests.TC_1_01_04</td>
+<td>Test_InvalidValues_ErrorMessage</td>
+<td>"login", "pa$$word"</td>
+<td>  Expected: True
+</br>  But was:  False
+</br></td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:47.396</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_04</td>
+<td>Test_InvalidValues_ErrorMessage</td>
+<td>"1234", "12"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:47.675</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_04</td>
+<td>Test_InvalidValues_ErrorMessage</td>
+<td>"12", "1234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:51.153</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_05</td>
+<td>Test_LoginWithInvalidLoginCredentials</td>
+<td>"odmin", "9234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:51.453</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_05</td>
+<td>Test_LoginWithInvalidLoginCredentials</td>
+<td>"sashq", "5234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:51.705</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_05</td>
+<td>Test_LoginWithInvalidLoginCredentials</td>
+<td>"jtytro", "1734"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:58.252</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_02_01</td>
+<td>Test_DropMouseFocus_RightMenuClosed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:52:59.695</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_02_01</td>
+<td>Test_ProfileButtonClick_RightMenuOpened</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:05.754</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_02_02</td>
+<td>Test_ExitButtonClicked_LoginPageOpened</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:11.241</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_03_01</td>
+<td>Test_EndedGroupsFilter</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:12.147</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_03_01</td>
+<td>Test_FirstSignIn_AvailableGroupsList</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:13.108</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_03_01</td>
+<td>Test_FutureGroupsFilter</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:14.047</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_03_01</td>
+<td>Test_MyGroupsFilterChecked_NoneAvailable</br>Groups</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:14.970</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_03_01</td>
+<td>Test_MyGroupsFilterCheckedUnchecked</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:20.892</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_01</td>
+<td>Test_CursorFocusOutOfMenu_LeftMenuClosed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:22.308</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_01</td>
+<td>Test_CursorToLeftBorder_LeftMenuOpened</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:28.434</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_02</td>
+<td>Test_SignInAsCoordinatorOrAdmin_CheckGro</br>up_FourButtonsAvailable</td>
+<td>"dmytro", "1234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:30.050</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_02</td>
+<td>Test_SignInAsCoordinatorOrAdmin_CheckGro</br>up_FourButtonsAvailable</td>
+<td>"artur", "1234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:32.034</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_02</td>
+<td>Test_SignInAsCoordinatorOrAdmin_TwoButto</br>nsAvailable</td>
+<td>"dmytro", "1234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:33.441</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_02</td>
+<td>Test_SignInAsCoordinatorOrAdmin_TwoButto</br>nsAvailable</td>
+<td>"artur", "1234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:34.976</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_02</td>
+<td>Test_SignInAsTeacher_CheckGroup_OneButto</br>nsAvailable</td>
+<td>"sasha", "1234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:36.978</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_02</td>
+<td>Test_SignInAsTeacher_OneButtonsAvailable</td>
+<td>"sasha", "1234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:43.077</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCancelButton_GroupCreateWindow</br>Closed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:44.549</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCreateButton_GroupCreateWindow</br>Opened</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:46.045</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_PressEscKey_GroupCreateWindowClosed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:55.349</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_04</td>
+<td>Test_ClickCancelButton_GroupDeleteConfir</br>mantionWindowClosed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:53:59.983</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_04</td>
+<td>Test_PressEscKey_GroupDeleteConfirmantio</br>nWindowOpenedClosed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:01.553</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_04</td>
+<td>Test_SelectGroup_ClickDeleteButton_Group</br>DeleteConfirmantionWindowOpened</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:10.103</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_05</td>
+<td>Test_NewGroupCreate_GroupAppearedInGroup</br>sList</td>
+<td>".Net", "groupNet", "K. Kozak", "SoftServe", "02/13/2018", "Expert"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:13.937</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_05</td>
+<td>Test_NewGroupCreate_GroupAppearedInGroup</br>sList</td>
+<td>"ISTQB", "groupISTQB", "O. Reuta", "OpenGroup", "11/19/2018", "Expertik"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:17.842</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_05</td>
+<td>Test_NewGroupCreate_GroupAppearedInGroup</br>sList</td>
+<td>"iOS", "groupIOS", "D. Petin", "SoftServe", "06/11/2012", "Expertok"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:21.917</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_05</td>
+<td>Test_NewGroupCreate_GroupAppearedInGroup</br>sList</td>
+<td>"UX", "groupUX", "P. Kucher", "OpenGroup", "01/05/2011", "Testwoman"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:25.697</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_05</td>
+<td>Test_NewGroupCreate_GroupAppearedInGroup</br>sList</td>
+<td>"C/C++", "groupC/C++", "A. Koval", "SoftServe", "09/27/2017", "Testman"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:27.282</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_05</td>
+<td>Test_SignInAsAdministrator_OpenGroupCrea</br>teWindow_LocationDDlEnabled</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:28.761</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_05</td>
+<td>Test_SignInAsCoordinator_OpenGroupCreate</br>Window_LocationDDlnotEnabled</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:35.159</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_06</td>
+<td>Test_EnterStartDate_FinishDateFilled</td>
+<td>"MQC", "03/15/2018", "05/17/2018"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:36.886</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_06</td>
+<td>Test_EnterStartDate_FinishDateFilled</td>
+<td>"ISTQB", "01/20/2019", "03/24/2019"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:38.582</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_06</td>
+<td>Test_EnterStartDate_FinishDateFilled</td>
+<td>".Net", "12/12/2018", "03/06/2019"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:40.343</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_06</td>
+<td>Test_EnterStartDate_FinishDateFilled</td>
+<td>"WebUI", "07/26/2018", "10/18/2018"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:46.470</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_EmptyFieldsClickConfirm_FourHintsDi</br>splayed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:48.242</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_ExpertBeyondMinMaxBoundary_Warn</td>
+<td>"abcd"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:50.000</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_ExpertBeyondMinMaxBoundary_Warn</td>
+<td>"exp"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:51.797</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_ExpertBeyondMinMaxBoundary_Warn</td>
+<td>"abcabcabcabcabcabcabcabcas"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:53.544</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_ExpertNameInvalidData_Warn</td>
+<td>"123"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:55.244</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_ExpertNameInvalidData_Warn</td>
+<td>"@#$$#@"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:56.921</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_ExpertNameInvalidData_Warn</td>
+<td>"_)(#"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:54:58.799</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_GroupNameAboveMaxBoundary_Warn</td>
+<td>"012345678901234567890"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:55:00.547</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_GroupNameAboveMaxBoundary_Warn</td>
+<td>"abcdefghiklmnopqrstuvw"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:55:02.201</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_GroupNameAboveMaxBoundary_Warn</td>
+<td>"aaaaabbbbbcccccddddd1"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:55:03.844</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_GroupNameBelowLowerBoundary_Warn</td>
+<td>"a1b"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:55:05.495</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_GroupNameBelowLowerBoundary_Warn</td>
+<td>"123"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:55:07.159</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_GroupNameBelowLowerBoundary_Warn</td>
+<td>"abc"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:55:09.025</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_GroupNameStardDateInvalidData_Warns</td>
+<td>"!@#$%$^#@$", "43453463"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:55:10.841</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_GroupNameStardDateInvalidData_Warns</td>
+<td>"hello$", "9809039"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:55:12.639</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_07</td>
+<td>Test_GroupNameStardDateInvalidData_Warns</td>
+<td>"hi^group", "1234"</td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 11:55:26.916</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_01_04</td>
+<td>Test_InvalidValues_ErrorMessage</td>
+<td>"login", "pa$$word"</td>
+<td>-</td>
+</tr>
+<tr style='color: red;'>
+<td>09.07.2018 16:01:15.193</td>
+<td>Failed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCancelButton_GroupCreateWindow</br>Closed</td>
+<td></td>
+<td>OpenQA.Selenium.WebDriverTimeoutException : Timed out after 10 seconds
+</br>  ----&gt; OpenQA.Selenium.NoSuchWindowException : no such window: target window already closed</br>from unknown error: web view not found</br>  (Session info: chrome=69.0.3497.81)</br>  (Driver info: chromedriver=2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform=Windows NT 10.0.17134 x86_64)</td>
+</tr>
+<tr style='color: red;'>
+<td>09.07.2018 16:01:15.208</td>
+<td>Failed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCreateButton_GroupCreateWindow</br>Opened</td>
+<td></td>
+<td>OpenQA.Selenium.NoSuchWindowException : no such window: target window already closed</br>from unknown error: web view not found</br>  (Session info: chrome=69.0.3497.81)</br>  (Driver info: chromedriver=2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform=Windows NT 10.0.17134 x86_64)</td>
+</tr>
+<tr style='color: red;'>
+<td>09.07.2018 16:01:15.217</td>
+<td>Failed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_PressEscKey_GroupCreateWindowClosed</td>
+<td></td>
+<td>OpenQA.Selenium.NoSuchWindowException : no such window: target window already closed</br>from unknown error: web view not found</br>  (Session info: chrome=69.0.3497.81)</br>  (Driver info: chromedriver=2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform=Windows NT 10.0.17134 x86_64)</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 16:01:47.099</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCancelButton_GroupCreateWindow</br>Closed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 16:01:48.544</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCreateButton_GroupCreateWindow</br>Opened</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 16:01:50.593</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_PressEscKey_GroupCreateWindowClosed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 16:02:03.042</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCancelButton_GroupCreateWindow</br>Closed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: red;'>
+<td>09.07.2018 16:02:04.548</td>
+<td>Failed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCreateButton_GroupCreateWindow</br>Opened</td>
+<td></td>
+<td>System.NullReferenceException : Object reference not set to an instance of an object.</td>
+</tr>
+<tr style='color: red;'>
+<td>09.07.2018 16:02:04.564</td>
+<td>Failed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_PressEscKey_GroupCreateWindowClosed</td>
+<td></td>
+<td>OpenQA.Selenium.NoSuchWindowException : no such window: target window already closed</br>from unknown error: web view not found</br>  (Session info: chrome=69.0.3497.81)</br>  (Driver info: chromedriver=2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform=Windows NT 10.0.17134 x86_64)</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 16:32:07.455</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCancelButton_GroupCreateWindow</br>Closed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 16:32:08.984</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCreateButton_GroupCreateWindow</br>Opened</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 16:32:10.952</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_PressEscKey_GroupCreateWindowClosed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: red;'>
+<td>09.07.2018 17:06:11.738</td>
+<td>Failed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCancelButton_GroupCreateWindow</br>Closed</td>
+<td></td>
+<td>OpenQA.Selenium.WebDriverTimeoutException : Timed out after 10 seconds
+</br>  ----&gt; OpenQA.Selenium.NoSuchWindowException : no such window: target window already closed</br>from unknown error: web view not found</br>  (Session info: chrome=69.0.3497.81)</br>  (Driver info: chromedriver=2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform=Windows NT 10.0.17134 x86_64)</td>
+</tr>
+<tr style='color: red;'>
+<td>09.07.2018 17:06:11.755</td>
+<td>Failed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCreateButton_GroupCreateWindow</br>Opened</td>
+<td></td>
+<td>OpenQA.Selenium.NoSuchWindowException : no such window: target window already closed</br>from unknown error: web view not found</br>  (Session info: chrome=69.0.3497.81)</br>  (Driver info: chromedriver=2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform=Windows NT 10.0.17134 x86_64)</td>
+</tr>
+<tr style='color: red;'>
+<td>09.07.2018 17:06:11.764</td>
+<td>Failed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_PressEscKey_GroupCreateWindowClosed</td>
+<td></td>
+<td>OpenQA.Selenium.NoSuchWindowException : no such window: target window already closed</br>from unknown error: web view not found</br>  (Session info: chrome=69.0.3497.81)</br>  (Driver info: chromedriver=2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform=Windows NT 10.0.17134 x86_64)</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 17:06:48.436</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCancelButton_GroupCreateWindow</br>Closed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 17:06:50.068</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCreateButton_GroupCreateWindow</br>Opened</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 17:06:52.300</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_PressEscKey_GroupCreateWindowClosed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: red;'>
+<td>09.07.2018 17:07:05.861</td>
+<td>Failed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCancelButton_GroupCreateWindow</br>Closed</td>
+<td></td>
+<td>System.InvalidOperationException : chrome not reachable</br>  (Session info: chrome=69.0.3497.81)</br>  (Driver info: chromedriver=2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform=Windows NT 10.0.17134 x86_64) (100)</td>
+</tr>
+<tr style='color: red;'>
+<td>09.07.2018 17:07:11.886</td>
+<td>Failed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCreateButton_GroupCreateWindow</br>Opened</td>
+<td></td>
+<td>System.InvalidOperationException : chrome not reachable</br>  (Session info: chrome=69.0.3497.81)</br>  (Driver info: chromedriver=2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform=Windows NT 10.0.17134 x86_64) (100)</td>
+</tr>
+<tr style='color: red;'>
+<td>09.07.2018 17:07:17.902</td>
+<td>Failed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_PressEscKey_GroupCreateWindowClosed</td>
+<td></td>
+<td>System.InvalidOperationException : chrome not reachable</br>  (Session info: chrome=69.0.3497.81)</br>  (Driver info: chromedriver=2.41.578737 (49da6702b16031c40d63e5618de03a32ff6c197e),platform=Windows NT 10.0.17134 x86_64) (100)</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 17:53:19.455</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCancelButton_GroupCreateWindow</br>Closed</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 17:53:21.545</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_ClickCreateButton_GroupCreateWindow</br>Opened</td>
+<td></td>
+<td>-</td>
+</tr>
+<tr style='color: green;'>
+<td>09.07.2018 17:53:24.153</td>
+<td>Passed</td>
+<td>CaesarTests.TC_1_04_03</td>
+<td>Test_PressEscKey_GroupCreateWindowClosed</td>
+<td></td>
+<td>-</td>
+</tr>
 </table>
 </body>
 
